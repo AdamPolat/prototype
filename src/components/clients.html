@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* Risk filter switcher */
+        .cl-risk-switcher {
+            display: flex; background: #f0f3f5; border-radius: 12px;
+            padding: 5px; gap: 4px; margin-bottom: 20px;
+            border: 1px solid #c7c7c7;
+        }
+        .cl-risk-btn {
+            flex: 1; padding: 10px 16px; border: none; border-radius: 9px;
+            background: transparent; font-size: 13.5px; font-weight: 500;
+            color: #4a6470; cursor: pointer; transition: background 0.15s, color 0.15s;
+            display: flex; align-items: center; justify-content: center; gap: 7px;
+        }
+        .cl-risk-btn:hover { background: #fff; }
+        .cl-risk-btn:focus { outline: none; box-shadow: none; }
+        .cl-risk-btn.active {
+            background: #fff; color: #1a2b35;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1); font-weight: 600;
+            border: none; outline: none;
+        }
+        .cl-risk-btn.active:focus { box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+        .cl-risk-btn .cl-risk-count { font-weight: 700; }
+        .cl-risk-icon { font-size: 15px; }
+
+        /* Search + Add bar */
+        .cl-action-bar { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; }
+        .cl-search {
+            flex: 1; display: flex; align-items: center; gap: 10px;
+            background: #fff; border: 1px solid #c9d8de; border-radius: 8px;
+            padding: 0 14px; height: 42px;
+        }
+        .cl-search-icon { color: #8aa8b2; font-size: 13px; }
+        .cl-search-input { border: none; outline: none; font-size: 13px; color: #1a2b35; background: transparent; width: 100%; }
+        .cl-search-input::placeholder { color: #8aa8b2; }
+        .cl-add-btn { height: 42px; padding: 0 20px; border-radius: 8px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+
+        /* Client name cell */
+        .cl-name-cell { display: flex; align-items: center; gap: 10px; }
+        .cl-name-info .cl-name { font-size: 13px; font-weight: 600; color: #1a2b35; }
+        .cl-name-info .cl-abn { font-size: 11px; color: #8aa8b2; }
+
+        /* Risk rating */
+        .cl-risk-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 7px;
+        }
+        .cl-risk-low  { background: #e6f4ec; color: #2d6a35; }
+        .cl-risk-medium { background: #fdf0dc; color: #9a6200; }
+        .cl-risk-high { background: #fde8e8; color: #c0392b; }
+
+        /* CDD status badges */
+        .cl-cdd-badge {
+            display: inline-flex; align-items: center; gap: 5px;
+            font-size: 12.5px; padding: 4px 12px; border-radius: 20px;
+            border: 1px solid #c9d8de; background: #fff; color: #2a3840;
+        }
+
+        /* Add Client Modal */
+        .ncg-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 1050;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.2s ease; pointer-events: none;
+        }
+        .ncg-overlay.open { opacity: 1; pointer-events: all; }
+        .ncg-modal {
+            background: #fff; border-radius: 14px; width: 760px; max-width: 95vw;
+            max-height: 90vh; overflow-y: auto; box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+            transform: translateY(16px); transition: transform 0.2s ease;
+        }
+        .ncg-overlay.open .ncg-modal { transform: translateY(0); }
+        .ncg-modal-header {
+            background: #1a3a40; color: #fff; padding: 22px 32px;
+            border-radius: 14px 14px 0 0; font-size: 17px; font-weight: 700;
+        }
+        .ncg-modal-body { padding: 28px 32px; }
+        .ncg-info-box {
+            background: #fdf8ec; border: 1px solid #e8d89a; border-radius: 10px;
+            padding: 16px 18px; margin-bottom: 24px;
+        }
+        .ncg-info-box .ncg-info-title { color: #9a6200; font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+        .ncg-info-box p { color: #9a6200; font-size: 13px; margin: 0; line-height: 1.6; }
+        .ncg-options-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px;
+        }
+        .ncg-option {
+            display: flex; align-items: center; gap: 14px;
+            border: 1px solid #c9d8de; border-radius: 10px; padding: 16px 18px;
+            cursor: pointer; transition: border-color 0.15s, background 0.15s;
+        }
+        .ncg-option:hover { border-color: #5a9e6a; background: #f6fbf7; }
+        .ncg-option.selected { border-color: #5a9e6a; background: #f0f9f2; }
+        .ncg-option-icon { width: 36px; text-align: center; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .ncg-option-icon img { width: 32px; height: 32px; object-fit: contain; }
+        .ncg-option-text .ncg-option-title { font-size: 14.5px; font-weight: 600; color: #1a2b35; margin-bottom: 2px; }
+        .ncg-option-text .ncg-option-desc { font-size: 12px; color: #7a8f98; line-height: 1.5; }
+        .ncg-form-row { display: flex; gap: 16px; margin-bottom: 16px; }
+        .ncg-form-group { flex: 1; display: flex; flex-direction: column; }
+        .ncg-form-label { font-size: 13px; font-weight: 500; color: #1a2b35; margin-bottom: 6px; }
+        .ncg-form-input, .ncg-form-select {
+            border: 1px solid #c9d8de; border-radius: 8px; padding: 10px 12px;
+            font-size: 13px; color: #1a2b35; outline: none; width: 100%;
+            transition: border-color 0.15s; background: #fff;
+        }
+        .ncg-form-input:focus, .ncg-form-select:focus { border-color: #5a9e6a; }
+        .ncg-form-select { appearance: none; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23666'/%3E%3C/svg%3E") no-repeat right 12px center; }
+        .ncg-modal-footer {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 18px 32px; border-top: 1px solid #e8edf0;
+        }
+        .ncg-cancel-btn {
+            padding: 10px 22px; border: 1px solid #c9d8de; border-radius: 8px;
+            background: #fff; color: #1a2b35; font-size: 13px; font-weight: 600; cursor: pointer;
+        }
+        .ncg-cancel-btn:hover { background: #f5f7f8; }
+        .ncg-create-btn {
+            padding: 10px 24px; border: none; border-radius: 8px;
+            background: #4a7c3f; color: #fff; font-size: 13px; font-weight: 600; cursor: pointer;
+        }
+        .ncg-create-btn:hover { background: #3d6835; }
+
+        /* Empty state */
+        .cl-empty { display:none; flex-direction:column; align-items:center; justify-content:center; padding:60px 20px; text-align:center; opacity:0; transition:opacity 300ms ease; }
+        .cl-empty.visible { opacity:1; }
+        .cl-empty img { width:220px; margin-bottom:24px; }
+        .cl-empty h6 { font-size:16px; font-weight:700; color:#1a2b35; margin-bottom:10px; }
+        .cl-empty p { font-size:13.5px; color:#7a8f98; line-height:1.7; margin:0; }
+    </style>
+</head>
+<body>
+
+    <!-- ===== TOP HEADER ===== -->
+    <header class="app-header d-flex align-items-center">
+        <div class="header-logo d-flex align-items-center justify-content-center">
+            <img src="images/logo.svg" alt="Logo" width="32" height="32">
+        </div>
+        <div class="header-search flex-grow-1">
+            <div class="header-search-pill d-flex align-items-center">
+                <svg class="header-search-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.099zm-5.242 1.156a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11"/>
+                </svg>
+                <span class="header-search-label">Search:</span>
+                <input type="text" class="header-search-input" placeholder="search for content">
+                <kbd class="header-search-kbd">CMD + SR</kbd>
+            </div>
+        </div>
+        <div class="header-actions d-flex align-items-center">
+            <button class="header-icon-btn" title="Call">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/></svg>
+            </button>
+            <button class="header-icon-btn" title="Power">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M7.5 1v7h1V1z"/><path d="M3 8.812a5 5 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812"/></svg>
+            </button>
+            <button class="header-icon-btn" title="Apps">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3A1.5 1.5 0 0 1 15 10.5v3A1.5 1.5 0 0 1 13.5 15h-3A1.5 1.5 0 0 1 9 13.5z"/></svg>
+            </button>
+            <button class="header-avatar-btn" title="Profile">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="app-body">
+
+        <!-- ===== SIDEBAR ===== -->
+        <nav class="app-sidebar d-flex flex-column align-items-center py-3">
+            <a class="sidebar-nav-link" href="dashboard.html" title="Dashboard">
+                <span class="sidebar-icon-wrap"><img src="images/dashboard.svg" alt="Dashboard" width="20" height="20"></span>
+                <span class="sidebar-label">Dashboard</span>
+            </a>
+            <a class="sidebar-nav-link active" href="clients.html" title="Clients">
+                <span class="sidebar-icon-wrap active-icon"><img src="images/client.svg" alt="Clients" width="20" height="20"></span>
+                <span class="sidebar-label sidebar-label--active">Clients</span>
+            </a>
+            <a class="sidebar-nav-link" href="risk-assessment.html" title="Firm">
+                <span class="sidebar-icon-wrap"><img src="images/firm.svg" alt="Firm" width="20" height="20"></span>
+                <span class="sidebar-label">Firm</span>
+            </a>
+            <a class="sidebar-nav-link" href="#" title="Settings">
+                <span class="sidebar-icon-wrap"><img src="images/settings.svg" alt="Settings" width="20" height="20"></span>
+                <span class="sidebar-label">Settings</span>
+            </a>
+        </nav>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="app-main" style="background:#f5f7f8;">
+            <div class="content-wrap">
+
+                <h4 class="page-title">Clients</h4>
+
+                <!-- Tab -->
+                <ul class="nav ra-tabs mb-4">
+                    <li class="nav-item">
+                        <a class="nav-link ra-tab active" href="#">Clients</a>
+                    </li>
+                </ul>
+
+                <!-- Risk filter switcher -->
+                <div class="cl-risk-switcher">
+                    <button class="cl-risk-btn active" data-filter="all">
+                        All Risks <span class="cl-risk-count">47</span>
+                    </button>
+                    <button class="cl-risk-btn" data-filter="high">
+                        <span class="cl-risk-icon">😟</span> High Risk <span class="cl-risk-count">4</span>
+                    </button>
+                    <button class="cl-risk-btn" data-filter="medium">
+                        <span class="cl-risk-icon">😐</span> Medium Risk <span class="cl-risk-count">3</span>
+                    </button>
+                    <button class="cl-risk-btn" data-filter="low">
+                        <span class="cl-risk-icon">😊</span> Low Risk <span class="cl-risk-count">8</span>
+                    </button>
+                </div>
+
+                <!-- Search + Add -->
+                <div class="cl-action-bar">
+                    <div class="cl-search">
+                        <i class="fas fa-search cl-search-icon"></i>
+                        <input type="text" class="cl-search-input" placeholder="Search: search for content">
+                    </div>
+                    <button class="btn btn-generate cl-add-btn">Add Client +</button>
+                </div>
+
+                <!-- Clients table -->
+                <div class="ukp-table-wrap" id="clientsTableWrap">
+                    <table class="ukp-table">
+                        <thead>
+                            <tr>
+                                <th>Client Name <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" class="ml-1 sort-icon"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg></th>
+                                <th>Entity Type <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" class="ml-1 sort-icon"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg></th>
+                                <th>Risk Rating</th>
+                                <th>CDD Status <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" class="ml-1 sort-icon"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg></th>
+                                <th>Last CDD</th>
+                                <th>Next Reviews <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" class="ml-1 sort-icon"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg></th>
+                                <th>Assigned to <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" class="ml-1 sort-icon"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg></th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="ukp-row" data-risk="low">
+                                <td><div class="cl-name-cell"><img src="images/new_image.jpg" class="ukp-avatar-img" alt=""><div class="cl-name-info"><div class="cl-name">Jeevan Tokhi</div><div class="cl-abn">ABN 778 906 23B</div></div></div></td>
+                                <td>Trust</td>
+                                <td><span class="cl-risk-badge cl-risk-low">Low <i class="fa-regular fa-face-smile"></i></span></td>
+                                <td><span class="cl-cdd-badge"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#00923b" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg> Current</span></td>
+                                <td>26th of December 2025</td>
+                                <td>26th of December 2026</td>
+                                <td>Kim Davidson</td>
+                                <td><div class="dropdown"><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div></div></td>
+                            </tr>
+                            <tr class="ukp-row" data-risk="medium">
+                                <td><div class="cl-name-cell"><img src="images/new_image.jpg" class="ukp-avatar-img" alt=""><div class="cl-name-info"><div class="cl-name">Jeevan Tokhi</div><div class="cl-abn">ABN 778 906 23B</div></div></div></td>
+                                <td>Partnership</td>
+                                <td><span class="cl-risk-badge cl-risk-medium">Medium <i class="fa-regular fa-face-meh"></i></span></td>
+                                <td><span class="cl-cdd-badge"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#00923b" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg> Current</span></td>
+                                <td>18th of April 2025</td>
+                                <td>18th of April 2026</td>
+                                <td>Jason Lee</td>
+                                <td><div class="dropdown"><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div></div></td>
+                            </tr>
+                            <tr class="ukp-row" data-risk="high">
+                                <td><div class="cl-name-cell"><img src="images/new_image.jpg" class="ukp-avatar-img" alt=""><div class="cl-name-info"><div class="cl-name">Jeevan Tokhi</div><div class="cl-abn">ABN 778 906 23B</div></div></div></td>
+                                <td>Partnership</td>
+                                <td><span class="cl-risk-badge cl-risk-high">High <i class="fa-regular fa-face-frown"></i></span></td>
+                                <td><span class="cl-cdd-badge"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#b85c00" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/></svg> Due Soon</span></td>
+                                <td>3rd of April 2025</td>
+                                <td>3rd of April 2026</td>
+                                <td>Jason Lee</td>
+                                <td><div class="dropdown"><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div></div></td>
+                            </tr>
+                            <tr class="ukp-row" data-risk="high">
+                                <td><div class="cl-name-cell"><img src="images/new_image.jpg" class="ukp-avatar-img" alt=""><div class="cl-name-info"><div class="cl-name">Jeevan Tokhi</div><div class="cl-abn">ABN 778 906 23B</div></div></div></td>
+                                <td>Partnership</td>
+                                <td><span class="cl-risk-badge cl-risk-high">High <i class="fa-regular fa-face-frown"></i></span></td>
+                                <td><span class="cl-cdd-badge"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#b85c00" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/></svg> Due Soon</span></td>
+                                <td>3rd of April 2025</td>
+                                <td>3rd of April 2025</td>
+                                <td>Jason Lee</td>
+                                <td><div class="dropdown"><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div></div></td>
+                            </tr>
+                            <tr class="ukp-row" data-risk="high">
+                                <td><div class="cl-name-cell"><img src="images/new_image.jpg" class="ukp-avatar-img" alt=""><div class="cl-name-info"><div class="cl-name">Jeevan Tokhi</div><div class="cl-abn">ABN 778 906 23B</div></div></div></td>
+                                <td>Partnership</td>
+                                <td><span class="cl-risk-badge cl-risk-high">High <i class="fa-regular fa-face-frown"></i></span></td>
+                                <td><span class="cl-cdd-badge"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#b85c00" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/></svg> Due Soon</span></td>
+                                <td>3rd of April 2025</td>
+                                <td>3rd of April 2026</td>
+                                <td>Jason Lee</td>
+                                <td><div class="dropdown"><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div></div></td>
+                            </tr>
+                            <tr class="ukp-row" data-risk="high">
+                                <td><div class="cl-name-cell"><img src="images/new_image.jpg" class="ukp-avatar-img" alt=""><div class="cl-name-info"><div class="cl-name">Jeevan Tokhi</div><div class="cl-abn">ABN 778 906 23B</div></div></div></td>
+                                <td>Partnership</td>
+                                <td><span class="cl-risk-badge cl-risk-high">High <i class="fa-regular fa-face-frown"></i></span></td>
+                                <td><span class="cl-cdd-badge"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#b85c00" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/></svg> Due Soon</span></td>
+                                <td>3rd of April 2025</td>
+                                <td>3rd of April 2025</td>
+                                <td>Jason Lee</td>
+                                <td><div class="dropdown"><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Empty state -->
+                <div id="clEmptyState" class="cl-empty">
+                    <img src="images/default_state.svg" alt="Nothing found">
+                    <h6>Nothing has been found</h6>
+                    <p>Try searching again using the correct spelling.<br>Also, it might help if you refresh the page as<br>this may be an internal search-error</p>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Client Modal -->
+    <div class="ncg-overlay" id="ncgOverlay">
+        <div class="ncg-modal">
+            <div class="ncg-modal-header">New Client Group</div>
+            <div class="ncg-modal-body">
+                <div class="ncg-info-box">
+                    <div class="ncg-info-title">New Client Group</div>
+                    <p>Next Steps: After creating the group, you'll proceed through the 6-step CDD workflow: Classification &rarr; Personal Details &rarr; Entities &rarr; Ownership &rarr; Risk Assessment &rarr; Approval.e.</p>
+                </div>
+
+                <div class="ncg-options-grid">
+                    <div class="ncg-option" data-type="business">
+                        <div class="ncg-option-icon"><img src="images/ncg-business.svg" alt="Business Group"></div>
+                        <div class="ncg-option-text">
+                            <div class="ncg-option-title">Business Group</div>
+                            <div class="ncg-option-desc">Corporate group, multiple companies, joint venture structure</div>
+                        </div>
+                    </div>
+                    <div class="ncg-option selected" data-type="individual">
+                        <div class="ncg-option-icon"><img src="images/ncg-individual.svg" alt="Individual / Sole Trader"></div>
+                        <div class="ncg-option-text">
+                            <div class="ncg-option-title">Individual / Sole Trader</div>
+                            <div class="ncg-option-desc">Single person — no associated entities or just one company</div>
+                        </div>
+                    </div>
+                    <div class="ncg-option" data-type="smsf">
+                        <div class="ncg-option-icon"><img src="images/ncg-smsf.svg" alt="SMSF Only"></div>
+                        <div class="ncg-option-text">
+                            <div class="ncg-option-title">SMSF Only</div>
+                            <div class="ncg-option-desc">Standalone SMSF with individual trustees — no other entities</div>
+                        </div>
+                    </div>
+                    <div class="ncg-option" data-type="family">
+                        <div class="ncg-option-icon"><img src="images/ncg-family.svg" alt="Family Group"></div>
+                        <div class="ncg-option-text">
+                            <div class="ncg-option-title">Family Group</div>
+                            <div class="ncg-option-desc">Family trust, SMSF, multiple individuals under common control</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ncg-form-row">
+                    <div class="ncg-form-group">
+                        <label class="ncg-form-label">Group / Family Name *</label>
+                        <input type="text" class="ncg-form-input" placeholder="">
+                    </div>
+                    <div class="ncg-form-group">
+                        <label class="ncg-form-label">Primary Contact</label>
+                        <input type="text" class="ncg-form-input" placeholder="">
+                    </div>
+                </div>
+                <div class="ncg-form-row">
+                    <div class="ncg-form-group">
+                        <label class="ncg-form-label">Accountant / Engagement Partner *</label>
+                        <select class="ncg-form-select">
+                            <option>Prepare Agent Form</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="ncg-modal-footer">
+                <button class="ncg-cancel-btn" id="ncgCancel">Cancel</button>
+                <button class="ncg-create-btn">Create group &amp; Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Spinner -->
+    <div id="spinnerOverlay" style="position:fixed;inset:0;background:rgba(0,54,66,0.75);z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.4s ease;">
+        <div class="loader"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Spinner
+        (function() {
+            var o = document.getElementById('spinnerOverlay');
+            requestAnimationFrame(function() { requestAnimationFrame(function() { o.style.opacity = '1'; }); });
+            setTimeout(function() { o.style.transition = 'opacity 0.6s ease'; o.style.opacity = '0'; setTimeout(function() { o.style.display = 'none'; }, 600); }, 1800);
+        })();
+
+        // Add Client modal
+        var ncgOverlay = document.getElementById('ncgOverlay');
+        document.querySelector('.cl-add-btn').addEventListener('click', function() {
+            ncgOverlay.classList.add('open');
+        });
+        document.getElementById('ncgCancel').addEventListener('click', function() {
+            ncgOverlay.classList.remove('open');
+        });
+        ncgOverlay.addEventListener('click', function(e) {
+            if (e.target === ncgOverlay) ncgOverlay.classList.remove('open');
+        });
+        document.querySelectorAll('.ncg-option').forEach(function(opt) {
+            opt.addEventListener('click', function() {
+                document.querySelectorAll('.ncg-option').forEach(function(o) { o.classList.remove('selected'); });
+                this.classList.add('selected');
+            });
+        });
+
+        // Risk switcher
+        var activeFilter = 'all';
+        document.querySelectorAll('.cl-risk-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.cl-risk-btn').forEach(function(b) { b.classList.remove('active'); });
+                this.classList.add('active');
+                activeFilter = this.dataset.filter;
+                applyFilters();
+            });
+        });
+
+        // Search
+        document.querySelector('.cl-search-input').addEventListener('input', applyFilters);
+
+        function applyFilters() {
+            var query = document.querySelector('.cl-search-input').value.toLowerCase();
+            var visible = 0;
+            document.querySelectorAll('.ukp-row').forEach(function(row) {
+                var matchRisk = activeFilter === 'all' || row.dataset.risk === activeFilter;
+                var matchSearch = row.textContent.toLowerCase().includes(query);
+                var show = matchRisk && matchSearch;
+                row.style.display = show ? '' : 'none';
+                if (show) visible++;
+            });
+            var empty = visible === 0;
+            document.getElementById('clientsTableWrap').style.display = empty ? 'none' : '';
+            var es = document.getElementById('clEmptyState');
+            if (empty) {
+                es.style.display = 'flex';
+                requestAnimationFrame(function() { requestAnimationFrame(function() { es.classList.add('visible'); }); });
+            } else {
+                es.classList.remove('visible');
+                es.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
