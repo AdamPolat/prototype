@@ -980,3 +980,63 @@ a {
 .ukp-empty-state img { width: 220px; margin-bottom: 24px; }
 .ukp-empty-title { font-size: 16px; font-weight: 700; color: #1a2b35; margin-bottom: 10px; }
 .ukp-empty-text { font-size: 13.5px; color: #7a8f98; line-height: 1.7; margin: 0; }
+
+/* Add Key Personal Modal */
+.ukp-modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 1050;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.2s ease; pointer-events: none;
+}
+.ukp-modal-overlay.open { opacity: 1; pointer-events: all; }
+.ukp-modal {
+    background: #fff; border-radius: 14px; width: 560px; max-width: 95vw;
+    max-height: 90vh; overflow-y: auto; box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+    transform: translateY(16px); transition: transform 0.2s ease;
+}
+.ukp-modal-overlay.open .ukp-modal { transform: translateY(0); }
+.ukp-modal-header {
+    background: #1a3a40; color: #fff; padding: 22px 32px;
+    border-radius: 14px 14px 0 0; font-size: 17px; font-weight: 700;
+}
+.ukp-modal-body { padding: 28px 32px; }
+.ukp-modal-info-box {
+    background: #fdf8ec; border: 1px solid #e8d89a; border-radius: 10px;
+    padding: 16px 18px; margin-bottom: 24px;
+}
+.ukp-modal-info-title { color: #9a6200; font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+.ukp-modal-info-box p { color: #9a6200; font-size: 13px; margin: 0; line-height: 1.6; }
+.ukp-modal-form-row { display: flex; gap: 16px; margin-bottom: 16px; }
+.ukp-modal-form-group { flex: 1; display: flex; flex-direction: column; }
+.ukp-modal-form-group.full { flex: 0 0 100%; margin-bottom: 16px; }
+.ukp-modal-form-label { font-size: 13px; font-weight: 500; color: #1a2b35; margin-bottom: 6px; }
+.ukp-modal-form-input, .ukp-modal-form-select {
+    border: 1px solid #c9d8de; border-radius: 8px; padding: 10px 12px;
+    font-size: 13px; color: #1a2b35; outline: none; width: 100%;
+    transition: border-color 0.15s; background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.13) 0px .9px 0px;
+}
+.ukp-modal-form-input:focus, .ukp-modal-form-select:focus { border-color: #5a9e6a; }
+.ukp-modal-form-select { appearance: none; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23666'/%3E%3C/svg%3E") no-repeat right 12px center; }
+.ukp-modal-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 32px; border-top: 1px solid #e8edf0;
+}
+.ukp-modal-cancel-btn {
+    padding: 10px 22px; border: 1px solid #c9d8de; border-radius: 8px;
+    background: #fff; color: #1a2b35; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.ukp-modal-cancel-btn:hover { background: #f5f7f8; }
+.ukp-modal-save-btn {
+    padding: 10px 24px; border: none; border-radius: 8px;
+    background: #4a7c3f; color: #fff; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.ukp-modal-save-btn:hover { background: #3d6835; }
+
+/* Fade in animation for new rows */
+@keyframes ukpRowFadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.ukp-row-new {
+    animation: ukpRowFadeIn 0.4s ease;
+}

@@ -59,7 +59,7 @@
                 </span>
                 <span class="sidebar-label">Clients</span>
             </a>
-            <a class="sidebar-nav-link active" href="#" title="Firm">
+            <a class="sidebar-nav-link active" href="firm-profile.html" title="Firm">
                 <span class="sidebar-icon-wrap active-icon">
                     <img src="images/firm.svg" alt="Firm" width="20" height="20">
                 </span>
@@ -275,6 +275,67 @@
         <button class="ukp-see-more-btn mt-3">See more details</button>
     </div>
 
+    <!-- Add Key Personal Modal -->
+    <div class="ukp-modal-overlay" id="ukpModalOverlay">
+        <div class="ukp-modal">
+            <div class="ukp-modal-header">Add Key Personal</div>
+            <div class="ukp-modal-body">
+                <div class="ukp-modal-info-box">
+                    <div class="ukp-modal-info-title">Let's get started...</div>
+                    <p>Choose the sector that best describes your firm's designated services. This determines the right risk assessment template for your practice.</p>
+                </div>
+
+                <div class="ukp-modal-form">
+                    <div class="ukp-modal-form-group full">
+                        <label class="ukp-modal-form-label">Name</label>
+                        <input type="text" class="ukp-modal-form-input" id="ukpModalName" placeholder="">
+                    </div>
+                    <div class="ukp-modal-form-row">
+                        <div class="ukp-modal-form-group">
+                            <label class="ukp-modal-form-label">Status</label>
+                            <select class="ukp-modal-form-select" id="ukpModalStatus">
+                                <option>Complete</option>
+                                <option>Incomplete</option>
+                            </select>
+                        </div>
+                        <div class="ukp-modal-form-group">
+                            <label class="ukp-modal-form-label">Phone Number</label>
+                            <input type="tel" class="ukp-modal-form-input" id="ukpModalPhone" placeholder="" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                    </div>
+                    <div class="ukp-modal-form-row">
+                        <div class="ukp-modal-form-group">
+                            <label class="ukp-modal-form-label">Email</label>
+                            <input type="text" class="ukp-modal-form-input" id="ukpModalEmail" placeholder="">
+                        </div>
+                        <div class="ukp-modal-form-group">
+                            <label class="ukp-modal-form-label">Training Completed</label>
+                            <select class="ukp-modal-form-select" id="ukpModalTraining">
+                                <option>Complete</option>
+                                <option>Incomplete</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="ukp-modal-form-group full">
+                        <label class="ukp-modal-form-label">Address</label>
+                        <input type="text" class="ukp-modal-form-input" id="ukpModalAddress" placeholder="">
+                    </div>
+                    <div class="ukp-modal-form-group full">
+                        <label class="ukp-modal-form-label">Position</label>
+                        <select class="ukp-modal-form-select" id="ukpModalPosition">
+                            <option>Key Personal</option>
+                            <option>User</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="ukp-modal-footer">
+                <button class="ukp-modal-cancel-btn" id="ukpModalCancel">Cancel</button>
+                <button class="ukp-modal-save-btn" id="ukpModalSave">Save</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Spinner Overlay -->
     <div id="spinnerOverlay" style="position:fixed; inset:0; background:rgba(0,54,66,0.75); z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column; opacity:0; transition: opacity 0.4s ease;">
         <div class="loader"></div>
@@ -300,6 +361,82 @@
             tab.addEventListener('click', function(e) {
                 if (this.getAttribute('href') === '#') e.preventDefault();
             });
+        });
+
+        // Add Key Personal modal
+        var ukpModalOverlay = document.getElementById('ukpModalOverlay');
+        var ukpAddBtn = document.querySelector('.ukp-add-btn');
+        var ukpModalCancel = document.getElementById('ukpModalCancel');
+
+        ukpAddBtn.addEventListener('click', function() {
+            ukpModalOverlay.classList.add('open');
+        });
+        ukpModalCancel.addEventListener('click', function() {
+            ukpModalOverlay.classList.remove('open');
+        });
+        ukpModalOverlay.addEventListener('click', function(e) {
+            if (e.target === ukpModalOverlay) ukpModalOverlay.classList.remove('open');
+        });
+
+        // Restrict phone number to digits only
+        document.getElementById('ukpModalPhone').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        // Save new user/key personal
+        document.getElementById('ukpModalSave').addEventListener('click', function() {
+            var name = document.getElementById('ukpModalName').value || 'New User';
+            var status = document.getElementById('ukpModalStatus').value;
+            var phone = document.getElementById('ukpModalPhone').value;
+            var email = document.getElementById('ukpModalEmail').value;
+            var training = document.getElementById('ukpModalTraining').value;
+            var address = document.getElementById('ukpModalAddress').value;
+            var position = document.getElementById('ukpModalPosition').value;
+
+            // Truncate long text
+            var emailShort = email.length > 25 ? email.substring(0, 22) + '....' : email;
+            var addressShort = address.length > 25 ? address.substring(0, 22) + '....' : address;
+
+            // Create training badge HTML
+            var trainingBadgeHTML = training === 'Complete'
+                ? '<span class="ukp-training-badge"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#00923b" viewBox="0 0 16 16" class="mr-1"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg> Complete</span>'
+                : '<span class="ukp-training-badge" style="color:#c0392b;"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#c0392b" viewBox="0 0 16 16" class="mr-1"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/></svg> Incomplete</span>';
+
+            // Create new row
+            var newRow = document.createElement('tr');
+            newRow.className = 'ukp-row ukp-row-new';
+            newRow.setAttribute('data-name', name);
+            newRow.setAttribute('data-role', position);
+            newRow.setAttribute('data-email', email);
+            newRow.setAttribute('data-phone', phone);
+            newRow.setAttribute('data-address', address);
+            newRow.setAttribute('data-training', training);
+            newRow.setAttribute('data-position', position);
+
+            newRow.innerHTML =
+                '<td><div class="ukp-name-cell"><img src="images/new_image.jpg" class="ukp-avatar-img" alt=""> ' + name + '</div></td>' +
+                '<td><span class="status-badge status-low">' + status + '</span></td>' +
+                '<td>' + phone + '</td>' +
+                '<td>' + emailShort + '</td>' +
+                '<td>' + addressShort + '</td>' +
+                '<td>' + trainingBadgeHTML + '</td>' +
+                '<td>' + position + '</td>' +
+                '<td><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div></td>';
+
+            // Insert at the beginning of the table
+            document.querySelector('#usersTable tbody').insertBefore(newRow, document.querySelector('#usersTable tbody').firstChild);
+
+            // Close modal and clear form
+            ukpModalOverlay.classList.remove('open');
+            document.getElementById('ukpModalName').value = '';
+            document.getElementById('ukpModalPhone').value = '';
+            document.getElementById('ukpModalEmail').value = '';
+            document.getElementById('ukpModalAddress').value = '';
+
+            // Remove animation class after animation completes
+            setTimeout(function() {
+                newRow.classList.remove('ukp-row-new');
+            }, 400);
         });
 
         // Filter dropdown
