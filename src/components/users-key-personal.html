@@ -433,10 +433,10 @@
             document.getElementById('ukpModalEmail').value = '';
             document.getElementById('ukpModalAddress').value = '';
 
-            // Remove animation class after animation completes
+            // Remove animation class after animation completes (300ms delay + 400ms animation)
             setTimeout(function() {
                 newRow.classList.remove('ukp-row-new');
-            }, 400);
+            }, 700);
         });
 
         // Filter dropdown
