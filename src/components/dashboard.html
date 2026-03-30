@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+</head>
+<body>
+
+    <!-- Spinner Overlay -->
+    <div id="spinnerOverlay" style="position:fixed; inset:0; background:rgba(0,54,66,0.75); z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column; opacity:0; transition: opacity 0.4s ease;">
+        <div class="loader"></div>
+    </div>
+
+    <!-- ===== TOP HEADER ===== -->
+    <header class="app-header d-flex align-items-center">
+        <div class="header-logo d-flex align-items-center justify-content-center">
+            <img src="images/logo.svg" alt="Logo" width="32" height="32">
+        </div>
+        <div class="header-search flex-grow-1">
+            <div class="header-search-pill d-flex align-items-center">
+                <svg class="header-search-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.099zm-5.242 1.156a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11"/>
+                </svg>
+                <span class="header-search-label">Search:</span>
+                <input type="text" class="header-search-input" placeholder="search for content">
+                <kbd class="header-search-kbd">CMD + SR</kbd>
+            </div>
+        </div>
+        <div class="header-actions d-flex align-items-center">
+            <button class="header-icon-btn" title="Call">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/></svg>
+            </button>
+            <button class="header-icon-btn" title="Power">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M7.5 1v7h1V1z"/><path d="M3 8.812a5 5 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812"/></svg>
+            </button>
+            <button class="header-icon-btn" title="Apps">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3A1.5 1.5 0 0 1 15 10.5v3A1.5 1.5 0 0 1 13.5 15h-3A1.5 1.5 0 0 1 9 13.5z"/></svg>
+            </button>
+            <button class="header-avatar-btn" title="Profile">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== LAYOUT ===== -->
+    <div class="app-body">
+
+        <!-- ===== SIDEBAR ===== -->
+        <nav class="app-sidebar d-flex flex-column align-items-center py-3">
+            <a class="sidebar-nav-link active" href="dashboard.html" title="Dashboard">
+                <span class="sidebar-icon-wrap active-icon">
+                    <img src="images/dashboard.svg" alt="Dashboard" width="20" height="20">
+                </span>
+                <span class="sidebar-label sidebar-label--active">Dashboard</span>
+            </a>
+            <a class="sidebar-nav-link" href="#" title="Clients">
+                <span class="sidebar-icon-wrap">
+                    <img src="images/client.svg" alt="Clients" width="20" height="20">
+                </span>
+                <span class="sidebar-label">Clients</span>
+            </a>
+            <a class="sidebar-nav-link" href="risk-assessment.html" title="Firm">
+                <span class="sidebar-icon-wrap">
+                    <img src="images/firm.svg" alt="Firm" width="20" height="20">
+                </span>
+                <span class="sidebar-label">Firm</span>
+            </a>
+            <a class="sidebar-nav-link" href="#" title="Settings">
+                <span class="sidebar-icon-wrap">
+                    <img src="images/settings.svg" alt="Settings" width="20" height="20">
+                </span>
+                <span class="sidebar-label">Settings</span>
+            </a>
+        </nav>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="app-main" style="background:#f5f7f8;">
+            <div class="content-wrap">
+
+                <h4 class="page-title">Sample Heading</h4>
+
+                <!-- Tabs -->
+                <ul class="nav ra-tabs mb-4">
+                    <li class="nav-item"><a class="nav-link ra-tab active" href="#">Sample Tab Heading</a></li>
+                    <li class="nav-item"><a class="nav-link ra-tab" href="#">Sample Tab Heading</a></li>
+                    <li class="nav-item"><a class="nav-link ra-tab" href="#">Sample Tab Heading</a></li>
+                    <li class="nav-item"><a class="nav-link ra-tab" href="#">Sample Tab Heading</a></li>
+                </ul>
+
+                <!-- Stat cards row -->
+                <div class="row mb-4">
+                    <div class="col-6 col-lg-3 mb-3">
+                        <div class="stat-card">
+                            <div class="stat-value">25%</div>
+                            <div class="stat-label">Example Filter selected</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3 mb-3">
+                        <div class="stat-card">
+                            <div class="stat-value">15%</div>
+                            <div class="stat-label">Example Filter selected</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3 mb-3">
+                        <div class="stat-card">
+                            <div class="stat-value">40%</div>
+                            <div class="stat-label">Example Filter selected</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3 mb-3">
+                        <div class="stat-card">
+                            <div class="stat-value">20%</div>
+                            <div class="stat-label">Example Filter selected</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Yearly Activity chart -->
+                <div class="dash-card mb-4">
+                    <h6 class="dash-card-title">Yearly Activity</h6>
+                    <div style="position:relative; height:260px;">
+                        <canvas id="yearlyChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Bottom row -->
+                <div class="row">
+                    <!-- Stats donut -->
+                    <div class="col-12 col-lg-3 mb-4">
+                        <div class="dash-card h-100">
+                            <h6 class="dash-card-title">Stats</h6>
+                            <p class="dash-card-sub">Example Filter selected</p>
+                            <div class="d-flex align-items-center justify-content-between mt-3">
+                                <div style="position:relative; width:110px; height:110px; flex-shrink:0;">
+                                    <canvas id="donutChart"></canvas>
+                                    <div class="donut-center-label">100%</div>
+                                </div>
+                                <div class="chart-legend ml-3">
+                                    <div class="legend-item"><span class="legend-dot" style="background:#aaa"></span>Stat One</div>
+                                    <div class="legend-item"><span class="legend-dot" style="background:#4fc3f7"></span>Stat Two</div>
+                                    <div class="legend-item"><span class="legend-dot" style="background:#f06292"></span>Stat Three</div>
+                                    <div class="legend-item"><span class="legend-dot" style="background:#81c784"></span>Stat Four</div>
+                                    <div class="legend-item"><span class="legend-dot" style="background:#388e3c"></span>Stat Five</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Arc -->
+                    <div class="col-12 col-lg-3 mb-4">
+                        <div class="dash-card h-100">
+                            <h6 class="dash-card-title">Progress Arc</h6>
+                            <p class="dash-card-sub">Example Filter selected</p>
+                            <div class="arc-wrap mt-2">
+                                <div class="arc-inner">
+                                    <canvas id="arcChart" width="160" height="90"></canvas>
+                                    <div class="arc-label">
+                                        <div class="arc-percent">66%</div>
+                                        <div class="arc-complete">Complete</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Linear -->
+                    <div class="col-12 col-lg-3 mb-4">
+                        <div class="dash-card h-100">
+                            <h6 class="dash-card-title">Progress Linear</h6>
+                            <p class="dash-card-sub">Example Filter selected</p>
+                            <div class="mt-4">
+                                <div class="linear-bar-wrap">
+                                    <div class="linear-bar-track">
+                                        <div class="linear-bar-fill" style="width:66%"></div>
+                                    </div>
+                                </div>
+                                <div class="linear-label-row mt-2">
+                                    <span class="linear-percent">66%</span>
+                                    <span class="linear-complete">Complete</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats pie -->
+                    <div class="col-12 col-lg-3 mb-4">
+                        <div class="dash-card h-100">
+                            <h6 class="dash-card-title">Stats</h6>
+                            <p class="dash-card-sub">Example Filter selected</p>
+                            <div class="d-flex align-items-center justify-content-between mt-3">
+                                <div style="position:relative; width:110px; height:110px; flex-shrink:0;">
+                                    <canvas id="pieChart"></canvas>
+                                </div>
+                                <div class="chart-legend ml-3">
+                                    <div class="legend-item"><span class="legend-dot" style="background:#aaa"></span>Stat One</div>
+                                    <div class="legend-item"><span class="legend-dot" style="background:#4fc3f7"></span>Stat Two</div>
+                                    <div class="legend-item"><span class="legend-dot" style="background:#f06292"></span>Stat Three</div>
+                                    <div class="legend-item"><span class="legend-dot" style="background:#81c784"></span>Stat Four</div>
+                                    <div class="legend-item"><span class="legend-dot" style="background:#388e3c"></span>Stat Five</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Page load spinner
+        (function() {
+            var overlay = document.getElementById('spinnerOverlay');
+            requestAnimationFrame(function() {
+                requestAnimationFrame(function() {
+                    overlay.style.opacity = '1';
+                });
+            });
+            setTimeout(function() {
+                overlay.style.transition = 'opacity 0.6s ease';
+                overlay.style.opacity = '0';
+                setTimeout(function() { overlay.style.display = 'none'; }, 600);
+            }, 1800);
+        })();
+
+        // Tab switching
+        document.querySelectorAll('.ra-tab').forEach(function(tab) {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.ra-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // ── Yearly Activity Bar Chart ──
+        const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC','JAN','FEB'];
+        const d1 = [48,52,46,48,65,15,18,48,46,50,42,18,18,48];
+        const d2 = [18,38,18,24,33,14,10,18,32,48,22,12,12,18];
+        new Chart(document.getElementById('yearlyChart'), {
+            type: 'bar',
+            data: {
+                labels: months,
+                datasets: [
+                    { label: 'Series A', data: d1, backgroundColor: '#81c784', borderRadius: 3, stack: 'a' },
+                    { label: 'Series B', data: d2, backgroundColor: '#388e3c', borderRadius: 3, stack: 'a' }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { stacked: true, grid: { display: false }, ticks: { font: { size: 11 }, color: '#7a8f98' } },
+                    y: { stacked: true, min: 0, max: 100, ticks: { stepSize: 20, font: { size: 11 }, color: '#7a8f98' }, grid: { color: '#eaf0f3' } }
+                }
+            }
+        });
+
+        // ── Donut Chart ──
+        new Chart(document.getElementById('donutChart'), {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: [5, 10, 8, 32, 45],
+                    backgroundColor: ['#aaa','#4fc3f7','#f06292','#81c784','#388e3c'],
+                    borderWidth: 2, borderColor: '#fff'
+                }]
+            },
+            options: {
+                cutout: '70%', responsive: true, maintainAspectRatio: true,
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // ── Pie Chart ──
+        new Chart(document.getElementById('pieChart'), {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [5, 10, 8, 32, 45],
+                    backgroundColor: ['#aaa','#4fc3f7','#f06292','#81c784','#388e3c'],
+                    borderWidth: 2, borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: true,
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // ── Progress Arc (canvas gauge) ──
+        (function() {
+            const canvas = document.getElementById('arcChart');
+            const ctx = canvas.getContext('2d');
+            const W = canvas.width, H = canvas.height;
+            const cx = W / 2, cy = H - 10;
+            const r = H - 20;
+            const pct = 0.66;
+            // Track
+            ctx.beginPath();
+            ctx.arc(cx, cy, r, Math.PI, 0);
+            ctx.lineWidth = 18;
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineCap = 'round';
+            ctx.stroke();
+            // Fill
+            ctx.beginPath();
+            ctx.arc(cx, cy, r, Math.PI, Math.PI + pct * Math.PI);
+            ctx.lineWidth = 18;
+            ctx.strokeStyle = '#388e3c';
+            ctx.lineCap = 'round';
+            ctx.stroke();
+        })();
+    </script>
+</body>
+</html>

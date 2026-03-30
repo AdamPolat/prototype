@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.98 14.98">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: .75px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_3">
+    <g id="Interface-Essential__x2F__FaceID__x2F__face-id-4">
+      <g id="Group_85">
+        <g id="face-id-4">
+          <path id="Shape_409" class="cls-1" d="M14.61,11.76v1.9c0,.52-.42.95-.95.95h-1.9"/>
+          <path id="Shape_410" class="cls-1" d="M11.76.38h1.9c.52,0,.95.42.95.95v1.9"/>
+          <path id="Shape_411" class="cls-1" d="M.38,3.22v-1.9C.38.8.8.38,1.32.38h1.9"/>
+          <path id="Shape_412" class="cls-1" d="M3.22,14.61h-1.9c-.52,0-.95-.42-.95-.95v-1.9"/>
+          <path id="Oval_47" class="cls-1" d="M7.49,8.21c1.44,0,2.61-1.17,2.61-2.61s-1.17-2.61-2.61-2.61-2.61,1.17-2.61,2.61,1.17,2.61,2.61,2.61Z"/>
+          <path id="Shape_413" class="cls-1" d="M11.52,12c-.6-1.71-2.22-2.85-4.03-2.85s-3.42,1.14-4.03,2.85"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

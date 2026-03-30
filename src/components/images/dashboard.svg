@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.44 14.44">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: .75px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_3">
+    <g id="Interface-Essential__x2F__Dashboard__x2F__gauge-dashboard-1">
+      <g id="Group_13">
+        <g id="gauge-dashboard-1">
+          <path id="Shape_34" class="cls-1" d="M5.39,9.22v-.17c0-1.01.82-1.83,1.83-1.83s1.83.82,1.83,1.83v.17"/>
+          <path id="Shape_35" class="cls-1" d="M8.59,3.11l-1.37,4.11"/>
+          <path id="Shape_36" class="cls-1" d="M3.8,4.48c-.13,0-.23.1-.23.23s.1.23.23.23.23-.1.23-.23-.1-.23-.23-.23h0"/>
+          <path id="Shape_37" class="cls-1" d="M11.56,6.76c-.13,0-.23.1-.23.23s.1.23.23.23.23-.1.23-.23-.1-.23-.23-.23h0"/>
+          <path id="Shape_38" class="cls-1" d="M10.64,4.48c-.09,0-.18.05-.21.14-.04.09-.02.18.05.25.07.07.16.09.25.05.09-.04.14-.12.14-.21,0-.13-.1-.23-.23-.23h0"/>
+          <path id="Shape_39" class="cls-1" d="M5.62,2.66c-.13,0-.23.1-.23.23s.1.23.23.23.23-.1.23-.23-.1-.23-.23-.23h0"/>
+          <path id="Shape_40" class="cls-1" d="M12.96,10.95c-3.4-2.54-8.07-2.54-11.48,0"/>
+          <path id="Oval_4" class="cls-1" d="M7.22,14.06c3.78,0,6.84-3.06,6.84-6.84S11,.38,7.22.38.38,3.44.38,7.22s3.06,6.84,6.84,6.84Z"/>
+          <path id="Shape_41" class="cls-1" d="M2.89,6.76c-.13,0-.23.1-.23.23s.1.23.23.23.23-.1.23-.23-.1-.23-.23-.23"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

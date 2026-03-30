@@ -1,0 +1,146 @@
+/* =====================================================
+   DASHBOARD PAGE STYLES
+   ===================================================== */
+
+.stat-card {
+    background: #fff;
+    border: 1px solid #dce8ed;
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.stat-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a2b35;
+    line-height: 1.2;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #7a8f98;
+    margin-top: 4px;
+}
+
+.dash-card {
+    background: #fff;
+    border: 1px solid #dce8ed;
+    border-radius: 12px;
+    padding: 20px 22px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.dash-card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a2b35;
+    margin-bottom: 2px;
+}
+
+.dash-card-sub {
+    font-size: 12px;
+    color: #7a8f98;
+    margin-bottom: 0;
+}
+
+/* Donut center label */
+.donut-center-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a2b35;
+    pointer-events: none;
+}
+
+/* Chart legend */
+.chart-legend {
+    flex: 1;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    font-size: 11.5px;
+    color: #4a6470;
+    margin-bottom: 5px;
+}
+
+.legend-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    margin-right: 7px;
+    flex-shrink: 0;
+}
+
+/* Progress Arc */
+.arc-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.arc-inner {
+    position: relative;
+    width: 160px;
+    height: 95px;
+}
+
+.arc-label {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.arc-percent {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a2b35;
+    line-height: 1.1;
+}
+
+.arc-complete {
+    font-size: 11px;
+    color: #9ab0b8;
+}
+
+/* Progress Linear */
+.linear-bar-wrap {
+    width: 100%;
+}
+
+.linear-bar-track {
+    background: #e0e0e0;
+    border-radius: 6px;
+    height: 20px;
+    overflow: hidden;
+}
+
+.linear-bar-fill {
+    height: 100%;
+    background: #388e3c;
+    border-radius: 6px;
+    transition: width 0.6s ease;
+}
+
+.linear-label-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.linear-percent {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a2b35;
+}
+
+.linear-complete {
+    font-size: 11px;
+    color: #9ab0b8;
+}

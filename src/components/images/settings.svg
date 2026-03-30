@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.98 14.98">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: .75px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_3">
+    <g id="Interface-Essential__x2F__Controls__x2F__settings-vertical">
+      <g id="Group_174">
+        <g id="settings-vertical">
+          <path id="Rectangle-path_67" class="cls-1" d="M.38,1.32C.38.8.8.38,1.32.38h12.33c.52,0,.95.42.95.95v12.33c0,.52-.42.95-.95.95H1.32c-.52,0-.95-.42-.95-.95V1.32Z"/>
+          <path id="Shape_796" class="cls-1" d="M9.86,7.03v-3.79"/>
+          <path id="Shape_797" class="cls-1" d="M9.86,11.77v-1.9"/>
+          <path id="Shape_798" class="cls-1" d="M11.28,8.45c0,.79-.64,1.42-1.42,1.42s-1.42-.64-1.42-1.42.64-1.42,1.42-1.42,1.42.64,1.42,1.42Z"/>
+          <path id="Shape_799" class="cls-1" d="M5.12,6.08v5.69"/>
+          <path id="Shape_800" class="cls-1" d="M6.54,4.66c0-.79-.64-1.42-1.42-1.42s-1.42.64-1.42,1.42.64,1.42,1.42,1.42c.38,0,.74-.15,1.01-.42.27-.27.42-.63.42-1.01h0Z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

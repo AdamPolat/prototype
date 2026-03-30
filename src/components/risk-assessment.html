@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Assessment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ===== TOP HEADER ===== -->
+    <header class="app-header d-flex align-items-center">
+        <!-- Logo -->
+        <div class="header-logo d-flex align-items-center justify-content-center">
+            <img src="images/logo.svg" alt="Logo" width="32" height="32">
+        </div>
+
+        <!-- Search -->
+        <div class="header-search flex-grow-1">
+            <div class="header-search-pill d-flex align-items-center">
+                <svg class="header-search-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.099zm-5.242 1.156a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11"/>
+                </svg>
+                <span class="header-search-label">Search:</span>
+                <input type="text" class="header-search-input" placeholder="search for content">
+                <kbd class="header-search-kbd">CMD + SR</kbd>
+            </div>
+        </div>
+
+        <!-- Right icons -->
+        <div class="header-actions d-flex align-items-center">
+            <button class="header-icon-btn" title="Call">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                </svg>
+            </button>
+            <button class="header-icon-btn" title="Power">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M7.5 1v7h1V1z"/>
+                    <path d="M3 8.812a5 5 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812"/>
+                </svg>
+            </button>
+            <button class="header-icon-btn" title="Apps">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3A1.5 1.5 0 0 1 15 10.5v3A1.5 1.5 0 0 1 13.5 15h-3A1.5 1.5 0 0 1 9 13.5z"/>
+                </svg>
+            </button>
+            <button class="header-avatar-btn" title="Profile">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== LAYOUT ===== -->
+    <div class="app-body">
+
+        <!-- ===== SIDEBAR ===== -->
+        <nav class="app-sidebar d-flex flex-column align-items-center py-3">
+            <a class="sidebar-nav-link" href="dashboard.html" title="Dashboard">
+                <span class="sidebar-icon-wrap">
+                    <img src="images/dashboard.svg" alt="Dashboard" width="20" height="20">
+                </span>
+                <span class="sidebar-label">Dashboard</span>
+            </a>
+            <a class="sidebar-nav-link" href="#" title="Clients">
+                <span class="sidebar-icon-wrap">
+                    <img src="images/client.svg" alt="Clients" width="20" height="20">
+                </span>
+                <span class="sidebar-label">Clients</span>
+            </a>
+            <a class="sidebar-nav-link active" href="#" title="Firm">
+                <span class="sidebar-icon-wrap active-icon">
+                    <img src="images/firm.svg" alt="Firm" width="20" height="20">
+                </span>
+                <span class="sidebar-label sidebar-label--active">Firm</span>
+            </a>
+            <a class="sidebar-nav-link" href="#" title="Settings">
+                <span class="sidebar-icon-wrap">
+                    <img src="images/settings.svg" alt="Settings" width="20" height="20">
+                </span>
+                <span class="sidebar-label">Settings</span>
+            </a>
+        </nav>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="app-main">
+            <div class="content-wrap">
+
+                <!-- Page title -->
+                <h4 class="page-title">Risk Assessment</h4>
+
+                <!-- Tabs -->
+                <ul class="nav ra-tabs mb-4">
+                    <li class="nav-item">
+                        <a class="nav-link ra-tab" href="firm-profile.html">Firm Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ra-tab" href="users-key-personal.html">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ra-tab active" href="#">Risk</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ra-tab" href="#">Policy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ra-tab" href="#">Process</a>
+                    </li>
+                </ul>
+
+                <!-- Complete alert -->
+                <div id="completeAlert" style="display:none; opacity:0; transition: opacity 0.6s ease;" class="complete-alert mb-4">
+                    <div class="complete-alert-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
+                    </div>
+                    <div>
+                        <div class="complete-alert-title">Assessment Complete</div>
+                        <div class="complete-alert-text">Please click Complete Assessment to finalise your assessment</div>
+                    </div>
+                </div>
+
+                <!-- Action buttons -->
+                <div class="d-flex align-items-center mb-4 action-row">
+                    <button class="btn btn-upload mr-1" data-toggle="modal" data-target="#uploadModal">
+                        Upload Risk Assessment
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 16 16" class="ml-2">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z"/>
+                        </svg>
+                    </button>
+                    <button class="btn btn-generate" data-toggle="modal" data-target="#generateModal">
+                        Generate Risk Assessment
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 16 16" class="ml-2">
+                            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708zm-1 .793 5 5V13.5a.5.5 0 0 1-.5.5h-2v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v3h-2a.5.5 0 0 1-.5-.5V7.293z"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Data table -->
+                <div class="ra-table-wrap">
+                    <table class="table ra-table mb-0">
+                        <thead>
+                            <tr>
+                                <th>Title
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" class="ml-1 sort-icon">
+                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                    </svg>
+                                </th>
+                                <th>Version
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" class="ml-1 sort-icon">
+                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                    </svg>
+                                </th>
+                                <th>Date Reviewed
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" class="ml-1 sort-icon">
+                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                    </svg>
+                                </th>
+                                <th>Reviewed By</th>
+                                <th>Summary of Change
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" class="ml-1 sort-icon">
+                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                    </svg>
+                                </th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="newAssessmentRow" style="opacity:0; display:none; transition: opacity 0.6s ease;">
+                                <td>Sample Table Data</td>
+                                <td>v1.0</td>
+                                <td>Sample Table Data</td>
+                                <td>Samual Jones</td>
+                                <td>Sample Table Data that is large</td>
+                                <td><span class="status-badge status-medium">Partially Complete</span></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-action dropdown-toggle" type="button" data-toggle="dropdown">&#8230;</button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#">View</a>
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item text-danger" href="#">Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sample Table Data</td>
+                                <td>v1.0</td>
+                                <td>Sample Table Data</td>
+                                <td>Samual Jones</td>
+                                <td>Sample Table Data that is large</td>
+                                <td><span class="status-badge status-low">Low</span></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-action dropdown-toggle" type="button" data-toggle="dropdown">&#8230;</button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#">View</a>
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item text-danger" href="#">Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sample Table Data</td>
+                                <td>v1.0</td>
+                                <td>Sample Table Data</td>
+                                <td>Samual Jones</td>
+                                <td>Sample Table Data that is large</td>
+                                <td><span class="status-badge status-low">Low</span></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-action dropdown-toggle" type="button" data-toggle="dropdown">&#8230;</button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#">View</a>
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item text-danger" href="#">Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sample Table Data</td>
+                                <td>v1.0</td>
+                                <td>Sample Table Data</td>
+                                <td>Samual Jones</td>
+                                <td>Sample Table Data that is large</td>
+                                <td><span class="status-badge status-low">Low</span></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-action dropdown-toggle" type="button" data-toggle="dropdown">&#8230;</button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#">View</a>
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item text-danger" href="#">Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sample Table Data</td>
+                                <td>v1.0</td>
+                                <td>Sample Table Data</td>
+                                <td>Samual Jones</td>
+                                <td>Sample Table Data that is large</td>
+                                <td><span class="status-badge status-medium">Medium</span></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-action dropdown-toggle" type="button" data-toggle="dropdown">&#8230;</button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#">View</a>
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item text-danger" href="#">Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </main>
+    </div><!-- /app-body -->
+
+    <!-- Spinner Overlay -->
+    <div id="spinnerOverlay" style="position:fixed; inset:0; background:rgba(0,54,66,0.75); z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column; opacity:0; transition: opacity 0.4s ease;">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Upload Risk Assessment Modal -->
+    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered gen-modal-dialog" role="document">
+            <div class="modal-content gen-modal-content">
+                <!-- Header -->
+                <div class="gen-modal-header">
+                    <h5 class="gen-modal-title" id="uploadModalLabel">Upload Risk Assessment</h5>
+                </div>
+                <!-- Body -->
+                <div class="gen-modal-body">
+                    <!-- Title -->
+                    <div class="form-group gen-form-group mb-3">
+                        <label class="gen-label">Title</label>
+                        <input type="text" class="upload-input" placeholder="Prepare Agent Form">
+                    </div>
+                    <!-- Version -->
+                    <div class="form-group gen-form-group mb-3">
+                        <label class="gen-label">Version</label>
+                        <input type="text" class="upload-input upload-input--half" placeholder="Prepare Agent Form">
+                    </div>
+                    <!-- Summary of Changes -->
+                    <div class="form-group gen-form-group mb-3">
+                        <label class="gen-label">Summary of Changes</label>
+                        <textarea class="upload-textarea"></textarea>
+                    </div>
+                    <!-- Drop zone -->
+                    <div class="upload-dropzone mb-3" id="dropzone">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#a0b4bc" viewBox="0 0 16 16" class="mb-2">
+                            <path d="M6.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
+                            <path d="M14 14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zM4 1a1 1 0 0 0-1 1v10l2.224-2.224a.5.5 0 0 1 .61-.075L8 11l2.157-3.02a.5.5 0 0 1 .76-.063L13 10V4.5h-2A1.5 1.5 0 0 1 9.5 3V1z"/>
+                        </svg>
+                        <p class="upload-drop-text">Drag and drop image here or <a href="#" class="upload-select-link" id="selectFilesLink">select files to upload</a></p>
+                        <p class="upload-drop-sub">Any file up to 20MB</p>
+                        <input type="file" id="fileInput" style="display:none" multiple>
+                    </div>
+                    <!-- Attachments list -->
+                    <div class="upload-attachments">
+                        <div class="upload-attachment-item">
+                            <div class="d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#2a9d8f" viewBox="0 0 16 16" class="mr-2">
+                                    <path d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0z"/>
+                                </svg>
+                                <span class="upload-attachment-name">Attachment One</span>
+                            </div>
+                            <div class="upload-attachment-actions">
+                                <button class="attach-icon-btn" title="Delete">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#2a9d8f" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg>
+                                </button>
+                                <button class="attach-icon-btn" title="Download">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#2a9d8f" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/></svg>
+                                </button>
+                                <button class="attach-icon-btn" title="More">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#2a9d8f" viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3A1.5 1.5 0 0 1 15 10.5v3A1.5 1.5 0 0 1 13.5 15h-3A1.5 1.5 0 0 1 9 13.5z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="upload-attachment-item" style="border-bottom:none;">
+                            <div class="d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#2a9d8f" viewBox="0 0 16 16" class="mr-2">
+                                    <path d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0z"/>
+                                </svg>
+                                <span class="upload-attachment-name">Attachment Four</span>
+                            </div>
+                            <div class="upload-attachment-actions">
+                                <button class="attach-icon-btn" title="Delete">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#2a9d8f" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg>
+                                </button>
+                                <button class="attach-icon-btn" title="Download">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#2a9d8f" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/></svg>
+                                </button>
+                                <button class="attach-icon-btn" title="More">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#2a9d8f" viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3A1.5 1.5 0 0 1 15 10.5v3A1.5 1.5 0 0 1 13.5 15h-3A1.5 1.5 0 0 1 9 13.5z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer -->
+                <div class="gen-modal-footer">
+                    <button class="btn gen-btn-cancel" data-dismiss="modal">Cancel</button>
+                    <button class="btn gen-btn-continue">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Generate Risk Assessment Modal -->
+    <div class="modal fade" id="generateModal" tabindex="-1" role="dialog" aria-labelledby="generateModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered gen-modal-dialog" role="document">
+            <div class="modal-content gen-modal-content">
+                <!-- Header -->
+                <div class="gen-modal-header">
+                    <h5 class="gen-modal-title" id="generateModalLabel">Generate Risk Assessment</h5>
+                </div>
+                <!-- Body -->
+                <div class="gen-modal-body">
+                    <div class="gen-info-box">
+                        <p class="gen-info-title">Let's get started...</p>
+                        <p class="gen-info-text">Choose the sector that best describes your firm's designated services. This determines the right risk assessment template for your practice.</p>
+                    </div>
+                    <div class="form-group gen-form-group">
+                        <label class="gen-label">Sector <span class="text-danger">*</span></label>
+                        <div class="gen-select-wrap">
+                            <select class="gen-select">
+                                <option>Prepare Agent Form</option>
+                                <option>Financial Services</option>
+                                <option>Accounting</option>
+                                <option>Legal Services</option>
+                                <option>Real Estate</option>
+                            </select>
+                            <svg class="gen-select-arrow" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer -->
+                <div class="gen-modal-footer">
+                    <button class="btn gen-btn-cancel" data-dismiss="modal">Cancel</button>
+                    <button class="btn gen-btn-continue" id="continueBtn">Continue to Risk Assessment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Tab switching
+        document.querySelectorAll('.ra-tab').forEach(function(tab) {
+            tab.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#') e.preventDefault();
+                document.querySelectorAll('.ra-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Page load spinner
+        (function() {
+            var overlay = document.getElementById('spinnerOverlay');
+            var isComplete = sessionStorage.getItem('assessmentComplete') === '1';
+
+            if (isComplete) {
+                sessionStorage.removeItem('assessmentComplete');
+                overlay.style.display = 'flex';
+                overlay.style.opacity = '0';
+                requestAnimationFrame(function() {
+                    requestAnimationFrame(function() {
+                        overlay.style.transition = 'opacity 0.4s ease';
+                        overlay.style.opacity = '1';
+                    });
+                });
+                setTimeout(function() {
+                    overlay.style.transition = 'opacity 0.6s ease';
+                    overlay.style.opacity = '0';
+                    setTimeout(function() {
+                        overlay.style.display = 'none';
+                        var newRow = document.getElementById('newAssessmentRow');
+                        if (newRow) {
+                            newRow.style.display = '';
+                            requestAnimationFrame(function() {
+                                requestAnimationFrame(function() {
+                                    newRow.style.opacity = '1';
+                                });
+                            });
+                        }
+                        setTimeout(function() {
+                            var alert = document.getElementById('completeAlert');
+                            if (alert) {
+                                alert.style.display = '';
+                                requestAnimationFrame(function() {
+                                    requestAnimationFrame(function() {
+                                        alert.style.opacity = '1';
+                                    });
+                                });
+                            }
+                        }, 600);
+                    }, 600);
+                }, 3000);
+            } else {
+                requestAnimationFrame(function() {
+                    requestAnimationFrame(function() {
+                        overlay.style.opacity = '1';
+                    });
+                });
+                setTimeout(function() {
+                    overlay.style.transition = 'opacity 0.6s ease';
+                    overlay.style.opacity = '0';
+                    setTimeout(function() { overlay.style.display = 'none'; }, 600);
+                }, 1800);
+            }
+        })();
+
+        // Upload modal — select files link
+        document.getElementById('selectFilesLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('fileInput').click();
+        });
+
+        // Continue button — close modal, show spinner
+        document.getElementById('continueBtn').addEventListener('click', function() {
+            $('#generateModal').modal('hide');
+            $('#generateModal').on('hidden.bs.modal', function() {
+                var overlay = document.getElementById('spinnerOverlay');
+                overlay.style.display = 'flex';
+                overlay.style.transition = 'opacity 0.4s ease';
+                overlay.style.opacity = '0';
+                requestAnimationFrame(function() {
+                    requestAnimationFrame(function() {
+                        overlay.style.opacity = '1';
+                    });
+                });
+                setTimeout(function() {
+                    overlay.style.transition = 'opacity 0.6s ease';
+                    overlay.style.opacity = '0';
+                    setTimeout(function() {
+                        overlay.style.display = 'none';
+                        overlay.style.transition = '';
+                        overlay.style.opacity = '1';
+                        window.location.href = 'edit-risk-assessment.html';
+                    }, 600);
+                }, 3000);
+                $('#generateModal').off('hidden.bs.modal');
+            });
+        });
+
+        // Column sort indicator (visual only)
+        document.querySelectorAll('.ra-table th').forEach(function(th) {
+            if (th.querySelector('.sort-icon')) {
+                th.style.cursor = 'pointer';
+                th.addEventListener('click', function() {
+                    document.querySelectorAll('.ra-table th').forEach(t => t.classList.remove('sorted'));
+                    this.classList.add('sorted');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 17">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: .75px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_3">
+    <g id="Messages-Chat-Smileys__x2F__Conversation__x2F__conversation-chat-1">
+      <g id="Group_87">
+        <g id="conversation-chat-1">
+          <path id="Shape_347" class="cls-1" d="M7.96,13.37c-.6,0-1.08-.49-1.08-1.08v-5.42c0-.6.49-1.08,1.08-1.08h7.58c.6,0,1.08.49,1.08,1.08v5.42c0,.6-.49,1.08-1.08,1.08h-1.08v3.25l-3.25-3.25h-3.25Z"/>
+          <path id="Shape_348" class="cls-1" d="M4.71,9.04l-2.17,2.17v-3.25h-1.08c-.6,0-1.08-.49-1.08-1.08V1.46C.38.86.86.38,1.46.38h7.58c.6,0,1.08.49,1.08,1.08v2.17"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

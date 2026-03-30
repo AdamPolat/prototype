@@ -1,0 +1,716 @@
+/* =====================================================
+   EDIT RISK ASSESSMENT PAGE
+   ===================================================== */
+
+.era-wrap {
+    padding: 28px 32px 0;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 62px);
+    background: #f5f7f8;
+}
+
+.era-page-header {
+    margin-bottom: 20px;
+}
+
+.era-page-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a2b35;
+    margin-bottom: 4px;
+}
+
+.era-breadcrumb {
+    font-size: 13px;
+}
+
+.era-breadcrumb-link {
+    color: #1565c8;
+    text-decoration: none;
+}
+
+.era-breadcrumb-link:hover {
+    text-decoration: underline;
+}
+
+.era-breadcrumb-sep {
+    color: #7a8f98;
+    margin: 0 6px;
+}
+
+.era-breadcrumb-current {
+    color: #1565c8;
+}
+
+/* ===== TWO-COLUMN LAYOUT ===== */
+
+.era-layout {
+    display: flex;
+    flex: 1;
+    background: #fff;
+    border: 1px solid #bfccd2;
+    border-radius: 12px;
+    overflow: hidden;
+    min-height: 0;
+}
+
+/* ===== LEFT STEPPER ===== */
+
+.era-stepper {
+    width: 340px;
+    flex-shrink: 0;
+    border-right: 1px solid #c8d5d9;
+    padding: 24px 36px;
+    overflow-y: auto;
+    background: #fff;
+}
+
+.era-stepper-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a2b35;
+    margin-bottom: 20px;
+}
+
+/* Each section is positioned relative so we can draw the connector line */
+.era-section {
+    position: relative;
+    padding-left: 36px;
+    margin-bottom: 4px;
+}
+
+/* Vertical connector line through all sections */
+.era-section::before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 28px;
+    bottom: -4px;
+    width: 2px;
+    background: #cfdde2;
+}
+
+.era-section:last-child::before {
+    display: none;
+}
+
+/* Step icon — absolutely positioned to the left */
+.era-step-icon {
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    z-index: 1;
+}
+
+.era-step-done {
+    background: #1a6b40;
+    color: #fff;
+    box-shadow: inset 0 0 0 4px #1a6b40, inset 0 0 0 7px #fff, inset 0 0 0 12px #1a6b40;
+}
+
+.era-step-done-fa {
+    position: absolute;
+    left: 0;
+    top: 4px;
+    font-size: 20px;
+    color: #00923b;
+    z-index: 1;
+}
+
+.era-step-pending {
+    background: #fff;
+    border: 1.5px solid #b8cdd4;
+    color: #8fa3af;
+    font-size: 12px;
+    font-style: italic;
+}
+
+.era-step-pending-fa {
+    position: absolute;
+    left: 0;
+    top: 4px;
+    font-size: 20px;
+    color: #b8cdd4;
+    z-index: 1;
+}
+
+.era-step-gear {
+    background: #e8eef1;
+    border: 1.5px solid #b8cdd4;
+    color: #7a8f98;
+}
+
+.era-section-header {
+    display: flex;
+    align-items: center;
+    padding: 4px 0 8px;
+    cursor: pointer;
+}
+
+.era-section-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a2b35;
+    line-height: 1.3;
+}
+
+.active-label {
+    color: #1a6b40;
+}
+
+.done-label {
+    color: #00923b;
+}
+
+/* Sub-items — indented slightly, no extra left padding since section already has it */
+.era-sub-items {
+    margin-bottom: 10px;
+}
+
+.era-sub-item {
+    display: block;
+    font-size: 13px;
+    color: #7a8f98;
+    padding: 7px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-bottom: 2px;
+    transition: background 0.12s, color 0.12s;
+    border-left: 3px solid transparent;
+}
+
+.era-sub-item:hover {
+    color: #1a2b35;
+    text-decoration: none;
+}
+
+.era-sub-active {
+    background: #e5ffe1;
+    color: #00923b !important;
+    font-weight: 600;
+    border-radius: 0 8px 8px 0;
+}
+
+.era-sub-done {
+    color: #1a6b40 !important;
+    font-weight: 500;
+}
+
+.era-sub-gear {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #7a8f98;
+}
+
+/* ===== RIGHT CONTENT ===== */
+
+.era-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.era-content-inner {
+    flex: 1;
+    padding: 24px 28px;
+    overflow-y: auto;
+}
+
+.era-content-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a2b35;
+    margin-bottom: 8px;
+}
+
+.era-content-desc {
+    font-size: 13px;
+    color: #4a6470;
+    line-height: 1.55;
+    margin-bottom: 20px;
+}
+
+/* Risk factors card */
+.era-risk-card {
+    border: 1px solid #bfccd2;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.era-risk-card-header {
+    padding: 12px 16px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #1a2b35;
+    border-bottom: 1px solid #bfccd2;
+    background: #f7fafc;
+}
+
+.era-risk-table-head {
+    padding: 10px 16px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #4a6470;
+    background: #f7fafc;
+    border-bottom: 1px solid #bfccd2;
+}
+
+.era-risk-row {
+    display: flex;
+    align-items: flex-start;
+    padding: 12px 16px;
+    border-bottom: 1px solid #bfccd2;
+    gap: 10px;
+    transition: background 0.12s;
+}
+
+.era-risk-row:last-child {
+    border-bottom: none;
+    border-top: 1px solid #bfccd2;
+}
+
+.era-risk-row:nth-last-child(2) {
+    border-bottom: none;
+}
+
+.era-risk-row:hover {
+    background: #f7fafc;
+}
+
+.era-row-arrow {
+    color: #4a6470;
+    font-size: 10px;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.era-row-text {
+    flex: 1;
+    font-size: 13px;
+    color: #2a3840;
+    line-height: 1.5;
+}
+
+.era-row-delete {
+    background: #fff;
+    border: 1px solid #c8d8df;
+    border-radius: 6px;
+    padding: 5px 7px;
+    color: #4a6470;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.12s, border-color 0.12s;
+}
+
+.era-row-delete:hover {
+    background: #feeaea;
+    border-color: #f5a9a9;
+    color: #c0392b;
+}
+
+/* Add Risk Factor button */
+.era-add-btn {
+    background: #eaf5f9;
+    border: none;
+    border-radius: 8px;
+    color: #0068ff;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background 0.12s;
+}
+
+.era-add-btn:hover {
+    background: #edf4fb;
+}
+
+/* ===== CONFIRM DELETE BOX ===== */
+
+.confirm-delete-box {
+    background: #fffbe6;
+    border: 1px solid #f0d98a;
+    border-radius: 10px;
+    padding: 16px 20px;
+}
+
+.confirm-delete-title {
+    color: #b07d00;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.confirm-delete-text {
+    color: #b07d00;
+    font-size: 13.5px;
+}
+
+/* ===== CONFIRM COMPLETE MODAL ===== */
+
+.confirm-complete-box {
+    background: #f0fcf3;
+    border: 1px solid #00ad00;
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.confirm-complete-icon {
+    width: 40px;
+    height: 40px;
+    background: #2e7d32;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.confirm-complete-title {
+    color: #1e5e28;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.confirm-complete-text {
+    color: #1e5e28;
+    font-size: 13.5px;
+}
+
+/* ===== FOOTER ===== */
+
+.era-footer {
+    display: flex;
+    align-items: center;
+    padding: 14px 28px;
+    border-top: 1px solid #dce8ed;
+    gap: 10px;
+    background: #fff;
+}
+
+.era-footer-right {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+}
+
+.era-btn-cancel {
+    background: #fff !important;
+    border: 1.5px solid #c8d8df !important;
+    border-radius: 10px !important;
+    color: #2a3840 !important;
+    font-size: 13px;
+    padding: 8px 20px !important;
+    box-shadow: none !important;
+}
+
+.era-btn-prev {
+    background: #fff !important;
+    border: 1.5px solid #c8d8df !important;
+    border-radius: 10px !important;
+    color: #2a3840 !important;
+    font-size: 13px;
+    padding: 8px 18px !important;
+    display: flex;
+    align-items: center;
+    box-shadow: none !important;
+    cursor: pointer;
+}
+
+.era-btn-save {
+    background: #1a6b40 !important;
+    border: none !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 20px !important;
+    box-shadow: 0 2px 8px rgba(26,107,64,0.2) !important;
+}
+
+.era-btn-save:hover {
+    background: #155835 !important;
+}
+
+.era-btn-next {
+    background: #1a6b40 !important;
+    border: none !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 20px !important;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(26,107,64,0.2) !important;
+}
+
+.era-btn-next:hover {
+    background: #155835 !important;
+}
+
+/* ===== STEP PANELS ===== */
+
+.era-step-panel {
+    flex: 1;
+    padding: 24px 28px;
+    overflow-y: auto;
+}
+
+/* ===== SUB-ITEM DONE CHECKMARK ===== */
+
+.era-sub-done::before {
+    content: '\f058';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: #00923b;
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+/* ===== 3-COL TABLE HEADER (Services Risk Factors) ===== */
+
+.era-risk-table-head-3col {
+    display: grid;
+    grid-template-columns: auto 1fr 140px 60px;
+    padding: 10px 16px 10px 0px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #4a6470;
+    background: #f7fafc;
+    border-bottom: 1px solid #bfccd2;
+}
+
+.era-risk-table-head-3col::before {
+    content: '';
+    width: 14px;
+}
+
+.era-risk-table-head-3col span:first-child {
+    justify-self: start;
+}
+
+.era-risk-table-head-3col span:last-child {
+    justify-self: end;
+}
+
+/* ===== RISK FACTOR ROWS WITH BADGE ===== */
+
+.era-risk-row-rf {
+    display: grid;
+    grid-template-columns: auto 1fr 140px 60px;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #bfccd2;
+    gap: 10px;
+    cursor: pointer;
+    transition: background 0.12s;
+}
+
+.era-risk-row-rf:hover {
+    background: #f7fafc;
+}
+
+.era-risk-row-rf:last-of-type {
+    border-bottom: none;
+}
+
+.era-risk-row-rf .era-row-delete {
+    width: fit-content;
+    justify-self: end;
+}
+
+.era-risk-row-rf .era-risk-badge {
+    width: fit-content;
+}
+
+/* ===== RISK BADGES ===== */
+
+.era-risk-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 5px 14px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    border: none;
+}
+
+.era-risk-badge--medium {
+    background: #fef3c7;
+    color: #c27803;
+}
+
+.era-risk-badge--high {
+    background: #fee2e2;
+    color: #e53e3e;
+}
+
+.era-risk-badge--low {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+/* ===== EXPANDABLE ROW CONTENT ===== */
+
+.era-row-expand {
+    padding: 16px 20px;
+    border-bottom: 1px solid #bfccd2;
+    background: #fff;
+    display: none;
+}
+
+.era-row-expand.open {
+    display: block;
+}
+
+.era-expand-section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a2b35;
+    margin-bottom: 8px;
+    margin-top: 12px;
+}
+
+.era-expand-section-title:first-child {
+    margin-top: 0;
+}
+
+.era-expand-textarea {
+    width: 100%;
+    border: 1px solid #bfccd2;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    color: #2a3840;
+    resize: vertical;
+    min-height: 72px;
+    background: #f6f7f8;
+    font-family: inherit;
+    line-height: 1.5;
+}
+
+/* ===== COUNTRY RISK ASSESSMENT TABLE ===== */
+
+.era-country-table-head {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1.5fr 1fr 1fr auto;
+    align-items: center;
+    padding: 10px 16px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #4a6470;
+    background: #f7fafc;
+    border-bottom: 1px solid #bfccd2;
+    gap: 10px;
+}
+
+.era-country-row {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1.5fr 1fr 1fr auto;
+    align-items: start;
+    padding: 12px 16px;
+    border-bottom: 1px solid #bfccd2;
+    gap: 10px;
+}
+
+.era-country-row:last-of-type {
+    border-bottom: none;
+}
+
+.era-country-select {
+    width: 100%;
+    border: 1px solid #bfccd2;
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-size: 13px;
+    color: #2a3840;
+    background: #fff;
+    font-family: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%234a6470' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    cursor: pointer;
+}
+
+.era-country-row .era-risk-badge {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.era-country-input-wrap {
+    display: flex;
+    align-items: center;
+    border: 1px solid #bfccd2;
+    border-radius: 8px;
+    padding: 7px 10px;
+    background: #fff;
+    gap: 4px;
+    font-size: 13px;
+    color: #2a3840;
+}
+
+.era-country-input-wrap input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 13px;
+    color: #2a3840;
+    background: transparent;
+    font-family: inherit;
+}
+
+.era-country-input-wrap span {
+    color: #4a6470;
+    flex-shrink: 0;
+}
+
+.era-country-controls-wrap {
+    padding: 12px 16px;
+    border-bottom: 1px solid #bfccd2;
+}
+
+.era-country-controls-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a2b35;
+    margin-bottom: 8px;
+}
+
+.era-country-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a2b35;
+}
