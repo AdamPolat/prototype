@@ -9,40 +9,129 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        /* Risk filter switcher */
-        .cl-risk-switcher {
-            display: flex; background: #f0f3f5; border-radius: 12px;
-            padding: 5px; gap: 4px; margin-bottom: 20px;
-            border: 1px solid #c7c7c7;
+        /* Filter system */
+        .cl-filter-wrap { position: relative; display: inline-block; }
+        .cl-filter-btn {
+            height: 52px; padding: 0 16px; border-radius: 8px;
+            background: #fff; border: 1px solid #c9d8de; font-size: 13px;
+            font-weight: 500; color: #1a2b35; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 6px;
+            transition: background 0.15s, border-color 0.15s;
         }
-        .cl-risk-btn {
-            flex: 1; padding: 10px 16px; border: none; border-radius: 9px;
-            background: transparent; font-size: 13.5px; font-weight: 500;
-            color: #4a6470; cursor: pointer; transition: background 0.15s, color 0.15s;
-            display: flex; align-items: center; justify-content: center; gap: 7px;
+        .cl-filter-btn:hover { background: #f5f7f8; border-color: #a8b8c0; }
+        .cl-filter-btn:focus { outline: none; }
+        .cl-filter-count {
+            display: inline-flex; align-items: center; justify-content: center;
+            min-width: 20px; height: 20px; padding: 0 6px;
+            background: #02d14c; color: #fff; border-radius: 10px;
+            font-size: 11px; font-weight: 700; margin-left: 4px;
         }
-        .cl-risk-btn:hover { background: #fff; }
-        .cl-risk-btn:focus { outline: none; box-shadow: none; }
-        .cl-risk-btn.active {
-            background: #fff; color: #1a2b35;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.1); font-weight: 600;
-            border: none; outline: none;
+
+        .cl-filter-dropdown {
+            display: none; position: absolute; top: calc(100% + 4px); left: 0;
+            background: #fff; border: 1px solid #c9d8de; border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12); z-index: 300;
+            min-width: 200px; overflow: hidden;
         }
-        .cl-risk-btn.active:focus { box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
-        .cl-risk-btn .cl-risk-count { font-weight: 700; }
-        .cl-risk-icon { font-size: 15px; }
+        .cl-filter-value-dropdown {
+            display: none; position: absolute; top: calc(100% + 4px);
+            background: #fff; border: 1px solid #c9d8de; border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12); z-index: 301;
+            min-width: 180px; overflow: hidden;
+        }
+        .cl-filter-value-dropdown:has(.cl-date-picker) {
+            min-width: 320px;
+        }
+        .cl-filter-dropdown.open, .cl-filter-value-dropdown.open { display: block; }
+        .cl-filter-option, .cl-filter-value-option {
+            padding: 10px 16px; font-size: 13px; color: #1a2b35;
+            cursor: pointer; transition: background 0.12s;
+        }
+        .cl-filter-option:hover, .cl-filter-value-option:hover { background: #f5f7f8; }
+        .cl-filter-option.active { background: #f5f7f8; }
+        .cl-filter-value-option {
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .cl-filter-value-label { flex: 1; }
+        .cl-filter-value-count {
+            color: #6a7f89; font-size: 12px; margin-left: 12px;
+        }
+
+        /* Date picker */
+        .cl-date-picker {
+            padding: 16px;
+        }
+        .cl-date-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        .cl-date-nav {
+            background: none; border: none; cursor: pointer;
+            color: #6a7f89; font-size: 18px; padding: 4px 8px;
+        }
+        .cl-date-nav:hover { color: #1a2b35; }
+        .cl-date-current {
+            font-size: 14px; font-weight: 600; color: #1a2b35;
+        }
+        .cl-date-grid {
+            display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px;
+        }
+        .cl-date-day-header {
+            text-align: center; font-size: 11px; font-weight: 600;
+            color: #6a7f89; padding: 8px 0;
+        }
+        .cl-date-day {
+            aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+            font-size: 13px; color: #1a2b35; cursor: pointer;
+            border-radius: 50%; transition: background 0.12s;
+        }
+        .cl-date-day:hover { background: #f5f7f8; }
+        .cl-date-day.selected { background: #c9d8de; font-weight: 600; }
+        .cl-date-day.empty { cursor: default; }
+        .cl-date-day.empty:hover { background: transparent; }
+
+        /* Active filter pills */
+        .cl-active-filters {
+            display: flex; flex-wrap: wrap; gap: 8px;
+        }
+        .cl-active-filters:not(:empty) {
+            margin-bottom: 10px;
+        }
+        .cl-filter-pill {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 12px 10px 14px; background: #dce5e8; border-radius: 9px;
+            font-size: 13px; color: #1a2b35;
+        }
+        .cl-filter-pill-count { font-weight: 600; color: #0068ff; }
+        .cl-filter-pill-label { font-weight: 500; }
+        .cl-filter-pill-value { font-weight: 600; }
+        .cl-filter-pill-remove {
+            width: 23px; height: 23px; border-radius: 38%;
+            background: #dce5e8; border: none; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; color: #6a7f89; transition: background 0.12s;
+        }
+        .cl-filter-pill-remove:hover { background: #e0e8ea; }
+        .cl-add-filter-pill {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 43px; height: 42px; border-radius: 21%;
+            background: #dce5e8; border: none; cursor: pointer;
+            font-size: 24px; color: #1a2b35; font-weight: 300;
+            transition: background 0.12s;
+        }
+        .cl-add-filter-pill:hover { background: #d5e4e7; }
 
         /* Search + Add bar */
         .cl-action-bar { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; }
         .cl-search {
             flex: 1; display: flex; align-items: center; gap: 10px;
             background: #fff; border: 1px solid #c9d8de; border-radius: 8px;
-            padding: 0 14px; height: 42px;
+            padding: 0 14px; height: 52px;
         }
         .cl-search-icon { color: #8aa8b2; font-size: 13px; }
         .cl-search-input { border: none; outline: none; font-size: 13px; color: #1a2b35; background: transparent; width: 100%; }
         .cl-search-input::placeholder { color: #8aa8b2; }
-        .cl-add-btn { height: 42px; padding: 0 20px; border-radius: 8px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+        .cl-add-btn { height: 52px; padding: 0 20px; border-radius: 8px; font-size: 13px; font-weight: 600; white-space: nowrap; }
 
         /* Client name cell */
         .cl-name-cell { display: flex; align-items: center; gap: 10px; }
@@ -141,7 +230,7 @@
     <!-- ===== TOP HEADER ===== -->
     <header class="app-header d-flex align-items-center">
         <div class="header-logo d-flex align-items-center justify-content-center">
-            <img src="images/logo.svg" alt="Logo" width="32" height="32">
+            <img src="images/FV-LOGO.svg" alt="Logo" width="36" height="36">
         </div>
         <div class="header-search flex-grow-1">
             <div class="header-search-pill d-flex align-items-center">
@@ -204,30 +293,38 @@
                     </li>
                 </ul>
 
-                <!-- Risk filter switcher -->
-                <div class="cl-risk-switcher">
-                    <button class="cl-risk-btn active" data-filter="all">
-                        All Risks <span class="cl-risk-count">47</span>
-                    </button>
-                    <button class="cl-risk-btn" data-filter="high">
-                        <span class="cl-risk-icon">😟</span> High Risk <span class="cl-risk-count">4</span>
-                    </button>
-                    <button class="cl-risk-btn" data-filter="medium">
-                        <span class="cl-risk-icon">😐</span> Medium Risk <span class="cl-risk-count">3</span>
-                    </button>
-                    <button class="cl-risk-btn" data-filter="low">
-                        <span class="cl-risk-icon">😊</span> Low Risk <span class="cl-risk-count">8</span>
-                    </button>
-                </div>
-
-                <!-- Search + Add -->
+                <!-- Action bar with filters -->
                 <div class="cl-action-bar">
                     <button class="btn btn-generate cl-add-btn">Add Client +</button>
+
+                    <div class="cl-filter-wrap">
+                        <button class="cl-filter-btn" id="clAddFilterBtn">
+                            Add Filter
+                            <span class="cl-filter-count" id="clFilterCount" style="display: none;">0</span>
+                            <i class="fas fa-sliders-h"></i>
+                        </button>
+
+                        <!-- Filter category dropdown -->
+                        <div class="cl-filter-dropdown" id="clFilterDropdown">
+                            <div class="cl-filter-option" data-category="entityType">Entity Type</div>
+                            <div class="cl-filter-option" data-category="riskRating">Risk Rating</div>
+                            <div class="cl-filter-option" data-category="cddStatus">CDD Status</div>
+                            <div class="cl-filter-option" data-category="lastCddDate">Last CDD Date</div>
+                            <div class="cl-filter-option" data-category="nextReviewDate">Next Review Date</div>
+                        </div>
+
+                        <!-- Filter value dropdown -->
+                        <div class="cl-filter-value-dropdown" id="clFilterValueDropdown"></div>
+                    </div>
+
                     <div class="cl-search">
                         <i class="fas fa-search cl-search-icon"></i>
                         <input type="text" class="cl-search-input" placeholder="Search: search for content">
                     </div>
                 </div>
+
+                <!-- Active filters pills -->
+                <div class="cl-active-filters" id="clActiveFilters"></div>
 
                 <!-- Clients table -->
                 <div class="ukp-table-wrap" id="clientsTableWrap">
@@ -244,67 +341,8 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="ukp-row" data-risk="low">
-                                <td><div class="cl-name-cell"><img src="images/new_image.jpg" class="ukp-avatar-img" alt=""><div class="cl-name-info"><div class="cl-name">Jeevan Tokhi</div><div class="cl-abn">ABN 778 906 23B</div></div></div></td>
-                                <td>Trust</td>
-                                <td><span class="cl-risk-badge cl-risk-low">Low <i class="fa-regular fa-face-smile"></i></span></td>
-                                <td><span class="cl-cdd-badge"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#00923b" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg> Current</span></td>
-                                <td>26th of December 2025</td>
-                                <td>26th of December 2026</td>
-                                <td>Kim Davidson</td>
-                                <td><div class="dropdown"><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div></div></td>
-                            </tr>
-                            <tr class="ukp-row" data-risk="medium">
-                                <td><div class="cl-name-cell"><img src="images/new_image.jpg" class="ukp-avatar-img" alt=""><div class="cl-name-info"><div class="cl-name">Jeevan Tokhi</div><div class="cl-abn">ABN 778 906 23B</div></div></div></td>
-                                <td>Partnership</td>
-                                <td><span class="cl-risk-badge cl-risk-medium">Medium <i class="fa-regular fa-face-meh"></i></span></td>
-                                <td><span class="cl-cdd-badge"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#00923b" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg> Current</span></td>
-                                <td>18th of April 2025</td>
-                                <td>18th of April 2026</td>
-                                <td>Jason Lee</td>
-                                <td><div class="dropdown"><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div></div></td>
-                            </tr>
-                            <tr class="ukp-row" data-risk="high">
-                                <td><div class="cl-name-cell"><img src="images/new_image.jpg" class="ukp-avatar-img" alt=""><div class="cl-name-info"><div class="cl-name">Jeevan Tokhi</div><div class="cl-abn">ABN 778 906 23B</div></div></div></td>
-                                <td>Partnership</td>
-                                <td><span class="cl-risk-badge cl-risk-high">High <i class="fa-regular fa-face-frown"></i></span></td>
-                                <td><span class="cl-cdd-badge"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#b85c00" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/></svg> Due Soon</span></td>
-                                <td>3rd of April 2025</td>
-                                <td>3rd of April 2026</td>
-                                <td>Jason Lee</td>
-                                <td><div class="dropdown"><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div></div></td>
-                            </tr>
-                            <tr class="ukp-row" data-risk="high">
-                                <td><div class="cl-name-cell"><img src="images/new_image.jpg" class="ukp-avatar-img" alt=""><div class="cl-name-info"><div class="cl-name">Jeevan Tokhi</div><div class="cl-abn">ABN 778 906 23B</div></div></div></td>
-                                <td>Partnership</td>
-                                <td><span class="cl-risk-badge cl-risk-high">High <i class="fa-regular fa-face-frown"></i></span></td>
-                                <td><span class="cl-cdd-badge"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#b85c00" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/></svg> Due Soon</span></td>
-                                <td>3rd of April 2025</td>
-                                <td>3rd of April 2025</td>
-                                <td>Jason Lee</td>
-                                <td><div class="dropdown"><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div></div></td>
-                            </tr>
-                            <tr class="ukp-row" data-risk="high">
-                                <td><div class="cl-name-cell"><img src="images/new_image.jpg" class="ukp-avatar-img" alt=""><div class="cl-name-info"><div class="cl-name">Jeevan Tokhi</div><div class="cl-abn">ABN 778 906 23B</div></div></div></td>
-                                <td>Partnership</td>
-                                <td><span class="cl-risk-badge cl-risk-high">High <i class="fa-regular fa-face-frown"></i></span></td>
-                                <td><span class="cl-cdd-badge"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#b85c00" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/></svg> Due Soon</span></td>
-                                <td>3rd of April 2025</td>
-                                <td>3rd of April 2026</td>
-                                <td>Jason Lee</td>
-                                <td><div class="dropdown"><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div></div></td>
-                            </tr>
-                            <tr class="ukp-row" data-risk="high">
-                                <td><div class="cl-name-cell"><img src="images/new_image.jpg" class="ukp-avatar-img" alt=""><div class="cl-name-info"><div class="cl-name">Jeevan Tokhi</div><div class="cl-abn">ABN 778 906 23B</div></div></div></td>
-                                <td>Partnership</td>
-                                <td><span class="cl-risk-badge cl-risk-high">High <i class="fa-regular fa-face-frown"></i></span></td>
-                                <td><span class="cl-cdd-badge"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#b85c00" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/></svg> Due Soon</span></td>
-                                <td>3rd of April 2025</td>
-                                <td>3rd of April 2025</td>
-                                <td>Jason Lee</td>
-                                <td><div class="dropdown"><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div></div></td>
-                            </tr>
+                        <tbody id="clientsTableBody">
+                            <!-- Rows will be dynamically populated from JSON -->
                         </tbody>
                     </table>
                 </div>
@@ -403,6 +441,62 @@
             setTimeout(function() { o.style.transition = 'opacity 0.6s ease'; o.style.opacity = '0'; setTimeout(function() { o.style.display = 'none'; }, 600); }, 1800);
         })();
 
+        // Client data
+        var clientsData = [];
+
+        // Load and render clients from JSON
+        fetch('../data/clients.json')
+            .then(function(response) { return response.json(); })
+            .then(function(data) {
+                clientsData = data;
+                renderClients();
+            })
+            .catch(function(error) {
+                console.error('Error loading clients:', error);
+            });
+
+        function renderClients() {
+            var tbody = document.getElementById('clientsTableBody');
+            tbody.innerHTML = '';
+
+            clientsData.forEach(function(client) {
+                var row = createClientRow(client);
+                tbody.appendChild(row);
+            });
+        }
+
+        function createClientRow(client) {
+            var row = document.createElement('tr');
+            row.className = 'ukp-row';
+            row.dataset.risk = client.riskRating.toLowerCase();
+            row.dataset.entityType = client.entityType;
+            row.dataset.cddStatus = client.cddStatus;
+
+            // Risk badge
+            var riskClass = 'cl-risk-' + client.riskRating.toLowerCase();
+            var riskIcon = client.riskRating === 'Low' ? 'fa-face-smile' :
+                          client.riskRating === 'Medium' ? 'fa-face-meh' : 'fa-face-frown';
+
+            // CDD badge
+            var cddIconColor = client.cddStatus === 'Current' ? '#00923b' :
+                              client.cddStatus === 'Overdue' ? '#c0392b' : '#b85c00';
+            var cddIcon = client.cddStatus === 'Current'
+                ? '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="' + cddIconColor + '" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>'
+                : '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="' + cddIconColor + '" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/></svg>';
+
+            row.innerHTML =
+                '<td><div class="cl-name-cell"><img src="images/new_image.jpg" class="ukp-avatar-img" alt=""><div class="cl-name-info"><div class="cl-name">' + client.name + '</div><div class="cl-abn">ABN ' + client.abn + '</div></div></div></td>' +
+                '<td>' + client.entityType + '</td>' +
+                '<td><span class="cl-risk-badge ' + riskClass + '">' + client.riskRating + ' <i class="fa-regular ' + riskIcon + '"></i></span></td>' +
+                '<td><span class="cl-cdd-badge">' + cddIcon + ' ' + client.cddStatus + '</span></td>' +
+                '<td>' + client.lastCdd + '</td>' +
+                '<td>' + client.nextReview + '</td>' +
+                '<td>' + client.assignedTo + '</td>' +
+                '<td><div class="dropdown"><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div></div></td>';
+
+            return row;
+        }
+
         // Add Client modal
         var ncgOverlay = document.getElementById('ncgOverlay');
         document.querySelector('.cl-add-btn').addEventListener('click', function() {
@@ -421,16 +515,263 @@
             });
         });
 
-        // Risk switcher
-        var activeFilter = 'all';
-        document.querySelectorAll('.cl-risk-btn').forEach(function(btn) {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.cl-risk-btn').forEach(function(b) { b.classList.remove('active'); });
+        // Advanced filter system
+        var activeFilters = {}; // { category: value }
+        var currentCategory = null;
+
+        var filterDefinitions = {
+            entityType: {
+                label: 'Entity Type',
+                options: ['Trust', 'Partnership', 'Family', 'Individual /Sole Trader', 'Business Group', 'Other'],
+                type: 'select'
+            },
+            riskRating: {
+                label: 'Risk Rating',
+                options: ['Low', 'Medium', 'High'],
+                type: 'select'
+            },
+            cddStatus: {
+                label: 'CDD Status',
+                options: ['Current', 'Due Soon', 'Overdue'],
+                type: 'select'
+            },
+            lastCddDate: {
+                label: 'Last CDD Date',
+                options: [],
+                type: 'date'
+            },
+            nextReviewDate: {
+                label: 'Next Review Date',
+                options: [],
+                type: 'date'
+            }
+        };
+
+        var clAddFilterBtn = document.getElementById('clAddFilterBtn');
+        var clFilterDropdown = document.getElementById('clFilterDropdown');
+        var clFilterValueDropdown = document.getElementById('clFilterValueDropdown');
+        var clActiveFiltersContainer = document.getElementById('clActiveFilters');
+
+        // Show category dropdown
+        clAddFilterBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            clFilterDropdown.classList.toggle('open');
+            clFilterValueDropdown.classList.remove('open');
+        });
+
+        // Category hover - show values or date picker
+        document.querySelectorAll('#clFilterDropdown .cl-filter-option').forEach(function(opt) {
+            opt.addEventListener('mouseenter', function() {
+                // Highlight current category
+                document.querySelectorAll('#clFilterDropdown .cl-filter-option').forEach(function(o) {
+                    o.classList.remove('active');
+                });
                 this.classList.add('active');
-                activeFilter = this.dataset.filter;
-                applyFilters();
+
+                currentCategory = this.dataset.category;
+                var def = filterDefinitions[currentCategory];
+
+                clFilterValueDropdown.innerHTML = '';
+
+                if (def.type === 'date') {
+                    // Show date picker
+                    renderDatePicker();
+                } else {
+                    // Build value dropdown with counts
+                    def.options.forEach(function(value) {
+                        var count = getFilterCount(currentCategory, value);
+
+                        var valueOpt = document.createElement('div');
+                        valueOpt.className = 'cl-filter-value-option';
+                        valueOpt.innerHTML = '<span class="cl-filter-value-label">' + value + '</span>' +
+                                            '<span class="cl-filter-value-count">(' + count + ')</span>';
+                        valueOpt.dataset.value = value;
+                        valueOpt.addEventListener('click', function() {
+                            addFilter(currentCategory, value);
+                            clFilterDropdown.classList.remove('open');
+                            clFilterValueDropdown.classList.remove('open');
+                        });
+                        clFilterValueDropdown.appendChild(valueOpt);
+                    });
+                }
+
+                // Position and show value dropdown
+                var rect = clFilterDropdown.getBoundingClientRect();
+                clFilterValueDropdown.style.left = (rect.width + 4) + 'px';
+                clFilterValueDropdown.style.top = '50px';
+                clFilterValueDropdown.classList.add('open');
             });
         });
+
+        // Close value dropdown when mouse leaves both dropdowns
+        var closeValueTimer;
+        clFilterDropdown.addEventListener('mouseleave', function() {
+            closeValueTimer = setTimeout(function() {
+                clFilterValueDropdown.classList.remove('open');
+                document.querySelectorAll('#clFilterDropdown .cl-filter-option').forEach(function(o) {
+                    o.classList.remove('active');
+                });
+            }, 100);
+        });
+        clFilterValueDropdown.addEventListener('mouseenter', function() {
+            clearTimeout(closeValueTimer);
+        });
+        clFilterValueDropdown.addEventListener('mouseleave', function() {
+            clFilterValueDropdown.classList.remove('open');
+            document.querySelectorAll('#clFilterDropdown .cl-filter-option').forEach(function(o) {
+                o.classList.remove('active');
+            });
+        });
+
+        // Close dropdowns on outside click
+        document.addEventListener('click', function() {
+            clFilterDropdown.classList.remove('open');
+            clFilterValueDropdown.classList.remove('open');
+            document.querySelectorAll('#clFilterDropdown .cl-filter-option').forEach(function(o) {
+                o.classList.remove('active');
+            });
+        });
+
+        function addFilter(category, value) {
+            activeFilters[category] = value;
+            renderActiveFilters();
+            updateFilterCount();
+            applyFilters();
+        }
+
+        function removeFilter(category) {
+            delete activeFilters[category];
+            renderActiveFilters();
+            updateFilterCount();
+            applyFilters();
+        }
+
+        function updateFilterCount() {
+            var count = Object.keys(activeFilters).length;
+            var countEl = document.getElementById('clFilterCount');
+            if (count > 0) {
+                countEl.textContent = count;
+                countEl.style.display = 'inline-flex';
+            } else {
+                countEl.style.display = 'none';
+            }
+        }
+
+        function getFilterCount(category, value) {
+            if (!clientsData || clientsData.length === 0) return 0;
+
+            return clientsData.filter(function(client) {
+                if (category === 'entityType') {
+                    return client.entityType === value;
+                } else if (category === 'riskRating') {
+                    return client.riskRating === value;
+                } else if (category === 'cddStatus') {
+                    return client.cddStatus === value;
+                }
+                return false;
+            }).length;
+        }
+
+        var currentPickerDate = new Date();
+
+        function renderDatePicker() {
+            var year = currentPickerDate.getFullYear();
+            var month = currentPickerDate.getMonth();
+
+            var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                            'July', 'August', 'September', 'October', 'November', 'December'];
+            var dayNames = ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
+
+            var firstDay = new Date(year, month, 1).getDay();
+            firstDay = firstDay === 0 ? 6 : firstDay - 1; // Convert Sunday=0 to Monday=0
+
+            var daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            var html = '<div class="cl-date-picker">';
+            html += '<div class="cl-date-header">';
+            html += '<button class="cl-date-nav" id="clDatePrev">&larr;</button>';
+            html += '<span class="cl-date-current">' + monthNames[month] + ' ' + year + '</span>';
+            html += '<button class="cl-date-nav" id="clDateNext">&rarr;</button>';
+            html += '</div>';
+            html += '<div class="cl-date-grid">';
+
+            // Day headers
+            dayNames.forEach(function(day) {
+                html += '<div class="cl-date-day-header">' + day + '</div>';
+            });
+
+            // Empty cells before first day
+            for (var i = 0; i < firstDay; i++) {
+                html += '<div class="cl-date-day empty"></div>';
+            }
+
+            // Days
+            for (var day = 1; day <= daysInMonth; day++) {
+                html += '<div class="cl-date-day" data-date="' + day + '/' + (month + 1) + '/' + (year % 100) + '">' + day + '</div>';
+            }
+
+            html += '</div></div>';
+
+            clFilterValueDropdown.innerHTML = html;
+
+            // Add event listeners
+            document.getElementById('clDatePrev').addEventListener('click', function(e) {
+                e.stopPropagation();
+                currentPickerDate.setMonth(currentPickerDate.getMonth() - 1);
+                renderDatePicker();
+            });
+
+            document.getElementById('clDateNext').addEventListener('click', function(e) {
+                e.stopPropagation();
+                currentPickerDate.setMonth(currentPickerDate.getMonth() + 1);
+                renderDatePicker();
+            });
+
+            document.querySelectorAll('.cl-date-day:not(.empty)').forEach(function(dayEl) {
+                dayEl.addEventListener('click', function() {
+                    var dateValue = this.dataset.date;
+                    addFilter(currentCategory, dateValue);
+                    clFilterDropdown.classList.remove('open');
+                    clFilterValueDropdown.classList.remove('open');
+                });
+            });
+        }
+
+        function renderActiveFilters() {
+            clActiveFiltersContainer.innerHTML = '';
+
+            Object.keys(activeFilters).forEach(function(category) {
+                var value = activeFilters[category];
+                var def = filterDefinitions[category];
+                var count = getFilterCount(category, value);
+
+                var pill = document.createElement('div');
+                pill.className = 'cl-filter-pill';
+                pill.innerHTML =
+                    '<span class="cl-filter-pill-count">(' + count + ')</span> ' +
+                    '<span class="cl-filter-pill-label">' + def.label + ':</span> ' +
+                    '<span class="cl-filter-pill-value">' + value + '</span>' +
+                    '<button class="cl-filter-pill-remove" data-category="' + category + '">&times;</button>';
+
+                pill.querySelector('.cl-filter-pill-remove').addEventListener('click', function() {
+                    removeFilter(this.dataset.category);
+                });
+
+                clActiveFiltersContainer.appendChild(pill);
+            });
+
+            // Add "+" button to add more filters
+            if (Object.keys(activeFilters).length > 0) {
+                var addBtn = document.createElement('button');
+                addBtn.className = 'cl-add-filter-pill';
+                addBtn.textContent = '+';
+                addBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    clFilterDropdown.classList.add('open');
+                });
+                clActiveFiltersContainer.appendChild(addBtn);
+            }
+        }
 
         // Search
         document.querySelector('.cl-search-input').addEventListener('input', applyFilters);
@@ -438,13 +779,42 @@
         function applyFilters() {
             var query = document.querySelector('.cl-search-input').value.toLowerCase();
             var visible = 0;
+
             document.querySelectorAll('.ukp-row').forEach(function(row) {
-                var matchRisk = activeFilter === 'all' || row.dataset.risk === activeFilter;
-                var matchSearch = row.textContent.toLowerCase().includes(query);
-                var show = matchRisk && matchSearch;
-                row.style.display = show ? '' : 'none';
-                if (show) visible++;
+                var match = true;
+
+                // Apply search
+                if (query && !row.textContent.toLowerCase().includes(query)) {
+                    match = false;
+                }
+
+                // Apply active filters
+                Object.keys(activeFilters).forEach(function(category) {
+                    var filterValue = activeFilters[category];
+
+                    if (category === 'entityType') {
+                        var entityType = row.dataset.entityType;
+                        if (entityType !== filterValue) match = false;
+                    } else if (category === 'riskRating') {
+                        var risk = row.dataset.risk;
+                        if (risk !== filterValue.toLowerCase()) match = false;
+                    } else if (category === 'cddStatus') {
+                        var cddStatus = row.dataset.cddStatus;
+                        if (cddStatus !== filterValue) match = false;
+                    } else if (category === 'lastCddDate') {
+                        var lastCdd = row.children[4].textContent.trim();
+                        if (lastCdd !== filterValue) match = false;
+                    } else if (category === 'nextReviewDate') {
+                        var nextReview = row.children[5].textContent.trim();
+                        if (nextReview !== filterValue) match = false;
+                    }
+                });
+
+                row.style.display = match ? '' : 'none';
+                if (match) visible++;
             });
+
+            // Show/hide empty state
             var empty = visible === 0;
             document.getElementById('clientsTableWrap').style.display = empty ? 'none' : '';
             var es = document.getElementById('clEmptyState');
