@@ -285,32 +285,36 @@ a {
 }
 
 .btn-upload {
+    height: 52px;
+    padding: 0 16px !important;
+    border-radius: 8px !important;
     background: #fff;
-    border: 1.5px solid #b8cdd4 !important;
-    border-radius: 9px !important;
-    color: #2a3840 !important;
+    border: 1px solid #c9d8de !important;
     font-size: 13px;
     font-weight: 500;
-    padding: 9px 18px !important;
-    display: flex;
+    color: #1a2b35 !important;
+    cursor: pointer;
+    display: inline-flex;
     align-items: center;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05) !important;
+    gap: 6px;
     transition: background 0.15s, border-color 0.15s;
 }
 
 .btn-upload:hover {
-    background: #f5f9fa;
-    border-color: #8fb8c4 !important;
+    background: #f5f7f8;
+    border-color: #a8b8c0 !important;
 }
 
 .btn-generate {
     background: #1a6b40;
     border: none !important;
-    border-radius: 9px !important;
+    border-radius: 8px !important;
     color: #fff !important;
     font-size: 13px;
     font-weight: 600;
-    padding: 9px 20px !important;
+    padding: 0 20px !important;
+    height: 52px;
+    white-space: nowrap;
     display: flex;
     align-items: center;
     box-shadow: 0 2px 8px rgba(26,107,64,0.25) !important;
@@ -853,7 +857,7 @@ a {
 .fp-form-row--auto { flex-wrap: wrap; }
 .fp-form-group { display: flex; flex-direction: column; gap: 6px; flex: 1; }
 .fp-form-group--sm { flex: 0 0 160px; }
-.fp-form-group--md { flex: 0 0 280px; }
+.fp-form-group--md { flex: 0 0 20px; }
 .fp-form-label { font-size: 12.5px; color: #4a5e66; font-weight: 500; margin-bottom: 0; }
 .fp-form-input {
     height: 38px; border-radius: 8px; border: 1px solid #c9d8de;
