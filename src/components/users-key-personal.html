@@ -6,11 +6,18 @@
     <title>Users & Key Personal</title>
     <link rel="icon" type="image/svg+xml" href="images/FV-LOGO.svg">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="../css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+    <!-- Authentication Check -->
+    <script>
+        if (sessionStorage.getItem('isAuthenticated') !== 'true') {
+            window.location.href = 'login.html';
+        }
+    </script>
 
     <!-- ===== TOP HEADER ===== -->
     <header class="app-header d-flex align-items-center">
@@ -31,7 +38,7 @@
             <button class="header-icon-btn" title="Call">
                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/></svg>
             </button>
-            <button class="header-icon-btn" title="Power">
+            <button class="header-icon-btn" title="Logout" id="logoutBtn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M7.5 1v7h1V1z"/><path d="M3 8.812a5 5 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812"/></svg>
             </button>
             <button class="header-icon-btn" title="Apps">
@@ -99,6 +106,17 @@
                     </li>
                 </ul>
 
+                <!-- Archive Success Alert -->
+                <div id="archiveAlert" style="display: none; opacity: 0; transition: opacity 0.6s;" class="complete-alert mb-4">
+                    <div class="complete-alert-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"></path></svg>
+                    </div>
+                    <div>
+                        <div class="complete-alert-title">Archive Successful</div>
+                        <div class="complete-alert-text">The contact has been archived and removed from your key personal list</div>
+                    </div>
+                </div>
+
                 <!-- Action bar -->
                 <div class="ukp-action-bar d-flex align-items-center mb-4">
                     <button class="btn btn-generate ukp-add-btn mr-3">Add.... +</button>
@@ -145,7 +163,7 @@
                                 <td>256 Melbourne Rd, Melbo....</td>
                                 <td><span class="ukp-training-badge"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#00923b" viewBox="0 0 16 16" class="mr-1"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg> Complete</span></td>
                                 <td>User</td>
-                                <td><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div></td>
+                                <td><div class="dropdown"><button class="btn btn-action dropdown-toggle">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Archive</a></div></div></td>
                             </tr>
                             <tr class="ukp-row" data-name="Jeevan Tokhi" data-role="User" data-email="Jeevan_tokhi@bglcorp.com" data-phone="03445768" data-address="256 Melbourne Rd, Melbourne VIC 3000" data-training="Complete" data-position="User">
                                 <td><div class="ukp-name-cell"><img src="images/new_image.jpg" class="ukp-avatar-img" alt="JT"> Jeevan Tokhi</div></td>
@@ -155,7 +173,7 @@
                                 <td>256 Melbourne Rd, Melbo....</td>
                                 <td><span class="ukp-training-badge"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#00923b" viewBox="0 0 16 16" class="mr-1"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg> Complete</span></td>
                                 <td>User</td>
-                                <td><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div></td>
+                                <td><div class="dropdown"><button class="btn btn-action dropdown-toggle">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Archive</a></div></div></td>
                             </tr>
                             <tr class="ukp-row" data-name="Jeevan Tokhi" data-role="User" data-email="Jeevan_tokhi@bglcorp.com" data-phone="03445768" data-address="256 Melbourne Rd, Melbourne VIC 3000" data-training="Complete" data-position="User">
                                 <td><div class="ukp-name-cell"><img src="images/new_image.jpg" class="ukp-avatar-img" alt="JT"> Jeevan Tokhi</div></td>
@@ -165,7 +183,7 @@
                                 <td>256 Melbourne Rd, Melbo....</td>
                                 <td><span class="ukp-training-badge"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#00923b" viewBox="0 0 16 16" class="mr-1"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg> Complete</span></td>
                                 <td>User</td>
-                                <td><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div></td>
+                                <td><div class="dropdown"><button class="btn btn-action dropdown-toggle">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Archive</a></div></div></td>
                             </tr>
                             <tr class="ukp-row" data-name="Jeevan Tokhi" data-role="User" data-email="Jeevan_tokhi@bglcorp.com" data-phone="03445768" data-address="256 Melbourne Rd, Melbourne VIC 3000" data-training="Complete" data-position="User">
                                 <td><div class="ukp-name-cell"><img src="images/new_image.jpg" class="ukp-avatar-img" alt="JT"> Jeevan Tokhi</div></td>
@@ -175,7 +193,7 @@
                                 <td>256 Melbourne Rd, Melbo....</td>
                                 <td><span class="ukp-training-badge"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#00923b" viewBox="0 0 16 16" class="mr-1"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg> Complete</span></td>
                                 <td>User</td>
-                                <td><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div></td>
+                                <td><div class="dropdown"><button class="btn btn-action dropdown-toggle">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Archive</a></div></div></td>
                             </tr>
                         </tbody>
                     </table>
@@ -206,7 +224,7 @@
                                 <td>256 Melbourne Rd, Melbo....</td>
                                 <td><span class="ukp-training-badge"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#00923b" viewBox="0 0 16 16" class="mr-1"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg> Complete</span></td>
                                 <td>Key Personal</td>
-                                <td><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div></td>
+                                <td><div class="dropdown"><button class="btn btn-action dropdown-toggle">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Archive</a></div></div></td>
                             </tr>
                             <tr class="ukp-row" data-name="Jeevan Tokhi" data-role="Key Personal" data-email="Jeevan_tokhi@bglcorp.com" data-phone="03445768" data-address="256 Melbourne Rd, Melbourne VIC 3000" data-training="Complete" data-position="Key Personal">
                                 <td><div class="ukp-name-cell"><img src="images/new_image.jpg" class="ukp-avatar-img" alt="JT"> Jeevan Tokhi</div></td>
@@ -216,7 +234,7 @@
                                 <td>256 Melbourne Rd, Melbo....</td>
                                 <td><span class="ukp-training-badge"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#00923b" viewBox="0 0 16 16" class="mr-1"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg> Complete</span></td>
                                 <td>Key Personal</td>
-                                <td><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div></td>
+                                <td><div class="dropdown"><button class="btn btn-action dropdown-toggle">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Archive</a></div></div></td>
                             </tr>
                         </tbody>
                     </table>
@@ -337,6 +355,27 @@
         </div>
     </div>
 
+    <!-- Archive Confirmation Modal -->
+    <div class="gen-modal-overlay" id="archiveModalOverlay">
+        <div class="gen-modal">
+            <div class="gen-modal-content">
+                <div class="gen-modal-header">
+                    <h5 class="gen-modal-title">Archive Confirmation</h5>
+                </div>
+                <div class="gen-modal-body">
+                    <div class="gen-info-box">
+                        <div class="gen-info-title">Warning!</div>
+                        <p class="gen-info-text">Are you sure you want to archive this Key Personal?<br>This contact will no longer appear in your key personal but stays in the records.</p>
+                    </div>
+                </div>
+                <div class="gen-modal-footer">
+                    <button class="btn gen-btn-cancel" id="archiveModalCancel">Cancel</button>
+                    <button class="btn gen-btn-continue" id="archiveModalConfirm">Confirm Archive</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Spinner Overlay -->
     <div id="spinnerOverlay" style="position:fixed; inset:0; background:rgba(0,54,66,0.75); z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column; opacity:0; transition: opacity 0.4s ease;">
         <div class="loader"></div>
@@ -422,7 +461,7 @@
                 '<td>' + addressShort + '</td>' +
                 '<td>' + trainingBadgeHTML + '</td>' +
                 '<td>' + position + '</td>' +
-                '<td><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div></td>';
+                '<td><div class="dropdown"><button class="btn btn-action dropdown-toggle">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Archive</a></div></div></td>';
 
             // Insert at the beginning of the table
             document.querySelector('#usersTable tbody').insertBefore(newRow, document.querySelector('#usersTable tbody').firstChild);
@@ -513,6 +552,105 @@ document.getElementById('popEmail').textContent = row.dataset.email;
         popover.addEventListener('mouseleave', function() {
             popover.style.display = 'none';
         });
+
+        // Manual dropdown handling
+        var rowToArchive = null;
+
+        document.addEventListener('click', function(e) {
+            // Check if clicked element is a dropdown toggle
+            if (e.target.classList.contains('dropdown-toggle')) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                // Close all other dropdowns
+                document.querySelectorAll('.dropdown-menu.show').forEach(function(menu) {
+                    menu.classList.remove('show');
+                });
+
+                // Toggle the clicked dropdown
+                var dropdown = e.target.closest('.dropdown');
+                var menu = dropdown.querySelector('.dropdown-menu');
+                menu.classList.toggle('show');
+            }
+            // Check if Archive item was clicked
+            else if (e.target.classList.contains('dropdown-item') && e.target.textContent.trim() === 'Archive') {
+                e.preventDefault();
+                // Store reference to the row being archived
+                rowToArchive = e.target.closest('tr');
+                document.getElementById('archiveModalOverlay').classList.add('open');
+                // Close all dropdowns
+                document.querySelectorAll('.dropdown-menu.show').forEach(function(menu) {
+                    menu.classList.remove('show');
+                });
+            }
+            else {
+                // Close all dropdowns when clicking outside
+                document.querySelectorAll('.dropdown-menu.show').forEach(function(menu) {
+                    menu.classList.remove('show');
+                });
+            }
+        });
+
+        // Archive modal handlers
+        var archiveModalOverlay = document.getElementById('archiveModalOverlay');
+        var archiveModalCancel = document.getElementById('archiveModalCancel');
+        var archiveModalConfirm = document.getElementById('archiveModalConfirm');
+
+        archiveModalCancel.addEventListener('click', function() {
+            archiveModalOverlay.classList.remove('open');
+            rowToArchive = null;
+        });
+
+        archiveModalOverlay.addEventListener('click', function(e) {
+            if (e.target === archiveModalOverlay) {
+                archiveModalOverlay.classList.remove('open');
+                rowToArchive = null;
+            }
+        });
+
+        archiveModalConfirm.addEventListener('click', function() {
+            // Close the modal
+            archiveModalOverlay.classList.remove('open');
+
+            // Animate and remove the row
+            if (rowToArchive) {
+                // Add 300ms delay before starting animation
+                setTimeout(function() {
+                    rowToArchive.classList.add('animate__animated', 'animate__hinge');
+
+                    // Remove the row after hinge animation completes (2000ms)
+                    setTimeout(function() {
+                        rowToArchive.remove();
+                        rowToArchive = null;
+
+                        // Show success alert
+                        var archiveAlert = document.getElementById('archiveAlert');
+                        archiveAlert.style.display = 'flex';
+                        requestAnimationFrame(function() {
+                            requestAnimationFrame(function() {
+                                archiveAlert.style.opacity = '1';
+                            });
+                        });
+
+                        // Hide alert after 4 seconds
+                        setTimeout(function() {
+                            archiveAlert.style.opacity = '0';
+                            setTimeout(function() {
+                                archiveAlert.style.display = 'none';
+                            }, 600);
+                        }, 4000);
+                    }, 2000);
+                }, 300);
+            }
+        });
+    </script>
+    <script>
+        if (document.getElementById("logoutBtn")) {
+            document.getElementById("logoutBtn").addEventListener("click", function() {
+                sessionStorage.removeItem("isAuthenticated");
+                window.location.href = "login.html";
+            });
+        }
     </script>
 </body>
 </html>

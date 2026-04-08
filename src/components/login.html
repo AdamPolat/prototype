@@ -292,8 +292,10 @@
                             <span class="input-icon"><i class="fas fa-user"></i></span>
                             <input
                                 type="text"
+                                id="username"
                                 class="form-input with-icon"
                                 placeholder="Username"
+                                autocomplete="username"
                             >
                         </div>
                     </div>
@@ -303,10 +305,16 @@
                             <span class="input-icon"><i class="fas fa-lock"></i></span>
                             <input
                                 type="password"
+                                id="password"
                                 class="form-input with-icon"
                                 placeholder="Password"
+                                autocomplete="current-password"
                             >
                         </div>
+                    </div>
+
+                    <div id="errorMessage" style="display: none; color: rgb(255 255 255); font-size: 14px; margin-bottom: 12px; text-align: center; padding: 12px; background: rgba(255, 107, 107, 0.7); border-radius: 10px; border: 1px solid rgb(63 0 0 / 30%);">
+                        Invalid username or password
                     </div>
 
                     <button type="submit" class="btn-submit">Login</button>
@@ -341,12 +349,49 @@
     <script>!function(){var u=window.UnicornStudio;if(u&&u.init){if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",function(){u.init()})}else{u.init()}}else{window.UnicornStudio={isInitialized:!1};var i=document.createElement("script");i.src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.6/dist/unicornStudio.umd.js",i.onload=function(){if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",function(){UnicornStudio.init()})}else{UnicornStudio.init()}},(document.head||document.body).appendChild(i)}}();</script>
 
     <script>
+        // Check if already logged in
+        if (sessionStorage.getItem('isAuthenticated') === 'true') {
+            window.location.href = 'dashboard.html';
+        }
+
         // Handle form submission
         document.getElementById('signupForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            console.log('Login submitted');
-            setTimeout(() => window.location.href = 'dashboard.html', 500);
+
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var errorMessage = document.getElementById('errorMessage');
+
+            // Check credentials
+            if (username === 'user' && password === 'BGLnotes03') {
+                // Successful login
+                sessionStorage.setItem('isAuthenticated', 'true');
+                errorMessage.style.display = 'none';
+
+                // Redirect to dashboard
+                window.location.href = 'dashboard.html';
+            } else {
+                // Failed login
+                errorMessage.style.display = 'block';
+
+                // Clear password field
+                document.getElementById('password').value = '';
+
+                // Shake animation
+                errorMessage.style.animation = 'shake 0.4s';
+                setTimeout(function() {
+                    errorMessage.style.animation = '';
+                }, 400);
+            }
         });
     </script>
+
+    <style>
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+    </style>
 </body>
 </html>

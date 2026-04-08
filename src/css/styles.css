@@ -439,12 +439,27 @@ a {
     color: #1a2b35 !important;
 }
 
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
 .dropdown-menu {
     border-radius: 10px;
     border: 1px solid #dce8ed;
     box-shadow: 0 8px 24px rgba(0,0,0,0.1);
     padding: 6px 0;
     font-size: 13px;
+    z-index: 1000;
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 2px;
+}
+
+.dropdown-menu.show {
+    display: block;
 }
 
 .dropdown-item {
@@ -486,6 +501,35 @@ a {
     box-shadow: 0 20px 60px rgba(0,0,0,0.2);
 }
 
+.gen-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.gen-modal-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.gen-modal {
+    width: 540px;
+    max-width: 95vw;
+    transform: translateY(16px);
+    transition: transform 0.2s ease;
+}
+
+.gen-modal-overlay.open .gen-modal {
+    transform: translateY(0);
+}
+
 .gen-modal-header {
     background: #003642;
     padding: 22px 28px;
@@ -508,7 +552,14 @@ a {
     border: 1px solid #f0d98a;
     border-radius: 10px;
     padding: 16px 20px;
-    margin-bottom: 24px;
+    margin-bottom: 0;
+}
+
+.gen-info-box p {
+    color: #b07d00;
+    font-size: 13.5px;
+    line-height: 1.55;
+    margin: 0;
 }
 
 .gen-info-title {
@@ -891,7 +942,7 @@ a {
 }
 .ukp-table thead th:first-child { border-left: 1px solid #c7c7c7; border-radius: 8px 0 0 8px; }
 .ukp-table thead th:last-child { border-right: 1px solid #c7c7c7; border-radius: 0 8px 8px 0; text-align: right; }
-.ukp-table tbody td:last-child { text-align: right; }
+.ukp-table tbody td:last-child { text-align: right; position: relative; }
 .ukp-table tbody tr {
     background: #fff; border-radius: 10px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.06);
@@ -901,6 +952,10 @@ a {
 .ukp-table tbody td {
     padding: 12px 16px; font-size: 13px; color: #2a3840; vertical-align: middle;
     border-top: 1px solid #dce8ed; border-bottom: 1px solid #dce8ed;
+}
+
+.ukp-row-archiving {
+    transform-origin: top left;
 }
 .ukp-table tbody td:first-child { border-left: 1px solid #dce8ed; border-radius: 10px 0 0 10px; }
 .ukp-table tbody td:last-child { border-right: 1px solid #dce8ed; border-radius: 0 10px 10px 0; }
