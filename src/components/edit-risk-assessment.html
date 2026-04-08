@@ -513,10 +513,6 @@
                         <!-- Footer -->
                         <div class="era-footer">
                             <button class="btn era-btn-cancel">Cancel</button>
-                            <button class="btn era-btn-prev">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16" class="mr-1"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/></svg>
-                                Previous
-                            </button>
                             <div class="era-footer-right">
                                 <button class="btn era-btn-save">Save for later</button>
                                 <button class="btn era-btn-next">
@@ -669,14 +665,6 @@
                 $('#confirmCompleteModal').modal('show');
             } else {
                 activateStep(currentStepIndex + 1);
-            }
-        });
-
-        document.querySelector('.era-btn-prev').addEventListener('click', function() {
-            if (currentStepIndex === 0) {
-                window.location.href = 'risk-assessment.html';
-            } else {
-                activateStep(currentStepIndex - 1);
             }
         });
 
