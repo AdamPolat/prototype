@@ -185,7 +185,7 @@
                                 <td><span class="status-badge status-medium">Partially Complete</span></td>
                                 <td>
                                     <div class="dropdown">
-                                        <button class="btn btn-action dropdown-toggle" type="button" data-toggle="dropdown">&#8230;</button>
+                                        <button class="btn btn-action dropdown-toggle" type="button">&#8230;</button>
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item" href="#">Edit</a>
                                             <a class="dropdown-item text-danger" href="#">Delete</a>
@@ -206,7 +206,7 @@
                                 <td><span class="status-badge status-low">Low</span></td>
                                 <td>
                                     <div class="dropdown">
-                                        <button class="btn btn-action dropdown-toggle" type="button" data-toggle="dropdown">&#8230;</button>
+                                        <button class="btn btn-action dropdown-toggle" type="button">&#8230;</button>
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item" href="#">Edit</a>
                                             <a class="dropdown-item text-danger" href="#">Delete</a>
@@ -227,7 +227,7 @@
                                 <td><span class="status-badge status-low">Low</span></td>
                                 <td>
                                     <div class="dropdown">
-                                        <button class="btn btn-action dropdown-toggle" type="button" data-toggle="dropdown">&#8230;</button>
+                                        <button class="btn btn-action dropdown-toggle" type="button">&#8230;</button>
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item" href="#">Edit</a>
                                             <a class="dropdown-item text-danger" href="#">Delete</a>
@@ -248,7 +248,7 @@
                                 <td><span class="status-badge status-low">Low</span></td>
                                 <td>
                                     <div class="dropdown">
-                                        <button class="btn btn-action dropdown-toggle" type="button" data-toggle="dropdown">&#8230;</button>
+                                        <button class="btn btn-action dropdown-toggle" type="button">&#8230;</button>
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item" href="#">Edit</a>
                                             <a class="dropdown-item text-danger" href="#">Delete</a>
@@ -269,7 +269,7 @@
                                 <td><span class="status-badge status-medium">Medium</span></td>
                                 <td>
                                     <div class="dropdown">
-                                        <button class="btn btn-action dropdown-toggle" type="button" data-toggle="dropdown">&#8230;</button>
+                                        <button class="btn btn-action dropdown-toggle" type="button">&#8230;</button>
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item" href="#">Edit</a>
                                             <a class="dropdown-item text-danger" href="#">Delete</a>
@@ -528,6 +528,35 @@
                 th.addEventListener('click', function() {
                     document.querySelectorAll('.ra-table th').forEach(t => t.classList.remove('sorted'));
                     this.classList.add('sorted');
+                });
+            }
+        });
+
+        // Manual dropdown handler
+        document.addEventListener('click', function(e) {
+            var toggleBtn = e.target.closest('.dropdown-toggle');
+
+            if (toggleBtn) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                var dropdown = toggleBtn.closest('.dropdown');
+                var menu = dropdown.querySelector('.dropdown-menu');
+                var isOpen = menu.classList.contains('show');
+
+                // Close all dropdowns
+                document.querySelectorAll('.dropdown-menu.show').forEach(function(m) {
+                    m.classList.remove('show');
+                });
+
+                // Toggle current dropdown
+                if (!isOpen) {
+                    menu.classList.add('show');
+                }
+            } else {
+                // Close all dropdowns if clicking outside
+                document.querySelectorAll('.dropdown-menu.show').forEach(function(m) {
+                    m.classList.remove('show');
                 });
             }
         });
