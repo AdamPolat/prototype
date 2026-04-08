@@ -389,6 +389,11 @@ a {
     font-size: 13px;
 }
 
+.ra-table thead th:last-child,
+.ra-table tbody td:last-child {
+    text-align: right;
+}
+
 /* Status badges */
 .status-badge {
     display: inline-block;
