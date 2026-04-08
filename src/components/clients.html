@@ -442,6 +442,40 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        // Disable Bootstrap's automatic dropdown initialization
+        $(document).off('click.bs.dropdown.data-api');
+    </script>
+    <script>
+        // Manual dropdown handler
+        document.addEventListener('click', function(e) {
+            var toggleBtn = e.target.closest('.dropdown-toggle');
+
+            if (toggleBtn) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                var dropdown = toggleBtn.closest('.dropdown');
+                var menu = dropdown.querySelector('.dropdown-menu');
+                var isOpen = menu.classList.contains('show');
+
+                // Close all dropdowns
+                document.querySelectorAll('.dropdown-menu.show').forEach(function(m) {
+                    m.classList.remove('show');
+                });
+
+                // Toggle current dropdown
+                if (!isOpen) {
+                    menu.classList.add('show');
+                }
+            } else {
+                // Close all dropdowns if clicking outside
+                document.querySelectorAll('.dropdown-menu.show').forEach(function(m) {
+                    m.classList.remove('show');
+                });
+            }
+        });
+    </script>
+    <script>
         // Spinner
         (function() {
             var o = document.getElementById('spinnerOverlay');
@@ -500,7 +534,7 @@
                 '<td>' + client.lastCdd + '</td>' +
                 '<td>' + client.nextReview + '</td>' +
                 '<td>' + client.assignedTo + '</td>' +
-                '<td><div class="dropdown"><button class="btn btn-action dropdown-toggle" data-toggle="dropdown">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Archive</a><a class="dropdown-item text-danger" href="#">Delete</a></div></div></td>';
+                '<td><div class="dropdown"><button class="btn btn-action dropdown-toggle">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Archive</a><a class="dropdown-item text-danger" href="#">Delete</a></div></div></td>';
 
             return row;
         }
