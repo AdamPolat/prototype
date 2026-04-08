@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styleguide - BGLID2</title>
+    <link rel="icon" type="image/svg+xml" href="images/FV-LOGO.svg">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .sg-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+            border: 1px solid #dce8ed;
+        }
+        .sg-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a2b35;
+            margin-bottom: 8px;
+        }
+        .sg-subtitle {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a2b35;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #dce8ed;
+        }
+        .sg-description {
+            font-size: 14px;
+            color: #6a7f89;
+            margin-bottom: 24px;
+        }
+        .sg-color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .sg-color-card {
+            border: 1px solid #dce8ed;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .sg-color-swatch {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .sg-color-info {
+            padding: 12px;
+            background: #f8f9fa;
+        }
+        .sg-color-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a2b35;
+            margin-bottom: 4px;
+        }
+        .sg-color-value {
+            font-size: 12px;
+            color: #6a7f89;
+            font-family: monospace;
+        }
+        .sg-demo-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+            align-items: center;
+        }
+        .sg-code {
+            background: #f8f9fa;
+            border: 1px solid #dce8ed;
+            border-radius: 6px;
+            padding: 2px 6px;
+            font-family: monospace;
+            font-size: 12px;
+            color: #c0392b;
+        }
+        .sg-type-sample {
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Temporarily disabled for testing -->
+    <script>
+        // if (sessionStorage.getItem('isAuthenticated') !== 'true') {
+        //     window.location.href = 'login.html';
+        // }
+    </script>
+
+    <!-- ===== TOP HEADER ===== -->
+    <header class="app-header d-flex align-items-center">
+        <div class="header-logo d-flex align-items-center justify-content-center">
+            <img src="images/FV-LOGO.svg" alt="Logo" width="36" height="36">
+        </div>
+        <div class="header-search flex-grow-1">
+            <div class="header-search-pill d-flex align-items-center">
+                <svg class="header-search-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.099zm-5.242 1.156a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11"/>
+                </svg>
+                <span class="header-search-label">Search:</span>
+                <input type="text" class="header-search-input" placeholder="search for content">
+                <kbd class="header-search-kbd">CMD + SR</kbd>
+            </div>
+        </div>
+        <div class="header-actions d-flex align-items-center">
+            <button class="header-icon-btn" title="Call">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/></svg>
+            </button>
+            <button class="header-icon-btn" title="Logout" id="logoutBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M7.5 1v7h1V1z"/><path d="M3 8.812a5 5 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812"/></svg>
+            </button>
+            <button class="header-icon-btn" title="Apps">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3A1.5 1.5 0 0 1 15 10.5v3A1.5 1.5 0 0 1 13.5 15h-3A1.5 1.5 0 0 1 9 13.5z"/></svg>
+            </button>
+            <button class="header-avatar-btn" title="Profile">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="app-body">
+        <!-- ===== SIDEBAR ===== -->
+        <nav class="app-sidebar d-flex flex-column align-items-center py-3">
+            <a class="sidebar-nav-link active" href="styleguide.html" title="Styleguide">
+                <span class="sidebar-icon-wrap active-icon">
+                    <img src="images/dashboard.svg" alt="Styleguide" width="20" height="20">
+                </span>
+                <span class="sidebar-label sidebar-label--active">Styleguide</span>
+            </a>
+            <a class="sidebar-nav-link" href="dashboard.html" title="Dashboard">
+                <span class="sidebar-icon-wrap">
+                    <img src="images/dashboard.svg" alt="Dashboard" width="20" height="20">
+                </span>
+                <span class="sidebar-label">Dashboard</span>
+            </a>
+            <a class="sidebar-nav-link" href="clients.html" title="Clients">
+                <span class="sidebar-icon-wrap">
+                    <img src="images/client.svg" alt="Clients" width="20" height="20">
+                </span>
+                <span class="sidebar-label">Clients</span>
+            </a>
+            <a class="sidebar-nav-link" href="firm-profile.html" title="Firm">
+                <span class="sidebar-icon-wrap">
+                    <img src="images/firm.svg" alt="Firm" width="20" height="20">
+                </span>
+                <span class="sidebar-label">Firm</span>
+            </a>
+        </nav>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="app-main" style="background:#f5f7f8;">
+            <div class="content-wrap">
+                <h4 class="page-title">Design System Styleguide</h4>
+
+                <!-- ===== COLORS ===== -->
+                <div class="sg-section">
+                    <h2 class="sg-title">Colors</h2>
+                    <p class="sg-description">Core color palette used throughout the application</p>
+
+                    <h3 class="sg-subtitle">Primary Colors</h3>
+                    <div class="sg-color-grid">
+                        <div class="sg-color-card">
+                            <div class="sg-color-swatch" style="background:#003642;">Primary Dark</div>
+                            <div class="sg-color-info">
+                                <div class="sg-color-name">Primary Dark</div>
+                                <div class="sg-color-value">#003642</div>
+                            </div>
+                        </div>
+                        <div class="sg-color-card">
+                            <div class="sg-color-swatch" style="background:#004754;">Primary</div>
+                            <div class="sg-color-info">
+                                <div class="sg-color-name">Primary</div>
+                                <div class="sg-color-value">#004754</div>
+                            </div>
+                        </div>
+                        <div class="sg-color-card">
+                            <div class="sg-color-swatch" style="background:#1a6b40;">Success Green</div>
+                            <div class="sg-color-info">
+                                <div class="sg-color-name">Success Green</div>
+                                <div class="sg-color-value">#1a6b40</div>
+                            </div>
+                        </div>
+                        <div class="sg-color-card">
+                            <div class="sg-color-swatch" style="background:#00923b;">Green</div>
+                            <div class="sg-color-info">
+                                <div class="sg-color-name">Green</div>
+                                <div class="sg-color-value">#00923b</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="sg-subtitle">Text Colors</h3>
+                    <div class="sg-color-grid">
+                        <div class="sg-color-card">
+                            <div class="sg-color-swatch" style="background:#1a2b35;">Primary Text</div>
+                            <div class="sg-color-info">
+                                <div class="sg-color-name">Primary Text</div>
+                                <div class="sg-color-value">#1a2b35</div>
+                            </div>
+                        </div>
+                        <div class="sg-color-card">
+                            <div class="sg-color-swatch" style="background:#2a3840;">Secondary Text</div>
+                            <div class="sg-color-info">
+                                <div class="sg-color-name">Secondary Text</div>
+                                <div class="sg-color-value">#2a3840</div>
+                            </div>
+                        </div>
+                        <div class="sg-color-card">
+                            <div class="sg-color-swatch" style="background:#6a7f89;">Muted Text</div>
+                            <div class="sg-color-info">
+                                <div class="sg-color-name">Muted Text</div>
+                                <div class="sg-color-value">#6a7f89</div>
+                            </div>
+                        </div>
+                        <div class="sg-color-card">
+                            <div class="sg-color-swatch" style="background:#c0392b;">Danger Red</div>
+                            <div class="sg-color-info">
+                                <div class="sg-color-name">Danger Red</div>
+                                <div class="sg-color-value">#c0392b</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="sg-subtitle">Background Colors</h3>
+                    <div class="sg-color-grid">
+                        <div class="sg-color-card">
+                            <div class="sg-color-swatch" style="background:#f0f4f6; color:#1a2b35;">Page Background</div>
+                            <div class="sg-color-info">
+                                <div class="sg-color-name">Page Background</div>
+                                <div class="sg-color-value">#f0f4f6</div>
+                            </div>
+                        </div>
+                        <div class="sg-color-card">
+                            <div class="sg-color-swatch" style="background:#f5f7f8; color:#1a2b35;">Content Background</div>
+                            <div class="sg-color-info">
+                                <div class="sg-color-name">Content Background</div>
+                                <div class="sg-color-value">#f5f7f8</div>
+                            </div>
+                        </div>
+                        <div class="sg-color-card">
+                            <div class="sg-color-swatch" style="background:#ffffff; color:#1a2b35; border:1px solid #dce8ed;">White</div>
+                            <div class="sg-color-info">
+                                <div class="sg-color-name">White</div>
+                                <div class="sg-color-value">#ffffff</div>
+                            </div>
+                        </div>
+                        <div class="sg-color-card">
+                            <div class="sg-color-swatch" style="background:#f0fcf3; color:#1a2b35;">Success Light</div>
+                            <div class="sg-color-info">
+                                <div class="sg-color-name">Success Light</div>
+                                <div class="sg-color-value">#f0fcf3</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="sg-subtitle">Border Colors</h3>
+                    <div class="sg-color-grid">
+                        <div class="sg-color-card">
+                            <div class="sg-color-swatch" style="background:#dce8ed; color:#1a2b35;">Border</div>
+                            <div class="sg-color-info">
+                                <div class="sg-color-name">Border</div>
+                                <div class="sg-color-value">#dce8ed</div>
+                            </div>
+                        </div>
+                        <div class="sg-color-card">
+                            <div class="sg-color-swatch" style="background:#c9d8de; color:#1a2b35;">Border Dark</div>
+                            <div class="sg-color-info">
+                                <div class="sg-color-name">Border Dark</div>
+                                <div class="sg-color-value">#c9d8de</div>
+                            </div>
+                        </div>
+                        <div class="sg-color-card">
+                            <div class="sg-color-swatch" style="background:#00ad00;">Success Border</div>
+                            <div class="sg-color-info">
+                                <div class="sg-color-name">Success Border</div>
+                                <div class="sg-color-value">#00ad00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== TYPOGRAPHY ===== -->
+                <div class="sg-section">
+                    <h2 class="sg-title">Typography</h2>
+                    <p class="sg-description">Font family: <span class="sg-code">Noto Sans</span></p>
+
+                    <h3 class="sg-subtitle">Headings</h3>
+                    <div class="sg-type-sample">
+                        <h1 style="font-size:32px; font-weight:700; color:#1a2b35; margin-bottom:8px;">Heading 1 - 32px Bold</h1>
+                        <code class="sg-code">font-size: 32px; font-weight: 700;</code>
+                    </div>
+                    <div class="sg-type-sample">
+                        <h2 style="font-size:24px; font-weight:700; color:#1a2b35; margin-bottom:8px;">Heading 2 - 24px Bold</h2>
+                        <code class="sg-code">font-size: 24px; font-weight: 700;</code>
+                    </div>
+                    <div class="sg-type-sample">
+                        <h3 style="font-size:18px; font-weight:600; color:#1a2b35; margin-bottom:8px;">Heading 3 - 18px Semi-Bold</h3>
+                        <code class="sg-code">font-size: 18px; font-weight: 600;</code>
+                    </div>
+                    <div class="sg-type-sample">
+                        <h4 class="page-title">Page Title - 22px Bold</h4>
+                        <code class="sg-code">.page-title { font-size: 22px; font-weight: 700; }</code>
+                    </div>
+
+                    <h3 class="sg-subtitle">Body Text</h3>
+                    <div class="sg-type-sample">
+                        <p style="font-size:14px; color:#2a3840; margin-bottom:8px;">Body text - 14px Regular</p>
+                        <code class="sg-code">font-size: 14px; color: #2a3840;</code>
+                    </div>
+                    <div class="sg-type-sample">
+                        <p style="font-size:13px; color:#6a7f89; margin-bottom:8px;">Small text - 13px</p>
+                        <code class="sg-code">font-size: 13px; color: #6a7f89;</code>
+                    </div>
+                    <div class="sg-type-sample">
+                        <p style="font-size:12px; color:#6a7f89; margin-bottom:8px;">Extra small text - 12px</p>
+                        <code class="sg-code">font-size: 12px; color: #6a7f89;</code>
+                    </div>
+                </div>
+
+                <!-- ===== BUTTONS ===== -->
+                <div class="sg-section">
+                    <h2 class="sg-title">Buttons</h2>
+                    <p class="sg-description">Button styles and states</p>
+
+                    <h3 class="sg-subtitle">Primary Buttons</h3>
+                    <div class="sg-demo-row">
+                        <button class="btn btn-generate">Generate Button</button>
+                        <code class="sg-code">.btn-generate</code>
+                    </div>
+                    <div class="sg-demo-row">
+                        <button class="btn gen-btn-continue">Continue Button</button>
+                        <code class="sg-code">.gen-btn-continue</code>
+                    </div>
+                    <div class="sg-demo-row">
+                        <button class="btn gen-btn-cancel">Cancel Button</button>
+                        <code class="sg-code">.gen-btn-cancel</code>
+                    </div>
+
+                    <h3 class="sg-subtitle">Action Buttons</h3>
+                    <div class="sg-demo-row">
+                        <button class="btn btn-action dropdown-toggle">⋯</button>
+                        <code class="sg-code">.btn-action</code>
+                    </div>
+                    <div class="sg-demo-row">
+                        <button class="header-icon-btn" title="Icon Button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/></svg>
+                        </button>
+                        <code class="sg-code">.header-icon-btn</code>
+                    </div>
+                </div>
+
+                <!-- ===== BADGES ===== -->
+                <div class="sg-section">
+                    <h2 class="sg-title">Badges & Status Indicators</h2>
+                    <p class="sg-description">Status badges for various states</p>
+
+                    <h3 class="sg-subtitle">Status Badges</h3>
+                    <div class="sg-demo-row">
+                        <span class="status-badge status-low">Complete</span>
+                        <code class="sg-code">.status-badge.status-low</code>
+                    </div>
+                    <div class="sg-demo-row">
+                        <span class="status-badge status-medium">In Progress</span>
+                        <code class="sg-code">.status-badge.status-medium</code>
+                    </div>
+                    <div class="sg-demo-row">
+                        <span class="status-badge status-high">Overdue</span>
+                        <code class="sg-code">.status-badge.status-high</code>
+                    </div>
+
+                    <h3 class="sg-subtitle">Training Badges</h3>
+                    <div class="sg-demo-row">
+                        <span class="ukp-training-badge">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#00923b" viewBox="0 0 16 16" class="mr-1"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
+                            Complete
+                        </span>
+                        <code class="sg-code">.ukp-training-badge</code>
+                    </div>
+
+                    <h3 class="sg-subtitle">Risk Rating Badges</h3>
+                    <div class="sg-demo-row">
+                        <span class="cl-risk-badge cl-risk-low">Low <i class="fa-regular fa-face-smile"></i></span>
+                        <code class="sg-code">.cl-risk-badge.cl-risk-low</code>
+                    </div>
+                    <div class="sg-demo-row">
+                        <span class="cl-risk-badge cl-risk-medium">Medium <i class="fa-regular fa-face-meh"></i></span>
+                        <code class="sg-code">.cl-risk-badge.cl-risk-medium</code>
+                    </div>
+                    <div class="sg-demo-row">
+                        <span class="cl-risk-badge cl-risk-high">High <i class="fa-regular fa-face-frown"></i></span>
+                        <code class="sg-code">.cl-risk-badge.cl-risk-high</code>
+                    </div>
+                </div>
+
+                <!-- ===== ALERTS ===== -->
+                <div class="sg-section">
+                    <h2 class="sg-title">Alerts & Notifications</h2>
+                    <p class="sg-description">Alert components for user feedback</p>
+
+                    <h3 class="sg-subtitle">Success Alert</h3>
+                    <div class="complete-alert mb-4">
+                        <div class="complete-alert-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
+                        </div>
+                        <div>
+                            <div class="complete-alert-title">Success Title</div>
+                            <div class="complete-alert-text">This is a success message with details</div>
+                        </div>
+                    </div>
+                    <code class="sg-code">.complete-alert</code>
+
+                    <h3 class="sg-subtitle">Warning Alert</h3>
+                    <div class="gen-info-box">
+                        <div class="gen-info-title">Warning!</div>
+                        <p class="gen-info-text">This is a warning message with important information</p>
+                    </div>
+                    <code class="sg-code">.gen-info-box</code>
+                </div>
+
+                <!-- ===== FORMS ===== -->
+                <div class="sg-section">
+                    <h2 class="sg-title">Form Elements</h2>
+                    <p class="sg-description">Input fields, selects, and form controls</p>
+
+                    <h3 class="sg-subtitle">Text Input</h3>
+                    <div class="ukp-modal-form-group" style="max-width:400px; margin-bottom:24px;">
+                        <label class="ukp-modal-form-label">Label Text</label>
+                        <input type="text" class="ukp-modal-form-input" placeholder="Placeholder text">
+                    </div>
+                    <code class="sg-code">.ukp-modal-form-input</code>
+
+                    <h3 class="sg-subtitle">Select Dropdown</h3>
+                    <div class="ukp-modal-form-group" style="max-width:400px; margin-bottom:24px;">
+                        <label class="ukp-modal-form-label">Select Label</label>
+                        <select class="ukp-modal-form-select">
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                            <option>Option 3</option>
+                        </select>
+                    </div>
+                    <code class="sg-code">.ukp-modal-form-select</code>
+                </div>
+
+                <!-- ===== TABS ===== -->
+                <div class="sg-section">
+                    <h2 class="sg-title">Tabs</h2>
+                    <p class="sg-description">Tab navigation component</p>
+
+                    <ul class="nav ra-tabs mb-4">
+                        <li class="nav-item">
+                            <a class="nav-link ra-tab active" href="#">Active Tab</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link ra-tab" href="#">Tab 2</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link ra-tab" href="#">Tab 3</a>
+                        </li>
+                    </ul>
+                    <code class="sg-code">.ra-tabs .ra-tab</code>
+                </div>
+
+                <!-- ===== MODALS ===== -->
+                <div class="sg-section">
+                    <h2 class="sg-title">Modals</h2>
+                    <p class="sg-description">Modal dialog components</p>
+
+                    <div style="max-width:500px; border:1px solid #dce8ed; border-radius:14px; overflow:hidden;">
+                        <div class="gen-modal-header">
+                            <h5 class="gen-modal-title">Modal Header</h5>
+                        </div>
+                        <div class="gen-modal-body">
+                            <div class="gen-info-box">
+                                <div class="gen-info-title">Information</div>
+                                <p class="gen-info-text">Modal body content goes here with information boxes</p>
+                            </div>
+                        </div>
+                        <div class="gen-modal-footer">
+                            <button class="btn gen-btn-cancel">Cancel</button>
+                            <button class="btn gen-btn-continue">Continue</button>
+                        </div>
+                    </div>
+                    <code class="sg-code">.gen-modal</code>
+                </div>
+
+                <!-- ===== SPACING ===== -->
+                <div class="sg-section">
+                    <h2 class="sg-title">Spacing System</h2>
+                    <p class="sg-description">Consistent spacing values used throughout the application</p>
+
+                    <div class="sg-type-sample">
+                        <div style="display:flex; gap:12px; align-items:center;">
+                            <div style="width:8px; height:40px; background:#003642;"></div>
+                            <code class="sg-code">8px - Small gap</code>
+                        </div>
+                    </div>
+                    <div class="sg-type-sample">
+                        <div style="display:flex; gap:12px; align-items:center;">
+                            <div style="width:12px; height:40px; background:#003642;"></div>
+                            <code class="sg-code">12px - Default gap</code>
+                        </div>
+                    </div>
+                    <div class="sg-type-sample">
+                        <div style="display:flex; gap:12px; align-items:center;">
+                            <div style="width:16px; height:40px; background:#003642;"></div>
+                            <code class="sg-code">16px - Medium gap</code>
+                        </div>
+                    </div>
+                    <div class="sg-type-sample">
+                        <div style="display:flex; gap:12px; align-items:center;">
+                            <div style="width:24px; height:40px; background:#003642;"></div>
+                            <code class="sg-code">24px - Large gap</code>
+                        </div>
+                    </div>
+                    <div class="sg-type-sample">
+                        <div style="display:flex; gap:12px; align-items:center;">
+                            <div style="width:32px; height:40px; background:#003642;"></div>
+                            <code class="sg-code">32px - Extra large gap</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== BORDER RADIUS ===== -->
+                <div class="sg-section">
+                    <h2 class="sg-title">Border Radius</h2>
+                    <p class="sg-description">Rounded corner values for consistent UI elements</p>
+
+                    <div class="sg-demo-row">
+                        <div style="width:100px; height:60px; background:#003642; border-radius:6px;"></div>
+                        <code class="sg-code">6px - Small radius</code>
+                    </div>
+                    <div class="sg-demo-row">
+                        <div style="width:100px; height:60px; background:#003642; border-radius:10px;"></div>
+                        <code class="sg-code">10px - Default radius</code>
+                    </div>
+                    <div class="sg-demo-row">
+                        <div style="width:100px; height:60px; background:#003642; border-radius:12px;"></div>
+                        <code class="sg-code">12px - Medium radius</code>
+                    </div>
+                    <div class="sg-demo-row">
+                        <div style="width:100px; height:60px; background:#003642; border-radius:14px;"></div>
+                        <code class="sg-code">14px - Large radius</code>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
