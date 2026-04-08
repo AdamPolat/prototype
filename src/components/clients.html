@@ -453,7 +453,7 @@
     </div>
 
     <!-- Archive Modal -->
-    <div class="gen-modal-overlay" id="archiveModalOverlay" style="display:none;">
+    <div class="gen-modal-overlay" id="archiveModalOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:1060; align-items:center; justify-content:center;">
         <div class="gen-modal">
             <div class="gen-modal-content">
                 <div class="gen-modal-header">
@@ -527,6 +527,7 @@
             .then(function(data) {
                 clientsData = data;
                 renderClients();
+                setupArchiveFunctionality();
             })
             .catch(function(error) {
                 console.error('Error loading clients:', error);
@@ -854,66 +855,70 @@
         document.querySelector('.cl-search-input').addEventListener('input', applyFilters);
 
         // Archive functionality
-        var rowToArchive = null;
-        var archiveModalOverlay = document.getElementById('archiveModalOverlay');
-        var archiveCancelBtn = document.getElementById('archiveCancelBtn');
-        var archiveConfirmBtn = document.getElementById('archiveConfirmBtn');
-        var completeAlert = document.getElementById('completeAlert');
+        function setupArchiveFunctionality() {
+            var rowToArchive = null;
+            var archiveModalOverlay = document.getElementById('archiveModalOverlay');
+            var archiveCancelBtn = document.getElementById('archiveCancelBtn');
+            var archiveConfirmBtn = document.getElementById('archiveConfirmBtn');
+            var completeAlert = document.getElementById('completeAlert');
 
-        // Delegate click event for Archive links
-        document.addEventListener('click', function(e) {
-            if (e.target.closest('.dropdown-item') && e.target.textContent.trim() === 'Archive') {
-                e.preventDefault();
-                rowToArchive = e.target.closest('tr');
-                archiveModalOverlay.style.display = 'flex';
-            }
-        });
+            // Delegate click event for Archive links using event delegation on table body
+            document.getElementById('clientsTableBody').addEventListener('click', function(e) {
+                var archiveLink = e.target.closest('a.dropdown-item');
+                if (archiveLink && archiveLink.textContent.trim() === 'Archive') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    rowToArchive = archiveLink.closest('tr');
+                    archiveModalOverlay.style.display = 'flex';
+                }
+            });
 
-        // Cancel archive
-        archiveCancelBtn.addEventListener('click', function() {
-            archiveModalOverlay.style.display = 'none';
-            rowToArchive = null;
-        });
-
-        // Confirm archive
-        archiveConfirmBtn.addEventListener('click', function() {
-            archiveModalOverlay.style.display = 'none';
-
-            if (rowToArchive) {
-                // Add hinge animation
-                rowToArchive.classList.add('animate__animated', 'animate__hinge');
-
-                // After animation completes (2s), remove row and show alert
-                setTimeout(function() {
-                    rowToArchive.remove();
-                    rowToArchive = null;
-
-                    // Show success alert
-                    completeAlert.style.display = 'block';
-                    requestAnimationFrame(function() {
-                        requestAnimationFrame(function() {
-                            completeAlert.style.opacity = '1';
-                        });
-                    });
-
-                    // Hide alert after 4 seconds
-                    setTimeout(function() {
-                        completeAlert.style.opacity = '0';
-                        setTimeout(function() {
-                            completeAlert.style.display = 'none';
-                        }, 600);
-                    }, 4000);
-                }, 2000);
-            }
-        });
-
-        // Close modal on overlay click
-        archiveModalOverlay.addEventListener('click', function(e) {
-            if (e.target === archiveModalOverlay) {
+            // Cancel archive
+            archiveCancelBtn.addEventListener('click', function() {
                 archiveModalOverlay.style.display = 'none';
                 rowToArchive = null;
-            }
-        });
+            });
+
+            // Confirm archive
+            archiveConfirmBtn.addEventListener('click', function() {
+                archiveModalOverlay.style.display = 'none';
+
+                if (rowToArchive) {
+                    // Add hinge animation
+                    rowToArchive.classList.add('animate__animated', 'animate__hinge');
+
+                    // After animation completes (2s), remove row and show alert
+                    setTimeout(function() {
+                        rowToArchive.remove();
+                        rowToArchive = null;
+
+                        // Show success alert
+                        completeAlert.style.display = 'block';
+                        requestAnimationFrame(function() {
+                            requestAnimationFrame(function() {
+                                completeAlert.style.opacity = '1';
+                            });
+                        });
+
+                        // Hide alert after 4 seconds
+                        setTimeout(function() {
+                            completeAlert.style.opacity = '0';
+                            setTimeout(function() {
+                                completeAlert.style.display = 'none';
+                            }, 600);
+                        }, 4000);
+                    }, 2000);
+                }
+            });
+
+            // Close modal on overlay click
+            archiveModalOverlay.addEventListener('click', function(e) {
+                if (e.target === archiveModalOverlay) {
+                    archiveModalOverlay.style.display = 'none';
+                    rowToArchive = null;
+                }
+            });
+        }
 
         function applyFilters() {
             var query = document.querySelector('.cl-search-input').value.toLowerCase();
