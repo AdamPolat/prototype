@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         /* Filter system */
         .cl-filter-wrap { position: relative; display: inline-block; }
@@ -301,6 +302,19 @@
                     </li>
                 </ul>
 
+                <!-- Success Alert -->
+                <div id='completeAlert' style='display:none; opacity:0; transition: opacity 0.6s ease;' class='complete-alert mb-4'>
+                    <div class='complete-alert-icon'>
+                        <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='currentColor' viewBox='0 0 16 16'>
+                            <path d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z'/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class='complete-alert-title'>Archive Successful</div>
+                        <div class='complete-alert-text'>The client has been successfully archived</div>
+                    </div>
+                </div>
+
                 <!-- Action bar with filters -->
                 <div class="cl-action-bar">
                     <button class="btn btn-generate cl-add-btn">Add Client +</button>
@@ -436,6 +450,27 @@
     <!-- Spinner -->
     <div id="spinnerOverlay" style="position:fixed;inset:0;background:rgba(0,54,66,0.75);z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.4s ease;">
         <div class="loader"></div>
+    </div>
+
+    <!-- Archive Modal -->
+    <div class="gen-modal-overlay" id="archiveModalOverlay" style="display:none;">
+        <div class="gen-modal">
+            <div class="gen-modal-content">
+                <div class="gen-modal-header">
+                    <h5 class="gen-modal-title">Archive Confirmation</h5>
+                </div>
+                <div class="gen-modal-body">
+                    <div class="gen-info-box">
+                        <div class="gen-info-title">Warning!</div>
+                        <p class="gen-info-text">Are you sure you want to archive this client?<br>This client will no longer appear in your clients list but stays in the records.</p>
+                    </div>
+                </div>
+                <div class="gen-modal-footer">
+                    <button class="btn gen-btn-cancel" id="archiveCancelBtn">Cancel</button>
+                    <button class="btn gen-btn-continue" id="archiveConfirmBtn">Confirm Archive</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -817,6 +852,68 @@
 
         // Search
         document.querySelector('.cl-search-input').addEventListener('input', applyFilters);
+
+        // Archive functionality
+        var rowToArchive = null;
+        var archiveModalOverlay = document.getElementById('archiveModalOverlay');
+        var archiveCancelBtn = document.getElementById('archiveCancelBtn');
+        var archiveConfirmBtn = document.getElementById('archiveConfirmBtn');
+        var completeAlert = document.getElementById('completeAlert');
+
+        // Delegate click event for Archive links
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.dropdown-item') && e.target.textContent.trim() === 'Archive') {
+                e.preventDefault();
+                rowToArchive = e.target.closest('tr');
+                archiveModalOverlay.style.display = 'flex';
+            }
+        });
+
+        // Cancel archive
+        archiveCancelBtn.addEventListener('click', function() {
+            archiveModalOverlay.style.display = 'none';
+            rowToArchive = null;
+        });
+
+        // Confirm archive
+        archiveConfirmBtn.addEventListener('click', function() {
+            archiveModalOverlay.style.display = 'none';
+
+            if (rowToArchive) {
+                // Add hinge animation
+                rowToArchive.classList.add('animate__animated', 'animate__hinge');
+
+                // After animation completes (2s), remove row and show alert
+                setTimeout(function() {
+                    rowToArchive.remove();
+                    rowToArchive = null;
+
+                    // Show success alert
+                    completeAlert.style.display = 'block';
+                    requestAnimationFrame(function() {
+                        requestAnimationFrame(function() {
+                            completeAlert.style.opacity = '1';
+                        });
+                    });
+
+                    // Hide alert after 4 seconds
+                    setTimeout(function() {
+                        completeAlert.style.opacity = '0';
+                        setTimeout(function() {
+                            completeAlert.style.display = 'none';
+                        }, 600);
+                    }, 4000);
+                }, 2000);
+            }
+        });
+
+        // Close modal on overlay click
+        archiveModalOverlay.addEventListener('click', function(e) {
+            if (e.target === archiveModalOverlay) {
+                archiveModalOverlay.style.display = 'none';
+                rowToArchive = null;
+            }
+        });
 
         function applyFilters() {
             var query = document.querySelector('.cl-search-input').value.toLowerCase();
