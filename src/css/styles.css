@@ -335,7 +335,8 @@ a {
     border-radius: 12px;
     border: 1px solid #dce8ed;
     box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: visible;
 }
 
 .ra-table {
@@ -468,12 +469,14 @@ a {
     box-shadow: 0 8px 24px rgba(0,0,0,0.1);
     padding: 6px 0;
     font-size: 13px;
-    z-index: 1000;
+    z-index: 1050;
     display: none;
     position: absolute;
     right: 0;
     top: 100%;
     margin-top: 2px;
+    background: #fff;
+    min-width: 160px;
 }
 
 .dropdown-menu.show {
