@@ -227,7 +227,7 @@ a {
     min-height: calc(100vh - 62px);
     background: #ffffff;
     border-top-left-radius: 10px;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .content-wrap {
