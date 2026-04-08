@@ -423,6 +423,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        // Disable Bootstrap's automatic dropdown initialization
+        $(document).off('click.bs.dropdown.data-api');
+    </script>
+    <script>
         // Tab switching
         document.querySelectorAll('.ra-tab').forEach(function(tab) {
             tab.addEventListener('click', function(e) {
