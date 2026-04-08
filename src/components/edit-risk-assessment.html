@@ -513,6 +513,10 @@
                         <!-- Footer -->
                         <div class="era-footer">
                             <button class="btn era-btn-cancel">Cancel</button>
+                            <button class="btn era-btn-prev" style="display: none;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16" class="mr-1"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/></svg>
+                                Previous
+                            </button>
                             <div class="era-footer-right">
                                 <button class="btn era-btn-save">Save for later</button>
                                 <button class="btn era-btn-next">
@@ -636,12 +640,21 @@
 
             // Update button states
             var nextBtn = document.querySelector('.era-btn-next');
+            var prevBtn = document.querySelector('.era-btn-prev');
+
             if (index === subItems.length - 1) {
                 nextBtn.disabled = false;
                 nextBtn.innerHTML = 'Complete Assessment';
             } else {
                 nextBtn.disabled = false;
                 nextBtn.innerHTML = 'Next <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16" class="ml-1"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/></svg>';
+            }
+
+            // Show/hide Previous button based on step
+            if (index === 0) {
+                prevBtn.style.display = 'none';
+            } else {
+                prevBtn.style.display = '';
             }
 
             currentStepIndex = index;
@@ -668,11 +681,26 @@
             }
         });
 
+        document.querySelector('.era-btn-prev').addEventListener('click', function() {
+            if (currentStepIndex > 0) {
+                activateStep(currentStepIndex - 1);
+            }
+        });
+
         // Init button states
         var nextBtnInit = document.querySelector('.era-btn-next');
+        var prevBtnInit = document.querySelector('.era-btn-prev');
+
         if (currentStepIndex === subItems.length - 1) {
             nextBtnInit.disabled = false;
             nextBtnInit.innerHTML = 'Complete Assessment';
+        }
+
+        // Hide Previous button if on first step
+        if (currentStepIndex === 0) {
+            prevBtnInit.style.display = 'none';
+        } else {
+            prevBtnInit.style.display = '';
         }
 
         // Row expand/collapse for Services Risk Factors (step 1)
