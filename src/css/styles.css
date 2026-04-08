@@ -764,6 +764,18 @@ a {
     border: 1px solid #90caf9;
 }
 
+.label-tag-current {
+    background: #e0f2f1;
+    color: #00897b;
+    border: 1px solid #4db6ac;
+}
+
+.label-tag-firm-verify-generated {
+    background: #ede7f6;
+    color: #5e35b1;
+    border: 1px solid #9575cd;
+}
+
 /* =====================================================
    COMPLETE ALERT
    ===================================================== */
