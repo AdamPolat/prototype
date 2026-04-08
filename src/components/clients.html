@@ -862,14 +862,32 @@
             var archiveConfirmBtn = document.getElementById('archiveConfirmBtn');
             var completeAlert = document.getElementById('completeAlert');
 
-            // Delegate click event for Archive links using event delegation on table body
-            document.getElementById('clientsTableBody').addEventListener('click', function(e) {
-                var archiveLink = e.target.closest('a.dropdown-item');
-                if (archiveLink && archiveLink.textContent.trim() === 'Archive') {
+            console.log('Archive elements found:', {
+                modal: !!archiveModalOverlay,
+                cancel: !!archiveCancelBtn,
+                confirm: !!archiveConfirmBtn,
+                alert: !!completeAlert
+            });
+
+            // Delegate click event for Archive links using event delegation on document
+            document.addEventListener('click', function(e) {
+                var target = e.target;
+
+                // Check if clicked element or its parent is the Archive link
+                if ((target.classList && target.classList.contains('dropdown-item') && target.textContent.trim() === 'Archive') ||
+                    (target.parentElement && target.parentElement.classList && target.parentElement.classList.contains('dropdown-item') && target.parentElement.textContent.trim() === 'Archive')) {
+
                     e.preventDefault();
                     e.stopPropagation();
+
+                    var archiveLink = target.classList && target.classList.contains('dropdown-item') ? target : target.parentElement;
                     rowToArchive = archiveLink.closest('tr');
-                    archiveModalOverlay.style.display = 'flex';
+
+                    console.log('Archive clicked, row:', rowToArchive);
+
+                    if (archiveModalOverlay) {
+                        archiveModalOverlay.style.display = 'flex';
+                    }
                 }
             });
 
