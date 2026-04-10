@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .app-main {
+            background: #f5f7f8;
+        }
+    </style>
 </head>
 <body>
     <!-- Authentication Check -->
@@ -132,6 +137,17 @@
                     </div>
                 </div>
 
+                <!-- Sent for Review alert -->
+                <div id="sentForReviewAlert" style="display:none; opacity:0; transition: opacity 0.6s ease;" class="complete-alert mb-4">
+                    <div class="complete-alert-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
+                    </div>
+                    <div>
+                        <div class="complete-alert-title">Sent for Review</div>
+                        <div class="complete-alert-text">you have successfully sent Sample Table Data for review. Please review the document.</div>
+                    </div>
+                </div>
+
                 <!-- Action buttons -->
                 <div class="d-flex align-items-center mb-4 action-row">
                     <button class="btn btn-upload mr-1" data-toggle="modal" data-target="#uploadModal">
@@ -159,18 +175,23 @@
                                         <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
                                     </svg>
                                 </th>
-                                <th>Labels</th>
                                 <th>Version
                                     <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" class="ml-1 sort-icon">
                                         <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
                                     </svg>
                                 </th>
+                                <th>Tags</th>
                                 <th>Date Reviewed
                                     <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" class="ml-1 sort-icon">
                                         <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
                                     </svg>
                                 </th>
                                 <th>Reviewed By</th>
+                                <th>Next Review Date
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" class="ml-1 sort-icon">
+                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                    </svg>
+                                </th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -178,10 +199,25 @@
                         <tbody>
                             <tr id="newAssessmentRow" style="opacity:0; display:none; transition: opacity 0.6s ease;">
                                 <td>Sample Table Data</td>
-                                <td><span class="label-tag label-tag-current">Current</span></td>
                                 <td>v1.0</td>
+                                <td><span class="label-tag label-tag-current">Current</span></td>
                                 <td>Sample Table Data</td>
                                 <td>Samual Jones</td>
+                                <td>
+                                    <div class="ra-date-wrapper">
+                                        <input type="text" class="ra-date-input" placeholder="dd/mm/yyyy">
+                                        <button class="ra-date-save" style="display: none;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 12.38 9.13">
+                                                <path fill="#6da820" stroke="#6da820" stroke-miterlimit="10" d="M11.64.74c.32.32.32.83,0,1.15l-6.5,6.5c-.32.32-.83.32-1.15,0L.74,5.14c-.32-.32-.32-.83,0-1.15s.83-.32,1.15,0l2.68,2.67L10.49.74c.32-.32.83-.32,1.15,0h0Z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="ra-date-cancel" style="display: none;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 10.05 10.05">
+                                                <path fill="#4f6568" stroke="#4f6568" stroke-miterlimit="10" d="M6.3,5.02l2.98,2.98c.35.35.35.93,0,1.28s-.93.35-1.28,0l-2.98-2.98-2.98,2.98c-.35.35-.93.35-1.28,0-.35-.35-.35-.93,0-1.28l2.98-2.98L.77,2.05c-.35-.35-.35-.93,0-1.28s.93-.35,1.28,0l2.98,2.98L8,.76c.35-.35.93-.35,1.28,0,.35.35.35.93,0,1.28l-2.98,2.98Z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
                                 <td><span class="status-badge status-medium">Partially Complete</span></td>
                                 <td>
                                     <div class="dropdown">
@@ -193,17 +229,33 @@
                                             <a class="dropdown-item" href="#">Download All</a>
                                             <a class="dropdown-item" href="#">Cancel Review</a>
                                             <a class="dropdown-item" href="#">Send for Review</a>
+                                            <a class="dropdown-item mark-current-toggle" href="#">Mark as Current</a>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>Sample Table Data</td>
+                            <tr id="draftAssessmentRow" style="opacity:0; display:none; transition: opacity 0.6s ease;">
+                                <td>Draft Risk Assessment 2024</td>
+                                <td>v1.0</td>
                                 <td><span class="label-tag label-tag-firm-verify-generated">Firm Verify Generated</span></td>
-                                <td>v1.0</td>
-                                <td>Sample Table Data</td>
-                                <td>Samual Jones</td>
-                                <td><span class="status-badge status-low">Low</span></td>
+                                <td>15/03/2024</td>
+                                <td>John Smith</td>
+                                <td>
+                                    <div class="ra-date-wrapper">
+                                        <input type="text" class="ra-date-input" placeholder="dd/mm/yyyy">
+                                        <button class="ra-date-save" style="display: none;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 12.38 9.13">
+                                                <path fill="#6da820" stroke="#6da820" stroke-miterlimit="10" d="M11.64.74c.32.32.32.83,0,1.15l-6.5,6.5c-.32.32-.83.32-1.15,0L.74,5.14c-.32-.32-.32-.83,0-1.15s.83-.32,1.15,0l2.68,2.67L10.49.74c.32-.32.83-.32,1.15,0h0Z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="ra-date-cancel" style="display: none;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 10.05 10.05">
+                                                <path fill="#4f6568" stroke="#4f6568" stroke-miterlimit="10" d="M6.3,5.02l2.98,2.98c.35.35.35.93,0,1.28s-.93.35-1.28,0l-2.98-2.98-2.98,2.98c-.35.35-.93.35-1.28,0-.35-.35-.35-.93,0-1.28l2.98-2.98L.77,2.05c-.35-.35-.35-.93,0-1.28s.93-.35,1.28,0l2.98,2.98L8,.76c.35-.35.93-.35,1.28,0,.35.35.35.93,0,1.28l-2.98,2.98Z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge status-draft">Draft</span></td>
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-action dropdown-toggle" type="button">&#8230;</button>
@@ -214,37 +266,32 @@
                                             <a class="dropdown-item" href="#">Download All</a>
                                             <a class="dropdown-item" href="#">Cancel Review</a>
                                             <a class="dropdown-item" href="#">Send for Review</a>
+                                            <a class="dropdown-item mark-current-toggle" href="#">Mark as Current</a>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Sample Table Data</td>
-                                <td><span class="label-tag label-tag-current">Current</span></td>
                                 <td>v1.0</td>
-                                <td>Sample Table Data</td>
-                                <td>Samual Jones</td>
-                                <td><span class="status-badge status-low">Low</span></td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button class="btn btn-action dropdown-toggle" type="button">&#8230;</button>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#">Edit</a>
-                                            <a class="dropdown-item text-danger" href="#">Delete</a>
-                                            <a class="dropdown-item" href="#">View</a>
-                                            <a class="dropdown-item" href="#">Download All</a>
-                                            <a class="dropdown-item" href="#">Cancel Review</a>
-                                            <a class="dropdown-item" href="#">Send for Review</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Sample Table Data</td>
                                 <td><span class="label-tag label-tag-firm-verify-generated">Firm Verify Generated</span></td>
-                                <td>v1.0</td>
                                 <td>Sample Table Data</td>
                                 <td>Samual Jones</td>
+                                <td>
+                                    <div class="ra-date-wrapper">
+                                        <input type="text" class="ra-date-input" placeholder="dd/mm/yyyy">
+                                        <button class="ra-date-save" style="display: none;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 12.38 9.13">
+                                                <path fill="#6da820" stroke="#6da820" stroke-miterlimit="10" d="M11.64.74c.32.32.32.83,0,1.15l-6.5,6.5c-.32.32-.83.32-1.15,0L.74,5.14c-.32-.32-.32-.83,0-1.15s.83-.32,1.15,0l2.68,2.67L10.49.74c.32-.32.83-.32,1.15,0h0Z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="ra-date-cancel" style="display: none;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 10.05 10.05">
+                                                <path fill="#4f6568" stroke="#4f6568" stroke-miterlimit="10" d="M6.3,5.02l2.98,2.98c.35.35.35.93,0,1.28s-.93.35-1.28,0l-2.98-2.98-2.98,2.98c-.35.35-.93.35-1.28,0-.35-.35-.35-.93,0-1.28l2.98-2.98L.77,2.05c-.35-.35-.35-.93,0-1.28s.93-.35,1.28,0l2.98,2.98L8,.76c.35-.35.93-.35,1.28,0,.35.35.35.93,0,1.28l-2.98,2.98Z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
                                 <td><span class="status-badge status-low">Low</span></td>
                                 <td>
                                     <div class="dropdown">
@@ -256,16 +303,106 @@
                                             <a class="dropdown-item" href="#">Download All</a>
                                             <a class="dropdown-item" href="#">Cancel Review</a>
                                             <a class="dropdown-item" href="#">Send for Review</a>
+                                            <a class="dropdown-item mark-current-toggle" href="#">Mark as Current</a>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Sample Table Data</td>
-                                <td><span class="label-tag label-tag-current">Current</span></td>
                                 <td>v1.0</td>
+                                <td><span class="label-tag label-tag-current">Current</span></td>
                                 <td>Sample Table Data</td>
                                 <td>Samual Jones</td>
+                                <td>
+                                    <div class="ra-date-wrapper">
+                                        <input type="text" class="ra-date-input" placeholder="dd/mm/yyyy">
+                                        <button class="ra-date-save" style="display: none;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 12.38 9.13">
+                                                <path fill="#6da820" stroke="#6da820" stroke-miterlimit="10" d="M11.64.74c.32.32.32.83,0,1.15l-6.5,6.5c-.32.32-.83.32-1.15,0L.74,5.14c-.32-.32-.32-.83,0-1.15s.83-.32,1.15,0l2.68,2.67L10.49.74c.32-.32.83-.32,1.15,0h0Z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="ra-date-cancel" style="display: none;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 10.05 10.05">
+                                                <path fill="#4f6568" stroke="#4f6568" stroke-miterlimit="10" d="M6.3,5.02l2.98,2.98c.35.35.35.93,0,1.28s-.93.35-1.28,0l-2.98-2.98-2.98,2.98c-.35.35-.93.35-1.28,0-.35-.35-.35-.93,0-1.28l2.98-2.98L.77,2.05c-.35-.35-.35-.93,0-1.28s.93-.35,1.28,0l2.98,2.98L8,.76c.35-.35.93-.35,1.28,0,.35.35.35.93,0,1.28l-2.98,2.98Z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge status-low">Low</span></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-action dropdown-toggle" type="button">&#8230;</button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item text-danger" href="#">Delete</a>
+                                            <a class="dropdown-item" href="#">View</a>
+                                            <a class="dropdown-item" href="#">Download All</a>
+                                            <a class="dropdown-item" href="#">Cancel Review</a>
+                                            <a class="dropdown-item" href="#">Send for Review</a>
+                                            <a class="dropdown-item mark-current-toggle" href="#">Mark as Current</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sample Table Data</td>
+                                <td>v1.0</td>
+                                <td><span class="label-tag label-tag-firm-verify-generated">Firm Verify Generated</span></td>
+                                <td>Sample Table Data</td>
+                                <td>Samual Jones</td>
+                                <td>
+                                    <div class="ra-date-wrapper">
+                                        <input type="text" class="ra-date-input" placeholder="dd/mm/yyyy">
+                                        <button class="ra-date-save" style="display: none;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 12.38 9.13">
+                                                <path fill="#6da820" stroke="#6da820" stroke-miterlimit="10" d="M11.64.74c.32.32.32.83,0,1.15l-6.5,6.5c-.32.32-.83.32-1.15,0L.74,5.14c-.32-.32-.32-.83,0-1.15s.83-.32,1.15,0l2.68,2.67L10.49.74c.32-.32.83-.32,1.15,0h0Z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="ra-date-cancel" style="display: none;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 10.05 10.05">
+                                                <path fill="#4f6568" stroke="#4f6568" stroke-miterlimit="10" d="M6.3,5.02l2.98,2.98c.35.35.35.93,0,1.28s-.93.35-1.28,0l-2.98-2.98-2.98,2.98c-.35.35-.93.35-1.28,0-.35-.35-.35-.93,0-1.28l2.98-2.98L.77,2.05c-.35-.35-.35-.93,0-1.28s.93-.35,1.28,0l2.98,2.98L8,.76c.35-.35.93-.35,1.28,0,.35.35.35.93,0,1.28l-2.98,2.98Z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge status-low">Low</span></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-action dropdown-toggle" type="button">&#8230;</button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item text-danger" href="#">Delete</a>
+                                            <a class="dropdown-item" href="#">View</a>
+                                            <a class="dropdown-item" href="#">Download All</a>
+                                            <a class="dropdown-item" href="#">Cancel Review</a>
+                                            <a class="dropdown-item" href="#">Send for Review</a>
+                                            <a class="dropdown-item mark-current-toggle" href="#">Mark as Current</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sample Table Data</td>
+                                <td>v1.0</td>
+                                <td><span class="label-tag label-tag-current">Current</span></td>
+                                <td>Sample Table Data</td>
+                                <td>Samual Jones</td>
+                                <td>
+                                    <div class="ra-date-wrapper">
+                                        <input type="text" class="ra-date-input" placeholder="dd/mm/yyyy">
+                                        <button class="ra-date-save" style="display: none;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 12.38 9.13">
+                                                <path fill="#6da820" stroke="#6da820" stroke-miterlimit="10" d="M11.64.74c.32.32.32.83,0,1.15l-6.5,6.5c-.32.32-.83.32-1.15,0L.74,5.14c-.32-.32-.32-.83,0-1.15s.83-.32,1.15,0l2.68,2.67L10.49.74c.32-.32.83-.32,1.15,0h0Z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="ra-date-cancel" style="display: none;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 10.05 10.05">
+                                                <path fill="#4f6568" stroke="#4f6568" stroke-miterlimit="10" d="M6.3,5.02l2.98,2.98c.35.35.35.93,0,1.28s-.93.35-1.28,0l-2.98-2.98-2.98,2.98c-.35.35-.93.35-1.28,0-.35-.35-.35-.93,0-1.28l2.98-2.98L.77,2.05c-.35-.35-.35-.93,0-1.28s.93-.35,1.28,0l2.98,2.98L8,.76c.35-.35.93-.35,1.28,0,.35.35.35.93,0,1.28l-2.98,2.98Z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
                                 <td><span class="status-badge status-medium">Medium</span></td>
                                 <td>
                                     <div class="dropdown">
@@ -277,6 +414,7 @@
                                             <a class="dropdown-item" href="#">Download All</a>
                                             <a class="dropdown-item" href="#">Cancel Review</a>
                                             <a class="dropdown-item" href="#">Send for Review</a>
+                                            <a class="dropdown-item mark-current-toggle" href="#">Mark as Current</a>
                                         </div>
                                     </div>
                                 </td>
@@ -380,6 +518,164 @@
         </div>
     </div>
 
+    <!-- Send for Review Modal - Step 1 (Confirmation) -->
+    <div class="modal fade" id="sendForReviewModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered gen-modal-dialog" role="document">
+            <div class="modal-content gen-modal-content">
+                <div class="gen-modal-header">
+                    <h5 class="gen-modal-title">Send for Review</h5>
+                </div>
+                <div class="gen-modal-body">
+                    <div class="confirm-complete-box">
+                        <div class="confirm-complete-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 15.61 15.61">
+                                <path fill="#fff" d="M1.05,11.71C-.35,9.29-.35,6.32,1.05,3.9,2.44,1.49,5.02,0,7.8,0s5.37,1.49,6.76,3.9c1.39,2.41,1.39,5.39,0,7.8-1.39,2.41-3.97,3.9-6.76,3.9s-5.37-1.49-6.76-3.9ZM5.18,5.04v.04c-.15.38.05.8.43.93.38.13.8-.06.93-.45v-.04c.05-.1.14-.16.24-.16h1.78c.25,0,.46.2.46.46,0,.16-.09.32-.23.4l-1.35.77c-.23.13-.37.37-.37.63v.41c0,.41.33.73.73.73s.73-.32.73-.72l.99-.56c.6-.34.97-.98.97-1.67,0-1.06-.86-1.92-1.92-1.92h-1.78c-.72,0-1.37.46-1.61,1.14h0ZM7.8,11.71c.54,0,.98-.44.98-.98s-.44-.98-.98-.98-.98.44-.98.98.44.98.98.98Z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="confirm-complete-title">Send for review?</div>
+                            <div class="confirm-complete-text">Would you like to send this risk assessment for review?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gen-modal-footer">
+                    <button class="btn gen-btn-cancel" data-dismiss="modal">Save as draft</button>
+                    <button class="btn gen-btn-continue" id="confirmSendForReviewBtn">Send for Review</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Send for Review Modal - Step 2 (Select Receiver) -->
+    <div class="modal fade" id="selectReceiverModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered gen-modal-dialog" role="document">
+            <div class="modal-content gen-modal-content">
+                <div class="gen-modal-header">
+                    <h5 class="gen-modal-title">Send for Review</h5>
+                </div>
+                <div class="gen-modal-body">
+                    <div class="ukp-modal-form-group full">
+                        <label class="ukp-modal-form-label">Receiver</label>
+                        <select class="ukp-modal-form-select" id="receiverSelect">
+                            <option>Select a receiver</option>
+                            <option>John Smith</option>
+                            <option>Sarah Johnson</option>
+                            <option>Michael Brown [self]</option>
+                            <option>Emily Davis</option>
+                        </select>
+                    </div>
+                    <div id="selfReviewFields" style="display: none;">
+                        <div class="ukp-modal-form-group full">
+                            <label class="ukp-modal-form-label">Date Reviewed <span class="text-danger">*</span></label>
+                            <input type="text" class="ukp-modal-form-input" id="dateReviewed" placeholder="dd/mm/yyyy">
+                        </div>
+                        <div class="ukp-modal-form-group full">
+                            <label class="ukp-modal-form-label">Comments</label>
+                            <textarea class="ukp-modal-form-input" id="reviewComments" rows="4" placeholder="Enter any comments..." style="resize: vertical; height: auto; padding: 10px 12px;"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="gen-modal-footer">
+                    <button class="btn gen-btn-cancel" data-dismiss="modal">Cancel</button>
+                    <button class="btn gen-btn-continue" id="sendBtn">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Risk Assessment Modal -->
+    <div class="modal fade" id="viewAssessmentModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered gen-modal-dialog" role="document">
+            <div class="modal-content gen-modal-content">
+                <div class="gen-modal-header">
+                    <h5 class="gen-modal-title">View Risk assessment</h5>
+                </div>
+                <div class="gen-modal-body">
+                    <div class="view-assessment-box">
+                        <div class="view-assessment-header">
+                            <div class="view-assessment-main">
+                                <div class="view-assessment-field">
+                                    <div class="view-assessment-label">Titel</div>
+                                    <div class="view-assessment-value">ML/TF Risk Assessment FY2026</div>
+                                </div>
+                                <div class="view-assessment-field">
+                                    <div class="view-assessment-label">Summary of Changes</div>
+                                    <div class="view-assessment-value">Annual update of the Financial Year Risk Assessment document</div>
+                                </div>
+                                <div class="view-assessment-field">
+                                    <div class="view-assessment-label">Provider</div>
+                                    <div class="view-assessment-value">AUSTRAC Online + Internal</div>
+                                </div>
+                            </div>
+                            <div class="view-assessment-version">
+                                <div class="view-assessment-label">Version:</div>
+                                <span class="view-version-badge">v 2.11</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="view-attachments-section">
+                        <div class="view-attachments-title">Attachments</div>
+                        <div class="view-attachment-item">
+                            <div class="view-attachment-name">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2a9d8f" viewBox="0 0 16 16" class="view-attachment-icon">
+                                    <path d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0z"/>
+                                </svg>
+                                Attachment One
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#2a9d8f" viewBox="0 0 16 16" class="view-download-icon">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="gen-modal-footer">
+                    <button class="btn gen-btn-cancel" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cancel Review Modal -->
+    <div class="modal fade" id="cancelReviewModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered gen-modal-dialog" role="document">
+            <div class="modal-content gen-modal-content">
+                <div class="gen-modal-header">
+                    <h5 class="gen-modal-title">Review Cancelled</h5>
+                </div>
+                <div class="gen-modal-body">
+                    <div class="cancel-review-box">
+                        <div class="cancel-review-header">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16.04 16.04" class="cancel-review-icon">
+                                <path fill="#ff0016" d="M1.07,12.03C-.36,9.55-.36,6.49,1.07,4.01S5.15,0,8.02,0s5.51,1.53,6.95,4.01,1.43,5.54,0,8.02c-1.43,2.48-4.08,4.01-6.95,4.01s-5.51-1.53-6.95-4.01ZM8.02,12.03c.55,0,1-.45,1-1s-.45-1-1-1-1,.45-1,1,.45,1,1,1ZM7.27,4.76v3.51c0,.42.34.75.75.75s.75-.34.75-.75v-3.51c0-.42-.34-.75-.75-.75s-.75.34-.75.75Z"/>
+                            </svg>
+                            <div class="cancel-review-title">Review Cancelled</div>
+                        </div>
+                        <div class="cancel-review-message">This review is no longer available. The review request for the following document has been cancelled.</div>
+                    </div>
+                    <div class="view-attachments-section">
+                        <div class="view-attachments-title">Attachments</div>
+                        <div class="view-attachment-item">
+                            <div class="view-attachment-name">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2a9d8f" viewBox="0 0 16 16" class="view-attachment-icon">
+                                    <path d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0z"/>
+                                </svg>
+                                My_Assessment_EOFY26.doc
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#2a9d8f" viewBox="0 0 16 16" class="view-download-icon">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="gen-modal-footer">
+                    <button class="btn gen-btn-cancel" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Generate Risk Assessment Modal -->
     <div class="modal fade" id="generateModal" tabindex="-1" role="dialog" aria-labelledby="generateModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered gen-modal-dialog" role="document">
@@ -440,6 +736,7 @@
         (function() {
             var overlay = document.getElementById('spinnerOverlay');
             var isComplete = sessionStorage.getItem('assessmentComplete') === '1';
+            var isDraft = sessionStorage.getItem('assessmentDraft') === '1';
 
             if (isComplete) {
                 sessionStorage.removeItem('assessmentComplete');
@@ -478,6 +775,32 @@
                         }, 600);
                     }, 600);
                 }, 3000);
+            } else if (isDraft) {
+                sessionStorage.removeItem('assessmentDraft');
+                overlay.style.display = 'flex';
+                overlay.style.opacity = '0';
+                requestAnimationFrame(function() {
+                    requestAnimationFrame(function() {
+                        overlay.style.transition = 'opacity 0.4s ease';
+                        overlay.style.opacity = '1';
+                    });
+                });
+                setTimeout(function() {
+                    overlay.style.transition = 'opacity 0.6s ease';
+                    overlay.style.opacity = '0';
+                    setTimeout(function() {
+                        overlay.style.display = 'none';
+                        var draftRow = document.getElementById('draftAssessmentRow');
+                        if (draftRow) {
+                            draftRow.style.display = '';
+                            requestAnimationFrame(function() {
+                                requestAnimationFrame(function() {
+                                    draftRow.style.opacity = '1';
+                                });
+                            });
+                        }
+                    }, 600);
+                }, 1800);
             } else {
                 requestAnimationFrame(function() {
                     requestAnimationFrame(function() {
@@ -570,6 +893,346 @@
             document.getElementById("logoutBtn").addEventListener("click", function() {
                 sessionStorage.removeItem("isAuthenticated");
                 window.location.href = "login.html";
+            });
+        }
+    </script>
+    <script>
+        // Auto-format date inputs (dd/mm/yyyy)
+        function formatDateInput(input) {
+            input.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+                let formattedValue = '';
+
+                if (value.length > 0) {
+                    formattedValue = value.substring(0, 2); // dd
+                }
+                if (value.length >= 3) {
+                    formattedValue += '/' + value.substring(2, 4); // /mm
+                }
+                if (value.length >= 5) {
+                    formattedValue += '/' + value.substring(4, 8); // /yyyy
+                }
+
+                e.target.value = formattedValue;
+            });
+
+            // Handle backspace properly
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace') {
+                    let value = e.target.value;
+                    if (value.endsWith('/')) {
+                        e.preventDefault();
+                        e.target.value = value.slice(0, -1);
+                    }
+                }
+            });
+        }
+
+        // Apply formatting to all date inputs
+        document.querySelectorAll('.ra-date-input').forEach(function(input) {
+            formatDateInput(input);
+        });
+
+        // Re-apply to dynamically added inputs (for newAssessmentRow)
+        var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                mutation.addedNodes.forEach(function(node) {
+                    if (node.nodeType === 1) {
+                        var dateInputs = node.querySelectorAll ? node.querySelectorAll('.ra-date-input') : [];
+                        dateInputs.forEach(function(input) {
+                            formatDateInput(input);
+                        });
+                    }
+                });
+            });
+        });
+
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        // Show/hide save and cancel buttons for date inputs
+        document.addEventListener('input', function(e) {
+            if (e.target.classList.contains('ra-date-input')) {
+                var wrapper = e.target.closest('.ra-date-wrapper');
+                var saveBtn = wrapper.querySelector('.ra-date-save');
+                var cancelBtn = wrapper.querySelector('.ra-date-cancel');
+                var value = e.target.value;
+
+                // Show buttons when complete date is entered (10 characters: dd/mm/yyyy)
+                if (value.length === 10) {
+                    saveBtn.style.display = 'flex';
+                    cancelBtn.style.display = 'flex';
+                    saveBtn.classList.add('ra-date-btn-fade-in');
+                    cancelBtn.classList.add('ra-date-btn-fade-in');
+                } else {
+                    saveBtn.style.display = 'none';
+                    cancelBtn.style.display = 'none';
+                    saveBtn.classList.remove('ra-date-btn-fade-in');
+                    cancelBtn.classList.remove('ra-date-btn-fade-in');
+                }
+            }
+        });
+
+        // Handle save button click
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.ra-date-save')) {
+                e.preventDefault();
+                var wrapper = e.target.closest('.ra-date-wrapper');
+                var input = wrapper.querySelector('.ra-date-input');
+                var saveBtn = wrapper.querySelector('.ra-date-save');
+                var cancelBtn = wrapper.querySelector('.ra-date-cancel');
+
+                // Fade out buttons
+                saveBtn.classList.remove('ra-date-btn-fade-in');
+                cancelBtn.classList.remove('ra-date-btn-fade-in');
+                saveBtn.classList.add('ra-date-btn-fade-out');
+                cancelBtn.classList.add('ra-date-btn-fade-out');
+
+                // Hide buttons after fade-out animation completes
+                setTimeout(function() {
+                    saveBtn.style.display = 'none';
+                    cancelBtn.style.display = 'none';
+                    saveBtn.classList.remove('ra-date-btn-fade-out');
+                    cancelBtn.classList.remove('ra-date-btn-fade-out');
+                }, 200);
+
+                // Optional: Add visual feedback that date was saved
+                input.style.borderColor = '#5a9e6a';
+                setTimeout(function() {
+                    input.style.borderColor = '';
+                }, 1000);
+            }
+        });
+
+        // Handle cancel button click
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.ra-date-cancel')) {
+                e.preventDefault();
+                var wrapper = e.target.closest('.ra-date-wrapper');
+                var input = wrapper.querySelector('.ra-date-input');
+                var saveBtn = wrapper.querySelector('.ra-date-save');
+                var cancelBtn = wrapper.querySelector('.ra-date-cancel');
+
+                // Clear the input
+                input.value = '';
+
+                // Fade out buttons
+                saveBtn.classList.remove('ra-date-btn-fade-in');
+                cancelBtn.classList.remove('ra-date-btn-fade-in');
+                saveBtn.classList.add('ra-date-btn-fade-out');
+                cancelBtn.classList.add('ra-date-btn-fade-out');
+
+                // Hide buttons after fade-out animation completes
+                setTimeout(function() {
+                    saveBtn.style.display = 'none';
+                    cancelBtn.style.display = 'none';
+                    saveBtn.classList.remove('ra-date-btn-fade-out');
+                    cancelBtn.classList.remove('ra-date-btn-fade-out');
+                }, 200);
+            }
+        });
+    </script>
+    <script>
+        // Mark as Current / Remove Current functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('mark-current-toggle')) {
+                e.preventDefault();
+
+                var row = e.target.closest('tr');
+                var labelsCell = row.cells[2]; // Labels column (3rd column, index 2)
+
+                // Check if Current label already exists
+                var currentLabel = labelsCell.querySelector('.label-tag-current');
+
+                if (currentLabel) {
+                    // Remove Current label with fade-out animation
+                    currentLabel.classList.add('label-tag-fade-out');
+                    e.target.textContent = 'Mark as Current';
+
+                    // Remove element after animation completes
+                    setTimeout(function() {
+                        currentLabel.remove();
+                    }, 300);
+                } else {
+                    // Add Current label with fade-in animation
+                    var newLabel = document.createElement('span');
+                    newLabel.className = 'label-tag label-tag-current label-tag-fade-in';
+                    newLabel.textContent = 'Current';
+                    labelsCell.appendChild(newLabel);
+                    e.target.textContent = 'Remove Current';
+
+                    // Remove animation class after it completes
+                    setTimeout(function() {
+                        newLabel.classList.remove('label-tag-fade-in');
+                        newLabel.style.opacity = '1';
+                    }, 600);
+                }
+            }
+        });
+
+        // Update menu text on dropdown open
+        document.addEventListener('click', function(e) {
+            var toggleBtn = e.target.closest('.dropdown-toggle');
+            if (toggleBtn) {
+                var row = toggleBtn.closest('tr');
+                var dropdown = row.querySelector('.dropdown-menu');
+                var markCurrentItem = dropdown.querySelector('.mark-current-toggle');
+                var labelsCell = row.cells[2];
+                var currentLabel = labelsCell.querySelector('.label-tag-current');
+
+                if (currentLabel) {
+                    markCurrentItem.textContent = 'Remove Current';
+                } else {
+                    markCurrentItem.textContent = 'Mark as Current';
+                }
+            }
+        });
+
+        // Track the row being sent for review
+        var currentReviewRow = null;
+
+        // Handle "Send for Review" dropdown item click
+        document.addEventListener('click', function(e) {
+            var dropdownItem = e.target.closest('.dropdown-item');
+            if (dropdownItem && dropdownItem.textContent.trim() === 'Send for Review') {
+                e.preventDefault();
+                // Store the row being sent for review
+                currentReviewRow = dropdownItem.closest('tr');
+                // Close all dropdowns
+                document.querySelectorAll('.dropdown-menu.show').forEach(function(m) {
+                    m.classList.remove('show');
+                });
+                // Show the modal
+                $('#sendForReviewModal').modal('show');
+            }
+            // Handle "View" dropdown item click
+            if (dropdownItem && dropdownItem.textContent.trim() === 'View') {
+                e.preventDefault();
+                // Close all dropdowns
+                document.querySelectorAll('.dropdown-menu.show').forEach(function(m) {
+                    m.classList.remove('show');
+                });
+                // Show the view modal
+                $('#viewAssessmentModal').modal('show');
+            }
+            // Handle "Cancel Review" dropdown item click
+            if (dropdownItem && dropdownItem.textContent.trim() === 'Cancel Review') {
+                e.preventDefault();
+                // Close all dropdowns
+                document.querySelectorAll('.dropdown-menu.show').forEach(function(m) {
+                    m.classList.remove('show');
+                });
+                // Show the cancel review modal
+                $('#cancelReviewModal').modal('show');
+            }
+        });
+
+        // Handle "Send for Review" confirmation button - transition to receiver selection
+        if (document.getElementById('confirmSendForReviewBtn')) {
+            document.getElementById('confirmSendForReviewBtn').addEventListener('click', function() {
+                // Fade out first modal
+                $('#sendForReviewModal').modal('hide');
+                // Show second modal after first one is hidden
+                $('#sendForReviewModal').on('hidden.bs.modal', function() {
+                    $('#selectReceiverModal').modal('show');
+                    // Remove event handler to prevent multiple bindings
+                    $('#sendForReviewModal').off('hidden.bs.modal');
+                });
+            });
+        }
+
+        // Handle receiver selection change - show/hide self-review fields
+        if (document.getElementById('receiverSelect')) {
+            document.getElementById('receiverSelect').addEventListener('change', function() {
+                var selfFields = document.getElementById('selfReviewFields');
+                if (this.value === 'Michael Brown [self]') {
+                    selfFields.style.display = 'block';
+                } else {
+                    selfFields.style.display = 'none';
+                }
+            });
+        }
+
+        // Auto-format date input in modal (dd/mm/yyyy)
+        if (document.getElementById('dateReviewed')) {
+            var dateInput = document.getElementById('dateReviewed');
+
+            dateInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+                let formattedValue = '';
+
+                if (value.length > 0) {
+                    formattedValue = value.substring(0, 2); // dd
+                }
+                if (value.length >= 3) {
+                    formattedValue += '/' + value.substring(2, 4); // /mm
+                }
+                if (value.length >= 5) {
+                    formattedValue += '/' + value.substring(4, 8); // /yyyy
+                }
+
+                e.target.value = formattedValue;
+            });
+
+            // Handle backspace properly
+            dateInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace') {
+                    let value = e.target.value;
+                    if (value.endsWith('/')) {
+                        e.preventDefault();
+                        e.target.value = value.slice(0, -1);
+                    }
+                }
+            });
+        }
+
+        // Handle "Send" button in receiver modal
+        if (document.getElementById('sendBtn')) {
+            document.getElementById('sendBtn').addEventListener('click', function() {
+                var receiver = document.getElementById('receiverSelect').value;
+                var dateReviewed = document.getElementById('dateReviewed').value;
+                var comments = document.getElementById('reviewComments').value;
+
+                $('#selectReceiverModal').modal('hide');
+
+                // Update the row that was sent for review
+                if (currentReviewRow) {
+                    // Update status badge (6th cell, index 6)
+                    var statusCell = currentReviewRow.cells[6];
+                    statusCell.innerHTML = '<span class="label-tag label-tag-blue">Under Review</span>';
+
+                    // Update action button (7th cell, index 7)
+                    var actionCell = currentReviewRow.cells[7];
+                    actionCell.innerHTML = '<button class="btn gen-btn-continue btn-small btn-review-custom">Review</button>';
+
+                    // Show sent for review alert after 800ms delay
+                    var alert = document.getElementById('sentForReviewAlert');
+                    if (alert) {
+                        setTimeout(function() {
+                            alert.style.display = '';
+                            requestAnimationFrame(function() {
+                                requestAnimationFrame(function() {
+                                    alert.style.opacity = '1';
+                                });
+                            });
+                        }, 800);
+                    }
+
+                    // Add shake animation after 300ms delay
+                    setTimeout(function() {
+                        currentReviewRow.classList.add('row-shake');
+                        // Remove animation class after it completes
+                        setTimeout(function() {
+                            currentReviewRow.classList.remove('row-shake');
+                        }, 500);
+                    }, 300);
+                }
+
+                // Add any additional logic here (e.g., API call to send for review)
+                console.log('Risk assessment sent for review to:', receiver);
+                if (receiver === 'Michael Brown [self]') {
+                    console.log('Date Reviewed:', dateReviewed);
+                    console.log('Comments:', comments);
+                }
             });
         }
     </script>

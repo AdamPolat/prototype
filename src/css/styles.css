@@ -289,7 +289,7 @@ a {
     padding: 0 16px !important;
     border-radius: 8px !important;
     background: #fff;
-    border: 1px solid #c9d8de !important;
+    border: 1px solid #bccdd3 !important;
     font-size: 13px;
     font-weight: 500;
     color: #1a2b35 !important;
@@ -333,8 +333,8 @@ a {
 .ra-table-wrap {
     background: #fff;
     border-radius: 12px;
-    border: 1px solid #dce8ed;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    border: 1px solid #d7d0d0;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.00);
     overflow: visible;
 }
 
@@ -363,6 +363,10 @@ a {
 
 .ra-table thead th.sorted {
     color: #1a6b40;
+}
+
+.ra-table thead th:first-child {
+    border-radius: 10px 0 0 0;
 }
 
 .sort-icon {
@@ -395,6 +399,7 @@ a {
     text-align: right;
     padding-right: 16px;
     width: 70px;
+    border-radius: 0 10px 0 0;
 }
 
 .ra-table tbody td:last-child {
@@ -405,6 +410,60 @@ a {
 
 .ra-table tbody td:last-child .dropdown {
     display: inline-block;
+}
+
+/* Date input in table */
+.ra-date-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ra-date-input {
+    width: 100%;
+    max-width: 100px;
+    padding: 6px 10px;
+    border: 1px solid #c9d8de;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #1a2b35;
+    outline: none;
+    transition: border-color 0.15s;
+    background: #fff;
+}
+
+.ra-date-input::placeholder {
+    color: #8aa8b2;
+}
+
+.ra-date-input:focus {
+    border-color: #1a6b40;
+}
+
+.ra-date-save,
+.ra-date-cancel {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #c9d8de;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.15s;
+    padding: 0;
+}
+
+.ra-date-save:hover {
+    background: #f0f9f2;
+    border-color: #5a9e6a;
+}
+
+.ra-date-cancel:hover {
+    background: #f5f7f8;
+    border-color: #5b6b74;
 }
 
 /* Status badges */
@@ -434,6 +493,12 @@ a {
     border: 1px solid #f5a9a9;
 }
 
+.status-draft {
+    background: #f5f7f8;
+    color: #4a6470;
+    border: 1px solid #c9d8de;
+}
+
 /* Action (three-dot) button */
 .btn-action {
     background: transparent !important;
@@ -455,6 +520,35 @@ a {
 .btn-action:hover {
     background: #edf3f6 !important;
     color: #1a2b35 !important;
+}
+
+/* Small button variant */
+.btn-small {
+    padding: 7px 24px !important;
+    border-radius: 8px !important;
+}
+
+/* Review button - custom font weight */
+.btn-review-custom {
+    font-weight: 300 !important;
+    font-size: 12px !important;
+}
+
+/* Review button with small variant */
+.btn-review-custom.btn-small {
+    padding: 7px 24px !important;
+    border-radius: 7px !important;
+}
+
+/* Shake animation for updated row */
+@keyframes shakeRow {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+    20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+.row-shake {
+    animation: shakeRow 0.5s ease;
 }
 
 .dropdown {
@@ -683,6 +777,180 @@ a {
     background: #155835 !important;
 }
 
+/* Confirm Complete Modal */
+.confirm-complete-box {
+    background: #fffbef;
+    border: 1px solid #d4a355;
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.confirm-complete-icon {
+    width: 40px;
+    height: 40px;
+    background: #b8912d;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.confirm-complete-title {
+    color: #9c7a2a;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.confirm-complete-text {
+    color: #9c7a2a;
+    font-size: 13.5px;
+}
+
+/* View Assessment Modal */
+.view-assessment-box {
+    background: #f5f7f8;
+    border: 1px solid #b8c5cb;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+}
+
+.view-assessment-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.view-assessment-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.view-assessment-version {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.view-assessment-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.view-assessment-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #5a7380;
+}
+
+.view-assessment-value {
+    font-size: 14px;
+    font-weight: 400;
+    color: #1a2b35;
+    line-height: 1.5;
+}
+
+.view-version-badge {
+    background: #c8e6c9;
+    color: #2e7d32;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 8px;
+}
+
+.view-attachments-section {
+    margin-top: 0;
+}
+
+.view-attachments-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a2b35;
+    margin-bottom: 16px;
+}
+
+.view-attachment-item {
+    background: #fff;
+    border: 1px solid #c9d8de;
+    border-radius: 10px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.12s;
+}
+
+.view-attachment-item:hover {
+    background: #f8fafb;
+}
+
+.view-attachment-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #1a2b35;
+    font-weight: 400;
+}
+
+.view-attachment-icon {
+    flex-shrink: 0;
+}
+
+.view-download-icon {
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: transform 0.12s;
+}
+
+.view-download-icon:hover {
+    transform: translateY(2px);
+}
+
+/* Cancel Review Modal */
+.cancel-review-box {
+    background: #fdf3f3;
+    border: 1px solid #e57373;
+    border-radius: 8px;
+    padding: 13px 17px;
+    margin-bottom: 24px;
+}
+
+.cancel-review-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 3px;
+}
+
+.cancel-review-icon {
+    flex-shrink: 0;
+}
+
+.cancel-review-title {
+    color: #d32f2f;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.cancel-review-message {
+    color: #d32f2f;
+    font-size: 14px;
+    line-height: 1.7;
+    padding-left: 0;
+}
+
 /* =====================================================
    LABEL TAGS
    ===================================================== */
@@ -694,6 +962,54 @@ a {
     font-size: 12px;
     font-weight: 200;
     text-align: center;
+}
+
+.label-tag + .label-tag {
+    margin-left: 6px;
+}
+
+@keyframes fadeInLabel {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeOutLabel {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+.label-tag-fade-in {
+    animation: fadeInLabel 300ms ease forwards;
+    animation-delay: 300ms;
+    opacity: 0;
+}
+
+.label-tag-fade-out {
+    animation: fadeOutLabel 300ms ease forwards;
+    opacity: 1;
+}
+
+/* Date button fade-in animation */
+.ra-date-btn-fade-in {
+    animation: fadeInLabel 200ms ease forwards;
+    opacity: 0;
+}
+
+.ra-date-btn-fade-out {
+    animation: fadeOutLabel 200ms ease forwards;
+    opacity: 1;
 }
 
 .label-tag-blue {

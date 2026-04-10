@@ -10,7 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <style>
+
+<style>
         /* Filter system */
         .cl-filter-wrap { position: relative; display: inline-block; }
         .cl-filter-btn {
@@ -484,6 +485,7 @@
         // Manual dropdown handler
         document.addEventListener('click', function(e) {
             var toggleBtn = e.target.closest('.dropdown-toggle');
+            var dropdownItem = e.target.closest('.dropdown-item');
 
             if (toggleBtn) {
                 e.preventDefault();
@@ -502,8 +504,8 @@
                 if (!isOpen) {
                     menu.classList.add('show');
                 }
-            } else {
-                // Close all dropdowns if clicking outside
+            } else if (!dropdownItem) {
+                // Only close dropdowns if NOT clicking on a dropdown item
                 document.querySelectorAll('.dropdown-menu.show').forEach(function(m) {
                     m.classList.remove('show');
                 });

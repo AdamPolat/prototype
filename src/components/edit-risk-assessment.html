@@ -217,6 +217,10 @@
                                 </div>
                             </div>
                             <button class="era-add-btn">Add Risk Factor +</button>
+                            <button class="era-restore-btn" data-section="0">
+                                Restore defaults
+                                <i class="fas fa-undo"></i>
+                            </button>
                         </div>
 
                         <!-- Step 1: Services Risk Factors -->
@@ -268,6 +272,10 @@
                                 </div>
                             </div>
                             <button class="era-add-btn">Add Risk Factor +</button>
+                            <button class="era-restore-btn" data-section="1">
+                                <i class="fas fa-undo"></i>
+                                Restore defaults
+                            </button>
                         </div>
 
                         <!-- Step 2: Identify Clients -->
@@ -309,6 +317,10 @@
                                 </div>
                             </div>
                             <button class="era-add-btn">Add Client Type +</button>
+                            <button class="era-restore-btn" data-section="2">
+                                <i class="fas fa-undo"></i>
+                                Restore defaults
+                            </button>
                         </div>
 
                         <!-- Step 3: Client Risk Factors -->
@@ -378,6 +390,10 @@
                                 </div>
                             </div>
                             <button class="era-add-btn">Add Risk Factor +</button>
+                            <button class="era-restore-btn" data-section="3">
+                                <i class="fas fa-undo"></i>
+                                Restore defaults
+                            </button>
                         </div>
 
                         <!-- Step 4: Identify Delivery Channels -->
@@ -421,6 +437,10 @@
                                 </div>
                             </div>
                             <button class="era-add-btn">Add Risk Factor +</button>
+                            <button class="era-restore-btn" data-section="4">
+                                <i class="fas fa-undo"></i>
+                                Restore defaults
+                            </button>
                         </div>
 
                         <!-- Step 5: Delivery Channel Risk Factors -->
@@ -442,6 +462,10 @@
                                 </div>
                             </div>
                             <button class="era-add-btn">Add Risk Factor +</button>
+                            <button class="era-restore-btn" data-section="5">
+                                <i class="fas fa-undo"></i>
+                                Restore defaults
+                            </button>
                         </div>
 
                         <!-- Step 6: Country Risk Assessment -->
@@ -490,21 +514,96 @@
                             <h5 class="era-content-title">Finalise Risk Assessment</h5>
                             <p class="era-content-desc">Provide a title and version number for this risk assessment. Use the summary of changes field to document what was updated in this version.</p>
 
+                            <!-- Action Required Alert -->
+                            <div class="era-action-alert">
+                                <div class="era-action-alert-header">
+                                    <div class="era-action-alert-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#cca81f" viewBox="0 0 16 16">
+                                            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div class="era-action-alert-title">Action required before completing</div>
+                                        <div class="era-action-alert-desc">Action required before completing. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit</div>
+                                    </div>
+                                </div>
+                                <div class="era-action-alert-list">
+                                    <div class="era-action-alert-item">
+                                        <div class="era-action-alert-item-left">
+                                            <div class="era-action-alert-status-icon era-action-alert-not-visited">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16.19 16.19">
+                                                    <rect fill="#dce1e4" stroke="#a7a7a7" stroke-miterlimit="10" stroke-width=".75" x=".38" y=".37" width="15.44" height="15.44" rx="7.72" ry="7.72"/>
+                                                    <path fill="#353535" d="M5.81,6.56c0-.3.06-.57.17-.81.1-.25.26-.46.45-.63.2-.18.44-.31.72-.41s.61-.15.97-.15c.34,0,.65.05.93.14.28.09.52.22.71.38.2.16.35.36.46.59.11.23.16.48.16.76,0,.36-.08.67-.26.92s-.43.49-.76.69c-.16.09-.29.18-.39.25-.1.08-.19.16-.25.24-.06.08-.11.17-.13.26-.03.09-.04.19-.04.31v.25h-1.26v-.26c-.03-.19-.02-.36,0-.51.03-.15.07-.29.14-.42.07-.13.16-.24.28-.35s.26-.2.42-.3c.15-.09.28-.18.38-.26.1-.08.19-.16.25-.24.06-.08.11-.16.13-.25.03-.09.04-.19.04-.3s-.02-.21-.06-.3c-.04-.09-.1-.17-.18-.24s-.17-.12-.29-.16-.23-.06-.37-.06c-.28,0-.5.08-.66.23-.17.16-.26.37-.27.63h-1.29ZM7.97,11.64c-.27,0-.48-.07-.64-.22-.15-.14-.23-.34-.23-.59s.08-.45.23-.6c.15-.14.37-.22.64-.22s.48.07.63.22c.15.14.23.34.23.6s-.08.45-.23.59c-.15.14-.36.22-.63.22Z"/>
+                                                </svg>
+                                            </div>
+                                            <span class="era-action-alert-item-text">1. Identify Services</span>
+                                        </div>
+                                        <span class="era-action-alert-badge era-action-alert-badge-grey">Not Visited</span>
+                                    </div>
+                                    <div class="era-action-alert-item">
+                                        <div class="era-action-alert-item-left">
+                                            <div class="era-action-alert-status-icon era-action-alert-not-visited">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16.19 16.19">
+                                                    <rect fill="#dce1e4" stroke="#a7a7a7" stroke-miterlimit="10" stroke-width=".75" x=".38" y=".37" width="15.44" height="15.44" rx="7.72" ry="7.72"/>
+                                                    <path fill="#353535" d="M5.81,6.56c0-.3.06-.57.17-.81.1-.25.26-.46.45-.63.2-.18.44-.31.72-.41s.61-.15.97-.15c.34,0,.65.05.93.14.28.09.52.22.71.38.2.16.35.36.46.59.11.23.16.48.16.76,0,.36-.08.67-.26.92s-.43.49-.76.69c-.16.09-.29.18-.39.25-.1.08-.19.16-.25.24-.06.08-.11.17-.13.26-.03.09-.04.19-.04.31v.25h-1.26v-.26c-.03-.19-.02-.36,0-.51.03-.15.07-.29.14-.42.07-.13.16-.24.28-.35s.26-.2.42-.3c.15-.09.28-.18.38-.26.1-.08.19-.16.25-.24.06-.08.11-.16.13-.25.03-.09.04-.19.04-.3s-.02-.21-.06-.3c-.04-.09-.1-.17-.18-.24s-.17-.12-.29-.16-.23-.06-.37-.06c-.28,0-.5.08-.66.23-.17.16-.26.37-.27.63h-1.29ZM7.97,11.64c-.27,0-.48-.07-.64-.22-.15-.14-.23-.34-.23-.59s.08-.45.23-.6c.15-.14.37-.22.64-.22s.48.07.63.22c.15.14.23.34.23.6s-.08.45-.23.59c-.15.14-.36.22-.63.22Z"/>
+                                                </svg>
+                                            </div>
+                                            <span class="era-action-alert-item-text">2. Identify Clients</span>
+                                        </div>
+                                        <span class="era-action-alert-badge era-action-alert-badge-grey">Not Visited</span>
+                                    </div>
+                                    <div class="era-action-alert-item">
+                                        <div class="era-action-alert-item-left">
+                                            <div class="era-action-alert-status-icon era-action-alert-has-error">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewBox="0 0 17.09 14.95">
+                                                    <path fill="#e8bb00" d="M8.54,0c.47,0,.91.25,1.15.66l7.21,12.28c.24.41.24.92,0,1.34-.24.41-.68.67-1.16.67H1.33c-.48,0-.92-.26-1.16-.67-.24-.41-.23-.93,0-1.34L7.39.66c.24-.41.68-.66,1.15-.66ZM9.61,11.75c0-.59-.48-1.07-1.07-1.07s-1.07.48-1.07,1.07.48,1.07,1.07,1.07,1.07-.48,1.07-1.07ZM8.54,4.27c-.44,0-.8.36-.8.8v3.74c0,.44.36.8.8.8s.8-.36.8-.8v-3.74c0-.44-.36-.8-.8-.8Z"/>
+                                                </svg>
+                                            </div>
+                                            <span class="era-action-alert-item-text">3. Client Risk Factors</span>
+                                        </div>
+                                        <span class="era-action-alert-badge era-action-alert-badge-red">Has Errors</span>
+                                    </div>
+                                    <div class="era-action-alert-item">
+                                        <div class="era-action-alert-item-left">
+                                            <div class="era-action-alert-status-icon era-action-alert-has-error">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewBox="0 0 17.09 14.95">
+                                                    <path fill="#e8bb00" d="M8.54,0c.47,0,.91.25,1.15.66l7.21,12.28c.24.41.24.92,0,1.34-.24.41-.68.67-1.16.67H1.33c-.48,0-.92-.26-1.16-.67-.24-.41-.23-.93,0-1.34L7.39.66c.24-.41.68-.66,1.15-.66ZM9.61,11.75c0-.59-.48-1.07-1.07-1.07s-1.07.48-1.07,1.07.48,1.07,1.07,1.07,1.07-.48,1.07-1.07ZM8.54,4.27c-.44,0-.8.36-.8.8v3.74c0,.44.36.8.8.8s.8-.36.8-.8v-3.74c0-.44-.36-.8-.8-.8Z"/>
+                                                </svg>
+                                            </div>
+                                            <span class="era-action-alert-item-text">4. Identify Delivery Channels</span>
+                                        </div>
+                                        <span class="era-action-alert-badge era-action-alert-badge-red">Has Errors</span>
+                                    </div>
+                                    <div class="era-action-alert-item">
+                                        <div class="era-action-alert-item-left">
+                                            <div class="era-action-alert-status-icon era-action-alert-not-visited">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16.19 16.19">
+                                                    <rect fill="#dce1e4" stroke="#a7a7a7" stroke-miterlimit="10" stroke-width=".75" x=".38" y=".37" width="15.44" height="15.44" rx="7.72" ry="7.72"/>
+                                                    <path fill="#353535" d="M5.81,6.56c0-.3.06-.57.17-.81.1-.25.26-.46.45-.63.2-.18.44-.31.72-.41s.61-.15.97-.15c.34,0,.65.05.93.14.28.09.52.22.71.38.2.16.35.36.46.59.11.23.16.48.16.76,0,.36-.08.67-.26.92s-.43.49-.76.69c-.16.09-.29.18-.39.25-.1.08-.19.16-.25.24-.06.08-.11.17-.13.26-.03.09-.04.19-.04.31v.25h-1.26v-.26c-.03-.19-.02-.36,0-.51.03-.15.07-.29.14-.42.07-.13.16-.24.28-.35s.26-.2.42-.3c.15-.09.28-.18.38-.26.1-.08.19-.16.25-.24.06-.08.11-.16.13-.25.03-.09.04-.19.04-.3s-.02-.21-.06-.3c-.04-.09-.1-.17-.18-.24s-.17-.12-.29-.16-.23-.06-.37-.06c-.28,0-.5.08-.66.23-.17.16-.26.37-.27.63h-1.29ZM7.97,11.64c-.27,0-.48-.07-.64-.22-.15-.14-.23-.34-.23-.59s.08-.45.23-.6c.15-.14.37-.22.64-.22s.48.07.63.22c.15.14.23.34.23.6s-.08.45-.23.59c-.15.14-.36.22-.63.22Z"/>
+                                                </svg>
+                                            </div>
+                                            <span class="era-action-alert-item-text">7. Finalise Risk Assessment</span>
+                                        </div>
+                                        <span class="era-action-alert-badge era-action-alert-badge-grey">Not Visited</span>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="era-risk-card" style="padding: 20px;">
                                 <div class="fp-form">
                                     <div class="fp-form-group">
                                         <label class="fp-form-label">Title</label>
-                                        <input type="text" class="fp-form-input" placeholder="">
+                                        <input type="text" class="fp-form-input" id="finaliseTitle" placeholder="">
                                     </div>
 
                                     <div class="fp-form-group fp-form-group--md">
                                         <label class="fp-form-label">Version</label>
-                                        <input type="text" class="fp-form-input" placeholder="">
+                                        <input type="text" class="fp-form-input" id="finaliseVersion" placeholder="">
                                     </div>
 
                                     <div class="fp-form-group">
                                         <label class="fp-form-label">Summary of Changes</label>
-                                        <textarea class="fp-form-input fp-form-textarea"></textarea>
+                                        <textarea class="fp-form-input fp-form-textarea" id="finaliseSummary"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -537,24 +636,79 @@
         <div class="modal-dialog modal-dialog-centered gen-modal-dialog" role="document">
             <div class="modal-content gen-modal-content">
                 <div class="gen-modal-header">
-                    <h5 class="gen-modal-title">Confirm Complete</h5>
+                    <h5 class="gen-modal-title">Send for Review</h5>
                 </div>
                 <div class="gen-modal-body">
                     <div class="confirm-complete-box">
                         <div class="confirm-complete-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 15.61 15.61">
+                                <path fill="#fff" d="M1.05,11.71C-.35,9.29-.35,6.32,1.05,3.9,2.44,1.49,5.02,0,7.8,0s5.37,1.49,6.76,3.9c1.39,2.41,1.39,5.39,0,7.8-1.39,2.41-3.97,3.9-6.76,3.9s-5.37-1.49-6.76-3.9ZM5.18,5.04v.04c-.15.38.05.8.43.93.38.13.8-.06.93-.45v-.04c.05-.1.14-.16.24-.16h1.78c.25,0,.46.2.46.46,0,.16-.09.32-.23.4l-1.35.77c-.23.13-.37.37-.37.63v.41c0,.41.33.73.73.73s.73-.32.73-.72l.99-.56c.6-.34.97-.98.97-1.67,0-1.06-.86-1.92-1.92-1.92h-1.78c-.72,0-1.37.46-1.61,1.14h0ZM7.8,11.71c.54,0,.98-.44.98-.98s-.44-.98-.98-.98-.98.44-.98.98.44.98.98.98Z"/>
+                            </svg>
                         </div>
                         <div>
-                            <div class="confirm-complete-title">Assessment Complete</div>
-                            <div class="confirm-complete-text">Please click Complete Assessment to finalise your assessment</div>
+                            <div class="confirm-complete-title">Send for review?</div>
+                            <div class="confirm-complete-text">Would you like to send this risk assessment for review?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gen-modal-footer">
+                    <button class="btn gen-btn-cancel" id="saveAsDraftBtn">Save as draft</button>
+                    <button class="btn gen-btn-continue" id="confirmCompleteBtn">Send for Review</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Select Receiver Modal -->
+    <div class="modal fade" id="selectReceiverModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered gen-modal-dialog" role="document">
+            <div class="modal-content gen-modal-content">
+                <div class="gen-modal-header">
+                    <h5 class="gen-modal-title">Send for Review</h5>
+                </div>
+                <div class="gen-modal-body">
+                    <div class="ukp-modal-form-group full">
+                        <label class="ukp-modal-form-label">Receiver</label>
+                        <select class="ukp-modal-form-select" id="receiverSelectEdit">
+                            <option>Select a receiver</option>
+                            <option>John Smith</option>
+                            <option>Sarah Johnson</option>
+                            <option>Michael Brown [self]</option>
+                            <option>Emily Davis</option>
+                        </select>
+                    </div>
+                    <div id="selfReviewFieldsEdit" style="display: none;">
+                        <div class="ukp-modal-form-group full">
+                            <label class="ukp-modal-form-label">Date Reviewed <span class="text-danger">*</span></label>
+                            <input type="text" class="ukp-modal-form-input" id="dateReviewedEdit" placeholder="dd/mm/yyyy">
+                        </div>
+                        <div class="ukp-modal-form-group full">
+                            <label class="ukp-modal-form-label">Comments</label>
+                            <textarea class="ukp-modal-form-input" id="reviewCommentsEdit" rows="4" placeholder="Enter any comments..." style="resize: vertical; height: auto; padding: 10px 12px;"></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="gen-modal-footer">
                     <button class="btn gen-btn-cancel" data-dismiss="modal">Cancel</button>
-                    <button class="btn gen-btn-continue" id="confirmCompleteBtn">Complete Assessment</button>
+                    <button class="btn gen-btn-continue" id="sendBtnEdit">Send</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Restore Defaults Popover -->
+    <div class="era-restore-popover" id="restorePopover">
+        <div class="era-restore-popover-info">
+            <div class="era-restore-popover-info-title">Restore previously deleted questions</div>
+            <div class="era-restore-popover-info-text">This will allow you to restore previously deleted questions. Click the checkbox to add again.</div>
+        </div>
+        <div class="era-restore-popover-body" id="restorePopoverBody">
+            <!-- Items will be populated here -->
+        </div>
+        <div class="era-restore-popover-footer">
+            <button class="era-restore-confirm-btn" id="restoreConfirmBtn" disabled>
+                Restore defaults (<span id="restoreCounter">0</span>)
+            </button>
         </div>
     </div>
 
@@ -577,6 +731,27 @@
                     <button class="btn gen-btn-cancel" data-dismiss="modal">Cancel</button>
                     <button class="btn gen-btn-continue" id="confirmDeleteBtn">Confirm Deletion</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Discard Changes Modal -->
+    <div class="gen-modal-overlay" id="discardChangesModal" style="position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: -1; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s ease;">
+        <div class="modal-content gen-modal-content" style="max-width: 500px;">
+            <div class="gen-modal-header">
+                <h5 class="gen-modal-title">Discard changes?</h5>
+            </div>
+            <div class="gen-modal-body">
+                <div class="confirm-delete-box">
+                    <div class="confirm-delete-title">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>Warning
+                    </div>
+                    <div class="confirm-delete-text">Are you sure you want to cancel? Any unsaved changes will be lost</div>
+                </div>
+            </div>
+            <div class="gen-modal-footer">
+                <button class="btn gen-btn-cancel" id="discardGoBackBtn">Go Back</button>
+                <button class="btn gen-btn-continue" id="discardChangesBtn">Discard</button>
             </div>
         </div>
     </div>
@@ -643,8 +818,9 @@
             var prevBtn = document.querySelector('.era-btn-prev');
 
             if (index === subItems.length - 1) {
-                nextBtn.disabled = false;
                 nextBtn.innerHTML = 'Complete Assessment';
+                // Check if form is filled to enable/disable button
+                validateFinaliseForm();
             } else {
                 nextBtn.disabled = false;
                 nextBtn.innerHTML = 'Next <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16" class="ml-1"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/></svg>';
@@ -660,9 +836,163 @@
             currentStepIndex = index;
         }
 
+        // Validate finalise form and enable/disable Complete Assessment button
+        function validateFinaliseForm() {
+            var title = document.getElementById('finaliseTitle');
+            var version = document.getElementById('finaliseVersion');
+            var summary = document.getElementById('finaliseSummary');
+            var nextBtn = document.querySelector('.era-btn-next');
+
+            if (title && version && summary) {
+                var isValid = title.value.trim() !== '' &&
+                              version.value.trim() !== '' &&
+                              summary.value.trim() !== '';
+                nextBtn.disabled = !isValid;
+            }
+        }
+
+        // Add input listeners to finalise form fields
+        var finaliseTitle = document.getElementById('finaliseTitle');
+        var finaliseVersion = document.getElementById('finaliseVersion');
+        var finaliseSummary = document.getElementById('finaliseSummary');
+
+        if (finaliseTitle) finaliseTitle.addEventListener('input', validateFinaliseForm);
+        if (finaliseVersion) finaliseVersion.addEventListener('input', validateFinaliseForm);
+        if (finaliseSummary) finaliseSummary.addEventListener('input', validateFinaliseForm);
+
         var subItems = document.querySelectorAll('.era-sub-item');
         var currentStepIndex = Array.from(subItems).findIndex(function(i) { return i.classList.contains('era-sub-active'); });
         if (currentStepIndex === -1) currentStepIndex = 0;
+
+        // Track deleted items for each section
+        var deletedItems = {};
+
+        // Handle restore defaults button clicks - show popover
+        var currentRestoreSection = null;
+        var restorePopover = document.getElementById('restorePopover');
+        var restorePopoverBody = document.getElementById('restorePopoverBody');
+        var restoreCounter = document.getElementById('restoreCounter');
+        var restoreConfirmBtn = document.getElementById('restoreConfirmBtn');
+
+        document.querySelectorAll('.era-restore-btn').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var sectionIndex = parseInt(this.getAttribute('data-section'));
+                currentRestoreSection = sectionIndex;
+
+                // Populate popover with deleted items
+                restorePopoverBody.innerHTML = '';
+                var items = deletedItems[sectionIndex] || [];
+
+                if (items.length === 0) {
+                    restorePopoverBody.innerHTML = '<div style="padding: 20px; text-align: center; color: #8aa8b2;">No deleted items to restore</div>';
+                }
+
+                items.forEach(function(item, index) {
+                    var itemDiv = document.createElement('div');
+                    itemDiv.className = 'era-restore-popover-item';
+
+                    // Truncate text after 100 characters
+                    var displayText = item.text.length > 100 ? item.text.substring(0, 100) + '...' : item.text;
+
+                    itemDiv.innerHTML = `
+                        <input type="checkbox" class="era-restore-popover-checkbox" data-index="${index}">
+                        <label class="era-restore-popover-label">${displayText}</label>
+                    `;
+                    restorePopoverBody.appendChild(itemDiv);
+
+                    // Handle checkbox click
+                    var checkbox = itemDiv.querySelector('.era-restore-popover-checkbox');
+                    var label = itemDiv.querySelector('.era-restore-popover-label');
+
+                    checkbox.addEventListener('change', updateRestoreCounter);
+                    label.addEventListener('click', function() {
+                        checkbox.checked = !checkbox.checked;
+                        updateRestoreCounter();
+                    });
+                });
+
+                // Position popover relative to the clicked button
+                var buttonRect = this.getBoundingClientRect();
+                var popoverHeight = 350; // Approximate max height
+
+                restorePopover.style.position = 'fixed';
+                restorePopover.style.right = (window.innerWidth - buttonRect.right - 200) + 'px';
+                restorePopover.style.bottom = (window.innerHeight - buttonRect.top + 8) + 'px';
+                restorePopover.style.top = 'auto';
+
+                // Show popover
+                restorePopover.style.display = 'block';
+                requestAnimationFrame(function() {
+                    restorePopover.classList.add('show');
+                });
+
+                // Reset counter
+                updateRestoreCounter();
+            });
+        });
+
+        function updateRestoreCounter() {
+            var checkedCount = restorePopoverBody.querySelectorAll('.era-restore-popover-checkbox:checked').length;
+            restoreCounter.textContent = checkedCount;
+            restoreConfirmBtn.disabled = checkedCount === 0;
+        }
+
+
+        // Handle popover confirm - restore selected items
+        restoreConfirmBtn.addEventListener('click', function() {
+            if (currentRestoreSection !== null && deletedItems[currentRestoreSection]) {
+                var checkboxes = restorePopoverBody.querySelectorAll('.era-restore-popover-checkbox:checked');
+                var panel = document.querySelectorAll('.era-step-panel')[currentRestoreSection];
+                var riskCard = panel.querySelector('.era-risk-card');
+
+                // Restore selected items in reverse order to maintain original order
+                var indicesToRestore = [];
+                checkboxes.forEach(function(cb) {
+                    indicesToRestore.push(parseInt(cb.getAttribute('data-index')));
+                });
+
+                indicesToRestore.sort(function(a, b) { return b - a; });
+
+                indicesToRestore.forEach(function(index) {
+                    var item = deletedItems[currentRestoreSection][index];
+                    // Insert the row back into the risk card
+                    var tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = item.html;
+                    var rowToRestore = tempDiv.firstChild;
+
+                    // Append to risk card
+                    riskCard.appendChild(rowToRestore);
+
+                    // Remove from deleted items
+                    deletedItems[currentRestoreSection].splice(index, 1);
+                });
+
+                // Re-attach delete handlers
+                attachDeleteHandlers();
+
+                // Hide restore button if no more deleted items
+                if (deletedItems[currentRestoreSection].length === 0) {
+                    panel.querySelector('.era-restore-btn').classList.remove('show');
+                }
+
+                // Hide popover
+                restorePopover.classList.remove('show');
+                setTimeout(function() {
+                    restorePopover.style.display = 'none';
+                }, 200);
+            }
+        });
+
+        // Close popover when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!restorePopover.contains(e.target) && !e.target.closest('.era-restore-btn')) {
+                restorePopover.classList.remove('show');
+                setTimeout(function() {
+                    restorePopover.style.display = 'none';
+                }, 200);
+            }
+        });
 
         // Stepper nav — clicking a sub-item
         subItems.forEach(function(item, idx) {
@@ -692,8 +1022,8 @@
         var prevBtnInit = document.querySelector('.era-btn-prev');
 
         if (currentStepIndex === subItems.length - 1) {
-            nextBtnInit.disabled = false;
             nextBtnInit.innerHTML = 'Complete Assessment';
+            validateFinaliseForm();
         }
 
         // Hide Previous button if on first step
@@ -721,7 +1051,7 @@
         function attachDeleteHandlers() {
             document.querySelectorAll('.era-row-delete').forEach(function(btn) {
                 btn.addEventListener('click', function() {
-                    rowToDelete = this.closest('.era-risk-row');
+                    rowToDelete = this.closest('.era-risk-row, .era-risk-row-rf');
                     $('#confirmDeleteModal').modal('show');
                 });
             });
@@ -729,16 +1059,124 @@
         attachDeleteHandlers();
 
         document.getElementById('confirmCompleteBtn').addEventListener('click', function() {
+            // Fade out first modal
+            $('#confirmCompleteModal').modal('hide');
+            // Show second modal after first one is hidden
+            $('#confirmCompleteModal').on('hidden.bs.modal', function() {
+                $('#selectReceiverModal').modal('show');
+                // Remove event handler to prevent multiple bindings
+                $('#confirmCompleteModal').off('hidden.bs.modal');
+            });
+        });
+
+        // Handle receiver selection change - show/hide self-review fields
+        if (document.getElementById('receiverSelectEdit')) {
+            document.getElementById('receiverSelectEdit').addEventListener('change', function() {
+                var selfFields = document.getElementById('selfReviewFieldsEdit');
+                if (this.value === 'Michael Brown [self]') {
+                    selfFields.style.display = 'block';
+                } else {
+                    selfFields.style.display = 'none';
+                }
+            });
+        }
+
+        // Auto-format date input in modal (dd/mm/yyyy)
+        if (document.getElementById('dateReviewedEdit')) {
+            var dateInput = document.getElementById('dateReviewedEdit');
+
+            dateInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+                let formattedValue = '';
+
+                if (value.length > 0) {
+                    formattedValue = value.substring(0, 2); // dd
+                }
+                if (value.length >= 3) {
+                    formattedValue += '/' + value.substring(2, 4); // /mm
+                }
+                if (value.length >= 5) {
+                    formattedValue += '/' + value.substring(4, 8); // /yyyy
+                }
+
+                e.target.value = formattedValue;
+            });
+
+            // Handle backspace properly
+            dateInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace') {
+                    let value = e.target.value;
+                    if (value.endsWith('/')) {
+                        e.preventDefault();
+                        e.target.value = value.slice(0, -1);
+                    }
+                }
+            });
+        }
+
+        // Handle "Send" button in receiver modal
+        if (document.getElementById('sendBtnEdit')) {
+            document.getElementById('sendBtnEdit').addEventListener('click', function() {
+                var receiver = document.getElementById('receiverSelectEdit').value;
+                var dateReviewed = document.getElementById('dateReviewedEdit').value;
+                var comments = document.getElementById('reviewCommentsEdit').value;
+
+                $('#selectReceiverModal').modal('hide');
+                $('#selectReceiverModal').on('hidden.bs.modal', function() {
+                    sessionStorage.setItem('assessmentComplete', '1');
+                    window.location.href = 'risk-assessment.html';
+                    $('#selectReceiverModal').off('hidden.bs.modal');
+                });
+
+                // Add any additional logic here (e.g., API call to send for review)
+                console.log('Risk assessment sent for review to:', receiver);
+                if (receiver === 'Michael Brown [self]') {
+                    console.log('Date Reviewed:', dateReviewed);
+                    console.log('Comments:', comments);
+                }
+            });
+        }
+
+        document.getElementById('saveAsDraftBtn').addEventListener('click', function() {
+            sessionStorage.setItem('assessmentDraft', '1');
             $('#confirmCompleteModal').modal('hide');
             $('#confirmCompleteModal').on('hidden.bs.modal', function() {
-                sessionStorage.setItem('assessmentComplete', '1');
                 window.location.href = 'risk-assessment.html';
+                $('#confirmCompleteModal').off('hidden.bs.modal');
             });
         });
 
         document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
             if (rowToDelete) {
-                rowToDelete.remove();
+                // Get the current section
+                var currentPanel = document.querySelector('.era-step-panel:not([style*="display: none"])');
+                if (currentPanel) {
+                    var sectionIndex = Array.from(document.querySelectorAll('.era-step-panel')).indexOf(currentPanel);
+
+                    // Initialize deleted items array for this section if needed
+                    if (!deletedItems[sectionIndex]) {
+                        deletedItems[sectionIndex] = [];
+                    }
+
+                    // Save deleted item information
+                    var rowText = rowToDelete.querySelector('.era-row-text');
+                    var itemText = rowText ? rowText.textContent.trim() : 'Deleted item';
+
+                    deletedItems[sectionIndex].push({
+                        html: rowToDelete.outerHTML,
+                        text: itemText
+                    });
+
+                    // Remove the row
+                    rowToDelete.remove();
+
+                    // Show restore button
+                    var restoreBtn = currentPanel.querySelector('.era-restore-btn');
+                    if (restoreBtn) {
+                        restoreBtn.classList.add('show');
+                    }
+                }
+
                 rowToDelete = null;
             }
             $('#confirmDeleteModal').modal('hide');
@@ -761,6 +1199,55 @@
             range.selectNodeContents(row.querySelector('.era-row-text'));
             window.getSelection().removeAllRanges();
             window.getSelection().addRange(range);
+        });
+
+        // Cancel button — show discard changes modal
+        document.querySelector('.era-btn-cancel').addEventListener('click', function() {
+            var modal = document.getElementById('discardChangesModal');
+            modal.style.zIndex = '1060';
+            modal.style.opacity = '1';
+            modal.style.pointerEvents = 'all';
+        });
+
+        // Breadcrumb link — show discard changes modal
+        document.querySelector('.era-breadcrumb-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            var modal = document.getElementById('discardChangesModal');
+            modal.style.zIndex = '1060';
+            modal.style.opacity = '1';
+            modal.style.pointerEvents = 'all';
+        });
+
+        // Go Back button — hide modal
+        document.getElementById('discardGoBackBtn').addEventListener('click', function() {
+            var modal = document.getElementById('discardChangesModal');
+            modal.style.opacity = '0';
+            modal.style.pointerEvents = 'none';
+            setTimeout(function() {
+                modal.style.zIndex = '-1';
+            }, 200);
+        });
+
+        // Discard changes — navigate to risk assessment page
+        document.getElementById('discardChangesBtn').addEventListener('click', function() {
+            var modal = document.getElementById('discardChangesModal');
+            modal.style.opacity = '0';
+            modal.style.pointerEvents = 'none';
+            setTimeout(function() {
+                window.location.href = 'risk-assessment.html';
+            }, 200);
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('discardChangesModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.style.opacity = '0';
+                this.style.pointerEvents = 'none';
+                var modal = this;
+                setTimeout(function() {
+                    modal.style.zIndex = '-1';
+                }, 200);
+            }
         });
     </script>
     <script>
