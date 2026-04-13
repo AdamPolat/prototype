@@ -1167,6 +1167,12 @@
                         text: itemText
                     });
 
+                    // If this row has an associated expanded section, remove it too
+                    var expandSection = rowToDelete.nextElementSibling;
+                    if (expandSection && expandSection.classList.contains('era-row-expand')) {
+                        expandSection.remove();
+                    }
+
                     // Remove the row
                     rowToDelete.remove();
 
@@ -1183,22 +1189,132 @@
         });
 
         // Add Risk Factor — appends inside .era-risk-card
-        document.querySelector('.era-add-btn').addEventListener('click', function() {
-            var card = document.querySelector('.era-risk-card');
-            var row = document.createElement('div');
-            row.className = 'era-risk-row';
-            row.innerHTML = '<span class="era-row-arrow">&#9654;</span><span class="era-row-text" contenteditable="true" style="outline:none; min-width:0;">New risk factor...</span><button class="era-row-delete" title="Delete"><i class="fas fa-trash-alt"></i></button>';
-            row.querySelector('.era-row-delete').addEventListener('click', function() {
-                rowToDelete = this.closest('.era-risk-row');
-                $('#confirmDeleteModal').modal('show');
+        document.querySelectorAll('.era-add-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var panel = this.closest('.era-step-panel');
+                var card = panel.querySelector('.era-risk-card');
+                var stepIndex = parseInt(panel.getAttribute('data-step'));
+
+                // Step 0 (Identify Services) should get expandable rows with Title and ML/TF/PF Vulnerability
+                if (stepIndex === 0) {
+                    // Create expandable row with Title and ML/TF/PF Vulnerability fields
+                    var row = document.createElement('div');
+                    row.className = 'era-risk-row era-risk-row--expandable';
+                    row.innerHTML = '<span class="era-row-arrow">&#9660;</span><span class="era-row-text" contenteditable="true" style="outline:none; min-width:0;">New risk factor...</span><button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>';
+
+                    // Create expanded section
+                    var expandSection = document.createElement('div');
+                    expandSection.className = 'era-row-expand open';
+                    expandSection.innerHTML = '<div class="era-expand-section-title">Title</div><input type="text" class="era-expand-textarea era-title-textarea" placeholder="Enter title..." style="height: auto; min-height: auto; resize: none;"><div class="era-expand-section-title">ML/TF/PF Vulnerability</div><textarea class="era-expand-textarea" placeholder="Enter ML/TF/PF vulnerability..."></textarea>';
+
+                    card.appendChild(row);
+                    card.appendChild(expandSection);
+
+                    // Link title textarea to row text
+                    var titleTextarea = expandSection.querySelector('.era-title-textarea');
+                    var rowText = row.querySelector('.era-row-text');
+
+                    titleTextarea.addEventListener('input', function() {
+                        var newText = this.value.trim();
+                        if (newText === '') {
+                            rowText.textContent = 'New risk factor...';
+                        } else {
+                            rowText.textContent = newText;
+                        }
+                    });
+
+                    // Also update textarea when row text is edited directly
+                    rowText.addEventListener('input', function() {
+                        var newText = this.textContent.trim();
+                        if (newText !== 'New risk factor...') {
+                            titleTextarea.value = newText;
+                        }
+                    });
+
+                    // Add click handler for expansion toggle
+                    row.addEventListener('click', function(e) {
+                        if (e.target.closest('.era-row-delete')) return;
+                        if (e.target.closest('.era-row-text') && e.target.closest('.era-row-text').isContentEditable) return;
+                        var expand = this.nextElementSibling;
+                        if (!expand || !expand.classList.contains('era-row-expand')) return;
+                        var isOpen = expand.classList.toggle('open');
+                        this.querySelector('.era-row-arrow').innerHTML = isOpen ? '&#9660;' : '&#9654;';
+                    });
+
+                    // Add delete handler
+                    row.querySelector('.era-row-delete').addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        rowToDelete = this.closest('.era-risk-row');
+                        $('#confirmDeleteModal').modal('show');
+                    });
+
+                    // Focus on the title textarea instead of row text
+                    titleTextarea.focus();
+                } else {
+                    // Check if this step uses expandable rows with badges (steps 1, 3, 5)
+                    var hasExpandableRows = panel.querySelector('.era-risk-row-rf') !== null;
+
+                    if (hasExpandableRows) {
+                        // Create expandable row with badges
+                        var row = document.createElement('div');
+                        row.className = 'era-risk-row-rf era-risk-row-rf--open';
+                        row.innerHTML = '<span class="era-row-arrow">&#9660;</span><span class="era-row-text" contenteditable="true" style="outline:none; min-width:0;">New risk factor...</span><span class="era-risk-badge era-risk-badge--medium">Medium ▼</span><button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>';
+
+                        // Create expanded section
+                        var expandSection = document.createElement('div');
+                        expandSection.className = 'era-row-expand open';
+                        expandSection.innerHTML = '<div class="era-expand-section-title">Assess Risk</div><textarea class="era-expand-textarea">Identify the risk factors associated with services provided, and assess the likelihood and impact of these risks occurring. Include mitigation controls to manage these risks.</textarea><div class="era-expand-section-title">Mitigation Controls</div><textarea class="era-expand-textarea">Identify beneficial owners for all complex legal structures. Use independent verification sources to confirm ownership and control. Refuse to act where beneficial ownership cannot be reasonably established.</textarea>';
+
+                        // Insert before the last child (which is typically the button row or total row)
+                        var lastRow = card.lastElementChild;
+                        if (lastRow && (lastRow.classList.contains('era-country-total-row') || lastRow.classList.contains('era-country-controls-wrap'))) {
+                            card.insertBefore(expandSection, lastRow);
+                            card.insertBefore(row, expandSection);
+                        } else {
+                            card.appendChild(row);
+                            card.appendChild(expandSection);
+                        }
+
+                        // Add click handler for expansion toggle
+                        row.addEventListener('click', function(e) {
+                            if (e.target.closest('.era-row-delete')) return;
+                            var expand = this.nextElementSibling;
+                            if (!expand || !expand.classList.contains('era-row-expand')) return;
+                            var isOpen = expand.classList.toggle('open');
+                            this.querySelector('.era-row-arrow').innerHTML = isOpen ? '&#9660;' : '&#9654;';
+                            this.classList.toggle('era-risk-row-rf--open', isOpen);
+                        });
+
+                        // Add delete handler
+                        row.querySelector('.era-row-delete').addEventListener('click', function() {
+                            rowToDelete = this.closest('.era-risk-row-rf');
+                            $('#confirmDeleteModal').modal('show');
+                        });
+
+                        // Focus on the text field
+                        row.querySelector('.era-row-text').focus();
+                        var range = document.createRange();
+                        range.selectNodeContents(row.querySelector('.era-row-text'));
+                        window.getSelection().removeAllRanges();
+                        window.getSelection().addRange(range);
+                    } else {
+                        // Create simple row for non-expandable sections
+                        var row = document.createElement('div');
+                        row.className = 'era-risk-row';
+                        row.innerHTML = '<span class="era-row-arrow">&#9654;</span><span class="era-row-text" contenteditable="true" style="outline:none; min-width:0;">New risk factor...</span><button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>';
+                        row.querySelector('.era-row-delete').addEventListener('click', function() {
+                            rowToDelete = this.closest('.era-risk-row');
+                            $('#confirmDeleteModal').modal('show');
+                        });
+                        card.appendChild(row);
+                        row.querySelector('.era-row-text').focus();
+                        var range = document.createRange();
+                        range.selectNodeContents(row.querySelector('.era-row-text'));
+                        window.getSelection().removeAllRanges();
+                        window.getSelection().addRange(range);
+                    }
+                }
             });
-            card.appendChild(row);
-            row.querySelector('.era-row-text').focus();
-            // Select all text for easy typing
-            var range = document.createRange();
-            range.selectNodeContents(row.querySelector('.era-row-text'));
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(range);
         });
 
         // Cancel button — show discard changes modal

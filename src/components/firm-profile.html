@@ -6,8 +6,219 @@
     <title>Firm Profile</title>
     <link rel="icon" type="image/svg+xml" href="images/FV-LOGO.svg">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="../css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Address Search Autocomplete */
+        .address-search-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .address-search-input {
+            width: 100%;
+            position: relative;
+        }
+
+        .address-search-spinner {
+            position: absolute;
+            right: auto;
+            left: 12px;
+            top: calc(50% - 10px);
+            transform: translateY(-50%);
+            display: none;
+            width: 22px;
+            height: 22px;
+            border: 3px solid #e0e0e0;
+            border-top: 3px solid #2a9d8f;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes spin {
+            0% { transform: translateY(-50%) rotate(0deg); }
+            100% { transform: translateY(-50%) rotate(360deg); }
+        }
+
+        .address-search-dropdown {
+            position: fixed;
+            background: white;
+            border: 1px solid #d0d7de;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-height: 250px;
+            overflow-y: auto;
+            z-index: 10000;
+            display: none;
+            margin-top: 4px;
+        }
+
+
+        .address-search-dropdown-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+            color: #24292f;
+            transition: background-color 0.15s ease;
+        }
+
+        .address-search-dropdown-item:hover {
+            background-color: #f6f8fa;
+        }
+
+        .address-search-dropdown-item.highlighted {
+            background-color: #f6f8fa;
+        }
+
+        .address-search-dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .address-validation-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: white;
+        }
+
+        .address-validation-search-icon {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .address-validation-header-text {
+            font-size: 14px;
+            color: #24292f;
+        }
+
+        .address-validation-header-text strong {
+            font-weight: 600;
+        }
+
+        .address-validation-header-text span {
+            font-style: italic;
+            color: #6e7781;
+        }
+
+        .address-dropdown-divider {
+            height: 1px;
+            background: #e1e4e8;
+            margin: 0;
+        }
+
+        .address-validation-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: white;
+            transition: background-color 0.15s ease;
+        }
+
+        .address-validation-footer.highlighted {
+            background: #1a8754;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .address-validation-footer.highlighted .address-add-new-text,
+        .address-validation-footer.highlighted .address-keyboard-hint-text {
+            color: white;
+        }
+
+        .address-validation-footer.highlighted .address-add-new-icon {
+            background: white;
+        }
+
+        .address-validation-footer.highlighted .address-add-new-icon svg path {
+            fill: #1a8754;
+        }
+
+        .address-validation-footer.highlighted .address-keyboard-key rect {
+            fill: white;
+        }
+
+        .address-validation-footer.highlighted .address-keyboard-key path {
+            fill: #1a8754;
+        }
+
+        .address-add-new-section {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .address-add-new-section:hover .address-add-new-text {
+            text-decoration: underline;
+        }
+
+        .address-add-new-icon {
+            width: 20px;
+            height: 20px;
+            background: #e8e8e8;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .address-add-new-icon svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .address-add-new-text {
+            color: #0068ff;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .address-keyboard-hint {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .address-keyboard-hint-text {
+            font-size: 12px;
+            color: #6e7781;
+            font-style: italic;
+        }
+
+        .address-keyboard-hint-keys {
+            display: flex;
+            gap: 4px;
+        }
+
+        .address-keyboard-key {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Form validation styles */
+        .ukp-modal-form-input.error,
+        .ukp-modal-form-select.error {
+            border-color: #dc3545 !important;
+        }
+
+        .ukp-modal-error-message {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .ukp-modal-error-message.show {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <!-- Authentication Check -->
@@ -182,13 +393,21 @@
                                 <div class="fp-form-row">
                                     <div class="fp-form-group">
                                         <label class="fp-form-label">Registered Address</label>
-                                        <input type="text" class="fp-form-input" value="Level 4, 287 Collins Street, Melbourne VIC 3000">
+                                        <div class="address-search-wrapper">
+                                            <input type="text" class="fp-form-input address-search-input" id="registeredAddress" value="Level 4, 287 Collins Street, Melbourne VIC 3000" placeholder="Start typing to search...">
+                                            <div class="address-search-spinner"></div>
+                                            <div class="address-search-dropdown" id="registeredAddressDropdown"></div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="fp-form-row">
                                     <div class="fp-form-group">
                                         <label class="fp-form-label">Business Address</label>
-                                        <input type="text" class="fp-form-input" value="Level 4, 287 Collins Street, Melbourne VIC 3000">
+                                        <div class="address-search-wrapper">
+                                            <input type="text" class="fp-form-input address-search-input" id="businessAddress" value="Level 4, 287 Collins Street, Melbourne VIC 3000" placeholder="Start typing to search...">
+                                            <div class="address-search-spinner"></div>
+                                            <div class="address-search-dropdown" id="businessAddressDropdown"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -321,6 +540,70 @@
         <div class="loader"></div>
     </div>
 
+    <!-- Add New Address Modal -->
+    <div class="ukp-modal-overlay" id="addAddressModalOverlay">
+        <div class="ukp-modal">
+            <div class="ukp-modal-header">Add New Address</div>
+            <div class="ukp-modal-body">
+                <div class="ukp-modal-form">
+                    <div class="ukp-modal-form-row">
+                        <div class="ukp-modal-form-group">
+                            <label class="ukp-modal-form-label">Country</label>
+                            <select class="ukp-modal-form-select" id="addressCountry">
+                                <option value="">Select a country</option>
+                                <option value="Australia">Australia</option>
+                                <option value="New Zealand">New Zealand</option>
+                                <option value="United Kingdom">United Kingdom</option>
+                                <option value="United States">United States</option>
+                            </select>
+                        </div>
+                        <div class="ukp-modal-form-group">
+                            <label class="ukp-modal-form-label">Care of</label>
+                            <input type="text" class="ukp-modal-form-input" id="addressCareOf" placeholder="">
+                        </div>
+                    </div>
+                    <div class="ukp-modal-form-group full">
+                        <label class="ukp-modal-form-label">Address Line 1 <span style="color: #dc3545;">*</span></label>
+                        <input type="text" class="ukp-modal-form-input" id="addressLine1" placeholder="">
+                        <div class="ukp-modal-error-message" id="addressLine1Error">Address Line 1 is required</div>
+                    </div>
+                    <div class="ukp-modal-form-group full">
+                        <label class="ukp-modal-form-label">Address Line 2</label>
+                        <input type="text" class="ukp-modal-form-input" id="addressLine2" placeholder="">
+                    </div>
+                    <div class="ukp-modal-form-row">
+                        <div class="ukp-modal-form-group">
+                            <label class="ukp-modal-form-label">Suburb</label>
+                            <input type="text" class="ukp-modal-form-input" id="addressSuburb" placeholder="">
+                        </div>
+                        <div class="ukp-modal-form-group">
+                            <label class="ukp-modal-form-label">State</label>
+                            <select class="ukp-modal-form-select" id="addressState">
+                                <option value="">Select a state</option>
+                                <option value="NSW">NSW</option>
+                                <option value="VIC">VIC</option>
+                                <option value="QLD">QLD</option>
+                                <option value="SA">SA</option>
+                                <option value="WA">WA</option>
+                                <option value="TAS">TAS</option>
+                                <option value="NT">NT</option>
+                                <option value="ACT">ACT</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="ukp-modal-form-group">
+                        <label class="ukp-modal-form-label">Postcode</label>
+                        <input type="text" class="ukp-modal-form-input" id="addressPostcode" placeholder="" style="max-width: 200px;">
+                    </div>
+                </div>
+            </div>
+            <div class="ukp-modal-footer">
+                <button class="ukp-modal-cancel-btn" id="addressModalCancel">Cancel</button>
+                <button class="ukp-modal-save-btn" id="addressModalSave">Save</button>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -381,6 +664,332 @@
                 window.location.href = "login.html";
             });
         }
+    </script>
+    <script>
+        // Address Search Functionality
+        let addressesData = [];
+        let searchTimeout = null;
+        let currentAddressInput = null; // Track which input opened the modal
+
+        // Load addresses from JSON
+        fetch('../data/addresses.json')
+            .then(response => response.json())
+            .then(data => {
+                addressesData = data;
+            })
+            .catch(error => console.error('Error loading addresses:', error));
+
+        // Add Address Modal Functions
+        function openAddAddressModal(inputElement) {
+            currentAddressInput = inputElement; // Store reference to the input
+            const modal = document.getElementById('addAddressModalOverlay');
+            modal.classList.add('open');
+            // Focus on Address Line 1 after modal animation
+            setTimeout(function() {
+                document.getElementById('addressLine1').focus();
+            }, 100);
+        }
+
+        function closeAddAddressModal() {
+            const modal = document.getElementById('addAddressModalOverlay');
+            modal.classList.remove('open');
+            // Clear form fields
+            document.getElementById('addressCountry').value = '';
+            document.getElementById('addressCareOf').value = '';
+            document.getElementById('addressLine1').value = '';
+            document.getElementById('addressLine2').value = '';
+            document.getElementById('addressSuburb').value = '';
+            document.getElementById('addressState').value = '';
+            document.getElementById('addressPostcode').value = '';
+            // Clear validation errors
+            document.getElementById('addressLine1').classList.remove('error');
+            document.getElementById('addressLine1Error').classList.remove('show');
+            // Reset current input reference
+            currentAddressInput = null;
+        }
+
+        // Modal event handlers
+        document.getElementById('addressModalCancel').addEventListener('click', closeAddAddressModal);
+
+        document.getElementById('addressModalSave').addEventListener('click', function() {
+            // Get form values
+            const country = document.getElementById('addressCountry').value;
+            const careOf = document.getElementById('addressCareOf').value;
+            const line1 = document.getElementById('addressLine1').value.trim();
+            const line2 = document.getElementById('addressLine2').value;
+            const suburb = document.getElementById('addressSuburb').value;
+            const state = document.getElementById('addressState').value;
+            const postcode = document.getElementById('addressPostcode').value;
+
+            // Reset previous errors
+            document.getElementById('addressLine1').classList.remove('error');
+            document.getElementById('addressLine1Error').classList.remove('show');
+
+            // Validate required fields
+            let isValid = true;
+
+            if (!line1) {
+                document.getElementById('addressLine1').classList.add('error');
+                document.getElementById('addressLine1Error').classList.add('show');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                return; // Stop if validation fails
+            }
+
+            // Build full address
+            let fullAddress = '';
+            if (careOf) fullAddress += careOf + ', ';
+            if (line1) fullAddress += line1;
+            if (line2) fullAddress += ', ' + line2;
+            if (suburb) fullAddress += ', ' + suburb;
+            if (state) fullAddress += ' ' + state;
+            if (postcode) fullAddress += ' ' + postcode;
+            if (country && country !== 'Australia') fullAddress += ', ' + country;
+
+            fullAddress = fullAddress.trim();
+
+            // Add to addresses data
+            const newAddress = {
+                id: addressesData.length + 1,
+                address: fullAddress
+            };
+            addressesData.push(newAddress);
+
+            // Populate the input field that triggered the modal
+            if (currentAddressInput && fullAddress) {
+                currentAddressInput.value = fullAddress;
+            }
+
+            closeAddAddressModal();
+            console.log('New address added and populated:', newAddress);
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('addAddressModalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAddAddressModal();
+            }
+        });
+
+        // Clear error state when user types in Address Line 1
+        document.getElementById('addressLine1').addEventListener('input', function() {
+            this.classList.remove('error');
+            document.getElementById('addressLine1Error').classList.remove('show');
+        });
+
+        // Initialize address search for all address inputs
+        function initAddressSearch(inputId, dropdownId) {
+            const input = document.getElementById(inputId);
+            const dropdown = document.getElementById(dropdownId);
+            const spinner = input.nextElementSibling;
+            let selectedIndex = -1;
+            let selectableItems = [];
+
+            input.addEventListener('input', function() {
+                const searchQuery = this.value.trim();
+
+                // Clear previous timeout
+                clearTimeout(searchTimeout);
+
+                if (searchQuery.length < 3) {
+                    dropdown.style.display = 'none';
+                    spinner.style.display = 'none';
+                    return;
+                }
+
+                // Show loading spinner
+                spinner.style.display = 'block';
+
+                // Position spinner after the text
+                const tempSpan = document.createElement('span');
+                tempSpan.style.visibility = 'hidden';
+                tempSpan.style.position = 'absolute';
+                tempSpan.style.font = window.getComputedStyle(input).font;
+                tempSpan.textContent = searchQuery;
+                document.body.appendChild(tempSpan);
+                const textWidth = tempSpan.offsetWidth;
+                document.body.removeChild(tempSpan);
+
+                spinner.style.left = Math.min(textWidth + 20, input.offsetWidth - 40) + 'px';
+                dropdown.style.display = 'none';
+
+                // Simulate search delay
+                searchTimeout = setTimeout(function() {
+                    // Filter addresses
+                    const results = addressesData.filter(item =>
+                        item.address.toLowerCase().includes(searchQuery.toLowerCase())
+                    );
+
+                    spinner.style.display = 'none';
+
+                    if (results.length > 0) {
+                        // Show dropdown with results
+                        dropdown.innerHTML = '';
+                        results.forEach(function(item) {
+                            const div = document.createElement('div');
+                            div.className = 'address-search-dropdown-item';
+                            div.textContent = item.address;
+                            div.addEventListener('click', function() {
+                                input.value = item.address;
+                                dropdown.style.display = 'none';
+                                selectedIndex = -1;
+                            });
+                            dropdown.appendChild(div);
+                        });
+                        // Position dropdown relative to input
+                        positionDropdown();
+                        dropdown.style.display = 'block';
+
+                        // Update selectable items
+                        selectableItems = Array.from(dropdown.querySelectorAll('.address-search-dropdown-item'));
+                        selectedIndex = -1;
+                    } else {
+                        // Show validation message inside dropdown
+                        dropdown.innerHTML = '';
+
+                        // Header with search icon and message
+                        const headerDiv = document.createElement('div');
+                        headerDiv.className = 'address-validation-header';
+                        headerDiv.innerHTML = `
+                            <svg class="address-validation-search-icon" viewBox="0 0 12 12">
+                                <path fill="#24292f" d="M9.75,4.88c0,1.08-.35,2.07-.94,2.88l2.97,2.97c.29.29.29.77,0,1.06s-.77.29-1.06,0l-2.97-2.97c-.81.59-1.8.94-2.88.94C2.18,9.75,0,7.57,0,4.88S2.18,0,4.88,0s4.88,2.18,4.88,4.88ZM4.88,8.25c1.21,0,2.32-.64,2.92-1.69s.6-2.33,0-3.38-1.72-1.69-2.92-1.69-2.32.64-2.92,1.69-.6,2.33,0,3.38,1.72,1.69,2.92,1.69Z"/>
+                            </svg>
+                            <div class="address-validation-header-text">
+                                <strong>Nothing found.</strong> <span>You can also add a custom addresss</span>
+                            </div>
+                        `;
+
+                        // Divider
+                        const divider = document.createElement('div');
+                        divider.className = 'address-dropdown-divider';
+
+                        // Footer with Add New and keyboard hints
+                        const footerDiv = document.createElement('div');
+                        footerDiv.className = 'address-validation-footer';
+                        footerDiv.innerHTML = `
+                            <div class="address-add-new-section">
+                                <div class="address-add-new-icon">
+                                    <svg viewBox="0 0 12 12">
+                                        <path fill="#0068ff" d="M6,0c.41,0,.75.34.75.75v4.5h4.5c.41,0,.75.34.75.75s-.34.75-.75.75h-4.5v4.5c0,.41-.34.75-.75.75s-.75-.34-.75-.75v-4.5H.75c-.41,0-.75-.34-.75-.75s.34-.75.75-.75h4.5V.75c0-.41.34-.75.75-.75Z"/>
+                                    </svg>
+                                </div>
+                                <span class="address-add-new-text">Add New Address</span>
+                            </div>
+                            <div class="address-keyboard-hint">
+                                <span class="address-keyboard-hint-text">Use the keys to select</span>
+                                <div class="address-keyboard-hint-keys">
+                                    <svg class="address-keyboard-key" viewBox="0 0 14.49 14.49">
+                                        <rect fill="#e8e8e8" width="14.49" height="14.49" rx="2.12" ry="2.12"/>
+                                        <path fill="#686b6d" d="M7.72,2.58l3.35,3.35c.26.26.26.69,0,.95s-.69.26-.95,0l-2.21-2.21v6.42c0,.37-.3.67-.67.67s-.67-.3-.67-.67v-6.42l-2.21,2.21c-.26.26-.69.26-.95,0s-.26-.69,0-.95l3.35-3.35c.26-.26.69-.26.95,0h0Z"/>
+                                    </svg>
+                                    <svg class="address-keyboard-key" viewBox="0 0 14.49 14.49">
+                                        <rect fill="#e8e8e8" width="14.49" height="14.49" rx="2.12" ry="2.12"/>
+                                        <path fill="#686b6d" d="M6.86,11.8l-3.43-3.43c-.27-.27-.27-.7,0-.97s.7-.27.97,0l2.26,2.26V3.09c0-.38.31-.69.69-.69s.69.31.69.69v6.58l2.26-2.26c.27-.27.7-.27.97,0s.27.7,0,.97l-3.43,3.43c-.27.27-.7.27-.97,0h0Z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        `;
+
+                        // Handle "Add New Address" click
+                        const addNewSection = footerDiv.querySelector('.address-add-new-section');
+                        addNewSection.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            openAddAddressModal(input);
+                            dropdown.style.display = 'none';
+                        });
+
+                        dropdown.appendChild(headerDiv);
+                        dropdown.appendChild(divider);
+                        dropdown.appendChild(footerDiv);
+
+                        // Position dropdown relative to input
+                        positionDropdown();
+                        dropdown.style.display = 'block';
+
+                        // Update selectable items (only the footer in this case)
+                        selectableItems = [footerDiv];
+                        selectedIndex = -1;
+                    }
+                }, 800); // 800ms delay to simulate search
+            });
+
+            // Keyboard navigation
+            input.addEventListener('keydown', function(e) {
+                if (dropdown.style.display !== 'block') return;
+
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    selectedIndex = Math.min(selectedIndex + 1, selectableItems.length - 1);
+                    updateSelection();
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    selectedIndex = Math.max(selectedIndex - 1, -1);
+                    updateSelection();
+                } else if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (selectedIndex >= 0 && selectableItems[selectedIndex]) {
+                        const selectedItem = selectableItems[selectedIndex];
+                        // Check if it's the footer (Add New Address)
+                        if (selectedItem.classList.contains('address-validation-footer')) {
+                            openAddAddressModal(input);
+                            dropdown.style.display = 'none';
+                            selectedIndex = -1;
+                        } else {
+                            selectedItem.click();
+                        }
+                    }
+                } else if (e.key === 'Escape') {
+                    dropdown.style.display = 'none';
+                    selectedIndex = -1;
+                }
+            });
+
+            function positionDropdown() {
+                const rect = input.getBoundingClientRect();
+                dropdown.style.top = (rect.bottom + 4) + 'px';
+                dropdown.style.left = rect.left + 'px';
+                dropdown.style.width = rect.width + 'px';
+            }
+
+            function updateSelection() {
+                // Remove all highlights
+                selectableItems.forEach(function(item) {
+                    item.classList.remove('highlighted');
+                });
+
+                // Add highlight to selected item
+                if (selectedIndex >= 0 && selectableItems[selectedIndex]) {
+                    selectableItems[selectedIndex].classList.add('highlighted');
+                }
+            }
+
+            // Reposition dropdown on scroll/resize
+            window.addEventListener('scroll', function() {
+                if (dropdown.style.display === 'block') {
+                    positionDropdown();
+                }
+            }, true);
+
+            window.addEventListener('resize', function() {
+                if (dropdown.style.display === 'block') {
+                    positionDropdown();
+                }
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.style.display = 'none';
+                    selectedIndex = -1;
+                }
+            });
+        }
+
+        // Initialize for both address fields
+        initAddressSearch('registeredAddress', 'registeredAddressDropdown');
+        initAddressSearch('businessAddress', 'businessAddressDropdown');
     </script>
 </body>
 </html>

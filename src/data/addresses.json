@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "address": "Level 4, 287 Collins Street, Melbourne VIC 3000"
+  },
+  {
+    "id": 2,
+    "address": "Suite 12, 45 King Street, Sydney NSW 2000"
+  },
+  {
+    "id": 3,
+    "address": "Level 2, 123 Queen Street, Brisbane QLD 4000"
+  },
+  {
+    "id": 4,
+    "address": "Unit 5, 789 Adelaide Street, Brisbane QLD 4000"
+  },
+  {
+    "id": 5,
+    "address": "Level 10, 456 George Street, Sydney NSW 2000"
+  },
+  {
+    "id": 6,
+    "address": "2578 Wellington Road, Mulgrave VIC 3170"
+  },
+  {
+    "id": 7,
+    "address": "Level 1, 88 Phillip Street, Parramatta NSW 2150"
+  },
+  {
+    "id": 8,
+    "address": "Suite 3, 234 Bourke Street, Melbourne VIC 3000"
+  },
+  {
+    "id": 9,
+    "address": "Level 6, 101 Grenfell Street, Adelaide SA 5000"
+  },
+  {
+    "id": 10,
+    "address": "Unit 8, 567 St Kilda Road, Melbourne VIC 3004"
+  }
+]
