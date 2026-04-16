@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program</title>
+    <link rel="icon" type="image/svg+xml" href="images/FV-LOGO.svg">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Empty state */
+        .cl-empty { display:none; flex-direction:column; align-items:center; justify-content:center; padding:60px 20px; text-align:center; opacity:0; transition:opacity 300ms ease; }
+        .cl-empty.visible { display:flex; opacity:1; }
+        .cl-empty img { width:220px; margin-bottom:24px; }
+        .cl-empty h6 { font-size:16px; font-weight:700; color:#1a2b35; margin-bottom:10px; }
+        .cl-empty p { font-size:13.5px; color:#7a8f98; line-height:1.7; margin:0; margin-bottom:24px; }
+
+        /* Buttons */
+        .cl-filter-btn {
+            height: 52px; padding: 0 16px; border-radius: 8px;
+            background: #fff; border: 1px solid #c9d8de; font-size: 13px;
+            font-weight: 500; color: #1a2b35; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 6px;
+            transition: background 0.15s, border-color 0.15s;
+        }
+        .cl-filter-btn:hover { background: #f5f7f8; border-color: #a8b8c0; }
+        .cl-filter-btn:focus { outline: none; }
+
+        .cl-add-btn {
+            height: 52px; padding: 0 20px; border-radius: 8px;
+            font-size: 13px; font-weight: 600; white-space: nowrap;
+        }
+
+        .cl-empty-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        /* Document requirement items */
+        .doc-requirement-item {
+            background: #fff;
+            border: 1px solid #c9d3d6;
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .doc-requirement-item:hover {
+            background: #f8f9fa;
+            border-color: #a8b8bd;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .doc-requirement-icon {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .doc-requirement-content {
+            flex: 1;
+        }
+
+        .doc-requirement-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a2b35;
+            margin: 0 0 4px 0;
+        }
+
+        .doc-requirement-status {
+            font-size: 13px;
+            color: #5a6c7a;
+            margin: 0;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .doc-requirement-badge {
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+
+        .doc-requirement-badge.ready {
+            background: #d4edda;
+            color: #2d5f3c;
+        }
+
+        .doc-requirement-badge.start {
+            background: #d4edda;
+            color: #2d5f3c;
+            cursor: pointer;
+        }
+
+        .doc-requirement-badge.start:hover {
+            background: #c3e6cb;
+        }
+
+        .doc-divider {
+            height: 1px;
+            background: #e8edf0;
+            margin: 24px 0;
+        }
+
+        .doc-requirement-item.doc-requirement-complete {
+            border-color: #008d3e;
+            background: #fff;
+        }
+
+        .doc-requirement-item.doc-requirement-complete:hover {
+            border-color: #008d3e;
+        }
+
+        .doc-requirement-item.finalise {
+            background: #f8f9fa;
+            cursor: not-allowed;
+        }
+
+        .doc-requirement-item.finalise:hover {
+            background: #f8f9fa;
+            border-color: #c9d3d6;
+            box-shadow: none;
+        }
+
+        .doc-requirement-item.finalise .doc-requirement-status {
+            color: #868e96;
+        }
+
+        /* Program content area */
+        .program-content {
+            display: none;
+        }
+
+        .program-content.visible {
+            display: block;
+        }
+
+        .program-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        /* Document status cards */
+        .doc-status-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .doc-status-card {
+            background: #f5f7f8;
+            border: 1px solid #c9d3d6;
+            border-radius: 10px;
+            padding: 24px 22px 26px 19px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .doc-status-card:hover {
+            background: #e8edf0;
+            border-color: #a8b8bd;
+        }
+
+        .doc-status-card.complete {
+            background: #fff;
+            border-color: #008d3e;
+        }
+
+        .doc-status-card.complete:hover {
+            background: #f8f9fa;
+            border-color: #008d3e;
+        }
+
+        .doc-status-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+
+        .doc-status-content h6 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a2b35;
+            margin: 0 0 4px 0;
+        }
+
+        .doc-status-content p {
+            font-size: 12px;
+            color: #5a6c7a;
+            margin: 0;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* Finalised program section */
+        .program-section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a2b35;
+            margin: 0 0 20px 0;
+        }
+
+        .program-table-container {
+            background: #fff;
+            border: 1px solid #c9d3d6;
+            border-radius: 10px;
+            overflow: hidden;
+            padding: 10px 25px;
+        }
+
+        .program-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .program-table thead {
+            background: #fff;
+        }
+
+        .program-table th {
+            padding: 10px 4px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+            color: #5a6c7a;
+            border-bottom: 1px solid #e8edf0;
+        }
+
+        .program-table td {
+            padding: 12px 3px;
+            font-size: 12px;
+            color: #1a2b35;
+            border-bottom: 1px solid #e8edf0;
+        }
+
+        .program-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .program-table tbody tr:hover {
+            background: #fafbfc;
+        }
+
+        .program-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .program-tag.low {
+            background: #d4edda;
+            color: #2d5f3c;
+        }
+
+        .program-table-icon {
+            width: 18px;
+            height: 18px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+            opacity: 0.4;
+        }
+    </style>
+</head>
+<body>
+    <!-- Authentication Check -->
+    <script>
+        if (sessionStorage.getItem('isAuthenticated') !== 'true') {
+            window.location.href = 'login.html';
+        }
+    </script>
+
+
+    <!-- ===== TOP HEADER ===== -->
+    <header class="app-header d-flex align-items-center">
+        <div class="header-logo d-flex align-items-center justify-content-center">
+            <img src="images/FV-LOGO.svg" alt="Logo" width="36" height="36">
+        </div>
+        <div class="header-search flex-grow-1">
+            <div class="header-search-pill d-flex align-items-center">
+                <svg class="header-search-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.099zm-5.242 1.156a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11"/>
+                </svg>
+                <span class="header-search-label">Search:</span>
+                <input type="text" class="header-search-input" placeholder="search for content">
+                <kbd class="header-search-kbd">CMD + SR</kbd>
+            </div>
+        </div>
+        <div class="header-actions d-flex align-items-center">
+            <button class="header-icon-btn" title="Call">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                </svg>
+            </button>
+            <button class="header-icon-btn" title="Logout" id="logoutBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M7.5 1v7h1V1z"/>
+                    <path d="M3 8.812a5 5 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812"/>
+                </svg>
+            </button>
+            <button class="header-icon-btn" title="Apps">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3A1.5 1.5 0 0 1 15 10.5v3A1.5 1.5 0 0 1 13.5 15h-3A1.5 1.5 0 0 1 9 13.5z"/>
+                </svg>
+            </button>
+            <button class="header-avatar-btn" title="Profile">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== LAYOUT ===== -->
+    <div class="app-body">
+
+        <!-- ===== SIDEBAR ===== -->
+        <nav class="app-sidebar d-flex flex-column align-items-center py-3">
+            <a class="sidebar-nav-link" href="dashboard.html" title="Dashboard">
+                <span class="sidebar-icon-wrap">
+                    <img src="images/dashboard.svg" alt="Dashboard" width="20" height="20">
+                </span>
+                <span class="sidebar-label">Dashboard</span>
+            </a>
+            <a class="sidebar-nav-link" href="clients.html" title="Clients">
+                <span class="sidebar-icon-wrap">
+                    <img src="images/client.svg" alt="Clients" width="20" height="20">
+                </span>
+                <span class="sidebar-label">Clients</span>
+            </a>
+            <a class="sidebar-nav-link active" href="firm-profile.html" title="Firm">
+                <span class="sidebar-icon-wrap active-icon">
+                    <img src="images/firm.svg" alt="Firm" width="20" height="20">
+                </span>
+                <span class="sidebar-label sidebar-label--active">Firm</span>
+            </a>
+            <a class="sidebar-nav-link" href="#" title="Settings">
+                <span class="sidebar-icon-wrap">
+                    <img src="images/settings.svg" alt="Settings" width="20" height="20">
+                </span>
+                <span class="sidebar-label">Settings</span>
+            </a>
+        </nav>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="app-main" style="background:#f5f7f8;">
+            <div class="content-wrap">
+
+                <!-- Page title -->
+                <h4 class="page-title">Program</h4>
+
+                <!-- Tabs -->
+                <ul class="nav ra-tabs mb-4">
+                    <li class="nav-item">
+                        <a class="nav-link ra-tab" href="firm-profile.html">Firm Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ra-tab" href="users-key-personal.html">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ra-tab" href="risk-assessment.html">Risk</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ra-tab" href="#">Policy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ra-tab active" href="program.html">Program</a>
+                    </li>
+                </ul>
+
+                <!-- Empty State -->
+                <div class="cl-empty visible" id="emptyState">
+                    <img src="images/default_state.svg" alt="Nothing found">
+                    <h6>No program has been created</h6>
+                    <p>Click Upload or Generate to<br>create a new Program. You can also<br>upload a previously completed Program</p>
+                    <div class="cl-empty-buttons">
+                        <button class="cl-filter-btn">
+                            Upload ...
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#0080ff" viewBox="0 0 16 16" style="vertical-align: middle; margin-left: 6px;">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                                <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z"/>
+                            </svg>
+                        </button>
+                        <button class="btn btn-generate cl-add-btn" id="generateProgramBtn">
+                            Generate....
+                            <i class="fas fa-magic" style="margin-left: 6px;"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Program Content -->
+                <div class="program-content" id="programContent">
+                    <!-- Action Buttons -->
+                    <div class="program-buttons">
+                        <button class="cl-filter-btn">
+                            Upload ...
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#0080ff" viewBox="0 0 16 16" style="vertical-align: middle; margin-left: 6px;">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                                <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z"/>
+                            </svg>
+                        </button>
+                        <button class="btn btn-generate cl-add-btn" id="generateProgramBtn2">
+                            Generate....
+                            <i class="fas fa-magic" style="margin-left: 6px;"></i>
+                        </button>
+                    </div>
+
+                    <!-- Document Status Cards -->
+                    <div class="doc-status-grid">
+                        <!-- Risk assessment -->
+                        <div class="doc-status-card" id="riskAssessmentCard">
+                            <div class="doc-status-icon incomplete">
+                                <svg viewBox="0 0 31.62 31.62" style="width: 40px; height: 40px;">
+                                    <rect fill="#dde1e4" stroke="#a7a7a7" stroke-miterlimit="10" stroke-width=".75px" x=".38" y=".38" width="30.87" height="30.87" rx="10.38" ry="10.38"/>
+                                    <path fill="#353535" d="M11.24,12.75c.01-.59.12-1.13.33-1.62.21-.49.51-.91.9-1.27.39-.35.87-.63,1.44-.82s1.22-.3,1.95-.3c.68,0,1.3.09,1.85.27.56.18,1.03.43,1.43.76.4.33.7.72.92,1.17.21.45.32.96.32,1.51,0,.72-.17,1.33-.51,1.85-.34.51-.85.97-1.52,1.37-.32.18-.58.35-.79.51-.21.16-.37.32-.5.48-.12.16-.21.33-.26.51-.05.18-.08.39-.08.61v.5h-2.52l-.02-.52c-.03-.38-.02-.72.03-1.03.05-.3.15-.58.29-.83.14-.25.32-.48.56-.69s.51-.41.84-.6c.3-.18.56-.35.77-.51.21-.15.37-.31.5-.47.12-.16.21-.33.26-.5.05-.17.08-.37.08-.59s-.04-.43-.13-.61c-.09-.18-.21-.34-.37-.48s-.35-.24-.57-.31-.47-.11-.74-.11c-.55,0-1,.16-1.33.47-.33.31-.52.73-.55,1.26h-2.58ZM15.57,22.89c-.54,0-.96-.14-1.27-.43-.31-.29-.46-.68-.46-1.19s.15-.91.46-1.19c.31-.29.73-.43,1.27-.43s.96.14,1.27.43c.3.29.46.69.46,1.19s-.15.9-.46,1.19c-.3.29-.73.43-1.27.43Z"/>
+                                </svg>
+                            </div>
+                            <div class="doc-status-content">
+                                <h6>Risk assessment</h6>
+                                <p>NO DOCUMENTS</p>
+                            </div>
+                        </div>
+
+                        <!-- Policy -->
+                        <div class="doc-status-card" id="policyCard">
+                            <div class="doc-status-icon incomplete">
+                                <svg viewBox="0 0 31.62 31.62" style="width: 40px; height: 40px;">
+                                    <rect fill="#dde1e4" stroke="#a7a7a7" stroke-miterlimit="10" stroke-width=".75px" x=".38" y=".38" width="30.87" height="30.87" rx="10.38" ry="10.38"/>
+                                    <path fill="#353535" d="M11.24,12.75c.01-.59.12-1.13.33-1.62.21-.49.51-.91.9-1.27.39-.35.87-.63,1.44-.82s1.22-.3,1.95-.3c.68,0,1.3.09,1.85.27.56.18,1.03.43,1.43.76.4.33.7.72.92,1.17.21.45.32.96.32,1.51,0,.72-.17,1.33-.51,1.85-.34.51-.85.97-1.52,1.37-.32.18-.58.35-.79.51-.21.16-.37.32-.5.48-.12.16-.21.33-.26.51-.05.18-.08.39-.08.61v.5h-2.52l-.02-.52c-.03-.38-.02-.72.03-1.03.05-.3.15-.58.29-.83.14-.25.32-.48.56-.69s.51-.41.84-.6c.3-.18.56-.35.77-.51.21-.15.37-.31.5-.47.12-.16.21-.33.26-.5.05-.17.08-.37.08-.59s-.04-.43-.13-.61c-.09-.18-.21-.34-.37-.48s-.35-.24-.57-.31-.47-.11-.74-.11c-.55,0-1,.16-1.33.47-.33.31-.52.73-.55,1.26h-2.58ZM15.57,22.89c-.54,0-.96-.14-1.27-.43-.31-.29-.46-.68-.46-1.19s.15-.91.46-1.19c.31-.29.73-.43,1.27-.43s.96.14,1.27.43c.3.29.46.69.46,1.19s-.15.9-.46,1.19c-.3.29-.73.43-1.27.43Z"/>
+                                </svg>
+                            </div>
+                            <div class="doc-status-content">
+                                <h6>Policy</h6>
+                                <p>NO DOCUMENTS</p>
+                            </div>
+                        </div>
+
+                        <!-- Process -->
+                        <div class="doc-status-card" id="processCard">
+                            <div class="doc-status-icon incomplete">
+                                <svg viewBox="0 0 31.62 31.62" style="width: 40px; height: 40px;">
+                                    <rect fill="#dde1e4" stroke="#a7a7a7" stroke-miterlimit="10" stroke-width=".75px" x=".38" y=".38" width="30.87" height="30.87" rx="10.38" ry="10.38"/>
+                                    <path fill="#353535" d="M11.24,12.75c.01-.59.12-1.13.33-1.62.21-.49.51-.91.9-1.27.39-.35.87-.63,1.44-.82s1.22-.3,1.95-.3c.68,0,1.3.09,1.85.27.56.18,1.03.43,1.43.76.4.33.7.72.92,1.17.21.45.32.96.32,1.51,0,.72-.17,1.33-.51,1.85-.34.51-.85.97-1.52,1.37-.32.18-.58.35-.79.51-.21.16-.37.32-.5.48-.12.16-.21.33-.26.51-.05.18-.08.39-.08.61v.5h-2.52l-.02-.52c-.03-.38-.02-.72.03-1.03.05-.3.15-.58.29-.83.14-.25.32-.48.56-.69s.51-.41.84-.6c.3-.18.56-.35.77-.51.21-.15.37-.31.5-.47.12-.16.21-.33.26-.5.05-.17.08-.37.08-.59s-.04-.43-.13-.61c-.09-.18-.21-.34-.37-.48s-.35-.24-.57-.31-.47-.11-.74-.11c-.55,0-1,.16-1.33.47-.33.31-.52.73-.55,1.26h-2.58ZM15.57,22.89c-.54,0-.96-.14-1.27-.43-.31-.29-.46-.68-.46-1.19s.15-.91.46-1.19c.31-.29.73-.43,1.27-.43s.96.14,1.27.43c.3.29.46.69.46,1.19s-.15.9-.46,1.19c-.3.29-.73.43-1.27.43Z"/>
+                                </svg>
+                            </div>
+                            <div class="doc-status-content">
+                                <h6>Process</h6>
+                                <p>NO DOCUMENTS</p>
+                            </div>
+                        </div>
+
+                        <!-- Finalise Program -->
+                        <div class="doc-status-card" id="finaliseProgramCard">
+                            <div class="doc-status-icon incomplete">
+                                <svg viewBox="0 0 31.62 31.62" style="width: 40px; height: 40px;">
+                                    <rect fill="#dde1e4" stroke="#a7a7a7" stroke-miterlimit="10" stroke-width=".75px" x=".38" y=".38" width="30.87" height="30.87" rx="10.38" ry="10.38"/>
+                                    <path fill="#353535" d="M11.24,12.75c.01-.59.12-1.13.33-1.62.21-.49.51-.91.9-1.27.39-.35.87-.63,1.44-.82s1.22-.3,1.95-.3c.68,0,1.3.09,1.85.27.56.18,1.03.43,1.43.76.4.33.7.72.92,1.17.21.45.32.96.32,1.51,0,.72-.17,1.33-.51,1.85-.34.51-.85.97-1.52,1.37-.32.18-.58.35-.79.51-.21.16-.37.32-.5.48-.12.16-.21.33-.26.51-.05.18-.08.39-.08.61v.5h-2.52l-.02-.52c-.03-.38-.02-.72.03-1.03.05-.3.15-.58.29-.83.14-.25.32-.48.56-.69s.51-.41.84-.6c.3-.18.56-.35.77-.51.21-.15.37-.31.5-.47.12-.16.21-.33.26-.5.05-.17.08-.37.08-.59s-.04-.43-.13-.61c-.09-.18-.21-.34-.37-.48s-.35-.24-.57-.31-.47-.11-.74-.11c-.55,0-1,.16-1.33.47-.33.31-.52.73-.55,1.26h-2.58ZM15.57,22.89c-.54,0-.96-.14-1.27-.43-.31-.29-.46-.68-.46-1.19s.15-.91.46-1.19c.31-.29.73-.43,1.27-.43s.96.14,1.27.43c.3.29.46.69.46,1.19s-.15.9-.46,1.19c-.3.29-.73.43-1.27.43Z"/>
+                                </svg>
+                            </div>
+                            <div class="doc-status-content">
+                                <h6>Finalise Program</h6>
+                                <p>NO DOCUMENTS</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Risk Assessment Table Section -->
+                    <div class="program-section" id="riskAssessmentTable" style="margin-top: 40px; display: none;">
+                        <h5 class="program-section-title">Risk assessement</h5>
+                        <div class="program-table-container">
+                            <table class="program-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 25%;">Title</th>
+                                        <th style="width: 20%;">Version</th>
+                                        <th style="width: 15%;">Tags</th>
+                                        <th style="width: 20%;">Date Reviews</th>
+                                        <th style="width: 20%;">Reveibed By</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.17 22.48" width="18" height="18" class="program-table-icon">
+                                                <defs>
+                                                    <style>
+                                                        .cls-1 {
+                                                            stroke-linecap: round;
+                                                            stroke-linejoin: round;
+                                                        }
+                                                        .cls-1, .cls-2 {
+                                                            fill: #fff;
+                                                            stroke: #9eb5cc;
+                                                            stroke-width: 3px;
+                                                        }
+                                                        .cls-2 {
+                                                            stroke-miterlimit: 10;
+                                                        }
+                                                    </style>
+                                                </defs>
+                                                <path class="cls-2" d="M12.39,1.5h-7.61c-1.81,0-3.29,1.47-3.29,3.29v12.91c0,1.81,1.47,3.29,3.29,3.29h10.6c1.81,0,3.29-1.47,3.29-3.29V7.77L12.39,1.5Z"/>
+                                                <path class="cls-1" d="M14.2,9.51h2.99s-6.27-6.27-6.27-6.27v2.99c0,1.81,1.47,3.29,3.29,3.29Z"/>
+                                            </svg>
+                                            Sample Table Data
+                                        </td>
+                                        <td>Sample Table Data</td>
+                                        <td><span class="program-tag low">Low</span></td>
+                                        <td>Sample Table Data</td>
+                                        <td>Sample Table Data</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Policy Table Section -->
+                    <div class="program-section" id="policyTable" style="margin-top: 40px; display: none;">
+                        <h5 class="program-section-title">Policy</h5>
+                        <div class="program-table-container">
+                            <table class="program-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 25%;">Title</th>
+                                        <th style="width: 20%;">Version</th>
+                                        <th style="width: 15%;">Tags</th>
+                                        <th style="width: 20%;">Date Reviews</th>
+                                        <th style="width: 20%;">Reveibed By</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.17 22.48" width="18" height="18" class="program-table-icon">
+                                                <defs>
+                                                    <style>
+                                                        .cls-1 {
+                                                            stroke-linecap: round;
+                                                            stroke-linejoin: round;
+                                                        }
+                                                        .cls-1, .cls-2 {
+                                                            fill: #fff;
+                                                            stroke: #9eb5cc;
+                                                            stroke-width: 3px;
+                                                        }
+                                                        .cls-2 {
+                                                            stroke-miterlimit: 10;
+                                                        }
+                                                    </style>
+                                                </defs>
+                                                <path class="cls-2" d="M12.39,1.5h-7.61c-1.81,0-3.29,1.47-3.29,3.29v12.91c0,1.81,1.47,3.29,3.29,3.29h10.6c1.81,0,3.29-1.47,3.29-3.29V7.77L12.39,1.5Z"/>
+                                                <path class="cls-1" d="M14.2,9.51h2.99s-6.27-6.27-6.27-6.27v2.99c0,1.81,1.47,3.29,3.29,3.29Z"/>
+                                            </svg>
+                                            Sample Table Data
+                                        </td>
+                                        <td>Sample Table Data</td>
+                                        <td><span class="program-tag low">Low</span></td>
+                                        <td>Sample Table Data</td>
+                                        <td>Sample Table Data</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Process Table Section -->
+                    <div class="program-section" id="processTable" style="margin-top: 40px; display: none;">
+                        <h5 class="program-section-title">Process</h5>
+                        <div class="program-table-container">
+                            <table class="program-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 25%;">Title</th>
+                                        <th style="width: 20%;">Version</th>
+                                        <th style="width: 15%;">Tags</th>
+                                        <th style="width: 20%;">Date Reviews</th>
+                                        <th style="width: 20%;">Reveibed By</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.17 22.48" width="18" height="18" class="program-table-icon">
+                                                <defs>
+                                                    <style>
+                                                        .cls-1 {
+                                                            stroke-linecap: round;
+                                                            stroke-linejoin: round;
+                                                        }
+                                                        .cls-1, .cls-2 {
+                                                            fill: #fff;
+                                                            stroke: #9eb5cc;
+                                                            stroke-width: 3px;
+                                                        }
+                                                        .cls-2 {
+                                                            stroke-miterlimit: 10;
+                                                        }
+                                                    </style>
+                                                </defs>
+                                                <path class="cls-2" d="M12.39,1.5h-7.61c-1.81,0-3.29,1.47-3.29,3.29v12.91c0,1.81,1.47,3.29,3.29,3.29h10.6c1.81,0,3.29-1.47,3.29-3.29V7.77L12.39,1.5Z"/>
+                                                <path class="cls-1" d="M14.2,9.51h2.99s-6.27-6.27-6.27-6.27v2.99c0,1.81,1.47,3.29,3.29,3.29Z"/>
+                                            </svg>
+                                            Sample Table Data
+                                        </td>
+                                        <td>Sample Table Data</td>
+                                        <td><span class="program-tag low">Low</span></td>
+                                        <td>Sample Table Data</td>
+                                        <td>Sample Table Data</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Current Documents Required Modal -->
+    <div class="ukp-modal-overlay" id="documentsRequiredModal">
+        <div class="ukp-modal" style="width: 680px;">
+            <div class="ukp-modal-header">Current Documents Required</div>
+            <div class="ukp-modal-body">
+                <!-- Info Box -->
+                <div class="ukp-modal-info-box">
+                    <div class="ukp-modal-info-title">Current Documents Required</div>
+                    <p>To generate a program, you need at least one current document in each of the following categories:</p>
+                </div>
+
+                <!-- Risk assessment -->
+                <div class="doc-requirement-item" id="riskAssessmentItem">
+                    <div class="doc-requirement-icon">
+                        <svg viewBox="0 0 31.62 31.62" style="width: 42px; height: 42px;">
+                            <rect fill="#dde1e4" stroke="#a7a7a7" stroke-miterlimit="10" stroke-width=".75px" x=".38" y=".38" width="30.87" height="30.87" rx="10.38" ry="10.38"/>
+                            <path fill="#353535" d="M11.24,12.75c.01-.59.12-1.13.33-1.62.21-.49.51-.91.9-1.27.39-.35.87-.63,1.44-.82s1.22-.3,1.95-.3c.68,0,1.3.09,1.85.27.56.18,1.03.43,1.43.76.4.33.7.72.92,1.17.21.45.32.96.32,1.51,0,.72-.17,1.33-.51,1.85-.34.51-.85.97-1.52,1.37-.32.18-.58.35-.79.51-.21.16-.37.32-.5.48-.12.16-.21.33-.26.51-.05.18-.08.39-.08.61v.5h-2.52l-.02-.52c-.03-.38-.02-.72.03-1.03.05-.3.15-.58.29-.83.14-.25.32-.48.56-.69s.51-.41.84-.6c.3-.18.56-.35.77-.51.21-.15.37-.31.5-.47.12-.16.21-.33.26-.5.05-.17.08-.37.08-.59s-.04-.43-.13-.61c-.09-.18-.21-.34-.37-.48s-.35-.24-.57-.31-.47-.11-.74-.11c-.55,0-1,.16-1.33.47-.33.31-.52.73-.55,1.26h-2.58ZM15.57,22.89c-.54,0-.96-.14-1.27-.43-.31-.29-.46-.68-.46-1.19s.15-.91.46-1.19c.31-.29.73-.43,1.27-.43s.96.14,1.27.43c.3.29.46.69.46,1.19s-.15.9-.46,1.19c-.3.29-.73.43-1.27.43Z"/>
+                        </svg>
+                    </div>
+                    <div class="doc-requirement-content">
+                        <h6 class="doc-requirement-title">Risk assessment</h6>
+                        <p class="doc-requirement-status">INCOMPLETE</p>
+                    </div>
+                    <div class="doc-requirement-badge ready">Start</div>
+                </div>
+
+                <!-- Policy -->
+                <div class="doc-requirement-item" id="policyItem">
+                    <div class="doc-requirement-icon">
+                        <svg viewBox="0 0 31.62 31.62" style="width: 42px; height: 42px;">
+                            <rect fill="#dde1e4" stroke="#a7a7a7" stroke-miterlimit="10" stroke-width=".75px" x=".38" y=".38" width="30.87" height="30.87" rx="10.38" ry="10.38"/>
+                            <path fill="#353535" d="M11.24,12.75c.01-.59.12-1.13.33-1.62.21-.49.51-.91.9-1.27.39-.35.87-.63,1.44-.82s1.22-.3,1.95-.3c.68,0,1.3.09,1.85.27.56.18,1.03.43,1.43.76.4.33.7.72.92,1.17.21.45.32.96.32,1.51,0,.72-.17,1.33-.51,1.85-.34.51-.85.97-1.52,1.37-.32.18-.58.35-.79.51-.21.16-.37.32-.5.48-.12.16-.21.33-.26.51-.05.18-.08.39-.08.61v.5h-2.52l-.02-.52c-.03-.38-.02-.72.03-1.03.05-.3.15-.58.29-.83.14-.25.32-.48.56-.69s.51-.41.84-.6c.3-.18.56-.35.77-.51.21-.15.37-.31.5-.47.12-.16.21-.33.26-.5.05-.17.08-.37.08-.59s-.04-.43-.13-.61c-.09-.18-.21-.34-.37-.48s-.35-.24-.57-.31-.47-.11-.74-.11c-.55,0-1,.16-1.33.47-.33.31-.52.73-.55,1.26h-2.58ZM15.57,22.89c-.54,0-.96-.14-1.27-.43-.31-.29-.46-.68-.46-1.19s.15-.91.46-1.19c.31-.29.73-.43,1.27-.43s.96.14,1.27.43c.3.29.46.69.46,1.19s-.15.9-.46,1.19c-.3.29-.73.43-1.27.43Z"/>
+                        </svg>
+                    </div>
+                    <div class="doc-requirement-content">
+                        <h6 class="doc-requirement-title">Policy</h6>
+                        <p class="doc-requirement-status">INCOMPLETE</p>
+                    </div>
+                    <div class="doc-requirement-badge ready">Start</div>
+                </div>
+
+                <!-- Process -->
+                <div class="doc-requirement-item" id="processItem">
+                    <div class="doc-requirement-icon">
+                        <svg viewBox="0 0 31.62 31.62" style="width: 42px; height: 42px;">
+                            <rect fill="#dde1e4" stroke="#a7a7a7" stroke-miterlimit="10" stroke-width=".75px" x=".38" y=".38" width="30.87" height="30.87" rx="10.38" ry="10.38"/>
+                            <path fill="#353535" d="M11.24,12.75c.01-.59.12-1.13.33-1.62.21-.49.51-.91.9-1.27.39-.35.87-.63,1.44-.82s1.22-.3,1.95-.3c.68,0,1.3.09,1.85.27.56.18,1.03.43,1.43.76.4.33.7.72.92,1.17.21.45.32.96.32,1.51,0,.72-.17,1.33-.51,1.85-.34.51-.85.97-1.52,1.37-.32.18-.58.35-.79.51-.21.16-.37.32-.5.48-.12.16-.21.33-.26.51-.05.18-.08.39-.08.61v.5h-2.52l-.02-.52c-.03-.38-.02-.72.03-1.03.05-.3.15-.58.29-.83.14-.25.32-.48.56-.69s.51-.41.84-.6c.3-.18.56-.35.77-.51.21-.15.37-.31.5-.47.12-.16.21-.33.26-.5.05-.17.08-.37.08-.59s-.04-.43-.13-.61c-.09-.18-.21-.34-.37-.48s-.35-.24-.57-.31-.47-.11-.74-.11c-.55,0-1,.16-1.33.47-.33.31-.52.73-.55,1.26h-2.58ZM15.57,22.89c-.54,0-.96-.14-1.27-.43-.31-.29-.46-.68-.46-1.19s.15-.91.46-1.19c.31-.29.73-.43,1.27-.43s.96.14,1.27.43c.3.29.46.69.46,1.19s-.15.9-.46,1.19c-.3.29-.73.43-1.27.43Z"/>
+                        </svg>
+                    </div>
+                    <div class="doc-requirement-content">
+                        <h6 class="doc-requirement-title">Process</h6>
+                        <p class="doc-requirement-status">GO TO POLICY</p>
+                    </div>
+                    <div class="doc-requirement-badge start">START</div>
+                </div>
+
+                <!-- Divider -->
+                <div class="doc-divider"></div>
+
+                <!-- Finalise Program -->
+                <div class="doc-requirement-item finalise" id="finaliseModalItem">
+                    <div class="doc-requirement-icon">
+                        <svg viewBox="0 0 31.62 31.62" style="width: 42px; height: 42px;">
+                            <rect fill="#dde1e4" stroke="#a7a7a7" stroke-miterlimit="10" stroke-width=".75px" x=".38" y=".38" width="30.87" height="30.87" rx="10.38" ry="10.38"/>
+                            <path fill="#353535" d="M11.24,12.75c.01-.59.12-1.13.33-1.62.21-.49.51-.91.9-1.27.39-.35.87-.63,1.44-.82s1.22-.3,1.95-.3c.68,0,1.3.09,1.85.27.56.18,1.03.43,1.43.76.4.33.7.72.92,1.17.21.45.32.96.32,1.51,0,.72-.17,1.33-.51,1.85-.34.51-.85.97-1.52,1.37-.32.18-.58.35-.79.51-.21.16-.37.32-.5.48-.12.16-.21.33-.26.51-.05.18-.08.39-.08.61v.5h-2.52l-.02-.52c-.03-.38-.02-.72.03-1.03.05-.3.15-.58.29-.83.14-.25.32-.48.56-.69s.51-.41.84-.6c.3-.18.56-.35.77-.51.21-.15.37-.31.5-.47.12-.16.21-.33.26-.5.05-.17.08-.37.08-.59s-.04-.43-.13-.61c-.09-.18-.21-.34-.37-.48s-.35-.24-.57-.31-.47-.11-.74-.11c-.55,0-1,.16-1.33.47-.33.31-.52.73-.55,1.26h-2.58ZM15.57,22.89c-.54,0-.96-.14-1.27-.43-.31-.29-.46-.68-.46-1.19s.15-.91.46-1.19c.31-.29.73-.43,1.27-.43s.96.14,1.27.43c.3.29.46.69.46,1.19s-.15.9-.46,1.19c-.3.29-.73.43-1.27.43Z"/>
+                        </svg>
+                    </div>
+                    <div class="doc-requirement-content">
+                        <h6 class="doc-requirement-title">Finalise Program</h6>
+                        <p class="doc-requirement-status">COMPLETE ABOVE TO FINALISE PROGRAM</p>
+                    </div>
+                    <button class="btn btn-generate cl-add-btn" id="generateProgramBtnFinal" style="display: none;">
+                        Generate Program
+                        <i class="fas fa-magic" style="margin-left: 6px;"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Spinner Overlay -->
+    <div id="spinnerOverlay" style="position:fixed; inset:0; background:rgba(0,54,66,0.75); z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column; opacity:0; transition: opacity 0.4s ease;">
+        <div class="loader"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Page load spinner
+        (function() {
+            var overlay = document.getElementById('spinnerOverlay');
+            requestAnimationFrame(function() {
+                requestAnimationFrame(function() {
+                    overlay.style.opacity = '1';
+                });
+            });
+            setTimeout(function() {
+                overlay.style.transition = 'opacity 0.6s ease';
+                overlay.style.opacity = '0';
+                setTimeout(function() { overlay.style.display = 'none'; }, 600);
+            }, 1800);
+        })();
+
+        // Accordion toggle
+        document.querySelectorAll('.fp-section-header').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var section = this.closest('.fp-section');
+                var body = document.getElementById(this.dataset.target);
+                var icon = this.querySelector('.fp-toggle-icon');
+                var isOpen = body.classList.contains('fp-section-body--open');
+
+                body.classList.toggle('fp-section-body--open', !isOpen);
+                icon.classList.toggle('fp-toggle-icon--open', !isOpen);
+                icon.innerHTML = isOpen
+                    ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" stroke="currentColor" stroke-width="0.8" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>'
+                    : '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" stroke="currentColor" stroke-width="0.8" viewBox="0 0 16 16"><path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/></svg>';
+            });
+        });
+    </script>
+    <script>
+        if (document.getElementById("logoutBtn")) {
+            document.getElementById("logoutBtn").addEventListener("click", function() {
+                sessionStorage.removeItem("isAuthenticated");
+                window.location.href = "login.html";
+            });
+        }
+
+        // Function to update Risk assessment status in modal
+        function updateRiskAssessmentModalStatus() {
+            var programContent = document.getElementById('programContent');
+            var riskAssessmentItem = document.getElementById('riskAssessmentItem');
+
+            if (programContent && programContent.classList.contains('visible') && riskAssessmentItem) {
+                // Change to complete state
+                riskAssessmentItem.classList.add('doc-requirement-complete');
+
+                // Update icon to checkmark
+                var icon = riskAssessmentItem.querySelector('.doc-requirement-icon svg');
+                if (icon) {
+                    icon.outerHTML = '<svg viewBox="0 0 34.54 34.54" style="width: 42px; height: 42px;"><rect stroke="#00310b" stroke-miterlimit="10" stroke-width=".5px" fill="#008d3e" x=".25" y=".25" width="34.04" height="34.04" rx="9.31" ry="9.31"/><polyline fill="#008d3e" points="9.46 17.7 14.45 22.68 25.75 11.37"/><path fill="#fff" d="M8.18,18.98l4.98,4.98c.69.69,1.87.69,2.57,0,3.29-3.29,6.58-6.58,9.87-9.87l1.44-1.44c1.65-1.65-.91-4.22-2.57-2.57-3.29,3.29-6.58,6.58-9.87,9.87-.48.48-.96.96-1.44,1.44h2.57c-1.66-1.66-3.32-3.32-4.98-4.98-1.65-1.65-4.22.91-2.57,2.57h0Z"/></svg>';
+                }
+
+                // Update status text
+                var statusText = riskAssessmentItem.querySelector('.doc-requirement-status');
+                if (statusText) {
+                    statusText.textContent = 'COMPLETE';
+                }
+
+                // Update badge
+                var badge = riskAssessmentItem.querySelector('.doc-requirement-badge');
+                if (badge) {
+                    badge.textContent = 'Complete';
+                }
+            }
+        }
+
+        // Function to update policy modal item based on card status
+        function updatePolicyModalStatus() {
+            var policyCard = document.getElementById('policyCard');
+            var policyItem = document.getElementById('policyItem');
+
+            if (policyCard && policyItem && policyCard.classList.contains('complete')) {
+                policyItem.classList.add('doc-requirement-complete');
+
+                // Update icon to checkmark
+                var modalIcon = policyItem.querySelector('.doc-requirement-icon svg');
+                if (modalIcon) {
+                    modalIcon.outerHTML = '<svg viewBox="0 0 34.54 34.54" style="width: 42px; height: 42px;">' +
+                        '<rect stroke="#00310b" stroke-miterlimit="10" stroke-width=".5px" fill="#008d3e" x=".25" y=".25" width="34.04" height="34.04" rx="9.31" ry="9.31"/>' +
+                        '<polyline fill="#008d3e" points="9.46 17.7 14.45 22.68 25.75 11.37"/>' +
+                        '<path fill="#fff" d="M8.18,18.98l4.98,4.98c.69.69,1.87.69,2.57,0,3.29-3.29,6.58-6.58,9.87-9.87l1.44-1.44c1.65-1.65-.91-4.22-2.57-2.57-3.29,3.29-6.58,6.58-9.87,9.87-.48.48-.96.96-1.44,1.44h2.57c-1.66-1.66-3.32-3.32-4.98-4.98-1.65-1.65-4.22.91-2.57,2.57h0Z"/>' +
+                        '</svg>';
+                }
+
+                // Update status text
+                var statusText = policyItem.querySelector('.doc-requirement-status');
+                if (statusText) {
+                    statusText.textContent = 'COMPLETE';
+                }
+
+                // Update badge
+                var badge = policyItem.querySelector('.doc-requirement-badge');
+                if (badge) {
+                    badge.textContent = 'Complete';
+                }
+            }
+        }
+
+        // Function to update process modal item based on card status
+        function updateProcessModalStatus() {
+            var processCard = document.getElementById('processCard');
+            var processItem = document.getElementById('processItem');
+
+            if (processCard && processItem && processCard.classList.contains('complete')) {
+                processItem.classList.add('doc-requirement-complete');
+
+                // Update icon to checkmark
+                var modalIcon = processItem.querySelector('.doc-requirement-icon svg');
+                if (modalIcon) {
+                    modalIcon.outerHTML = '<svg viewBox="0 0 34.54 34.54" style="width: 42px; height: 42px;">' +
+                        '<rect stroke="#00310b" stroke-miterlimit="10" stroke-width=".5px" fill="#008d3e" x=".25" y=".25" width="34.04" height="34.04" rx="9.31" ry="9.31"/>' +
+                        '<polyline fill="#008d3e" points="9.46 17.7 14.45 22.68 25.75 11.37"/>' +
+                        '<path fill="#fff" d="M8.18,18.98l4.98,4.98c.69.69,1.87.69,2.57,0,3.29-3.29,6.58-6.58,9.87-9.87l1.44-1.44c1.65-1.65-.91-4.22-2.57-2.57-3.29,3.29-6.58,6.58-9.87,9.87-.48.48-.96.96-1.44,1.44h2.57c-1.66-1.66-3.32-3.32-4.98-4.98-1.65-1.65-4.22.91-2.57,2.57h0Z"/>' +
+                        '</svg>';
+                }
+
+                // Update status text
+                var statusText = processItem.querySelector('.doc-requirement-status');
+                if (statusText) {
+                    statusText.textContent = 'COMPLETE';
+                }
+
+                // Update badge
+                var badge = processItem.querySelector('.doc-requirement-badge');
+                if (badge) {
+                    badge.textContent = 'Complete';
+                }
+            }
+        }
+
+        // Function to reset all modal items to incomplete state
+        function resetModalToIncomplete() {
+            // Reset Risk Assessment
+            var riskItem = document.getElementById('riskAssessmentItem');
+            if (riskItem) {
+                riskItem.classList.remove('doc-requirement-complete');
+                var riskIcon = riskItem.querySelector('.doc-requirement-icon svg');
+                if (riskIcon) {
+                    riskIcon.outerHTML = '<svg viewBox="0 0 31.62 31.62" style="width: 42px; height: 42px;">' +
+                        '<rect fill="#dde1e4" stroke="#a7a7a7" stroke-miterlimit="10" stroke-width=".75px" x=".38" y=".38" width="30.87" height="30.87" rx="10.38" ry="10.38"/>' +
+                        '<path fill="#353535" d="M11.24,12.75c.01-.59.12-1.13.33-1.62.21-.49.51-.91.9-1.27.39-.35.87-.63,1.44-.82s1.22-.3,1.95-.3c.68,0,1.3.09,1.85.27.56.18,1.03.43,1.43.76.4.33.7.72.92,1.17.21.45.32.96.32,1.51,0,.72-.17,1.33-.51,1.85-.34.51-.85.97-1.52,1.37-.32.18-.58.35-.79.51-.21.16-.37.32-.5.48-.12.16-.21.33-.26.51-.05.18-.08.39-.08.61v.5h-2.52l-.02-.52c-.03-.38-.02-.72.03-1.03.05-.3.15-.58.29-.83.14-.25.32-.48.56-.69s.51-.41.84-.6c.3-.18.56-.35.77-.51.21-.15.37-.31.5-.47.12-.16.21-.33.26-.5.05-.17.08-.37.08-.59s-.04-.43-.13-.61c-.09-.18-.21-.34-.37-.48s-.35-.24-.57-.31-.47-.11-.74-.11c-.55,0-1,.16-1.33.47-.33.31-.52.73-.55,1.26h-2.58ZM15.57,22.89c-.54,0-.96-.14-1.27-.43-.31-.29-.46-.68-.46-1.19s.15-.91.46-1.19c.31-.29.73-.43,1.27-.43s.96.14,1.27.43c.3.29.46.69.46,1.19s-.15.9-.46,1.19c-.3.29-.73.43-1.27.43Z"/>' +
+                        '</svg>';
+                }
+                var riskStatus = riskItem.querySelector('.doc-requirement-status');
+                if (riskStatus) riskStatus.textContent = 'INCOMPLETE';
+                var riskBadge = riskItem.querySelector('.doc-requirement-badge');
+                if (riskBadge) riskBadge.textContent = 'Start';
+            }
+
+            // Reset Policy
+            var policyItem = document.getElementById('policyItem');
+            if (policyItem) {
+                policyItem.classList.remove('doc-requirement-complete');
+                var policyIcon = policyItem.querySelector('.doc-requirement-icon svg');
+                if (policyIcon) {
+                    policyIcon.outerHTML = '<svg viewBox="0 0 31.62 31.62" style="width: 42px; height: 42px;">' +
+                        '<rect fill="#dde1e4" stroke="#a7a7a7" stroke-miterlimit="10" stroke-width=".75px" x=".38" y=".38" width="30.87" height="30.87" rx="10.38" ry="10.38"/>' +
+                        '<path fill="#353535" d="M11.24,12.75c.01-.59.12-1.13.33-1.62.21-.49.51-.91.9-1.27.39-.35.87-.63,1.44-.82s1.22-.3,1.95-.3c.68,0,1.3.09,1.85.27.56.18,1.03.43,1.43.76.4.33.7.72.92,1.17.21.45.32.96.32,1.51,0,.72-.17,1.33-.51,1.85-.34.51-.85.97-1.52,1.37-.32.18-.58.35-.79.51-.21.16-.37.32-.5.48-.12.16-.21.33-.26.51-.05.18-.08.39-.08.61v.5h-2.52l-.02-.52c-.03-.38-.02-.72.03-1.03.05-.3.15-.58.29-.83.14-.25.32-.48.56-.69s.51-.41.84-.6c.3-.18.56-.35.77-.51.21-.15.37-.31.5-.47.12-.16.21-.33.26-.5.05-.17.08-.37.08-.59s-.04-.43-.13-.61c-.09-.18-.21-.34-.37-.48s-.35-.24-.57-.31-.47-.11-.74-.11c-.55,0-1,.16-1.33.47-.33.31-.52.73-.55,1.26h-2.58ZM15.57,22.89c-.54,0-.96-.14-1.27-.43-.31-.29-.46-.68-.46-1.19s.15-.91.46-1.19c.31-.29.73-.43,1.27-.43s.96.14,1.27.43c.3.29.46.69.46,1.19s-.15.9-.46,1.19c-.3.29-.73.43-1.27.43Z"/>' +
+                        '</svg>';
+                }
+                var policyStatus = policyItem.querySelector('.doc-requirement-status');
+                if (policyStatus) policyStatus.textContent = 'INCOMPLETE';
+                var policyBadge = policyItem.querySelector('.doc-requirement-badge');
+                if (policyBadge) policyBadge.textContent = 'Start';
+            }
+
+            // Reset Process
+            var processItem = document.getElementById('processItem');
+            if (processItem) {
+                processItem.classList.remove('doc-requirement-complete');
+                var processIcon = processItem.querySelector('.doc-requirement-icon svg');
+                if (processIcon) {
+                    processIcon.outerHTML = '<svg viewBox="0 0 31.62 31.62" style="width: 42px; height: 42px;">' +
+                        '<rect fill="#dde1e4" stroke="#a7a7a7" stroke-miterlimit="10" stroke-width=".75px" x=".38" y=".38" width="30.87" height="30.87" rx="10.38" ry="10.38"/>' +
+                        '<path fill="#353535" d="M11.24,12.75c.01-.59.12-1.13.33-1.62.21-.49.51-.91.9-1.27.39-.35.87-.63,1.44-.82s1.22-.3,1.95-.3c.68,0,1.3.09,1.85.27.56.18,1.03.43,1.43.76.4.33.7.72.92,1.17.21.45.32.96.32,1.51,0,.72-.17,1.33-.51,1.85-.34.51-.85.97-1.52,1.37-.32.18-.58.35-.79.51-.21.16-.37.32-.5.48-.12.16-.21.33-.26.51-.05.18-.08.39-.08.61v.5h-2.52l-.02-.52c-.03-.38-.02-.72.03-1.03.05-.3.15-.58.29-.83.14-.25.32-.48.56-.69s.51-.41.84-.6c.3-.18.56-.35.77-.51.21-.15.37-.31.5-.47.12-.16.21-.33.26-.5.05-.17.08-.37.08-.59s-.04-.43-.13-.61c-.09-.18-.21-.34-.37-.48s-.35-.24-.57-.31-.47-.11-.74-.11c-.55,0-1,.16-1.33.47-.33.31-.52.73-.55,1.26h-2.58ZM15.57,22.89c-.54,0-.96-.14-1.27-.43-.31-.29-.46-.68-.46-1.19s.15-.91.46-1.19c.31-.29.73-.43,1.27-.43s.96.14,1.27.43c.3.29.46.69.46,1.19s-.15.9-.46,1.19c-.3.29-.73.43-1.27.43Z"/>' +
+                        '</svg>';
+                }
+                var processStatus = processItem.querySelector('.doc-requirement-status');
+                if (processStatus) processStatus.textContent = 'GO TO POLICY';
+                var processBadge = processItem.querySelector('.doc-requirement-badge');
+                if (processBadge) processBadge.textContent = 'START';
+            }
+        }
+
+        // Generate Program Modal
+        var generateBtn = document.getElementById('generateProgramBtn');
+        var documentsModal = document.getElementById('documentsRequiredModal');
+
+        if (generateBtn) {
+            generateBtn.addEventListener('click', function() {
+                resetModalToIncomplete();
+                documentsModal.classList.add('open');
+            });
+        }
+
+        // Close modal when clicking outside
+        if (documentsModal) {
+            documentsModal.addEventListener('click', function(e) {
+                if (e.target === documentsModal) {
+                    documentsModal.classList.remove('open');
+                }
+            });
+        }
+
+        // Risk Assessment Item Click
+        var riskAssessmentItem = document.getElementById('riskAssessmentItem');
+        if (riskAssessmentItem) {
+            riskAssessmentItem.addEventListener('click', function() {
+                window.location.href = 'edit-risk-assessment-program.html';
+            });
+        }
+
+        // Policy Item Click (Modal)
+        var policyItem = document.getElementById('policyItem');
+        if (policyItem) {
+            policyItem.addEventListener('click', function() {
+                window.location.href = 'edit-risk-assessment-program-policy.html';
+            });
+        }
+
+        // Policy Card Click (Program Content)
+        var policyCard = document.getElementById('policyCard');
+        if (policyCard) {
+            policyCard.addEventListener('click', function() {
+                window.location.href = 'edit-risk-assessment-program-policy.html';
+            });
+        }
+
+        // Process Item Click (Modal)
+        var processItemModal = document.getElementById('processItem');
+        if (processItemModal) {
+            processItemModal.addEventListener('click', function() {
+                window.location.href = 'edit-risk-assessment-program-process.html';
+            });
+        }
+
+        // Process Card Click (Program Content)
+        var processCard = document.getElementById('processCard');
+        if (processCard) {
+            processCard.addEventListener('click', function() {
+                window.location.href = 'edit-risk-assessment-program-process.html';
+            });
+        }
+
+        // Finalise Program Card Click (Program Content)
+        var finaliseProgramCard = document.getElementById('finaliseProgramCard');
+        if (finaliseProgramCard) {
+            finaliseProgramCard.addEventListener('click', function() {
+                // Check if all three are complete
+                var riskComplete = localStorage.getItem('riskAssessmentComplete') === 'true';
+                var policyComplete = localStorage.getItem('policyComplete') === 'true';
+                var processComplete = localStorage.getItem('processComplete') === 'true';
+
+                if (riskComplete && policyComplete && processComplete) {
+                    // All complete - finalise program (can add specific action here)
+                    console.log('Ready to finalise program');
+                    updateRiskAssessmentModalStatus();
+                    updatePolicyModalStatus();
+                    updateProcessModalStatus();
+                    updateFinaliseProgramModalStatus();
+                    documentsModal.classList.add('open');
+                } else {
+                    // Not all complete - show modal with current status
+                    updateRiskAssessmentModalStatus();
+                    updatePolicyModalStatus();
+                    updateProcessModalStatus();
+                    updateFinaliseProgramModalStatus();
+                    documentsModal.classList.add('open');
+                }
+            });
+        }
+
+        // Check if we should show program content
+        var showProgram = sessionStorage.getItem('showProgramContent');
+        if (showProgram === 'true') {
+            // Hide empty state
+            document.getElementById('emptyState').style.display = 'none';
+            // Show program content
+            document.getElementById('programContent').classList.add('visible');
+            // Clear the flag
+            sessionStorage.removeItem('showProgramContent');
+        }
+
+        // Check if risk assessment was completed and update risk assessment card
+        var riskAssessmentComplete = localStorage.getItem('riskAssessmentComplete');
+        if (riskAssessmentComplete === 'true') {
+            var riskAssessmentCard = document.getElementById('riskAssessmentCard');
+            if (riskAssessmentCard) {
+                // Add complete class
+                riskAssessmentCard.classList.add('complete');
+
+                // Update icon to checkmark
+                var riskIcon = riskAssessmentCard.querySelector('.doc-status-icon');
+                if (riskIcon) {
+                    riskIcon.classList.remove('incomplete');
+                    riskIcon.classList.add('complete');
+                    riskIcon.innerHTML = '<svg viewBox="0 0 34.54 34.54" style="width: 38px; height: 38px;">' +
+                        '<rect stroke="#00310b" stroke-miterlimit="10" stroke-width=".5px" fill="#008d3e" x=".25" y=".25" width="34.04" height="34.04" rx="9.31" ry="9.31"/>' +
+                        '<polyline fill="#008d3e" points="9.46 17.7 14.45 22.68 25.75 11.37"/>' +
+                        '<path fill="#fff" d="M8.18,18.98l4.98,4.98c.69.69,1.87.69,2.57,0,3.29-3.29,6.58-6.58,9.87-9.87l1.44-1.44c1.65-1.65-.91-4.22-2.57-2.57-3.29,3.29-6.58,6.58-9.87,9.87-.48.48-.96.96-1.44,1.44h2.57c-1.66-1.66-3.32-3.32-4.98-4.98-1.65-1.65-4.22.91-2.57,2.57h0Z"/>' +
+                        '</svg>';
+                }
+
+                // Update text
+                var riskContent = riskAssessmentCard.querySelector('.doc-status-content p');
+                if (riskContent) {
+                    riskContent.textContent = 'HAS ONE DOCUMENT';
+                }
+            }
+
+            // Show Risk Assessment table
+            var riskTable = document.getElementById('riskAssessmentTable');
+            if (riskTable) {
+                riskTable.style.display = 'block';
+            }
+        }
+
+        // Check if policy was completed and update policy card
+        var policyComplete = localStorage.getItem('policyComplete');
+        if (policyComplete === 'true') {
+            var policyCard = document.getElementById('policyCard');
+            if (policyCard) {
+                // Add complete class
+                policyCard.classList.add('complete');
+
+                // Update icon to checkmark
+                var policyIcon = policyCard.querySelector('.doc-status-icon');
+                if (policyIcon) {
+                    policyIcon.classList.remove('incomplete');
+                    policyIcon.classList.add('complete');
+                    policyIcon.innerHTML = '<svg viewBox="0 0 34.54 34.54" style="width: 38px; height: 38px;">' +
+                        '<rect stroke="#00310b" stroke-miterlimit="10" stroke-width=".5px" fill="#008d3e" x=".25" y=".25" width="34.04" height="34.04" rx="9.31" ry="9.31"/>' +
+                        '<polyline fill="#008d3e" points="9.46 17.7 14.45 22.68 25.75 11.37"/>' +
+                        '<path fill="#fff" d="M8.18,18.98l4.98,4.98c.69.69,1.87.69,2.57,0,3.29-3.29,6.58-6.58,9.87-9.87l1.44-1.44c1.65-1.65-.91-4.22-2.57-2.57-3.29,3.29-6.58,6.58-9.87,9.87-.48.48-.96.96-1.44,1.44h2.57c-1.66-1.66-3.32-3.32-4.98-4.98-1.65-1.65-4.22.91-2.57,2.57h0Z"/>' +
+                        '</svg>';
+                }
+
+                // Update text
+                var policyContent = policyCard.querySelector('.doc-status-content p');
+                if (policyContent) {
+                    policyContent.textContent = 'HAS ONE DOCUMENT';
+                }
+            }
+
+            // Update modal policy item
+            var policyItem = document.getElementById('policyItem');
+            if (policyItem) {
+                policyItem.classList.add('doc-requirement-complete');
+
+                // Update icon to checkmark
+                var modalIcon = policyItem.querySelector('.doc-requirement-icon svg');
+                if (modalIcon) {
+                    modalIcon.outerHTML = '<svg viewBox="0 0 34.54 34.54" style="width: 42px; height: 42px;">' +
+                        '<rect stroke="#00310b" stroke-miterlimit="10" stroke-width=".5px" fill="#008d3e" x=".25" y=".25" width="34.04" height="34.04" rx="9.31" ry="9.31"/>' +
+                        '<polyline fill="#008d3e" points="9.46 17.7 14.45 22.68 25.75 11.37"/>' +
+                        '<path fill="#fff" d="M8.18,18.98l4.98,4.98c.69.69,1.87.69,2.57,0,3.29-3.29,6.58-6.58,9.87-9.87l1.44-1.44c1.65-1.65-.91-4.22-2.57-2.57-3.29,3.29-6.58,6.58-9.87,9.87-.48.48-.96.96-1.44,1.44h2.57c-1.66-1.66-3.32-3.32-4.98-4.98-1.65-1.65-4.22.91-2.57,2.57h0Z"/>' +
+                        '</svg>';
+                }
+
+                // Update status text
+                var statusText = policyItem.querySelector('.doc-requirement-status');
+                if (statusText) {
+                    statusText.textContent = 'COMPLETE';
+                }
+
+                // Update badge
+                var badge = policyItem.querySelector('.doc-requirement-badge');
+                if (badge) {
+                    badge.textContent = 'Complete';
+                }
+            }
+
+            // Show Policy table
+            var policyTable = document.getElementById('policyTable');
+            if (policyTable) {
+                policyTable.style.display = 'block';
+            }
+        }
+
+        // Check if process was completed and update process card
+        var processComplete = localStorage.getItem('processComplete');
+        if (processComplete === 'true') {
+            var processCard = document.getElementById('processCard');
+            if (processCard) {
+                // Add complete class
+                processCard.classList.add('complete');
+
+                // Update icon to checkmark
+                var processIcon = processCard.querySelector('.doc-status-icon');
+                if (processIcon) {
+                    processIcon.classList.remove('incomplete');
+                    processIcon.classList.add('complete');
+                    processIcon.innerHTML = '<svg viewBox="0 0 34.54 34.54" style="width: 38px; height: 38px;">' +
+                        '<rect stroke="#00310b" stroke-miterlimit="10" stroke-width=".5px" fill="#008d3e" x=".25" y=".25" width="34.04" height="34.04" rx="9.31" ry="9.31"/>' +
+                        '<polyline fill="#008d3e" points="9.46 17.7 14.45 22.68 25.75 11.37"/>' +
+                        '<path fill="#fff" d="M8.18,18.98l4.98,4.98c.69.69,1.87.69,2.57,0,3.29-3.29,6.58-6.58,9.87-9.87l1.44-1.44c1.65-1.65-.91-4.22-2.57-2.57-3.29,3.29-6.58,6.58-9.87,9.87-.48.48-.96.96-1.44,1.44h2.57c-1.66-1.66-3.32-3.32-4.98-4.98-1.65-1.65-4.22.91-2.57,2.57h0Z"/>' +
+                        '</svg>';
+                }
+
+                // Update text
+                var processContent = processCard.querySelector('.doc-status-content p');
+                if (processContent) {
+                    processContent.textContent = 'HAS ONE DOCUMENT';
+                }
+            }
+
+            // Show Process table
+            var processTable = document.getElementById('processTable');
+            if (processTable) {
+                processTable.style.display = 'block';
+            }
+
+            // Update modal process item
+            var processItem = document.getElementById('processItem');
+            if (processItem) {
+                processItem.classList.add('doc-requirement-complete');
+
+                // Update icon to checkmark
+                var modalIcon = processItem.querySelector('.doc-requirement-icon svg');
+                if (modalIcon) {
+                    modalIcon.outerHTML = '<svg viewBox="0 0 34.54 34.54" style="width: 42px; height: 42px;">' +
+                        '<rect stroke="#00310b" stroke-miterlimit="10" stroke-width=".5px" fill="#008d3e" x=".25" y=".25" width="34.04" height="34.04" rx="9.31" ry="9.31"/>' +
+                        '<polyline fill="#008d3e" points="9.46 17.7 14.45 22.68 25.75 11.37"/>' +
+                        '<path fill="#fff" d="M8.18,18.98l4.98,4.98c.69.69,1.87.69,2.57,0,3.29-3.29,6.58-6.58,9.87-9.87l1.44-1.44c1.65-1.65-.91-4.22-2.57-2.57-3.29,3.29-6.58,6.58-9.87,9.87-.48.48-.96.96-1.44,1.44h2.57c-1.66-1.66-3.32-3.32-4.98-4.98-1.65-1.65-4.22.91-2.57,2.57h0Z"/>' +
+                        '</svg>';
+                }
+
+                // Update status text
+                var statusText = processItem.querySelector('.doc-requirement-status');
+                if (statusText) {
+                    statusText.textContent = 'COMPLETE';
+                }
+
+                // Update badge
+                var badge = processItem.querySelector('.doc-requirement-badge');
+                if (badge) {
+                    badge.textContent = 'Complete';
+                }
+            }
+        }
+
+        // Function to update finalise program modal status
+        function updateFinaliseProgramModalStatus() {
+            var riskComplete = localStorage.getItem('riskAssessmentComplete') === 'true';
+            var policyComplete = localStorage.getItem('policyComplete') === 'true';
+            var processComplete = localStorage.getItem('processComplete') === 'true';
+
+            if (riskComplete && policyComplete && processComplete) {
+                var finaliseModalItem = document.getElementById('finaliseModalItem');
+                if (finaliseModalItem) {
+                    finaliseModalItem.classList.remove('finalise');
+                    finaliseModalItem.classList.add('doc-requirement-complete');
+                    finaliseModalItem.style.cursor = 'pointer';
+
+                    // Update icon to checkmark
+                    var modalIcon = finaliseModalItem.querySelector('.doc-requirement-icon svg');
+                    if (modalIcon) {
+                        modalIcon.outerHTML = '<svg viewBox="0 0 34.54 34.54" style="width: 42px; height: 42px;">' +
+                            '<rect stroke="#00310b" stroke-miterlimit="10" stroke-width=".5px" fill="#008d3e" x=".25" y=".25" width="34.04" height="34.04" rx="9.31" ry="9.31"/>' +
+                            '<polyline fill="#008d3e" points="9.46 17.7 14.45 22.68 25.75 11.37"/>' +
+                            '<path fill="#fff" d="M8.18,18.98l4.98,4.98c.69.69,1.87.69,2.57,0,3.29-3.29,6.58-6.58,9.87-9.87l1.44-1.44c1.65-1.65-.91-4.22-2.57-2.57-3.29,3.29-6.58,6.58-9.87,9.87-.48.48-.96.96-1.44,1.44h2.57c-1.66-1.66-3.32-3.32-4.98-4.98-1.65-1.65-4.22.91-2.57,2.57h0Z"/>' +
+                            '</svg>';
+                    }
+
+                    // Update status text
+                    var statusText = finaliseModalItem.querySelector('.doc-requirement-status');
+                    if (statusText) {
+                        statusText.textContent = 'READY TO FINALISE';
+                    }
+
+                    // Show the Generate Program button
+                    var generateBtn = document.getElementById('generateProgramBtnFinal');
+                    if (generateBtn) {
+                        generateBtn.style.display = 'inline-flex';
+                    }
+                }
+            }
+        }
+
+        // Generate button in program content
+        var generateBtn2 = document.getElementById('generateProgramBtn2');
+        if (generateBtn2) {
+            generateBtn2.addEventListener('click', function() {
+                updateRiskAssessmentModalStatus();
+                updatePolicyModalStatus();
+                updateProcessModalStatus();
+                updateFinaliseProgramModalStatus();
+                documentsModal.classList.add('open');
+            });
+        }
+
+        // Check if all three documents are complete and enable Finalise Program card
+        var riskComplete = localStorage.getItem('riskAssessmentComplete') === 'true';
+        var policyComplete = localStorage.getItem('policyComplete') === 'true';
+        var processComplete = localStorage.getItem('processComplete') === 'true';
+
+        if (riskComplete && policyComplete && processComplete) {
+            var finaliseProgramCard = document.getElementById('finaliseProgramCard');
+            if (finaliseProgramCard) {
+                // Don't add complete class - keep default styling
+                // Don't change the icon - keep question mark
+                finaliseProgramCard.style.cursor = 'pointer';
+
+                // Update text only
+                var finaliseContent = finaliseProgramCard.querySelector('.doc-status-content p');
+                if (finaliseContent) {
+                    finaliseContent.textContent = 'READY TO FINALISE';
+                }
+            }
+
+            // Update modal Finalise Program item
+            var finaliseModalItem = document.getElementById('finaliseModalItem');
+            if (finaliseModalItem) {
+                finaliseModalItem.classList.remove('finalise');
+                finaliseModalItem.classList.add('doc-requirement-complete');
+                finaliseModalItem.style.cursor = 'pointer';
+
+                // Update icon to checkmark
+                var modalIcon = finaliseModalItem.querySelector('.doc-requirement-icon svg');
+                if (modalIcon) {
+                    modalIcon.outerHTML = '<svg viewBox="0 0 34.54 34.54" style="width: 42px; height: 42px;">' +
+                        '<rect stroke="#00310b" stroke-miterlimit="10" stroke-width=".5px" fill="#008d3e" x=".25" y=".25" width="34.04" height="34.04" rx="9.31" ry="9.31"/>' +
+                        '<polyline fill="#008d3e" points="9.46 17.7 14.45 22.68 25.75 11.37"/>' +
+                        '<path fill="#fff" d="M8.18,18.98l4.98,4.98c.69.69,1.87.69,2.57,0,3.29-3.29,6.58-6.58,9.87-9.87l1.44-1.44c1.65-1.65-.91-4.22-2.57-2.57-3.29,3.29-6.58,6.58-9.87,9.87-.48.48-.96.96-1.44,1.44h2.57c-1.66-1.66-3.32-3.32-4.98-4.98-1.65-1.65-4.22.91-2.57,2.57h0Z"/>' +
+                        '</svg>';
+                }
+
+                // Update status text
+                var statusText = finaliseModalItem.querySelector('.doc-requirement-status');
+                if (statusText) {
+                    statusText.textContent = 'READY TO FINALISE';
+                }
+
+                // Show the Generate Program button
+                var generateBtn = document.getElementById('generateProgramBtnFinal');
+                if (generateBtn) {
+                    generateBtn.style.display = 'inline-flex';
+                }
+            }
+        }
+
+        // Clear any existing table data from localStorage
+        localStorage.removeItem('programTableData');
+
+        // Clear all completion states only on page refresh (not on navigation)
+        var navEntry = performance.getEntriesByType('navigation')[0];
+        if (navEntry && navEntry.type === 'reload') {
+            localStorage.removeItem('riskAssessmentComplete');
+            localStorage.removeItem('policyComplete');
+            localStorage.removeItem('processComplete');
+        }
+    </script>
+</body>
+</html>

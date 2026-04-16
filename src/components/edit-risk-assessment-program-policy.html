@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Policy</title>
+    <link rel="icon" type="image/svg+xml" href="images/FV-LOGO.svg">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/edit-risk-assessment.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <!-- Authentication Check -->
+    <script>
+        if (sessionStorage.getItem('isAuthenticated') !== 'true') {
+            window.location.href = 'login.html';
+        }
+    </script>
+
+
+    <!-- Spinner Overlay -->
+    <div id="spinnerOverlay" style="position:fixed; inset:0; background:rgba(0,54,66,0.75); z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column; opacity:0; transition: opacity 0.4s ease;">
+        <div class="loader"></div>
+    </div>
+
+    <!-- ===== TOP HEADER ===== -->
+    <header class="app-header d-flex align-items-center">
+        <div class="header-logo d-flex align-items-center justify-content-center">
+            <img src="images/FV-LOGO.svg" alt="Logo" width="36" height="36">
+        </div>
+        <div class="header-search flex-grow-1">
+            <div class="header-search-pill d-flex align-items-center">
+                <svg class="header-search-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.099zm-5.242 1.156a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11"/>
+                </svg>
+                <span class="header-search-label">Search:</span>
+                <input type="text" class="header-search-input" placeholder="search for content">
+                <kbd class="header-search-kbd">CMD + SR</kbd>
+            </div>
+        </div>
+        <div class="header-actions d-flex align-items-center">
+            <button class="header-icon-btn" title="Call">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/></svg>
+            </button>
+            <button class="header-icon-btn" title="Logout" id="logoutBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M7.5 1v7h1V1z"/><path d="M3 8.812a5 5 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812"/></svg>
+            </button>
+            <button class="header-icon-btn" title="Apps">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3A1.5 1.5 0 0 1 15 10.5v3A1.5 1.5 0 0 1 13.5 15h-3A1.5 1.5 0 0 1 9 13.5z"/></svg>
+            </button>
+            <button class="header-avatar-btn" title="Profile">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== LAYOUT ===== -->
+    <div class="app-body">
+
+        <!-- ===== SIDEBAR ===== -->
+        <nav class="app-sidebar d-flex flex-column align-items-center py-3">
+            <a class="sidebar-nav-link" href="dashboard.html" title="Dashboard">
+                <span class="sidebar-icon-wrap">
+                    <img src="images/dashboard.svg" alt="Dashboard" width="20" height="20">
+                </span>
+                <span class="sidebar-label">Dashboard</span>
+            </a>
+            <a class="sidebar-nav-link" href="clients.html" title="Clients">
+                <span class="sidebar-icon-wrap">
+                    <img src="images/client.svg" alt="Clients" width="20" height="20">
+                </span>
+                <span class="sidebar-label">Clients</span>
+            </a>
+            <a class="sidebar-nav-link active" href="firm-profile.html" title="Firm">
+                <span class="sidebar-icon-wrap active-icon">
+                    <img src="images/firm.svg" alt="Firm" width="20" height="20">
+                </span>
+                <span class="sidebar-label sidebar-label--active">Firm</span>
+            </a>
+            <a class="sidebar-nav-link" href="#" title="Settings">
+                <span class="sidebar-icon-wrap">
+                    <img src="images/settings.svg" alt="Settings" width="20" height="20">
+                </span>
+                <span class="sidebar-label">Settings</span>
+            </a>
+        </nav>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="app-main">
+            <div class="era-wrap">
+
+                <!-- Page title + breadcrumb -->
+                <div class="era-page-header">
+                    <h4 class="era-page-title">Create Policy</h4>
+                    <div class="era-breadcrumb">
+                        <a href="program.html" class="era-breadcrumb-link">Program</a>
+                        <span class="era-breadcrumb-sep">/</span>
+                        <span class="era-breadcrumb-current">Create Policy</span>
+                    </div>
+                </div>
+
+                <!-- Two-column layout -->
+                <div class="era-layout">
+
+                    <!-- ===== LEFT STEPPER ===== -->
+                    <aside class="era-stepper">
+                        <h6 class="era-stepper-title">Policy</h6>
+
+                        <!-- Section: Services Risk -->
+                        <div class="era-section active-section">
+                            <div class="era-section-header">
+                                <i class="fas fa-dot-circle era-step-done-fa"></i>
+                                <span class="era-section-label active-label">Services Risk</span>
+                            </div>
+                            <div class="era-sub-items">
+                                <a href="#" class="era-sub-item era-sub-active">Identify Services</a>
+                                <a href="#" class="era-sub-item era-sub-done">Services Risk Factors</a>
+                            </div>
+                        </div>
+
+                        <!-- Section: Client Risk -->
+                        <div class="era-section">
+                            <div class="era-section-header">
+                                <i class="fas fa-question-circle era-step-pending-fa"></i>
+                                <span class="era-section-label">Client Risk</span>
+                            </div>
+                            <div class="era-sub-items">
+                                <a href="#" class="era-sub-item">Identify Clients</a>
+                                <a href="#" class="era-sub-item">Client Risk Factors</a>
+                            </div>
+                        </div>
+
+                        <!-- Section: Delivery Channel Risk -->
+                        <div class="era-section">
+                            <div class="era-section-header">
+                                <i class="fas fa-question-circle era-step-pending-fa"></i>
+                                <span class="era-section-label">Delivery Channel Risk</span>
+                            </div>
+                            <div class="era-sub-items">
+                                <a href="#" class="era-sub-item">Identify Delivery Channels</a>
+                                <a href="#" class="era-sub-item">Delivery Channel Risk Factors</a>
+                            </div>
+                        </div>
+
+                        <!-- Section: Country Risk -->
+                        <div class="era-section">
+                            <div class="era-section-header">
+                                <i class="fas fa-question-circle era-step-pending-fa"></i>
+                                <span class="era-section-label">Country Risk</span>
+                            </div>
+                            <div class="era-sub-items">
+                                <a href="#" class="era-sub-item">Country Risk Assessment</a>
+                            </div>
+                        </div>
+
+                        <!-- Section: Finish -->
+                        <div class="era-section">
+                            <div class="era-section-header">
+                                <i class="fas fa-question-circle era-step-pending-fa"></i>
+                                <span class="era-section-label">Finish</span>
+                            </div>
+                            <div class="era-sub-items">
+                                <a href="#" class="era-sub-item era-sub-gear">
+                                    <i class="fas fa-award" style="font-size: 20px;"></i>
+                                    Finalise Policy
+                                </a>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- ===== RIGHT CONTENT ===== -->
+                    <div class="era-content">
+
+                        <!-- Step 0: Identify Services -->
+                        <div class="era-step-panel" data-step="0">
+                            <h5 class="era-content-title">Identify Services</h5>
+                            <p class="era-content-desc">Identify the services your practice provides to clients.</p>
+                            <div class="era-risk-card">
+                                <div class="era-risk-card-header">Risk Factors</div>
+                                <div class="era-risk-table-head">Item</div>
+                                <div class="era-risk-row">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Assisting in the planning or execution of a transaction to sell, buy or transfer a body corporate or legal arrangement (item 2).</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Receiving, holding, controlling or managing a person's property to help in the planning or execution of a transaction (item 3).</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Assisting in organising, planning, or executing a transaction for equity or debt financing relating to a body corporate or legal arrangement (item 4).</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Selling or transferring a shelf company (item 5).</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Assisting in the planning or execution of the creation or restructuring a body corporate or legal arrangement (item 6).</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Acting as a director or secretary of a company, a power of attorney of a body corporate or legal arrangement, a partner in a partnership, a trustee of an express trust, or any other functionally equivalent position on behalf of a person. This includes arranging for another person to act in these roles (item 7).</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Acting as a nominee shareholder of a body corporate, or legal arrangement, on behalf of a person. This includes arranging for another person to act in these roles (item 8).</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                            </div>
+                            <button class="era-add-btn">Add Risk Factor +</button>
+                            <button class="era-restore-btn" data-section="0">
+                                Restore defaults
+                                <i class="fas fa-undo"></i>
+                            </button>
+                        </div>
+
+                        <!-- Step 1: Services Risk Factors -->
+                        <div class="era-step-panel" data-step="1" style="display:none">
+                            <h5 class="era-content-title">Services Risk Factors</h5>
+                            <p class="era-content-desc">Identify the risk factors associated with services provided, and assess the likelihood and impact of these risks occurring. Include mitigation controls to manage these risks.</p>
+                            <div class="era-risk-card">
+                                <div class="era-risk-card-header">Risk Factors</div>
+                                <div class="era-risk-table-head-3col">
+                                    <span>Item</span>
+                                    <span>Default Inherent Risk</span>
+                                    <span>Actions</span>
+                                </div>
+                                <div class="era-risk-row-rf">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">High value transactions</span>
+                                    <span class="era-risk-badge era-risk-badge--medium">Medium ▼</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row-rf">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Unusual physical transactions</span>
+                                    <span class="era-risk-badge era-risk-badge--high">High ▼</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row-rf">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Unusual virtual asset transactions</span>
+                                    <span class="era-risk-badge era-risk-badge--high">High ▼</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row-rf">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Effective anonymity</span>
+                                    <span class="era-risk-badge era-risk-badge--high">High ▼</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row-rf era-risk-row-rf--open">
+                                    <span class="era-row-arrow">&#9660;</span>
+                                    <span class="era-row-text">Unusual service requests</span>
+                                    <span class="era-risk-badge era-risk-badge--medium">Medium ▼</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-row-expand open">
+                                    <div class="era-expand-section-title">Assess Risk</div>
+                                    <textarea class="era-expand-textarea">Identify the risk factors associated with services provided, and assess the likelihood and impact of these risks occurring. Include mitigation controls to manage these risks.</textarea>
+                                    <div class="era-expand-section-title">Mitigation Controls</div>
+                                    <textarea class="era-expand-textarea">Identify beneficial owners for all complex legal structures. Use independent verification sources to confirm ownership and control. Refuse to act where beneficial ownership cannot be reasonably established.</textarea>
+                                </div>
+                            </div>
+                            <button class="era-add-btn">Add Risk Factor +</button>
+                            <button class="era-restore-btn" data-section="1">
+                                <i class="fas fa-undo"></i>
+                                Restore defaults
+                            </button>
+                        </div>
+
+                        <!-- Step 2: Identify Clients -->
+                        <div class="era-step-panel" data-step="2" style="display:none">
+                            <h5 class="era-content-title">Identify Clients</h5>
+                            <p class="era-content-desc">Identify the kinds of clients your practice deals with and assess their risks.</p>
+                            <div class="era-risk-card">
+                                <div class="era-risk-card-header">Risk Factors</div>
+                                <div class="era-risk-table-head">Client Type</div>
+                                <div class="era-risk-row">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Individuals and sole traders</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Bodies corporate</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Partnerships</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Trusts</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Associations</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Government bodies</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                            </div>
+                            <button class="era-add-btn">Add Client Type +</button>
+                            <button class="era-restore-btn" data-section="2">
+                                <i class="fas fa-undo"></i>
+                                Restore defaults
+                            </button>
+                        </div>
+
+                        <!-- Step 3: Client Risk Factors -->
+                        <div class="era-step-panel" data-step="3" style="display:none">
+                            <h5 class="era-content-title">Client Risk Factors</h5>
+                            <p class="era-content-desc">Identify the customer risk factors your practice may come across and assess the likelihood and impact of these risks occurring. Include mitigation controls to manage these risks.</p>
+                            <div class="era-risk-card">
+                                <div class="era-risk-card-header">Risk Factors</div>
+                                <div class="era-risk-table-head-3col">
+                                    <span>Item</span>
+                                    <span>Default Inherent Risk</span>
+                                    <span>Actions</span>
+                                </div>
+                                <div class="era-risk-row-rf">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Individuals suspected of profit-generating offences</span>
+                                    <span class="era-risk-badge era-risk-badge--medium">Medium ▼</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row-rf">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Politically exposed persons (PEPs) — Domestic</span>
+                                    <span class="era-risk-badge era-risk-badge--medium">Medium ▼</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row-rf">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Politically exposed persons (PEPs) — International organisations</span>
+                                    <span class="era-risk-badge era-risk-badge--high">High ▼</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row-rf">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Politically exposed persons (PEPs) — Foreign</span>
+                                    <span class="era-risk-badge era-risk-badge--high">High ▼</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row-rf">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Client's legal structures creating effective anonymity</span>
+                                    <span class="era-risk-badge era-risk-badge--high">High ▼</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row-rf">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Third party (for individuals)</span>
+                                    <span class="era-risk-badge era-risk-badge--medium">Medium ▼</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row-rf">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Clients with significant unexplained wealth</span>
+                                    <span class="era-risk-badge era-risk-badge--medium">Medium ▼</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row-rf">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Charities and non-profit organisations (NPOs)</span>
+                                    <span class="era-risk-badge era-risk-badge--low">Low ▼</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row-rf">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Low complexity clients</span>
+                                    <span class="era-risk-badge era-risk-badge--medium">Medium ▼</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                            </div>
+                            <button class="era-add-btn">Add Risk Factor +</button>
+                            <button class="era-restore-btn" data-section="3">
+                                <i class="fas fa-undo"></i>
+                                Restore defaults
+                            </button>
+                        </div>
+
+                        <!-- Step 4: Identify Delivery Channels -->
+                        <div class="era-step-panel" data-step="4" style="display:none">
+                            <h5 class="era-content-title">Identify Delivery Channels</h5>
+                            <p class="era-content-desc">Identify the delivery channels your practice uses to provide services and assess their risks. This includes new or emerging technologies related to how you deliver those services.</p>
+                            <div class="era-risk-card">
+                                <div class="era-risk-card-header">Risk factors</div>
+                                <div class="era-risk-table-head" style="display:flex; justify-content:space-between;">
+                                    <span>Item</span><span>Actions</span>
+                                </div>
+                                <div class="era-risk-row">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">In person</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Email</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Telephone</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Video conferencing programs</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Online platforms</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-risk-row">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Artificial Intelligence (AI)</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                            </div>
+                            <button class="era-add-btn">Add Risk Factor +</button>
+                            <button class="era-restore-btn" data-section="4">
+                                <i class="fas fa-undo"></i>
+                                Restore defaults
+                            </button>
+                        </div>
+
+                        <!-- Step 5: Delivery Channel Risk Factors -->
+                        <div class="era-step-panel" data-step="5" style="display:none">
+                            <h5 class="era-content-title">Delivery Channel Risk Factors</h5>
+                            <p class="era-content-desc">Identify the risk factors associated with delivery channels, and assess the likelihood and impact of these risks occurring. Include mitigation controls to manage these risks.</p>
+                            <div class="era-risk-card">
+                                <div class="era-risk-card-header">Risk Factors</div>
+                                <div class="era-risk-table-head-3col">
+                                    <span>Item</span>
+                                    <span>Default Inherent Risk</span>
+                                    <span>Actions</span>
+                                </div>
+                                <div class="era-risk-row-rf">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Suspected false and fraudulent identities</span>
+                                    <span class="era-risk-badge era-risk-badge--medium">Medium ▼</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                            </div>
+                            <button class="era-add-btn">Add Risk Factor +</button>
+                            <button class="era-restore-btn" data-section="5">
+                                <i class="fas fa-undo"></i>
+                                Restore defaults
+                            </button>
+                        </div>
+
+                        <!-- Step 6: Country Risk Assessment -->
+                        <div class="era-step-panel" data-step="6" style="display:none">
+                            <h5 class="era-content-title">Country Risk Assessment</h5>
+                            <p class="era-content-desc">Identify all countries relevant to your practice, including where you provide services, where your customers are based, and where entities are registered or incorporated. Assess the risk for each listed country.</p>
+                            <div class="era-risk-card">
+                                <div class="era-risk-card-header">Risk Assessment</div>
+                                <div class="era-country-table-head">
+                                    <span>Country</span>
+                                    <span>Proportion of Clients %</span>
+                                    <span>Basel AML Index</span>
+                                    <span>High Risk Listed</span>
+                                    <span>Final Rating</span>
+                                    <span>Actions</span>
+                                </div>
+                                <div class="era-country-row">
+                                    <select class="era-country-select">
+                                        <option selected>Australia</option>
+                                    </select>
+                                    <div class="era-country-input-wrap">
+                                        <input type="number" value="100">
+                                        <span>%</span>
+                                    </div>
+                                    <div class="era-country-input-wrap">
+                                        <input type="number" value="3">
+                                    </div>
+                                    <span class="era-risk-badge era-risk-badge--medium">Medium ▼</span>
+                                    <span class="era-risk-badge era-risk-badge--medium">Medium ▼</span>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-country-controls-wrap">
+                                    <div class="era-country-controls-label">Migration Controls</div>
+                                    <textarea class="era-expand-textarea"></textarea>
+                                </div>
+                                <div class="era-country-total-row">
+                                    <span>Total</span>
+                                    <span>100 %</span>
+                                </div>
+                            </div>
+                            <button class="era-add-btn">Add Country +</button>
+                        </div>
+
+                        <!-- Step 7: Finalise Policy -->
+                        <div class="era-step-panel" data-step="7" style="display:none">
+                            <h5 class="era-content-title">Finalise Policy</h5>
+                            <p class="era-content-desc">Provide a title and version number for this policy. Use the summary of changes field to document what was updated in this version.</p>
+
+                            <!-- Action Required Alert -->
+                            <div class="era-action-alert">
+                                <div class="era-action-alert-header">
+                                    <div class="era-action-alert-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#cca81f" viewBox="0 0 16 16">
+                                            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div class="era-action-alert-title">Action required before completing</div>
+                                        <div class="era-action-alert-desc">Action required before completing. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit</div>
+                                    </div>
+                                </div>
+                                <div class="era-action-alert-list">
+                                    <div class="era-action-alert-item">
+                                        <div class="era-action-alert-item-left">
+                                            <div class="era-action-alert-status-icon era-action-alert-not-visited">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16.19 16.19">
+                                                    <rect fill="#dce1e4" stroke="#a7a7a7" stroke-miterlimit="10" stroke-width=".75" x=".38" y=".37" width="15.44" height="15.44" rx="7.72" ry="7.72"/>
+                                                    <path fill="#353535" d="M5.81,6.56c0-.3.06-.57.17-.81.1-.25.26-.46.45-.63.2-.18.44-.31.72-.41s.61-.15.97-.15c.34,0,.65.05.93.14.28.09.52.22.71.38.2.16.35.36.46.59.11.23.16.48.16.76,0,.36-.08.67-.26.92s-.43.49-.76.69c-.16.09-.29.18-.39.25-.1.08-.19.16-.25.24-.06.08-.11.17-.13.26-.03.09-.04.19-.04.31v.25h-1.26v-.26c-.03-.19-.02-.36,0-.51.03-.15.07-.29.14-.42.07-.13.16-.24.28-.35s.26-.2.42-.3c.15-.09.28-.18.38-.26.1-.08.19-.16.25-.24.06-.08.11-.16.13-.25.03-.09.04-.19.04-.3s-.02-.21-.06-.3c-.04-.09-.1-.17-.18-.24s-.17-.12-.29-.16-.23-.06-.37-.06c-.28,0-.5.08-.66.23-.17.16-.26.37-.27.63h-1.29ZM7.97,11.64c-.27,0-.48-.07-.64-.22-.15-.14-.23-.34-.23-.59s.08-.45.23-.6c.15-.14.37-.22.64-.22s.48.07.63.22c.15.14.23.34.23.6s-.08.45-.23.59c-.15.14-.36.22-.63.22Z"/>
+                                                </svg>
+                                            </div>
+                                            <span class="era-action-alert-item-text">1. Identify Services</span>
+                                        </div>
+                                        <span class="era-action-alert-badge era-action-alert-badge-grey">Not Visited</span>
+                                    </div>
+                                    <div class="era-action-alert-item">
+                                        <div class="era-action-alert-item-left">
+                                            <div class="era-action-alert-status-icon era-action-alert-not-visited">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16.19 16.19">
+                                                    <rect fill="#dce1e4" stroke="#a7a7a7" stroke-miterlimit="10" stroke-width=".75" x=".38" y=".37" width="15.44" height="15.44" rx="7.72" ry="7.72"/>
+                                                    <path fill="#353535" d="M5.81,6.56c0-.3.06-.57.17-.81.1-.25.26-.46.45-.63.2-.18.44-.31.72-.41s.61-.15.97-.15c.34,0,.65.05.93.14.28.09.52.22.71.38.2.16.35.36.46.59.11.23.16.48.16.76,0,.36-.08.67-.26.92s-.43.49-.76.69c-.16.09-.29.18-.39.25-.1.08-.19.16-.25.24-.06.08-.11.17-.13.26-.03.09-.04.19-.04.31v.25h-1.26v-.26c-.03-.19-.02-.36,0-.51.03-.15.07-.29.14-.42.07-.13.16-.24.28-.35s.26-.2.42-.3c.15-.09.28-.18.38-.26.1-.08.19-.16.25-.24.06-.08.11-.16.13-.25.03-.09.04-.19.04-.3s-.02-.21-.06-.3c-.04-.09-.1-.17-.18-.24s-.17-.12-.29-.16-.23-.06-.37-.06c-.28,0-.5.08-.66.23-.17.16-.26.37-.27.63h-1.29ZM7.97,11.64c-.27,0-.48-.07-.64-.22-.15-.14-.23-.34-.23-.59s.08-.45.23-.6c.15-.14.37-.22.64-.22s.48.07.63.22c.15.14.23.34.23.6s-.08.45-.23.59c-.15.14-.36.22-.63.22Z"/>
+                                                </svg>
+                                            </div>
+                                            <span class="era-action-alert-item-text">2. Identify Clients</span>
+                                        </div>
+                                        <span class="era-action-alert-badge era-action-alert-badge-grey">Not Visited</span>
+                                    </div>
+                                    <div class="era-action-alert-item">
+                                        <div class="era-action-alert-item-left">
+                                            <div class="era-action-alert-status-icon era-action-alert-has-error">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewBox="0 0 17.09 14.95">
+                                                    <path fill="#e8bb00" d="M8.54,0c.47,0,.91.25,1.15.66l7.21,12.28c.24.41.24.92,0,1.34-.24.41-.68.67-1.16.67H1.33c-.48,0-.92-.26-1.16-.67-.24-.41-.23-.93,0-1.34L7.39.66c.24-.41.68-.66,1.15-.66ZM9.61,11.75c0-.59-.48-1.07-1.07-1.07s-1.07.48-1.07,1.07.48,1.07,1.07,1.07,1.07-.48,1.07-1.07ZM8.54,4.27c-.44,0-.8.36-.8.8v3.74c0,.44.36.8.8.8s.8-.36.8-.8v-3.74c0-.44-.36-.8-.8-.8Z"/>
+                                                </svg>
+                                            </div>
+                                            <span class="era-action-alert-item-text">3. Client Risk Factors</span>
+                                        </div>
+                                        <span class="era-action-alert-badge era-action-alert-badge-red">Has Errors</span>
+                                    </div>
+                                    <div class="era-action-alert-item">
+                                        <div class="era-action-alert-item-left">
+                                            <div class="era-action-alert-status-icon era-action-alert-has-error">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewBox="0 0 17.09 14.95">
+                                                    <path fill="#e8bb00" d="M8.54,0c.47,0,.91.25,1.15.66l7.21,12.28c.24.41.24.92,0,1.34-.24.41-.68.67-1.16.67H1.33c-.48,0-.92-.26-1.16-.67-.24-.41-.23-.93,0-1.34L7.39.66c.24-.41.68-.66,1.15-.66ZM9.61,11.75c0-.59-.48-1.07-1.07-1.07s-1.07.48-1.07,1.07.48,1.07,1.07,1.07,1.07-.48,1.07-1.07ZM8.54,4.27c-.44,0-.8.36-.8.8v3.74c0,.44.36.8.8.8s.8-.36.8-.8v-3.74c0-.44-.36-.8-.8-.8Z"/>
+                                                </svg>
+                                            </div>
+                                            <span class="era-action-alert-item-text">4. Identify Delivery Channels</span>
+                                        </div>
+                                        <span class="era-action-alert-badge era-action-alert-badge-red">Has Errors</span>
+                                    </div>
+                                    <div class="era-action-alert-item">
+                                        <div class="era-action-alert-item-left">
+                                            <div class="era-action-alert-status-icon era-action-alert-not-visited">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16.19 16.19">
+                                                    <rect fill="#dce1e4" stroke="#a7a7a7" stroke-miterlimit="10" stroke-width=".75" x=".38" y=".37" width="15.44" height="15.44" rx="7.72" ry="7.72"/>
+                                                    <path fill="#353535" d="M5.81,6.56c0-.3.06-.57.17-.81.1-.25.26-.46.45-.63.2-.18.44-.31.72-.41s.61-.15.97-.15c.34,0,.65.05.93.14.28.09.52.22.71.38.2.16.35.36.46.59.11.23.16.48.16.76,0,.36-.08.67-.26.92s-.43.49-.76.69c-.16.09-.29.18-.39.25-.1.08-.19.16-.25.24-.06.08-.11.17-.13.26-.03.09-.04.19-.04.31v.25h-1.26v-.26c-.03-.19-.02-.36,0-.51.03-.15.07-.29.14-.42.07-.13.16-.24.28-.35s.26-.2.42-.3c.15-.09.28-.18.38-.26.1-.08.19-.16.25-.24.06-.08.11-.16.13-.25.03-.09.04-.19.04-.3s-.02-.21-.06-.3c-.04-.09-.1-.17-.18-.24s-.17-.12-.29-.16-.23-.06-.37-.06c-.28,0-.5.08-.66.23-.17.16-.26.37-.27.63h-1.29ZM7.97,11.64c-.27,0-.48-.07-.64-.22-.15-.14-.23-.34-.23-.59s.08-.45.23-.6c.15-.14.37-.22.64-.22s.48.07.63.22c.15.14.23.34.23.6s-.08.45-.23.59c-.15.14-.36.22-.63.22Z"/>
+                                                </svg>
+                                            </div>
+                                            <span class="era-action-alert-item-text">7. Finalise Policy</span>
+                                        </div>
+                                        <span class="era-action-alert-badge era-action-alert-badge-grey">Not Visited</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="era-risk-card" style="padding: 20px;">
+                                <div class="fp-form">
+                                    <div class="fp-form-group">
+                                        <label class="fp-form-label">Title</label>
+                                        <input type="text" class="fp-form-input" id="finaliseTitle" placeholder="">
+                                    </div>
+
+                                    <div class="fp-form-group fp-form-group--md">
+                                        <label class="fp-form-label">Version</label>
+                                        <input type="text" class="fp-form-input" id="finaliseVersion" placeholder="">
+                                    </div>
+
+                                    <div class="fp-form-group">
+                                        <label class="fp-form-label">Summary of Changes</label>
+                                        <textarea class="fp-form-input fp-form-textarea" id="finaliseSummary"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="era-footer">
+                            <button class="btn era-btn-cancel">Cancel</button>
+                            <button class="btn era-btn-prev" style="display: none;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16" class="mr-1"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/></svg>
+                                Previous
+                            </button>
+                            <div class="era-footer-right">
+                                <button class="btn era-btn-save">Save for later</button>
+                                <button class="btn era-btn-next">
+                                    Next
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16" class="ml-1"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- /era-layout -->
+            </div><!-- /era-wrap -->
+        </main>
+    </div>
+
+    <!-- Confirm Complete Modal -->
+    <div class="modal fade" id="confirmCompleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered gen-modal-dialog" role="document">
+            <div class="modal-content gen-modal-content">
+                <div class="gen-modal-header">
+                    <h5 class="gen-modal-title">Send for Review</h5>
+                </div>
+                <div class="gen-modal-body">
+                    <div class="confirm-complete-box">
+                        <div class="confirm-complete-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 15.61 15.61">
+                                <path fill="#fff" d="M1.05,11.71C-.35,9.29-.35,6.32,1.05,3.9,2.44,1.49,5.02,0,7.8,0s5.37,1.49,6.76,3.9c1.39,2.41,1.39,5.39,0,7.8-1.39,2.41-3.97,3.9-6.76,3.9s-5.37-1.49-6.76-3.9ZM5.18,5.04v.04c-.15.38.05.8.43.93.38.13.8-.06.93-.45v-.04c.05-.1.14-.16.24-.16h1.78c.25,0,.46.2.46.46,0,.16-.09.32-.23.4l-1.35.77c-.23.13-.37.37-.37.63v.41c0,.41.33.73.73.73s.73-.32.73-.72l.99-.56c.6-.34.97-.98.97-1.67,0-1.06-.86-1.92-1.92-1.92h-1.78c-.72,0-1.37.46-1.61,1.14h0ZM7.8,11.71c.54,0,.98-.44.98-.98s-.44-.98-.98-.98-.98.44-.98.98.44.98.98.98Z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="confirm-complete-title">Send for review?</div>
+                            <div class="confirm-complete-text">Would you like to send this risk assessment for review?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gen-modal-footer">
+                    <button class="btn gen-btn-cancel" id="saveAsDraftBtn">Save as draft</button>
+                    <button class="btn gen-btn-continue" id="confirmCompleteBtnPolicy">Send for Review</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Select Receiver Modal -->
+    <div class="modal fade" id="selectReceiverModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered gen-modal-dialog" role="document">
+            <div class="modal-content gen-modal-content">
+                <div class="gen-modal-header">
+                    <h5 class="gen-modal-title">Send for Review</h5>
+                </div>
+                <div class="gen-modal-body">
+                    <div class="ukp-modal-form-group full">
+                        <label class="ukp-modal-form-label">Receiver</label>
+                        <select class="ukp-modal-form-select" id="receiverSelectEdit">
+                            <option>Select a receiver</option>
+                            <option>John Smith</option>
+                            <option>Sarah Johnson</option>
+                            <option>Michael Brown [self]</option>
+                            <option>Emily Davis</option>
+                        </select>
+                    </div>
+                    <div id="selfReviewFieldsEdit" style="display: none;">
+                        <div class="ukp-modal-form-group full">
+                            <label class="ukp-modal-form-label">Date Reviewed <span class="text-danger">*</span></label>
+                            <input type="text" class="ukp-modal-form-input" id="dateReviewedEdit" placeholder="dd/mm/yyyy">
+                        </div>
+                        <div class="ukp-modal-form-group full">
+                            <label class="ukp-modal-form-label">Comments</label>
+                            <textarea class="ukp-modal-form-input" id="reviewCommentsEdit" rows="4" placeholder="Enter any comments..." style="resize: vertical; height: auto; padding: 10px 12px;"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="gen-modal-footer">
+                    <button class="btn gen-btn-cancel" data-dismiss="modal">Cancel</button>
+                    <button class="btn gen-btn-continue" id="sendBtnEdit">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Restore Defaults Popover -->
+    <div class="era-restore-popover" id="restorePopover">
+        <div class="era-restore-popover-info">
+            <div class="era-restore-popover-info-title">Restore previously deleted questions</div>
+            <div class="era-restore-popover-info-text">This will allow you to restore previously deleted questions. Click the checkbox to add again.</div>
+        </div>
+        <div class="era-restore-popover-body" id="restorePopoverBody">
+            <!-- Items will be populated here -->
+        </div>
+        <div class="era-restore-popover-footer">
+            <button class="era-restore-confirm-btn" id="restoreConfirmBtn" disabled>
+                Restore defaults (<span id="restoreCounter">0</span>)
+            </button>
+        </div>
+    </div>
+
+    <!-- Confirm Deletion Modal -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered gen-modal-dialog" role="document">
+            <div class="modal-content gen-modal-content">
+                <div class="gen-modal-header">
+                    <h5 class="gen-modal-title">Confirm Deletion</h5>
+                </div>
+                <div class="gen-modal-body">
+                    <div class="confirm-delete-box">
+                        <div class="confirm-delete-title">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>Confirm Deletion
+                        </div>
+                        <div class="confirm-delete-text">Are you sure you would like to delete this?</div>
+                    </div>
+                </div>
+                <div class="gen-modal-footer">
+                    <button class="btn gen-btn-cancel" data-dismiss="modal">Cancel</button>
+                    <button class="btn gen-btn-continue" id="confirmDeleteBtn">Confirm Deletion</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Discard Changes Modal -->
+    <div class="gen-modal-overlay" id="discardChangesModal" style="position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: -1; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s ease;">
+        <div class="modal-content gen-modal-content" style="max-width: 500px;">
+            <div class="gen-modal-header">
+                <h5 class="gen-modal-title">Discard changes?</h5>
+            </div>
+            <div class="gen-modal-body">
+                <div class="confirm-delete-box">
+                    <div class="confirm-delete-title">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>Warning
+                    </div>
+                    <div class="confirm-delete-text">Are you sure you want to cancel? Any unsaved changes will be lost</div>
+                </div>
+            </div>
+            <div class="gen-modal-footer">
+                <button class="btn gen-btn-cancel" id="discardGoBackBtn">Go Back</button>
+                <button class="btn gen-btn-continue" id="discardChangesBtn">Discard</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Page load spinner
+        (function() {
+            var overlay = document.getElementById('spinnerOverlay');
+            requestAnimationFrame(function() {
+                requestAnimationFrame(function() { overlay.style.opacity = '1'; });
+            });
+            setTimeout(function() {
+                overlay.style.transition = 'opacity 0.6s ease';
+                overlay.style.opacity = '0';
+                setTimeout(function() { overlay.style.display = 'none'; }, 600);
+            }, 1800);
+        })();
+
+        function activateStep(index) {
+            var subItems = document.querySelectorAll('.era-sub-item');
+            if (index < 0 || index >= subItems.length) return;
+
+            // Update sub-item states
+            subItems.forEach(function(item, i) {
+                item.classList.remove('era-sub-active');
+                if (i < index) {
+                    item.classList.add('era-sub-done');
+                } else {
+                    item.classList.remove('era-sub-done');
+                }
+            });
+            subItems[index].classList.add('era-sub-active');
+
+            // Update section active state
+            var targetSection = subItems[index].closest('.era-section');
+            document.querySelectorAll('.era-section').forEach(function(sec) {
+                sec.classList.remove('active-section');
+                sec.querySelector('.era-section-label').classList.remove('active-label');
+                var icon = sec.querySelector('i');
+                if (!icon) return;
+                var secSubItems = sec.querySelectorAll('.era-sub-item');
+                var allDone = secSubItems.length > 0 && Array.from(secSubItems).every(function(i) {
+                    return i.classList.contains('era-sub-done');
+                });
+                icon.className = allDone ? 'fas fa-check-circle era-step-done-fa' : 'fas fa-question-circle era-step-pending-fa';
+                var label = sec.querySelector('.era-section-label');
+                if (allDone) { label.classList.add('done-label'); } else { label.classList.remove('done-label'); }
+            });
+            targetSection.classList.add('active-section');
+            targetSection.querySelector('.era-section-label').classList.add('active-label');
+            var activeIcon = targetSection.querySelector('i');
+            if (activeIcon) { activeIcon.className = 'fas fa-dot-circle era-step-done-fa'; }
+
+            // Show/hide step panels
+            document.querySelectorAll('.era-step-panel').forEach(function(panel) {
+                panel.style.display = parseInt(panel.dataset.step) === index ? '' : 'none';
+            });
+
+            // Update button states
+            var nextBtn = document.querySelector('.era-btn-next');
+            var prevBtn = document.querySelector('.era-btn-prev');
+
+            if (index === subItems.length - 1) {
+                nextBtn.innerHTML = 'Complete Policy';
+                // Check if form is filled to enable/disable button
+                validateFinaliseForm();
+            } else {
+                nextBtn.disabled = false;
+                nextBtn.innerHTML = 'Next <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16" class="ml-1"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/></svg>';
+            }
+
+            // Show/hide Previous button based on step
+            if (index === 0) {
+                prevBtn.style.display = 'none';
+            } else {
+                prevBtn.style.display = '';
+            }
+
+            currentStepIndex = index;
+        }
+
+        // Validate finalise form and enable/disable Complete Policy button
+        function validateFinaliseForm() {
+            var title = document.getElementById('finaliseTitle');
+            var version = document.getElementById('finaliseVersion');
+            var summary = document.getElementById('finaliseSummary');
+            var nextBtn = document.querySelector('.era-btn-next');
+
+            if (title && version && summary) {
+                var isValid = title.value.trim() !== '' &&
+                              version.value.trim() !== '' &&
+                              summary.value.trim() !== '';
+                nextBtn.disabled = !isValid;
+            }
+        }
+
+        // Add input listeners to finalise form fields
+        var finaliseTitle = document.getElementById('finaliseTitle');
+        var finaliseVersion = document.getElementById('finaliseVersion');
+        var finaliseSummary = document.getElementById('finaliseSummary');
+
+        if (finaliseTitle) finaliseTitle.addEventListener('input', validateFinaliseForm);
+        if (finaliseVersion) finaliseVersion.addEventListener('input', validateFinaliseForm);
+        if (finaliseSummary) finaliseSummary.addEventListener('input', validateFinaliseForm);
+
+        var subItems = document.querySelectorAll('.era-sub-item');
+        var currentStepIndex = Array.from(subItems).findIndex(function(i) { return i.classList.contains('era-sub-active'); });
+        if (currentStepIndex === -1) currentStepIndex = 0;
+
+        // Track deleted items for each section
+        var deletedItems = {};
+
+        // Handle restore defaults button clicks - show popover
+        var currentRestoreSection = null;
+        var restorePopover = document.getElementById('restorePopover');
+        var restorePopoverBody = document.getElementById('restorePopoverBody');
+        var restoreCounter = document.getElementById('restoreCounter');
+        var restoreConfirmBtn = document.getElementById('restoreConfirmBtn');
+
+        document.querySelectorAll('.era-restore-btn').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var sectionIndex = parseInt(this.getAttribute('data-section'));
+                currentRestoreSection = sectionIndex;
+
+                // Populate popover with deleted items
+                restorePopoverBody.innerHTML = '';
+                var items = deletedItems[sectionIndex] || [];
+
+                if (items.length === 0) {
+                    restorePopoverBody.innerHTML = '<div style="padding: 20px; text-align: center; color: #8aa8b2;">No deleted items to restore</div>';
+                }
+
+                items.forEach(function(item, index) {
+                    var itemDiv = document.createElement('div');
+                    itemDiv.className = 'era-restore-popover-item';
+
+                    // Truncate text after 100 characters
+                    var displayText = item.text.length > 100 ? item.text.substring(0, 100) + '...' : item.text;
+
+                    itemDiv.innerHTML = `
+                        <input type="checkbox" class="era-restore-popover-checkbox" data-index="${index}">
+                        <label class="era-restore-popover-label">${displayText}</label>
+                    `;
+                    restorePopoverBody.appendChild(itemDiv);
+
+                    // Handle checkbox click
+                    var checkbox = itemDiv.querySelector('.era-restore-popover-checkbox');
+                    var label = itemDiv.querySelector('.era-restore-popover-label');
+
+                    checkbox.addEventListener('change', updateRestoreCounter);
+                    label.addEventListener('click', function() {
+                        checkbox.checked = !checkbox.checked;
+                        updateRestoreCounter();
+                    });
+                });
+
+                // Position popover relative to the clicked button
+                var buttonRect = this.getBoundingClientRect();
+                var popoverHeight = 350; // Approximate max height
+
+                restorePopover.style.position = 'fixed';
+                restorePopover.style.right = (window.innerWidth - buttonRect.right - 200) + 'px';
+                restorePopover.style.bottom = (window.innerHeight - buttonRect.top + 8) + 'px';
+                restorePopover.style.top = 'auto';
+
+                // Show popover
+                restorePopover.style.display = 'block';
+                requestAnimationFrame(function() {
+                    restorePopover.classList.add('show');
+                });
+
+                // Reset counter
+                updateRestoreCounter();
+            });
+        });
+
+        function updateRestoreCounter() {
+            var checkedCount = restorePopoverBody.querySelectorAll('.era-restore-popover-checkbox:checked').length;
+            restoreCounter.textContent = checkedCount;
+            restoreConfirmBtn.disabled = checkedCount === 0;
+        }
+
+
+        // Handle popover confirm - restore selected items
+        restoreConfirmBtn.addEventListener('click', function() {
+            if (currentRestoreSection !== null && deletedItems[currentRestoreSection]) {
+                var checkboxes = restorePopoverBody.querySelectorAll('.era-restore-popover-checkbox:checked');
+                var panel = document.querySelectorAll('.era-step-panel')[currentRestoreSection];
+                var riskCard = panel.querySelector('.era-risk-card');
+
+                // Restore selected items in reverse order to maintain original order
+                var indicesToRestore = [];
+                checkboxes.forEach(function(cb) {
+                    indicesToRestore.push(parseInt(cb.getAttribute('data-index')));
+                });
+
+                indicesToRestore.sort(function(a, b) { return b - a; });
+
+                indicesToRestore.forEach(function(index) {
+                    var item = deletedItems[currentRestoreSection][index];
+                    // Insert the row back into the risk card
+                    var tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = item.html;
+                    var rowToRestore = tempDiv.firstChild;
+
+                    // Append to risk card
+                    riskCard.appendChild(rowToRestore);
+
+                    // Remove from deleted items
+                    deletedItems[currentRestoreSection].splice(index, 1);
+                });
+
+                // Re-attach delete handlers
+                attachDeleteHandlers();
+
+                // Hide restore button if no more deleted items
+                if (deletedItems[currentRestoreSection].length === 0) {
+                    panel.querySelector('.era-restore-btn').classList.remove('show');
+                }
+
+                // Hide popover
+                restorePopover.classList.remove('show');
+                setTimeout(function() {
+                    restorePopover.style.display = 'none';
+                }, 200);
+            }
+        });
+
+        // Close popover when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!restorePopover.contains(e.target) && !e.target.closest('.era-restore-btn')) {
+                restorePopover.classList.remove('show');
+                setTimeout(function() {
+                    restorePopover.style.display = 'none';
+                }, 200);
+            }
+        });
+
+        // Stepper nav — clicking a sub-item
+        subItems.forEach(function(item, idx) {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                activateStep(idx);
+            });
+        });
+
+        document.querySelector('.era-btn-next').addEventListener('click', function() {
+            var subItems = document.querySelectorAll('.era-sub-item');
+            if (currentStepIndex === subItems.length - 1) {
+                $('#confirmCompleteModal').modal('show');
+            } else {
+                activateStep(currentStepIndex + 1);
+            }
+        });
+
+        document.querySelector('.era-btn-prev').addEventListener('click', function() {
+            if (currentStepIndex > 0) {
+                activateStep(currentStepIndex - 1);
+            }
+        });
+
+        // Init button states
+        var nextBtnInit = document.querySelector('.era-btn-next');
+        var prevBtnInit = document.querySelector('.era-btn-prev');
+
+        if (currentStepIndex === subItems.length - 1) {
+            nextBtnInit.innerHTML = 'Complete Policy';
+            validateFinaliseForm();
+        }
+
+        // Hide Previous button if on first step
+        if (currentStepIndex === 0) {
+            prevBtnInit.style.display = 'none';
+        } else {
+            prevBtnInit.style.display = '';
+        }
+
+        // Row expand/collapse for Services Risk Factors (step 1)
+        document.querySelectorAll('.era-risk-row-rf').forEach(function(row) {
+            row.addEventListener('click', function(e) {
+                if (e.target.closest('.era-row-delete')) return;
+                var expand = this.nextElementSibling;
+                if (!expand || !expand.classList.contains('era-row-expand')) return;
+                var isOpen = expand.classList.toggle('open');
+                this.querySelector('.era-row-arrow').innerHTML = isOpen ? '&#9660;' : '&#9654;';
+                this.classList.toggle('era-risk-row-rf--open', isOpen);
+            });
+        });
+
+        // Delete row — show confirm modal
+        var rowToDelete = null;
+
+        function attachDeleteHandlers() {
+            document.querySelectorAll('.era-row-delete').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    rowToDelete = this.closest('.era-risk-row, .era-risk-row-rf');
+                    $('#confirmDeleteModal').modal('show');
+                });
+            });
+        }
+        attachDeleteHandlers();
+
+        document.getElementById('confirmCompleteBtnPolicy').addEventListener('click', function() {
+            // Set flag to show program content
+            sessionStorage.setItem('showProgramContent', 'true');
+            // Set flag for policy completion (use localStorage to persist)
+            localStorage.setItem('policyComplete', 'true');
+            // Navigate to program.html
+            window.location.href = 'program.html';
+        });
+
+        // Handle receiver selection change - show/hide self-review fields
+        if (document.getElementById('receiverSelectEdit')) {
+            document.getElementById('receiverSelectEdit').addEventListener('change', function() {
+                var selfFields = document.getElementById('selfReviewFieldsEdit');
+                if (this.value === 'Michael Brown [self]') {
+                    selfFields.style.display = 'block';
+                } else {
+                    selfFields.style.display = 'none';
+                }
+            });
+        }
+
+        // Auto-format date input in modal (dd/mm/yyyy)
+        if (document.getElementById('dateReviewedEdit')) {
+            var dateInput = document.getElementById('dateReviewedEdit');
+
+            dateInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+                let formattedValue = '';
+
+                if (value.length > 0) {
+                    formattedValue = value.substring(0, 2); // dd
+                }
+                if (value.length >= 3) {
+                    formattedValue += '/' + value.substring(2, 4); // /mm
+                }
+                if (value.length >= 5) {
+                    formattedValue += '/' + value.substring(4, 8); // /yyyy
+                }
+
+                e.target.value = formattedValue;
+            });
+
+            // Handle backspace properly
+            dateInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace') {
+                    let value = e.target.value;
+                    if (value.endsWith('/')) {
+                        e.preventDefault();
+                        e.target.value = value.slice(0, -1);
+                    }
+                }
+            });
+        }
+
+        // Handle "Send" button in receiver modal
+        if (document.getElementById('sendBtnEdit')) {
+            document.getElementById('sendBtnEdit').addEventListener('click', function() {
+                var receiver = document.getElementById('receiverSelectEdit').value;
+                var dateReviewed = document.getElementById('dateReviewedEdit').value;
+                var comments = document.getElementById('reviewCommentsEdit').value;
+
+                $('#selectReceiverModal').modal('hide');
+                $('#selectReceiverModal').on('hidden.bs.modal', function() {
+                    sessionStorage.setItem('assessmentComplete', '1');
+                    window.location.href = 'risk-assessment.html';
+                    $('#selectReceiverModal').off('hidden.bs.modal');
+                });
+
+                // Add any additional logic here (e.g., API call to send for review)
+                console.log('Risk assessment sent for review to:', receiver);
+                if (receiver === 'Michael Brown [self]') {
+                    console.log('Date Reviewed:', dateReviewed);
+                    console.log('Comments:', comments);
+                }
+            });
+        }
+
+        document.getElementById('saveAsDraftBtn').addEventListener('click', function() {
+            sessionStorage.setItem('assessmentDraft', '1');
+            $('#confirmCompleteModal').modal('hide');
+            $('#confirmCompleteModal').on('hidden.bs.modal', function() {
+                window.location.href = 'risk-assessment.html';
+                $('#confirmCompleteModal').off('hidden.bs.modal');
+            });
+        });
+
+        document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+            if (rowToDelete) {
+                // Get the current section
+                var currentPanel = document.querySelector('.era-step-panel:not([style*="display: none"])');
+                if (currentPanel) {
+                    var sectionIndex = Array.from(document.querySelectorAll('.era-step-panel')).indexOf(currentPanel);
+
+                    // Initialize deleted items array for this section if needed
+                    if (!deletedItems[sectionIndex]) {
+                        deletedItems[sectionIndex] = [];
+                    }
+
+                    // Save deleted item information
+                    var rowText = rowToDelete.querySelector('.era-row-text');
+                    var itemText = rowText ? rowText.textContent.trim() : 'Deleted item';
+
+                    deletedItems[sectionIndex].push({
+                        html: rowToDelete.outerHTML,
+                        text: itemText
+                    });
+
+                    // If this row has an associated expanded section, remove it too
+                    var expandSection = rowToDelete.nextElementSibling;
+                    if (expandSection && expandSection.classList.contains('era-row-expand')) {
+                        expandSection.remove();
+                    }
+
+                    // Remove the row
+                    rowToDelete.remove();
+
+                    // Show restore button
+                    var restoreBtn = currentPanel.querySelector('.era-restore-btn');
+                    if (restoreBtn) {
+                        restoreBtn.classList.add('show');
+                    }
+                }
+
+                rowToDelete = null;
+            }
+            $('#confirmDeleteModal').modal('hide');
+        });
+
+        // Add Risk Factor — appends inside .era-risk-card
+        document.querySelectorAll('.era-add-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var panel = this.closest('.era-step-panel');
+                var card = panel.querySelector('.era-risk-card');
+                var stepIndex = parseInt(panel.getAttribute('data-step'));
+
+                // Step 0 (Identify Services) should get expandable rows with Title and ML/TF/PF Vulnerability
+                if (stepIndex === 0) {
+                    // Create expandable row with Title and ML/TF/PF Vulnerability fields
+                    var row = document.createElement('div');
+                    row.className = 'era-risk-row era-risk-row--expandable';
+                    row.innerHTML = '<span class="era-row-arrow">&#9660;</span><span class="era-row-text" contenteditable="true" style="outline:none; min-width:0;">New risk factor...</span><button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>';
+
+                    // Create expanded section
+                    var expandSection = document.createElement('div');
+                    expandSection.className = 'era-row-expand open';
+                    expandSection.innerHTML = '<div class="era-expand-section-title">Title</div><input type="text" class="era-expand-textarea era-title-textarea" placeholder="Enter title..." style="height: auto; min-height: auto; resize: none;"><div class="era-expand-section-title">ML/TF/PF Vulnerability</div><textarea class="era-expand-textarea" placeholder="Enter ML/TF/PF vulnerability..."></textarea>';
+
+                    card.appendChild(row);
+                    card.appendChild(expandSection);
+
+                    // Link title textarea to row text
+                    var titleTextarea = expandSection.querySelector('.era-title-textarea');
+                    var rowText = row.querySelector('.era-row-text');
+
+                    titleTextarea.addEventListener('input', function() {
+                        var newText = this.value.trim();
+                        if (newText === '') {
+                            rowText.textContent = 'New risk factor...';
+                        } else {
+                            rowText.textContent = newText;
+                        }
+                    });
+
+                    // Also update textarea when row text is edited directly
+                    rowText.addEventListener('input', function() {
+                        var newText = this.textContent.trim();
+                        if (newText !== 'New risk factor...') {
+                            titleTextarea.value = newText;
+                        }
+                    });
+
+                    // Add click handler for expansion toggle
+                    row.addEventListener('click', function(e) {
+                        if (e.target.closest('.era-row-delete')) return;
+                        if (e.target.closest('.era-row-text') && e.target.closest('.era-row-text').isContentEditable) return;
+                        var expand = this.nextElementSibling;
+                        if (!expand || !expand.classList.contains('era-row-expand')) return;
+                        var isOpen = expand.classList.toggle('open');
+                        this.querySelector('.era-row-arrow').innerHTML = isOpen ? '&#9660;' : '&#9654;';
+                    });
+
+                    // Add delete handler
+                    row.querySelector('.era-row-delete').addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        rowToDelete = this.closest('.era-risk-row');
+                        $('#confirmDeleteModal').modal('show');
+                    });
+
+                    // Focus on the title textarea instead of row text
+                    titleTextarea.focus();
+                } else {
+                    // Check if this step uses expandable rows with badges (steps 1, 3, 5)
+                    var hasExpandableRows = panel.querySelector('.era-risk-row-rf') !== null;
+
+                    if (hasExpandableRows) {
+                        // Create expandable row with badges
+                        var row = document.createElement('div');
+                        row.className = 'era-risk-row-rf era-risk-row-rf--open';
+                        row.innerHTML = '<span class="era-row-arrow">&#9660;</span><span class="era-row-text" contenteditable="true" style="outline:none; min-width:0;">New risk factor...</span><span class="era-risk-badge era-risk-badge--medium">Medium ▼</span><button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>';
+
+                        // Create expanded section
+                        var expandSection = document.createElement('div');
+                        expandSection.className = 'era-row-expand open';
+                        expandSection.innerHTML = '<div class="era-expand-section-title">Assess Risk</div><textarea class="era-expand-textarea">Identify the risk factors associated with services provided, and assess the likelihood and impact of these risks occurring. Include mitigation controls to manage these risks.</textarea><div class="era-expand-section-title">Mitigation Controls</div><textarea class="era-expand-textarea">Identify beneficial owners for all complex legal structures. Use independent verification sources to confirm ownership and control. Refuse to act where beneficial ownership cannot be reasonably established.</textarea>';
+
+                        // Insert before the last child (which is typically the button row or total row)
+                        var lastRow = card.lastElementChild;
+                        if (lastRow && (lastRow.classList.contains('era-country-total-row') || lastRow.classList.contains('era-country-controls-wrap'))) {
+                            card.insertBefore(expandSection, lastRow);
+                            card.insertBefore(row, expandSection);
+                        } else {
+                            card.appendChild(row);
+                            card.appendChild(expandSection);
+                        }
+
+                        // Add click handler for expansion toggle
+                        row.addEventListener('click', function(e) {
+                            if (e.target.closest('.era-row-delete')) return;
+                            var expand = this.nextElementSibling;
+                            if (!expand || !expand.classList.contains('era-row-expand')) return;
+                            var isOpen = expand.classList.toggle('open');
+                            this.querySelector('.era-row-arrow').innerHTML = isOpen ? '&#9660;' : '&#9654;';
+                            this.classList.toggle('era-risk-row-rf--open', isOpen);
+                        });
+
+                        // Add delete handler
+                        row.querySelector('.era-row-delete').addEventListener('click', function() {
+                            rowToDelete = this.closest('.era-risk-row-rf');
+                            $('#confirmDeleteModal').modal('show');
+                        });
+
+                        // Focus on the text field
+                        row.querySelector('.era-row-text').focus();
+                        var range = document.createRange();
+                        range.selectNodeContents(row.querySelector('.era-row-text'));
+                        window.getSelection().removeAllRanges();
+                        window.getSelection().addRange(range);
+                    } else {
+                        // Create simple row for non-expandable sections
+                        var row = document.createElement('div');
+                        row.className = 'era-risk-row';
+                        row.innerHTML = '<span class="era-row-arrow">&#9654;</span><span class="era-row-text" contenteditable="true" style="outline:none; min-width:0;">New risk factor...</span><button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>';
+                        row.querySelector('.era-row-delete').addEventListener('click', function() {
+                            rowToDelete = this.closest('.era-risk-row');
+                            $('#confirmDeleteModal').modal('show');
+                        });
+                        card.appendChild(row);
+                        row.querySelector('.era-row-text').focus();
+                        var range = document.createRange();
+                        range.selectNodeContents(row.querySelector('.era-row-text'));
+                        window.getSelection().removeAllRanges();
+                        window.getSelection().addRange(range);
+                    }
+                }
+            });
+        });
+
+        // Cancel button — show discard changes modal
+        document.querySelector('.era-btn-cancel').addEventListener('click', function() {
+            var modal = document.getElementById('discardChangesModal');
+            modal.style.zIndex = '1060';
+            modal.style.opacity = '1';
+            modal.style.pointerEvents = 'all';
+        });
+
+        // Breadcrumb link — show discard changes modal
+        document.querySelector('.era-breadcrumb-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            var modal = document.getElementById('discardChangesModal');
+            modal.style.zIndex = '1060';
+            modal.style.opacity = '1';
+            modal.style.pointerEvents = 'all';
+        });
+
+        // Go Back button — hide modal
+        document.getElementById('discardGoBackBtn').addEventListener('click', function() {
+            var modal = document.getElementById('discardChangesModal');
+            modal.style.opacity = '0';
+            modal.style.pointerEvents = 'none';
+            setTimeout(function() {
+                modal.style.zIndex = '-1';
+            }, 200);
+        });
+
+        // Discard changes — navigate to program page
+        document.getElementById('discardChangesBtn').addEventListener('click', function() {
+            var modal = document.getElementById('discardChangesModal');
+            modal.style.opacity = '0';
+            modal.style.pointerEvents = 'none';
+            setTimeout(function() {
+                window.location.href = 'program.html';
+            }, 200);
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('discardChangesModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.style.opacity = '0';
+                this.style.pointerEvents = 'none';
+                var modal = this;
+                setTimeout(function() {
+                    modal.style.zIndex = '-1';
+                }, 200);
+            }
+        });
+    </script>
+    <script>
+        if (document.getElementById("logoutBtn")) {
+            document.getElementById("logoutBtn").addEventListener("click", function() {
+                sessionStorage.removeItem("isAuthenticated");
+                window.location.href = "login.html";
+            });
+        }
+    </script>
+</body>
+</html>
