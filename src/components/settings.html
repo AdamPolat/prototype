@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="icon" type="image/svg+xml" href="images/FV-LOGO.svg">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Authentication Check -->
+    <script>
+        if (sessionStorage.getItem('isAuthenticated') !== 'true') {
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <!-- ===== TOP HEADER ===== -->
+    <header class="app-header d-flex align-items-center">
+        <div class="header-logo d-flex align-items-center justify-content-center">
+            <img src="images/FV-LOGO.svg" alt="Logo" width="36" height="36">
+        </div>
+        <div class="header-search flex-grow-1">
+            <div class="header-search-pill d-flex align-items-center">
+                <svg class="header-search-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.099zm-5.242 1.156a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11"/>
+                </svg>
+                <span class="header-search-label">Search:</span>
+                <input type="text" class="header-search-input" placeholder="search for content">
+                <kbd class="header-search-kbd">CMD + SR</kbd>
+            </div>
+        </div>
+        <div class="header-actions d-flex align-items-center">
+            <button class="header-icon-btn" title="Call">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                </svg>
+            </button>
+            <button class="header-icon-btn" title="Logout" id="logoutBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M7.5 1v7h1V1z"/>
+                    <path d="M3 8.812a5 5 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812"/>
+                </svg>
+            </button>
+            <button class="header-icon-btn" title="Apps">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3A1.5 1.5 0 0 1 15 10.5v3A1.5 1.5 0 0 1 13.5 15h-3A1.5 1.5 0 0 1 9 13.5z"/>
+                </svg>
+            </button>
+            <button class="header-avatar-btn" title="Profile">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== LAYOUT ===== -->
+    <div class="app-body">
+
+        <!-- ===== SIDEBAR ===== -->
+        <nav class="app-sidebar d-flex flex-column align-items-center py-3">
+            <a class="sidebar-nav-link" href="dashboard.html" title="Dashboard">
+                <span class="sidebar-icon-wrap">
+                    <img src="images/dashboard.svg" alt="Dashboard" width="20" height="20">
+                </span>
+                <span class="sidebar-label">Dashboard</span>
+            </a>
+            <a class="sidebar-nav-link" href="clients.html" title="Clients">
+                <span class="sidebar-icon-wrap">
+                    <img src="images/client.svg" alt="Clients" width="20" height="20">
+                </span>
+                <span class="sidebar-label">Clients</span>
+            </a>
+            <a class="sidebar-nav-link" href="firm-profile.html" title="Firm">
+                <span class="sidebar-icon-wrap">
+                    <img src="images/firm.svg" alt="Firm" width="20" height="20">
+                </span>
+                <span class="sidebar-label">Firm</span>
+            </a>
+            <a class="sidebar-nav-link active" href="settings.html" title="Settings">
+                <span class="sidebar-icon-wrap active-icon">
+                    <img src="images/settings.svg" alt="Settings" width="20" height="20">
+                </span>
+                <span class="sidebar-label sidebar-label--active">Settings</span>
+            </a>
+        </nav>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="app-main" style="background:#f5f7f8;">
+            <div class="content-wrap">
+
+                <!-- Page title -->
+                <h4 class="page-title">Settings</h4>
+
+                <!-- Tabs -->
+                <ul class="nav ra-tabs mb-4">
+                    <li class="nav-item">
+                        <a class="nav-link ra-tab active" href="#">Email Template</a>
+                    </li>
+                </ul>
+
+                <!-- Email Template Layout - Connected Panel -->
+                <div style="background: #fff; border: 1px solid #c9d3d6; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: grid; grid-template-columns: 380px 1fr; overflow: hidden; height: calc(100vh - 220px);">
+
+                    <!-- Template Library (Left Column) -->
+                    <div style="background: #fff; padding: 24px; border-right: 1px solid #d1d7df; overflow-y: auto;">
+                        <h5 style="font-size: 16px; font-weight: 600; color: #1a2b35; margin-bottom: 16px;">Template Library</h5>
+
+                        <!-- Search and Add Button -->
+                        <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+                            <div class="cl-search">
+                                <i class="fas fa-search cl-search-icon"></i>
+                                <input type="text" class="cl-search-input" placeholder="Search">
+                            </div>
+                            <button style="width: 50px; height: 50px; background: #1a6b40; border: none; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                <svg style="width: 13px; height: 13px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.46 13.51">
+                                    <path fill="#fff" d="M9.59,7.46c-1.39,0-2.52,1.16-2.52,2.58v3.46h-1.67v-3.46c0-1.43-1.13-2.58-2.52-2.58H0v-1.73h2.87c1.39,0,2.52-1.16,2.52-2.58V0h1.67v3.15c0,1.43,1.13,2.58,2.52,2.58h2.87v1.73h-2.87Z"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Template List -->
+                        <div>
+                            <div class="template-item-card active" style="padding: 16px; border-radius: 8px; margin-bottom: 8px; cursor: pointer; background: #f4f7f9;">
+                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 4px;">
+                                    <div style="font-size: 14px; font-weight: 600; color: #1a2b35;">Send for Review</div>
+                                    <div style="font-size: 11px; color: #6e7781; white-space: nowrap; margin-left: 8px;">Created • 12min ago</div>
+                                </div>
+                                <div style="font-size: 12px; color: #6e7781; margin-bottom: 4px;">Figma Files</div>
+                                <div style="font-size: 12px; color: #848d97;">Thank you for your prompt response.</div>
+                            </div>
+
+                            <div class="template-item-card" style="padding: 16px; border-radius: 8px; margin-bottom: 8px; cursor: pointer;">
+                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 4px;">
+                                    <div style="font-size: 14px; font-weight: 600; color: #1a2b35;">Send for Review</div>
+                                    <div style="font-size: 11px; color: #6e7781; white-space: nowrap; margin-left: 8px;">Created • 12min ago</div>
+                                </div>
+                                <div style="font-size: 12px; color: #6e7781; margin-bottom: 4px;">Figma Files</div>
+                                <div style="font-size: 12px; color: #848d97;">Thank you for your prompt response.</div>
+                            </div>
+
+                            <div class="template-item-card" style="padding: 16px; border-radius: 8px; margin-bottom: 8px; cursor: pointer;">
+                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 4px;">
+                                    <div style="font-size: 14px; font-weight: 600; color: #1a2b35;">Send for Review</div>
+                                    <div style="font-size: 11px; color: #6e7781; white-space: nowrap; margin-left: 8px;">Created • 12min ago</div>
+                                </div>
+                                <div style="font-size: 12px; color: #6e7781; margin-bottom: 4px;">Figma Files</div>
+                                <div style="font-size: 12px; color: #848d97;">Thank you for your prompt response.</div>
+                            </div>
+
+                            <div class="template-item-card" style="padding: 16px; border-radius: 8px; margin-bottom: 8px; cursor: pointer;">
+                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 4px;">
+                                    <div style="font-size: 14px; font-weight: 600; color: #1a2b35;">Send for Review</div>
+                                    <div style="font-size: 11px; color: #6e7781; white-space: nowrap; margin-left: 8px;">Created • 12min ago</div>
+                                </div>
+                                <div style="font-size: 12px; color: #6e7781; margin-bottom: 4px;">Figma Files</div>
+                                <div style="font-size: 12px; color: #848d97;">Thank you for your prompt response.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Template Detail (Right Column) -->
+                    <div style="background: #f4f7f9; padding: 32px; overflow-y: auto;">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 32px;">
+                            <div>
+                                <h4 style="font-size: 20px; font-weight: 700; color: #1a2b35; margin-bottom: 8px;">Send for Review</h4>
+                                <p style="font-size: 13px; color: #6e7781; margin: 0;">The email template used when sending a risk assessment, policy, process or program for review.</p>
+                            </div>
+                            <button class="btn btn-generate cl-add-btn" style="background: #1a6b40; color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; cursor: pointer; white-space: nowrap;">
+                                New Version
+                                <svg style="width: 13px; height: 13px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.46 13.51">
+                                    <path fill="#fff" d="M9.59,7.46c-1.39,0-2.52,1.16-2.52,2.58v3.46h-1.67v-3.46c0-1.43-1.13-2.58-2.52-2.58H0v-1.73h2.87c1.39,0,2.52-1.16,2.52-2.58V0h1.67v3.15c0,1.43,1.13,2.58,2.52,2.58h2.87v1.73h-2.87Z"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Version Cards -->
+                        <div style="display: flex; flex-direction: column; gap: 16px;">
+                            <div class="version-card" style="background: #fff; border: 1px solid #d0d7de; border-radius: 8px; padding: 20px; display: flex; gap: 16px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06); position: relative;">
+                                <div style="width: 48px; height: 48px; background: #e4ebf2; border: 1px solid #c7c7c7; color: #457093; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 300; flex-shrink: 0;">SR</div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 15px; font-weight: 600; color: #1a2b35; margin-bottom: 6px;">Send for Review</div>
+                                    <div style="font-size: 12px; color: #6e7781;">Modified 17 Apr 2026 at 11:15 AM by Sarah Mitchell</div>
+                                </div>
+                                <div class="version-dropdown-wrap">
+                                    <button class="version-menu-btn">
+                                        <svg width="4" height="16" viewBox="0 0 4 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="2" cy="2" r="2" fill="#6e7781"/>
+                                            <circle cx="2" cy="8" r="2" fill="#6e7781"/>
+                                            <circle cx="2" cy="14" r="2" fill="#6e7781"/>
+                                        </svg>
+                                    </button>
+                                    <div class="version-dropdown-menu">
+                                        <div class="version-dropdown-item">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758l8.61-8.61Zm.176 4.823L9.75 4.81l-6.286 6.287a.253.253 0 0 0-.064.108l-.558 1.953 1.953-.558a.253.253 0 0 0 .108-.064Zm1.238-3.763a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354Z" fill="#1a2b35"/>
+                                            </svg>
+                                            Edit
+                                        </div>
+                                        <div class="version-dropdown-item">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm3.78-9.72a.75.75 0 0 0-1.06-1.06L6.75 9.19 5.28 7.72a.75.75 0 0 0-1.06 1.06l2 2a.75.75 0 0 0 1.06 0l4.5-4.5z" fill="#1a2b35"/>
+                                            </svg>
+                                            Default
+                                        </div>
+                                        <div class="version-dropdown-item">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z" fill="#1a2b35"/>
+                                                <path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z" fill="#1a2b35"/>
+                                            </svg>
+                                            Duplicate
+                                        </div>
+                                        <div class="version-dropdown-item version-dropdown-item-danger">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M11 1.75V3h2.25a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1 0-1.5H5V1.75C5 .784 5.784 0 6.75 0h2.5C10.216 0 11 .784 11 1.75ZM4.496 6.675l.66 6.6a.25.25 0 0 0 .249.225h5.19a.25.25 0 0 0 .249-.225l.66-6.6a.75.75 0 0 1 1.492.149l-.66 6.6A1.748 1.748 0 0 1 10.595 15h-5.19a1.75 1.75 0 0 1-1.741-1.575l-.66-6.6a.75.75 0 1 1 1.492-.15ZM6.5 1.75V3h3V1.75a.25.25 0 0 0-.25-.25h-2.5a.25.25 0 0 0-.25.25Z" fill="#d1242f"/>
+                                            </svg>
+                                            Delete
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="version-card" style="background: #fff; border: 1px solid #d0d7de; border-radius: 8px; padding: 20px; display: flex; gap: 16px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06); position: relative;">
+                                <div style="width: 48px; height: 48px; background: #e4ebf2; border: 1px solid #c7c7c7; color: #457093; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 300; flex-shrink: 0;">SR</div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 15px; font-weight: 600; color: #1a2b35; margin-bottom: 6px;">Send for Review</div>
+                                    <div style="font-size: 12px; color: #6e7781;">Modified 17 Apr 2026 at 11:15 AM by Sarah Mitchell</div>
+                                </div>
+                                <div class="version-dropdown-wrap">
+                                    <button class="version-menu-btn">
+                                        <svg width="4" height="16" viewBox="0 0 4 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="2" cy="2" r="2" fill="#6e7781"/>
+                                            <circle cx="2" cy="8" r="2" fill="#6e7781"/>
+                                            <circle cx="2" cy="14" r="2" fill="#6e7781"/>
+                                        </svg>
+                                    </button>
+                                    <div class="version-dropdown-menu">
+                                        <div class="version-dropdown-item">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758l8.61-8.61Zm.176 4.823L9.75 4.81l-6.286 6.287a.253.253 0 0 0-.064.108l-.558 1.953 1.953-.558a.253.253 0 0 0 .108-.064Zm1.238-3.763a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354Z" fill="#1a2b35"/>
+                                            </svg>
+                                            Edit
+                                        </div>
+                                        <div class="version-dropdown-item">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm3.78-9.72a.75.75 0 0 0-1.06-1.06L6.75 9.19 5.28 7.72a.75.75 0 0 0-1.06 1.06l2 2a.75.75 0 0 0 1.06 0l4.5-4.5z" fill="#1a2b35"/>
+                                            </svg>
+                                            Default
+                                        </div>
+                                        <div class="version-dropdown-item">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z" fill="#1a2b35"/>
+                                                <path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z" fill="#1a2b35"/>
+                                            </svg>
+                                            Duplicate
+                                        </div>
+                                        <div class="version-dropdown-item version-dropdown-item-danger">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M11 1.75V3h2.25a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1 0-1.5H5V1.75C5 .784 5.784 0 6.75 0h2.5C10.216 0 11 .784 11 1.75ZM4.496 6.675l.66 6.6a.25.25 0 0 0 .249.225h5.19a.25.25 0 0 0 .249-.225l.66-6.6a.75.75 0 0 1 1.492.149l-.66 6.6A1.748 1.748 0 0 1 10.595 15h-5.19a1.75 1.75 0 0 1-1.741-1.575l-.66-6.6a.75.75 0 1 1 1.492-.15ZM6.5 1.75V3h3V1.75a.25.25 0 0 0-.25-.25h-2.5a.25.25 0 0 0-.25.25Z" fill="#d1242f"/>
+                                            </svg>
+                                            Delete
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <style>
+                    .template-item-card:hover {
+                        background: #f6f8fa;
+                    }
+                    .template-item-card.active {
+                        background: #f4f7f9 !important;
+                    }
+                    .cl-search {
+                        flex: 1; display: flex; align-items: center; gap: 10px;
+                        background: #f8f8f8; border: 1px solid #c9d8de; border-radius: 8px;
+                        padding: 0 14px; height: 50px;
+                    }
+                    .cl-search-icon { color: #8aa8b2; font-size: 13px; }
+                    .cl-search-input { border: none; outline: none; font-size: 13px; color: #1a2b35; background: transparent; width: 100%; }
+                    .cl-search-input::placeholder { color: #8aa8b2; }
+
+                    /* Version dropdown menu */
+                    .version-dropdown-wrap {
+                        position: relative;
+                        align-self: center;
+                    }
+                    .version-menu-btn {
+                        width: 32px;
+                        height: 32px;
+                        border: 1px solid #d0d7de;
+                        background: #fff;
+                        border-radius: 6px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        transition: background 0.2s, border-color 0.2s;
+                    }
+                    .version-menu-btn:hover {
+                        background: #f6f8fa;
+                        border-color: #b8c4ce;
+                    }
+                    .version-dropdown-menu {
+                        position: absolute;
+                        right: 0;
+                        top: 40px;
+                        background: #fff;
+                        border: 1px solid #d0d7de;
+                        border-radius: 8px;
+                        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+                        min-width: 200px;
+                        z-index: 1000;
+                        display: none;
+                    }
+                    .version-dropdown-menu.show {
+                        display: block;
+                    }
+                    .version-dropdown-item {
+                        padding: 10px 16px;
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+                        font-size: 14px;
+                        color: #1a2b35;
+                        cursor: pointer;
+                        transition: background 0.15s;
+                    }
+                    .version-dropdown-item:hover {
+                        background: #f6f8fa;
+                    }
+                    .version-dropdown-item:first-child {
+                        border-radius: 8px 8px 0 0;
+                    }
+                    .version-dropdown-item:last-child {
+                        border-radius: 0 0 8px 8px;
+                    }
+                    .version-dropdown-item-danger {
+                        color: #d1242f;
+                    }
+                    .version-dropdown-item svg {
+                        flex-shrink: 0;
+                    }
+                </style>
+
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Spinner Overlay -->
+    <div id="spinnerOverlay" style="position:fixed; inset:0; background:rgba(0,54,66,0.75); z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column; opacity:0; transition: opacity 0.4s ease;">
+        <div class="loader"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Page load spinner
+        (function() {
+            var overlay = document.getElementById('spinnerOverlay');
+            requestAnimationFrame(function() {
+                requestAnimationFrame(function() {
+                    overlay.style.opacity = '1';
+                });
+            });
+            setTimeout(function() {
+                overlay.style.transition = 'opacity 0.6s ease';
+                overlay.style.opacity = '0';
+                setTimeout(function() { overlay.style.display = 'none'; }, 600);
+            }, 1800);
+        })();
+
+        // Logout
+        if (document.getElementById("logoutBtn")) {
+            document.getElementById("logoutBtn").addEventListener("click", function() {
+                sessionStorage.removeItem("isAuthenticated");
+                window.location.href = "login.html";
+            });
+        }
+
+        // Version dropdown menu
+        document.querySelectorAll('.version-menu-btn').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var menu = this.nextElementSibling;
+                var isOpen = menu.classList.contains('show');
+
+                // Close all dropdowns
+                document.querySelectorAll('.version-dropdown-menu').forEach(function(m) {
+                    m.classList.remove('show');
+                });
+
+                // Toggle current dropdown
+                if (!isOpen) {
+                    menu.classList.add('show');
+                }
+            });
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.version-dropdown-wrap')) {
+                document.querySelectorAll('.version-dropdown-menu').forEach(function(menu) {
+                    menu.classList.remove('show');
+                });
+            }
+        });
+
+        // Delete confirmation modal
+        setTimeout(function() {
+            var deleteModal = document.getElementById('deleteVersionModal');
+            var deleteButtons = document.querySelectorAll('.version-dropdown-item-danger');
+            var cardToDelete = null;
+
+            console.log('Delete buttons found:', deleteButtons.length);
+
+            deleteButtons.forEach(function(deleteBtn) {
+                deleteBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // Find the version card (the parent div with all the card styling)
+                    cardToDelete = this.closest('.version-card');
+
+                    console.log('Delete clicked, modal:', deleteModal, 'card:', cardToDelete);
+                    if (deleteModal) {
+                        deleteModal.classList.add('open');
+                    }
+                });
+            });
+
+            if (deleteModal) {
+                document.getElementById('deleteModalCancel').addEventListener('click', function() {
+                    deleteModal.classList.remove('open');
+                    cardToDelete = null;
+                });
+
+                document.getElementById('deleteModalConfirm').addEventListener('click', function() {
+                    deleteModal.classList.remove('open');
+
+                    // Animate and remove the card
+                    if (cardToDelete) {
+                        // Add 300ms delay before starting animation
+                        setTimeout(function() {
+                            cardToDelete.classList.add('animate__animated', 'animate__hinge');
+
+                            // Remove the card after hinge animation completes (2000ms)
+                            setTimeout(function() {
+                                cardToDelete.remove();
+                                cardToDelete = null;
+                            }, 2000);
+                        }, 300);
+                    }
+                });
+
+                // Close modal when clicking overlay
+                deleteModal.addEventListener('click', function(e) {
+                    if (e.target === deleteModal) {
+                        deleteModal.classList.remove('open');
+                        cardToDelete = null;
+                    }
+                });
+            }
+
+            // Duplicate functionality
+            function attachDuplicateListener(duplicateBtn) {
+                duplicateBtn.addEventListener('click', function handleDuplicateClick(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // Find the version card to duplicate
+                    var cardToDuplicate = this.closest('.version-card');
+
+                    if (cardToDuplicate) {
+                        // Clone the card deeply
+                        var clonedCard = cardToDuplicate.cloneNode(true);
+
+                        // Set initial opacity to 0 and add transition
+                        clonedCard.style.opacity = '0';
+                        clonedCard.style.transition = 'opacity 300ms ease';
+
+                        // Insert the cloned card after the original
+                        cardToDuplicate.parentNode.insertBefore(clonedCard, cardToDuplicate.nextSibling);
+
+                        // Trigger fade-in animation
+                        setTimeout(function() {
+                            clonedCard.style.opacity = '1';
+                        }, 10);
+
+                        // Re-attach event listeners to the new card's dropdown button
+                        var newMenuBtn = clonedCard.querySelector('.version-menu-btn');
+                        if (newMenuBtn) {
+                            newMenuBtn.addEventListener('click', function(e) {
+                                e.stopPropagation();
+                                var menu = this.nextElementSibling;
+                                var isOpen = menu.classList.contains('show');
+
+                                // Close all dropdowns
+                                document.querySelectorAll('.version-dropdown-menu').forEach(function(m) {
+                                    m.classList.remove('show');
+                                });
+
+                                // Toggle current dropdown
+                                if (!isOpen) {
+                                    menu.classList.add('show');
+                                }
+                            });
+                        }
+
+                        // Re-attach delete listener to the new card's delete button
+                        var newDeleteBtn = clonedCard.querySelector('.version-dropdown-item-danger');
+                        if (newDeleteBtn) {
+                            newDeleteBtn.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                cardToDelete = this.closest('.version-card');
+                                if (deleteModal) {
+                                    deleteModal.classList.add('open');
+                                }
+                            });
+                        }
+
+                        // Re-attach duplicate listener to the new card's duplicate button
+                        var duplicateItems = clonedCard.querySelectorAll('.version-dropdown-item:not(.version-dropdown-item-danger)');
+                        duplicateItems.forEach(function(dupItem) {
+                            if (dupItem.textContent.trim() === 'Duplicate') {
+                                attachDuplicateListener(dupItem);
+                            }
+                        });
+
+                        // Close the dropdown after duplicating
+                        document.querySelectorAll('.version-dropdown-menu').forEach(function(menu) {
+                            menu.classList.remove('show');
+                        });
+                    }
+                });
+            }
+
+            // Attach duplicate listeners to all initial duplicate buttons
+            var duplicateButtons = document.querySelectorAll('.version-dropdown-item:not(.version-dropdown-item-danger)');
+            duplicateButtons.forEach(function(item) {
+                if (item.textContent.trim() === 'Duplicate') {
+                    attachDuplicateListener(item);
+                }
+            });
+        }, 100);
+    </script>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="gen-modal-overlay" id="deleteVersionModal">
+        <div class="gen-modal">
+            <div class="gen-modal-content">
+                <div class="gen-modal-header">
+                    <h5 class="gen-modal-title">Delete Confirmation</h5>
+                </div>
+                <div class="gen-modal-body">
+                    <div class="gen-info-box">
+                        <div class="gen-info-title">Warning!</div>
+                        <p class="gen-info-text">Are you sure you want to delete this version?<br>This action cannot be undone.</p>
+                    </div>
+                </div>
+                <div class="gen-modal-footer">
+                    <button class="btn gen-btn-cancel" id="deleteModalCancel">Cancel</button>
+                    <button class="btn gen-btn-continue" id="deleteModalConfirm">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Email Template Modal -->
+    <div class="ukp-modal-overlay" id="emailTemplateModal">
+        <div class="ukp-modal" style="width: 800px;">
+            <div class="ukp-modal-header">Edit Email Template</div>
+            <div class="ukp-modal-body">
+                <div class="ukp-modal-form-group full">
+                    <label class="ukp-modal-form-label">Title</label>
+                    <input type="text" class="ukp-modal-form-input" id="emailTitle" placeholder="Enter title">
+                </div>
+                <div class="ukp-modal-form-group full">
+                    <label class="ukp-modal-form-label">Subject</label>
+                    <input type="text" class="ukp-modal-form-input" id="emailSubject" placeholder="Enter subject">
+                </div>
+                <div class="ukp-modal-form-group full">
+                    <label class="ukp-modal-form-label">Email Body</label>
+                    <div class="email-toolbar">
+                        <button class="toolbar-btn" type="button" title="Bold"><b>B</b></button>
+                        <button class="toolbar-btn" type="button" title="Italic"><i>I</i></button>
+                        <button class="toolbar-btn" type="button" title="Strikethrough"><s>S</s></button>
+                        <button class="toolbar-btn" type="button" title="Heading 1">H<sub>1</sub></button>
+                        <button class="toolbar-btn" type="button" title="Heading 2">H<sub>2</sub></button>
+                        <button class="toolbar-btn" type="button" title="Heading 3">H<sub>3</sub></button>
+                        <button class="toolbar-btn" type="button" title="Insert Link">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z" fill="currentColor"/>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" type="button" title="Insert Code">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.72 3.22a.75.75 0 011.06 1.06L2.06 8l3.72 3.72a.75.75 0 11-1.06 1.06L.47 8.53a.75.75 0 010-1.06l4.25-4.25zm6.56 0a.75.75 0 10-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06l-4.25-4.25z" fill="currentColor"/>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" type="button" title="Insert Variable">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 5.5a3.5 3.5 0 115.898 2.549 5.507 5.507 0 013.034 4.084.75.75 0 11-1.482.235 4.001 4.001 0 00-7.9 0 .75.75 0 01-1.482-.236A5.507 5.507 0 013.102 8.05 3.49 3.49 0 012 5.5zM11 4a.75.75 0 100 1.5 1.5 1.5 0 01.666 2.844.75.75 0 00-.416.672v.352a.75.75 0 00.574.73c1.2.289 2.162 1.2 2.522 2.372a.75.75 0 101.434-.44 5.01 5.01 0 00-2.56-3.012A3 3 0 0011 4z" fill="currentColor"/>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" type="button" title="Upload Image">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.5 5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" fill="currentColor"/>
+                                <path fill-rule="evenodd" d="M1.75 2.5a.25.25 0 00-.25.25v10.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25v-8.5a.25.25 0 00-.25-.25h-3a.75.75 0 01-.75-.75V2.5a.25.25 0 00-.25-.25h-8.5zM0 2.75C0 1.784.784 1 1.75 1h8.5c.966 0 1.75.784 1.75 1.75v.5h3.25c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0115.25 15H1.75A1.75 1.75 0 010 13.25V2.75z" fill="currentColor"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <textarea class="ukp-modal-form-input email-body-textarea" id="emailBody" rows="10" placeholder="Enter email body">Hi ${ReviewerName},
+
+A ${AssessmentType} has been submitted for your review on FirmVerify.
+
+Firm:
+${FirmName}
+
+Assessment Type:
+${AssessmentType}
+
+Document:
+${DocumentName}</textarea>
+                </div>
+            </div>
+            <div class="ukp-modal-footer">
+                <button class="ukp-modal-cancel-btn" id="emailModalCancel">Cancel</button>
+                <div style="display: flex; gap: 12px;">
+                    <button class="ukp-modal-cancel-btn" id="emailMarkDefault" style="display: flex; align-items: center; gap: 8px;">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z" fill="currentColor"/>
+                        </svg>
+                        Mark as default
+                    </button>
+                    <button class="ukp-modal-save-btn" id="emailModalUpdate">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .email-toolbar {
+            display: flex;
+            gap: 4px;
+            background: #1a3a40;
+            padding: 8px 12px;
+            border-radius: 8px 8px 0 0;
+            border: 1px solid #1a3a40;
+        }
+        .toolbar-btn {
+            background: transparent;
+            border: none;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.15s;
+            min-width: 36px;
+            height: 36px;
+        }
+        .toolbar-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .toolbar-btn sub {
+            font-size: 10px;
+            margin-left: -2px;
+        }
+        .email-body-textarea {
+            border-radius: 0 0 8px 8px !important;
+            border-top: none !important;
+            min-height: 300px;
+            resize: vertical;
+            font-family: 'Noto Sans', sans-serif;
+        }
+    </style>
+
+    <script>
+        // Email Template Modal
+        setTimeout(function() {
+            var emailModal = document.getElementById('emailTemplateModal');
+            var newVersionBtn = document.querySelector('.btn.btn-generate.cl-add-btn');
+            var versionCards = document.querySelectorAll('.version-card');
+            var editButtons = document.querySelectorAll('.version-dropdown-item');
+
+            // Open modal when clicking New Version button
+            if (newVersionBtn) {
+                newVersionBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (emailModal) {
+                        emailModal.classList.add('open');
+                    }
+                });
+            }
+
+            // Open modal when clicking version cards (but not dropdown buttons/menus)
+            versionCards.forEach(function(card) {
+                card.addEventListener('click', function(e) {
+                    // Don't open modal if clicking on dropdown button or menu
+                    if (!e.target.closest('.version-dropdown-wrap')) {
+                        if (emailModal) {
+                            emailModal.classList.add('open');
+                        }
+                    }
+                });
+            });
+
+            // Open modal when clicking Edit in dropdown
+            editButtons.forEach(function(editBtn) {
+                if (editBtn.textContent.trim() === 'Edit') {
+                    editBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (emailModal) {
+                            emailModal.classList.add('open');
+                        }
+                        // Close dropdown
+                        document.querySelectorAll('.version-dropdown-menu').forEach(function(menu) {
+                            menu.classList.remove('show');
+                        });
+                    });
+                }
+            });
+
+            // Close modal handlers
+            if (emailModal) {
+                document.getElementById('emailModalCancel').addEventListener('click', function() {
+                    emailModal.classList.remove('open');
+                });
+
+                document.getElementById('emailModalUpdate').addEventListener('click', function() {
+                    // Add save functionality here
+                    console.log('Email template updated');
+                    emailModal.classList.remove('open');
+                });
+
+                // Close when clicking overlay
+                emailModal.addEventListener('click', function(e) {
+                    if (e.target === emailModal) {
+                        emailModal.classList.remove('open');
+                    }
+                });
+            }
+        }, 100);
+    </script>
+</body>
+</html>
