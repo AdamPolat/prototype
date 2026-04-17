@@ -284,7 +284,7 @@
                 <span class="sidebar-icon-wrap"><img src="images/firm.svg" alt="Firm" width="20" height="20"></span>
                 <span class="sidebar-label">Firm</span>
             </a>
-            <a class="sidebar-nav-link" href="#" title="Settings">
+            <a class="sidebar-nav-link" href="settings.html" title="Settings">
                 <span class="sidebar-icon-wrap"><img src="images/settings.svg" alt="Settings" width="20" height="20"></span>
                 <span class="sidebar-label">Settings</span>
             </a>
@@ -521,19 +521,162 @@
         })();
 
         // Client data
-        var clientsData = [];
+        var clientsData = [
+            {
+                "name": "Riverside Ventures Pty Ltd",
+                "abn": "42 158 923 467",
+                "entityType": "Trust",
+                "riskRating": "Low",
+                "cddStatus": "Current",
+                "lastCdd": "15/02/26",
+                "nextReview": "15/02/27",
+                "assignedTo": "Kim Davidson"
+            },
+            {
+                "name": "Melbourne Property Group",
+                "abn": "78 234 891 234",
+                "entityType": "Partnership",
+                "riskRating": "Medium",
+                "cddStatus": "Current",
+                "lastCdd": "03/11/25",
+                "nextReview": "03/11/26",
+                "assignedTo": "Jason Lee"
+            },
+            {
+                "name": "Thompson Family Trust",
+                "abn": "91 445 672 889",
+                "entityType": "Family",
+                "riskRating": "Low",
+                "cddStatus": "Current",
+                "lastCdd": "22/01/26",
+                "nextReview": "22/01/27",
+                "assignedTo": "Sarah Mitchell"
+            },
+            {
+                "name": "Anderson Trading Co",
+                "abn": "55 789 234 156",
+                "entityType": "Individual /Sole Trader",
+                "riskRating": "Low",
+                "cddStatus": "Current",
+                "lastCdd": "18/12/25",
+                "nextReview": "18/12/26",
+                "assignedTo": "Kim Davidson"
+            },
+            {
+                "name": "Harbour Capital Partners",
+                "abn": "67 912 445 778",
+                "entityType": "Partnership",
+                "riskRating": "High",
+                "cddStatus": "Due Soon",
+                "lastCdd": "05/01/25",
+                "nextReview": "05/04/26",
+                "assignedTo": "Jason Lee"
+            },
+            {
+                "name": "Westside Holdings Group",
+                "abn": "33 267 893 445",
+                "entityType": "Business Group",
+                "riskRating": "High",
+                "cddStatus": "Due Soon",
+                "lastCdd": "12/02/25",
+                "nextReview": "12/04/26",
+                "assignedTo": "Michael Chen"
+            },
+            {
+                "name": "Collins Street Investments",
+                "abn": "48 556 789 223",
+                "entityType": "Trust",
+                "riskRating": "Medium",
+                "cddStatus": "Current",
+                "lastCdd": "28/01/26",
+                "nextReview": "28/01/27",
+                "assignedTo": "Sarah Mitchell"
+            },
+            {
+                "name": "Brighton Bay Traders",
+                "abn": "82 334 667 891",
+                "entityType": "Partnership",
+                "riskRating": "Low",
+                "cddStatus": "Current",
+                "lastCdd": "10/03/26",
+                "nextReview": "10/03/27",
+                "assignedTo": "Kim Davidson"
+            },
+            {
+                "name": "Chen Family Enterprises",
+                "abn": "29 445 112 667",
+                "entityType": "Family",
+                "riskRating": "Low",
+                "cddStatus": "Current",
+                "lastCdd": "07/02/26",
+                "nextReview": "07/02/27",
+                "assignedTo": "Jason Lee"
+            },
+            {
+                "name": "Southbank Property Trust",
+                "abn": "64 778 223 449",
+                "entityType": "Trust",
+                "riskRating": "Medium",
+                "cddStatus": "Current",
+                "lastCdd": "19/01/26",
+                "nextReview": "19/01/27",
+                "assignedTo": "Sarah Mitchell"
+            },
+            {
+                "name": "Newport Capital LLC",
+                "abn": "51 889 445 112",
+                "entityType": "Business Group",
+                "riskRating": "High",
+                "cddStatus": "Overdue",
+                "lastCdd": "08/11/24",
+                "nextReview": "08/02/26",
+                "assignedTo": "Michael Chen"
+            },
+            {
+                "name": "Williams & Associates",
+                "abn": "73 223 556 889",
+                "entityType": "Partnership",
+                "riskRating": "Medium",
+                "cddStatus": "Due Soon",
+                "lastCdd": "25/12/25",
+                "nextReview": "25/04/26",
+                "assignedTo": "Jason Lee"
+            },
+            {
+                "name": "Fitzroy Retail Group",
+                "abn": "88 667 334 221",
+                "entityType": "Business Group",
+                "riskRating": "High",
+                "cddStatus": "Due Soon",
+                "lastCdd": "14/01/25",
+                "nextReview": "14/04/26",
+                "assignedTo": "Kim Davidson"
+            },
+            {
+                "name": "Parker Consulting",
+                "abn": "36 992 778 334",
+                "entityType": "Individual /Sole Trader",
+                "riskRating": "Low",
+                "cddStatus": "Current",
+                "lastCdd": "02/03/26",
+                "nextReview": "02/03/27",
+                "assignedTo": "Sarah Mitchell"
+            },
+            {
+                "name": "Richmond Development Trust",
+                "abn": "47 115 889 667",
+                "entityType": "Trust",
+                "riskRating": "Low",
+                "cddStatus": "Current",
+                "lastCdd": "16/02/26",
+                "nextReview": "16/02/27",
+                "assignedTo": "Michael Chen"
+            }
+        ];
 
-        // Load and render clients from JSON
-        fetch('../data/clients.json')
-            .then(function(response) { return response.json(); })
-            .then(function(data) {
-                clientsData = data;
-                renderClients();
-                setupArchiveFunctionality();
-            })
-            .catch(function(error) {
-                console.error('Error loading clients:', error);
-            });
+        // Render clients immediately
+        renderClients();
+        setupArchiveFunctionality();
 
         function renderClients() {
             var tbody = document.getElementById('clientsTableBody');
