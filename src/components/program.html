@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/edit-risk-assessment.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         /* Empty state */
@@ -288,6 +289,577 @@
             margin-right: 10px;
             opacity: 0.4;
         }
+
+        /* Complete Alert */
+        .complete-alert {
+            background: #d4edda;
+            border: 1px solid #a8d5b0;
+            border-radius: 10px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .complete-alert-icon {
+            width: 40px;
+            height: 40px;
+            background: #28a745;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .complete-alert-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #155724;
+            margin-bottom: 4px;
+        }
+
+        .complete-alert-text {
+            font-size: 13px;
+            color: #155724;
+            margin: 0;
+        }
+
+        /* Upload Dropdown */
+        .upload-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .upload-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 4px;
+            background: #fff;
+            border: 1px solid #c9d8de;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            min-width: 200px;
+            z-index: 1000;
+            display: none;
+        }
+
+        .upload-dropdown-menu.show {
+            display: block;
+        }
+
+        .upload-dropdown-item {
+            padding: 10px 16px;
+            font-size: 13px;
+            color: #1a2b35;
+            cursor: pointer;
+            transition: background 0.15s;
+            text-align: left;
+        }
+
+        .upload-dropdown-item:first-child {
+            border-radius: 8px 8px 0 0;
+        }
+
+        .upload-dropdown-item:last-child {
+            border-radius: 0 0 8px 8px;
+        }
+
+        .upload-dropdown-item:hover {
+            background: #f5f7f8;
+        }
+
+        /* Generate Program Modal */
+        .program-stepper {
+            width: 200px;
+            background: #f5f7f8;
+            padding: 24px 20px;
+            border-right: 1px solid #e0e0e0;
+        }
+
+        .stepper-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            position: relative;
+        }
+
+        .stepper-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 40px;
+            width: 1px;
+            height: 24px;
+            background: #d0d0d0;
+        }
+
+        .stepper-item.active .stepper-label {
+            font-weight: 600;
+            color: #1a6b40;
+        }
+
+        .stepper-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .stepper-icon.complete {
+            background: #1a6b40;
+            color: #fff;
+        }
+
+        .stepper-icon.incomplete {
+            background: #e0e0e0;
+            color: #666;
+        }
+
+        .stepper-icon.gear {
+            background: #888;
+            color: #fff;
+        }
+
+        .stepper-label {
+            font-size: 14px;
+            color: #5a6c7a;
+        }
+
+        .program-modal-content {
+            flex: 1;
+            padding: 32px;
+            overflow-y: auto;
+        }
+
+        .program-modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a2b35;
+            margin: 0 0 12px 0;
+        }
+
+        .program-modal-description {
+            font-size: 14px;
+            color: #5a6c7a;
+            margin: 0 0 32px 0;
+        }
+
+        .document-selection-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .document-selection-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px;
+            border: 2px solid #d0d7de;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .document-selection-item:hover {
+            border-color: #a0b0bd;
+            background: #f9fafb;
+        }
+
+        .document-selection-item.selected {
+            border-color: #1a6b40;
+            background: #f0f8f4;
+        }
+
+        .doc-icon {
+            flex-shrink: 0;
+        }
+
+        .doc-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a2b35;
+            flex: 1;
+        }
+
+        .doc-badge {
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .doc-badge.approved {
+            background: #d4edda;
+            color: #2d5f3c;
+        }
+
+        .doc-badge.current {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .doc-badge.generated {
+            background: #fff;
+            border: 1px solid #1a6b40;
+            color: #1a6b40;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .program-modal-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 32px;
+            border-top: 1px solid #e0e0e0;
+            background: #fafafa;
+        }
+
+        .program-modal-btn {
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .program-modal-btn.cancel {
+            background: #fff;
+            border: 1px solid #c9d8de;
+            color: #1a2b35;
+        }
+
+        .program-modal-btn.cancel:hover {
+            background: #f5f7f8;
+        }
+
+        .program-modal-btn.back {
+            background: #fff;
+            border: 1px solid #c9d8de;
+            color: #1a2b35;
+        }
+
+        .program-modal-btn.back:hover {
+            background: #f5f7f8;
+        }
+
+        .program-modal-btn.next {
+            background: #1a6b40;
+            border: none;
+            color: #fff;
+        }
+
+        .program-modal-btn.next:hover {
+            background: #155530;
+        }
+
+        /* Generate Risk Program Modal */
+        .ncg-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            z-index: 1050;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            pointer-events: none;
+        }
+
+        .ncg-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .ncg-modal {
+            background: #fff;
+            border-radius: 14px;
+            max-width: 95vw;
+            max-height: 90vh;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+            transform: translateY(16px);
+            transition: transform 0.2s ease;
+        }
+
+        .ncg-overlay.open .ncg-modal {
+            transform: translateY(0);
+        }
+
+        .ncg-modal-header {
+            background: #1a3a40;
+            color: #fff;
+            padding: 22px 32px;
+            border-radius: 14px 14px 0 0;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .program-doc-item {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+        }
+
+        .program-doc-item:hover {
+            border-color: #a0b0bd !important;
+            background: #f9fafb !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .program-doc-item.selected {
+            border: 2px solid rgb(21, 194, 103) !important;
+            background: rgb(255, 255, 255) !important;
+        }
+
+        .program-select-btn {
+            transition: all 0.2s;
+            outline: none;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 1px 3px -1px, rgba(0, 0, 0, 0.3) 0px 0px 0.3px -1px;
+        }
+
+        .program-select-btn:hover {
+            background: #f5f7f8 !important;
+        }
+
+        .program-select-btn:active {
+            transform: scale(0.98);
+        }
+
+        .program-select-btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 107, 64, 0.2);
+        }
+
+        .program-select-btn.selected:hover {
+            background: #f0f8f4 !important;
+        }
+
+        /* Step transition animations */
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-fade-out {
+            animation: fadeOut 0.8s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+        }
+
+        .step-fade-in {
+            animation: fadeIn 0.8s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+        }
+
+        /* Validation box shake animation */
+        @keyframes shakeIn {
+            0% {
+                opacity: 0;
+                transform: translateX(0);
+            }
+            10% {
+                opacity: 1;
+                transform: translateX(-10px);
+            }
+            20% {
+                transform: translateX(10px);
+            }
+            30% {
+                transform: translateX(-10px);
+            }
+            40% {
+                transform: translateX(10px);
+            }
+            50%, 100% {
+                transform: translateX(0);
+            }
+        }
+
+        .shake-in {
+            animation: shakeIn 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        @keyframes fadeOutBox {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        .fade-out-box {
+            animation: fadeOutBox 0.3s ease forwards;
+        }
+
+        /* Success checkmark animation */
+        .checkmark {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #fff;
+            stroke-miterlimit: 10;
+            margin: 0 auto;
+            box-shadow: inset 0px 0px 0px #7ac142;
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+        }
+
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #7ac142;
+            fill: none;
+            animation: stroke .6s cubic-bezier(0.650, 0.000, 0.450, 1.000) forwards;
+        }
+
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke .3s cubic-bezier(0.650, 0.000, 0.450, 1.000) .8s forwards;
+        }
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes scale {
+            0%, 100% {
+                transform: none;
+            }
+            50% {
+                transform: scale3d(1.1, 1.1, 1);
+            }
+        }
+
+        @keyframes fill {
+            100% {
+                box-shadow: inset 0px 0px 0px 30px #7ac142;
+            }
+        }
+
+        /* Progress indicator animations */
+        .era-step-done-fa {
+            transition: all 0.3s ease;
+        }
+
+        .era-section.active-section .era-step-done-fa {
+            animation: pulse 0.6s ease;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .era-section-label {
+            transition: all 0.3s ease;
+        }
+
+        .era-section.active-section .era-section-label {
+            font-weight: 600;
+        }
+
+        /* Override era-stepper styles for modal */
+        .ncg-modal .era-stepper {
+            width: 280px;
+            flex-shrink: 0;
+            border-right: 1px solid #c8d5d9;
+            padding: 24px 36px;
+            overflow-y: auto;
+            background: #f5f7f8;
+            border-bottom-left-radius: 10px;
+        }
+
+        .ncg-modal .era-section-header {
+            cursor: default;
+            padding: 9px 0 8px;
+        }
+
+        .ncg-modal .era-section::before {
+            left: 9px;
+        }
+
+        .era-section::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 25px;
+            bottom: -6px;
+            width: 2px;
+            background: #a3aeb2;
+        }
+
+        /* Step transition loader */
+        .step-loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .step-loader.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .step-loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(26, 107, 64, 0.2);
+            border-top-color: #1a6b40;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -403,13 +975,20 @@
                     <h6>No program has been created</h6>
                     <p>Click Upload or Generate to<br>create a new Program. You can also<br>upload a previously completed Program</p>
                     <div class="cl-empty-buttons">
-                        <button class="cl-filter-btn">
-                            Upload ...
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#0080ff" viewBox="0 0 16 16" style="vertical-align: middle; margin-left: 6px;">
-                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
-                                <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z"/>
-                            </svg>
-                        </button>
+                        <div class="upload-dropdown">
+                            <button class="cl-filter-btn upload-dropdown-btn">
+                                Upload ...
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#494949" viewBox="0 0 16 16" style="vertical-align: middle; margin-left: 6px;">
+                                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                </svg>
+                            </button>
+                            <div class="upload-dropdown-menu">
+                                <div class="upload-dropdown-item">Risk Assessment</div>
+                                <div class="upload-dropdown-item">Policy</div>
+                                <div class="upload-dropdown-item">Process</div>
+                                <div class="upload-dropdown-item">Finalise Program</div>
+                            </div>
+                        </div>
                         <button class="btn btn-generate cl-add-btn" id="generateProgramBtn">
                             Generate....
                             <i class="fas fa-magic" style="margin-left: 6px;"></i>
@@ -421,13 +1000,20 @@
                 <div class="program-content" id="programContent">
                     <!-- Action Buttons -->
                     <div class="program-buttons">
-                        <button class="cl-filter-btn">
-                            Upload ...
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#0080ff" viewBox="0 0 16 16" style="vertical-align: middle; margin-left: 6px;">
-                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
-                                <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z"/>
-                            </svg>
-                        </button>
+                        <div class="upload-dropdown">
+                            <button class="cl-filter-btn upload-dropdown-btn">
+                                Upload ...
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#494949" viewBox="0 0 16 16" style="vertical-align: middle; margin-left: 6px;">
+                                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                </svg>
+                            </button>
+                            <div class="upload-dropdown-menu">
+                                <div class="upload-dropdown-item">Risk Assessment</div>
+                                <div class="upload-dropdown-item">Policy</div>
+                                <div class="upload-dropdown-item">Process</div>
+                                <div class="upload-dropdown-item">Finalise Program</div>
+                            </div>
+                        </div>
                         <button class="btn btn-generate cl-add-btn" id="generateProgramBtn2">
                             Generate....
                             <i class="fas fa-magic" style="margin-left: 6px;"></i>
@@ -500,42 +1086,53 @@
                             <table class="program-table">
                                 <thead>
                                     <tr>
-                                        <th style="width: 25%;">Title</th>
-                                        <th style="width: 20%;">Version</th>
-                                        <th style="width: 15%;">Tags</th>
-                                        <th style="width: 20%;">Date Reviews</th>
-                                        <th style="width: 20%;">Reveibed By</th>
+                                        <th>Title</th>
+                                        <th>Version</th>
+                                        <th>Tags</th>
+                                        <th>Date Reviewed</th>
+                                        <th>Reviewed By</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>Sample Table Data</td>
+                                        <td>v1.0</td>
+                                        <td><span class="ukp-training-badge"><i class="fas fa-magic mr-1"></i> Firm Verified Generated</span></td>
+                                        <td>Sample Table Data</td>
+                                        <td>Samual Jones</td>
                                         <td>
-                                            <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.17 22.48" width="18" height="18" class="program-table-icon">
-                                                <defs>
-                                                    <style>
-                                                        .cls-1 {
-                                                            stroke-linecap: round;
-                                                            stroke-linejoin: round;
-                                                        }
-                                                        .cls-1, .cls-2 {
-                                                            fill: #fff;
-                                                            stroke: #9eb5cc;
-                                                            stroke-width: 3px;
-                                                        }
-                                                        .cls-2 {
-                                                            stroke-miterlimit: 10;
-                                                        }
-                                                    </style>
-                                                </defs>
-                                                <path class="cls-2" d="M12.39,1.5h-7.61c-1.81,0-3.29,1.47-3.29,3.29v12.91c0,1.81,1.47,3.29,3.29,3.29h10.6c1.81,0,3.29-1.47,3.29-3.29V7.77L12.39,1.5Z"/>
-                                                <path class="cls-1" d="M14.2,9.51h2.99s-6.27-6.27-6.27-6.27v2.99c0,1.81,1.47,3.29,3.29,3.29Z"/>
-                                            </svg>
-                                            Sample Table Data
+                                            <div class="ra-date-wrapper">
+                                                <input type="text" class="ra-date-input" placeholder="dd/mm/yyyy">
+                                                <button class="ra-date-save" style="display: none;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 12.38 9.13">
+                                                        <path fill="#6da820" stroke="#6da820" stroke-miterlimit="10" d="M11.64.74c.32.32.32.83,0,1.15l-6.5,6.5c-.32.32-.83.32-1.15,0L.74,5.14c-.32-.32-.32-.83,0-1.15s.83-.32,1.15,0l2.68,2.67L10.49.74c.32-.32.83-.32,1.15,0h0Z"></path>
+                                                    </svg>
+                                                </button>
+                                                <button class="ra-date-cancel" style="display: none;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 10.05 10.05">
+                                                        <path fill="#4f6568" stroke="#4f6568" stroke-miterlimit="10" d="M6.3,5.02l2.98,2.98c.35.35.35.93,0,1.28s-.93.35-1.28,0l-2.98-2.98-2.98,2.98c-.35.35-.93.35-1.28,0-.35-.35-.35-.93,0-1.28l2.98-2.98L.77,2.05c-.35-.35-.35-.93,0-1.28s.93-.35,1.28,0l2.98,2.98L8,.76c.35-.35.93-.35,1.28,0,.35.35.35.93,0,1.28l-2.98,2.98Z"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
                                         </td>
-                                        <td>Sample Table Data</td>
-                                        <td><span class="program-tag low">Low</span></td>
-                                        <td>Sample Table Data</td>
-                                        <td>Sample Table Data</td>
+                                        <td><span class="label-tag label-tag-green">Approved</span></td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-action dropdown-toggle" type="button">…</button>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a class="dropdown-item" href="#">Edit</a>
+                                                    <a class="dropdown-item text-danger" href="#">Delete</a>
+                                                    <a class="dropdown-item" href="#">View</a>
+                                                    <a class="dropdown-item" href="#">Download All</a>
+                                                    <a class="dropdown-item" href="#">Cancel Review</a>
+                                                    <a class="dropdown-item" href="#">Send for Review</a>
+                                                    <a class="dropdown-item mark-current-toggle" href="#">Mark as Current</a>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -549,42 +1146,53 @@
                             <table class="program-table">
                                 <thead>
                                     <tr>
-                                        <th style="width: 25%;">Title</th>
-                                        <th style="width: 20%;">Version</th>
-                                        <th style="width: 15%;">Tags</th>
-                                        <th style="width: 20%;">Date Reviews</th>
-                                        <th style="width: 20%;">Reveibed By</th>
+                                        <th>Title</th>
+                                        <th>Version</th>
+                                        <th>Tags</th>
+                                        <th>Date Reviewed</th>
+                                        <th>Reviewed By</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>Sample Table Data</td>
+                                        <td>v1.0</td>
+                                        <td><span class="ukp-training-badge"><i class="fas fa-magic mr-1"></i> Firm Verified Generated</span></td>
+                                        <td>Sample Table Data</td>
+                                        <td>Samual Jones</td>
                                         <td>
-                                            <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.17 22.48" width="18" height="18" class="program-table-icon">
-                                                <defs>
-                                                    <style>
-                                                        .cls-1 {
-                                                            stroke-linecap: round;
-                                                            stroke-linejoin: round;
-                                                        }
-                                                        .cls-1, .cls-2 {
-                                                            fill: #fff;
-                                                            stroke: #9eb5cc;
-                                                            stroke-width: 3px;
-                                                        }
-                                                        .cls-2 {
-                                                            stroke-miterlimit: 10;
-                                                        }
-                                                    </style>
-                                                </defs>
-                                                <path class="cls-2" d="M12.39,1.5h-7.61c-1.81,0-3.29,1.47-3.29,3.29v12.91c0,1.81,1.47,3.29,3.29,3.29h10.6c1.81,0,3.29-1.47,3.29-3.29V7.77L12.39,1.5Z"/>
-                                                <path class="cls-1" d="M14.2,9.51h2.99s-6.27-6.27-6.27-6.27v2.99c0,1.81,1.47,3.29,3.29,3.29Z"/>
-                                            </svg>
-                                            Sample Table Data
+                                            <div class="ra-date-wrapper">
+                                                <input type="text" class="ra-date-input" placeholder="dd/mm/yyyy">
+                                                <button class="ra-date-save" style="display: none;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 12.38 9.13">
+                                                        <path fill="#6da820" stroke="#6da820" stroke-miterlimit="10" d="M11.64.74c.32.32.32.83,0,1.15l-6.5,6.5c-.32.32-.83.32-1.15,0L.74,5.14c-.32-.32-.32-.83,0-1.15s.83-.32,1.15,0l2.68,2.67L10.49.74c.32-.32.83-.32,1.15,0h0Z"></path>
+                                                    </svg>
+                                                </button>
+                                                <button class="ra-date-cancel" style="display: none;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 10.05 10.05">
+                                                        <path fill="#4f6568" stroke="#4f6568" stroke-miterlimit="10" d="M6.3,5.02l2.98,2.98c.35.35.35.93,0,1.28s-.93.35-1.28,0l-2.98-2.98-2.98,2.98c-.35.35-.93.35-1.28,0-.35-.35-.35-.93,0-1.28l2.98-2.98L.77,2.05c-.35-.35-.35-.93,0-1.28s.93-.35,1.28,0l2.98,2.98L8,.76c.35-.35.93-.35,1.28,0,.35.35.35.93,0,1.28l-2.98,2.98Z"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
                                         </td>
-                                        <td>Sample Table Data</td>
-                                        <td><span class="program-tag low">Low</span></td>
-                                        <td>Sample Table Data</td>
-                                        <td>Sample Table Data</td>
+                                        <td><span class="label-tag label-tag-green">Approved</span></td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-action dropdown-toggle" type="button">…</button>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a class="dropdown-item" href="#">Edit</a>
+                                                    <a class="dropdown-item text-danger" href="#">Delete</a>
+                                                    <a class="dropdown-item" href="#">View</a>
+                                                    <a class="dropdown-item" href="#">Download All</a>
+                                                    <a class="dropdown-item" href="#">Cancel Review</a>
+                                                    <a class="dropdown-item" href="#">Send for Review</a>
+                                                    <a class="dropdown-item mark-current-toggle" href="#">Mark as Current</a>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -598,42 +1206,53 @@
                             <table class="program-table">
                                 <thead>
                                     <tr>
-                                        <th style="width: 25%;">Title</th>
-                                        <th style="width: 20%;">Version</th>
-                                        <th style="width: 15%;">Tags</th>
-                                        <th style="width: 20%;">Date Reviews</th>
-                                        <th style="width: 20%;">Reveibed By</th>
+                                        <th>Title</th>
+                                        <th>Version</th>
+                                        <th>Tags</th>
+                                        <th>Date Reviewed</th>
+                                        <th>Reviewed By</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>Sample Table Data</td>
+                                        <td>v1.0</td>
+                                        <td><span class="ukp-training-badge"><i class="fas fa-magic mr-1"></i> Firm Verified Generated</span></td>
+                                        <td>Sample Table Data</td>
+                                        <td>Samual Jones</td>
                                         <td>
-                                            <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.17 22.48" width="18" height="18" class="program-table-icon">
-                                                <defs>
-                                                    <style>
-                                                        .cls-1 {
-                                                            stroke-linecap: round;
-                                                            stroke-linejoin: round;
-                                                        }
-                                                        .cls-1, .cls-2 {
-                                                            fill: #fff;
-                                                            stroke: #9eb5cc;
-                                                            stroke-width: 3px;
-                                                        }
-                                                        .cls-2 {
-                                                            stroke-miterlimit: 10;
-                                                        }
-                                                    </style>
-                                                </defs>
-                                                <path class="cls-2" d="M12.39,1.5h-7.61c-1.81,0-3.29,1.47-3.29,3.29v12.91c0,1.81,1.47,3.29,3.29,3.29h10.6c1.81,0,3.29-1.47,3.29-3.29V7.77L12.39,1.5Z"/>
-                                                <path class="cls-1" d="M14.2,9.51h2.99s-6.27-6.27-6.27-6.27v2.99c0,1.81,1.47,3.29,3.29,3.29Z"/>
-                                            </svg>
-                                            Sample Table Data
+                                            <div class="ra-date-wrapper">
+                                                <input type="text" class="ra-date-input" placeholder="dd/mm/yyyy">
+                                                <button class="ra-date-save" style="display: none;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 12.38 9.13">
+                                                        <path fill="#6da820" stroke="#6da820" stroke-miterlimit="10" d="M11.64.74c.32.32.32.83,0,1.15l-6.5,6.5c-.32.32-.83.32-1.15,0L.74,5.14c-.32-.32-.32-.83,0-1.15s.83-.32,1.15,0l2.68,2.67L10.49.74c.32-.32.83-.32,1.15,0h0Z"></path>
+                                                    </svg>
+                                                </button>
+                                                <button class="ra-date-cancel" style="display: none;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 10.05 10.05">
+                                                        <path fill="#4f6568" stroke="#4f6568" stroke-miterlimit="10" d="M6.3,5.02l2.98,2.98c.35.35.35.93,0,1.28s-.93.35-1.28,0l-2.98-2.98-2.98,2.98c-.35.35-.93.35-1.28,0-.35-.35-.35-.93,0-1.28l2.98-2.98L.77,2.05c-.35-.35-.35-.93,0-1.28s.93-.35,1.28,0l2.98,2.98L8,.76c.35-.35.93-.35,1.28,0,.35.35.35.93,0,1.28l-2.98,2.98Z"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
                                         </td>
-                                        <td>Sample Table Data</td>
-                                        <td><span class="program-tag low">Low</span></td>
-                                        <td>Sample Table Data</td>
-                                        <td>Sample Table Data</td>
+                                        <td><span class="label-tag label-tag-green">Approved</span></td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-action dropdown-toggle" type="button">…</button>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a class="dropdown-item" href="#">Edit</a>
+                                                    <a class="dropdown-item text-danger" href="#">Delete</a>
+                                                    <a class="dropdown-item" href="#">View</a>
+                                                    <a class="dropdown-item" href="#">Download All</a>
+                                                    <a class="dropdown-item" href="#">Cancel Review</a>
+                                                    <a class="dropdown-item" href="#">Send for Review</a>
+                                                    <a class="dropdown-item mark-current-toggle" href="#">Mark as Current</a>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -652,9 +1271,20 @@
             <div class="ukp-modal-header">Current Documents Required</div>
             <div class="ukp-modal-body">
                 <!-- Info Box -->
-                <div class="ukp-modal-info-box">
+                <div class="ukp-modal-info-box" id="infoBox">
                     <div class="ukp-modal-info-title">Current Documents Required</div>
                     <p>To generate a program, you need at least one current document in each of the following categories:</p>
+                </div>
+
+                <!-- Complete Alert -->
+                <div id="completeAlert" style="display: none; opacity: 0; transition: opacity 0.6s;" class="complete-alert mb-4">
+                    <div class="complete-alert-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"></path></svg>
+                    </div>
+                    <div>
+                        <div class="complete-alert-title">Ready to Generate Program</div>
+                        <div class="complete-alert-text">All prerequisites are met. Program is ready to be generated.</div>
+                    </div>
                 </div>
 
                 <!-- Risk assessment -->
@@ -669,7 +1299,10 @@
                         <h6 class="doc-requirement-title">Risk assessment</h6>
                         <p class="doc-requirement-status">INCOMPLETE</p>
                     </div>
-                    <div class="doc-requirement-badge ready">Start</div>
+                    <button class="btn btn-generate cl-add-btn" style="display: inline-flex;">
+                        Generate...
+                        <i class="fas fa-magic" style="margin-left: 6px;"></i>
+                    </button>
                 </div>
 
                 <!-- Policy -->
@@ -684,7 +1317,10 @@
                         <h6 class="doc-requirement-title">Policy</h6>
                         <p class="doc-requirement-status">INCOMPLETE</p>
                     </div>
-                    <div class="doc-requirement-badge ready">Start</div>
+                    <button class="btn btn-generate cl-add-btn" style="display: inline-flex;">
+                        Generate...
+                        <i class="fas fa-magic" style="margin-left: 6px;"></i>
+                    </button>
                 </div>
 
                 <!-- Process -->
@@ -699,7 +1335,10 @@
                         <h6 class="doc-requirement-title">Process</h6>
                         <p class="doc-requirement-status">GO TO POLICY</p>
                     </div>
-                    <div class="doc-requirement-badge start">START</div>
+                    <button class="btn btn-generate cl-add-btn" style="display: inline-flex;">
+                        Generate...
+                        <i class="fas fa-magic" style="margin-left: 6px;"></i>
+                    </button>
                 </div>
 
                 <!-- Divider -->
@@ -721,6 +1360,135 @@
                         Generate Program
                         <i class="fas fa-magic" style="margin-left: 6px;"></i>
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Generate Risk Program Modal -->
+    <div class="ncg-overlay" id="generateProgramModal">
+        <div class="ncg-modal" style="width: 1200px; max-width: 95vw; display: flex; flex-direction: column; height: 85vh;">
+            <!-- Modal Header -->
+            <div class="ncg-modal-header">Generate Risk Program</div>
+
+            <!-- Modal Body with Stepper Layout -->
+            <div style="display: flex; flex: 1; overflow: hidden;">
+                <!-- Left Stepper Sidebar -->
+                <aside class="era-stepper">
+                    <!-- Section: Risk Assessment -->
+                    <div class="era-section active-section">
+                        <div class="era-section-header">
+                            <i class="fas fa-dot-circle era-step-done-fa"></i>
+                            <span class="era-section-label active-label">Risk Assessment</span>
+                        </div>
+                    </div>
+
+                    <!-- Section: Policy -->
+                    <div class="era-section">
+                        <div class="era-section-header">
+                            <i class="fas fa-question-circle era-step-pending-fa"></i>
+                            <span class="era-section-label">Policy</span>
+                        </div>
+                    </div>
+
+                    <!-- Section: Process -->
+                    <div class="era-section">
+                        <div class="era-section-header">
+                            <i class="fas fa-question-circle era-step-pending-fa"></i>
+                            <span class="era-section-label">Process</span>
+                        </div>
+                    </div>
+
+                    <!-- Section: Program -->
+                    <div class="era-section">
+                        <div class="era-section-header">
+                            <i class="fas fa-question-circle era-step-pending-fa"></i>
+                            <span class="era-section-label">Program</span>
+                        </div>
+                    </div>
+
+                    <!-- Section: Finish -->
+                    <div class="era-section">
+                        <div class="era-section-header">
+                            <i class="fas fa-award" id="finishIcon" style="position: absolute; left: 0; top: 4px; font-size: 24px; color: #b8b8b8; z-index: 1;"></i>
+                            <span class="era-section-label">Finish</span>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Right Content Area -->
+                <div class="era-content" style="flex: 1; display: flex; flex-direction: column; background: #fff; position: relative;">
+                    <!-- Loader -->
+                    <div class="step-loader" id="stepLoader">
+                        <div class="step-loader-spinner"></div>
+                    </div>
+
+                    <div class="program-modal-content-area" style="flex: 1; padding: 32px 40px; overflow-y: auto; background: #f0f5f7;">
+                        <!-- Validation Info Box -->
+                        <div class="ukp-modal-info-box" id="programValidationBox" style="display: none; margin-bottom: 24px;">
+                            <div class="ukp-modal-info-title">Selection Required</div>
+                            <p>Please select at least one document to continue.</p>
+                        </div>
+
+                        <h3 style="font-size: 20px; font-weight: 700; color: #1a2b35; margin: 0 0 8px 0;">Risk Assessment</h3>
+                        <p style="font-size: 14px; color: #5a6c7a; margin: 0 0 32px 0;">Select the current risk assessment documents to include in your program.</p>
+
+                        <!-- Document Selection List -->
+                        <div style="display: flex; flex-direction: column; gap: 16px;">
+                            <!-- Document 1 - Selected -->
+                            <div class="program-doc-item selected" style="display: flex;align-items: center;gap: 10px;padding: 14px 25px;border: 2px solid rgb(21, 194, 103);border-radius: 10px;background: rgb(255, 255, 255);cursor: pointer;transition: all 0.2s;">
+                                <div style="font-size: 15px; font-weight: 300; color: #1a2b35;">Risk Assessment  V 2.0</div>
+                                <span style="padding: 2px 12px; border-radius: 6px; font-size: 11px; font-weight: 200; background: #e8f5e9; color: #388e3c; border: 1px solid #81c784;">Approved</span>
+                                <span style="padding: 2px 12px; border-radius: 6px; font-size: 11px; font-weight: 200; background: #e0f2f1; color: #00897b; border: 1px solid #4db6ac;">Current</span>
+                                <span style="padding: 3px 10px; border-radius: 20px; font-size: 11px; color: #2a3840; background: #fff; border: 1px solid #c9d8de; display: inline-flex; align-items: center; gap: 5px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="#df05e5" viewBox="0 0 16 16">
+                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path>
+                                    </svg>
+                                    FirmVerify Generated
+                                </span>
+                                <button class="program-select-btn selected" style="margin-left: auto; display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; font-size: 14px; font-weight: 500; background: rgb(255, 255, 255); border: 1px solid rgb(23, 140, 78); color: rgb(26, 43, 53); cursor: pointer; transition: all 0.2s; box-shadow: rgba(50, 50, 93, 0.25) 0px 1px 3px -1px, rgba(0, 0, 0, 0.3) 0px 0px 0.3px -1px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10" fill="#1a6b40" stroke="#1a6b40"/>
+                                        <path d="M9 12l2 2 4-4" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Select
+                                </button>
+                            </div>
+
+                            <!-- Document 2 - Unselected -->
+                            <div class="program-doc-item" style="display: flex; align-items: center; gap: 10px; padding: 14px 25px; border: 1px solid #d0d7de; border-radius: 10px; background: #fff; cursor: pointer; transition: all 0.2s;">
+                                <div style="font-size: 15px; font-weight: 300; color: #1a2b35;">Risk Assessment  V 1.0</div>
+                                <span style="padding: 2px 12px; border-radius: 6px; font-size: 11px; font-weight: 200; background: #e8f5e9; color: #388e3c; border: 1px solid #81c784;">Approved</span>
+                                <span style="padding: 3px 10px; border-radius: 20px; font-size: 11px; color: #2a3840; background: #fff; border: 1px solid #c9d8de; display: inline-flex; align-items: center; gap: 5px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="#df05e5" viewBox="0 0 16 16">
+                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                                    </svg>
+                                    FirmVerify Generated
+                                </span>
+                                <button class="program-select-btn" style="margin-left: auto; display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; font-size: 14px; font-weight: 500; background: #fff; border: 1px solid #d0d7de; color: #1a2b35; cursor: pointer; transition: all 0.2s; box-shadow: rgba(50, 50, 93, 0.25) 0px 1px 3px -1px, rgba(0, 0, 0, 0.3) 0px 0px 0.3px -1px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10" stroke="#d0d7de" fill="none"/>
+                                    </svg>
+                                    Select
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="program-modal-footer" style="display: flex; align-items: center; justify-content: space-between; padding: 20px 32px; border-top: 1px solid #e0e0e0; background: #fafafa;">
+                        <div style="display: flex; gap: 12px;">
+                            <button class="program-modal-btn cancel" id="programModalCancel" style="padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; background: #fff; border: 1px solid #c9d8de; color: #1a2b35;">Cancel</button>
+                            <button class="program-modal-btn back" id="programModalBack" style="padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; background: #fff; border: 1px solid #c9d8de; color: #1a2b35; display: inline-flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-arrow-left"></i>
+                                Back
+                            </button>
+                        </div>
+                        <button class="program-modal-btn next" id="programModalNext" style="padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; background: #1a6b40; border: none; color: #fff; display: inline-flex; align-items: center; gap: 8px;">
+                            Next
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -928,6 +1696,7 @@
         if (generateBtn) {
             generateBtn.addEventListener('click', function() {
                 resetModalToIncomplete();
+                updateFinaliseProgramModalStatus();
                 documentsModal.classList.add('open');
             });
         }
@@ -1185,6 +1954,17 @@
             var processComplete = localStorage.getItem('processComplete') === 'true';
 
             if (riskComplete && policyComplete && processComplete) {
+                // Show complete alert, hide info box
+                var infoBox = document.getElementById('infoBox');
+                var completeAlert = document.getElementById('completeAlert');
+                if (infoBox && completeAlert) {
+                    infoBox.style.display = 'none';
+                    completeAlert.style.display = 'flex';
+                    setTimeout(function() {
+                        completeAlert.style.opacity = '1';
+                    }, 10);
+                }
+
                 var finaliseModalItem = document.getElementById('finaliseModalItem');
                 if (finaliseModalItem) {
                     finaliseModalItem.classList.remove('finalise');
@@ -1212,6 +1992,15 @@
                     if (generateBtn) {
                         generateBtn.style.display = 'inline-flex';
                     }
+                }
+            } else {
+                // Show info box, hide complete alert
+                var infoBox = document.getElementById('infoBox');
+                var completeAlert = document.getElementById('completeAlert');
+                if (infoBox && completeAlert) {
+                    infoBox.style.display = 'block';
+                    completeAlert.style.display = 'none';
+                    completeAlert.style.opacity = '0';
                 }
             }
         }
@@ -1276,6 +2065,508 @@
                     generateBtn.style.display = 'inline-flex';
                 }
             }
+        }
+
+        // Generate Program button in modal (when all documents are complete)
+        var generateProgramBtnFinal = document.getElementById('generateProgramBtnFinal');
+        if (generateProgramBtnFinal) {
+            generateProgramBtnFinal.addEventListener('click', function() {
+                var generateProgramModal = document.getElementById('generateProgramModal');
+
+                // Fade out documents modal
+                if (documentsModal) {
+                    documentsModal.style.transition = 'opacity 0.4s ease';
+                    documentsModal.style.opacity = '0';
+
+                    setTimeout(function() {
+                        documentsModal.classList.remove('open');
+                        documentsModal.style.opacity = '';
+                        documentsModal.style.transition = '';
+
+                        // Fade in Generate Program Modal
+                        if (generateProgramModal) {
+                            generateProgramModal.classList.add('open');
+                            generateProgramModal.style.opacity = '0';
+                            generateProgramModal.style.transition = 'opacity 0.4s ease';
+
+                            setTimeout(function() {
+                                generateProgramModal.style.opacity = '1';
+                            }, 10);
+                        }
+                    }, 400);
+                }
+            });
+        }
+
+        // Upload dropdown functionality
+        document.querySelectorAll('.upload-dropdown-btn').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var dropdown = this.closest('.upload-dropdown');
+                var menu = dropdown.querySelector('.upload-dropdown-menu');
+                var isOpen = menu.classList.contains('show');
+
+                // Close all upload dropdowns
+                document.querySelectorAll('.upload-dropdown-menu').forEach(function(m) {
+                    m.classList.remove('show');
+                });
+
+                // Toggle current dropdown
+                if (!isOpen) {
+                    menu.classList.add('show');
+                }
+            });
+        });
+
+        // Close upload dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.upload-dropdown')) {
+                document.querySelectorAll('.upload-dropdown-menu').forEach(function(menu) {
+                    menu.classList.remove('show');
+                });
+            }
+        });
+
+        // Upload dropdown item clicks
+        document.querySelectorAll('.upload-dropdown-item').forEach(function(item) {
+            item.addEventListener('click', function() {
+                var text = this.textContent;
+
+                // Close the dropdown
+                document.querySelectorAll('.upload-dropdown-menu').forEach(function(menu) {
+                    menu.classList.remove('show');
+                });
+
+                // Open Generate Program Modal if "Finalise Program" is clicked
+                if (text === 'Finalise Program') {
+                    var generateProgramModal = document.getElementById('generateProgramModal');
+                    if (generateProgramModal) {
+                        generateProgramModal.classList.add('open');
+                    }
+                }
+            });
+        });
+
+        // Generate Program Modal - Multi-step functionality
+        var generateProgramModal = document.getElementById('generateProgramModal');
+        if (generateProgramModal) {
+            var modalState = {
+                currentStep: 'ra',
+                visitedSteps: { 'ra': true },
+                selectedRA: [],
+                selectedPol: [],
+                selectedProc: [],
+                programTitle: '',
+                programVersion: '',
+                programDescription: '',
+                showValidation: false
+            };
+
+            var steps = [
+                { id: 'ra', title: 'Risk Assessment' },
+                { id: 'pol', title: 'Policy' },
+                { id: 'proc', title: 'Process' },
+                { id: 'prog', title: 'Program' }
+            ];
+
+            // Sample documents (replace with actual data)
+            var sampleRA = [
+                { id: 'ra1', name: 'Risk Assessment V 2.0', current: true, approved: true, generated: true },
+                { id: 'ra2', name: 'Risk Assessment V 1.0', current: false, approved: true, generated: true }
+            ];
+            var samplePol = [
+                { id: 'pol1', name: 'AML/CTF Policy V 3.0', current: true, approved: true, generated: true }
+            ];
+            var sampleProc = [
+                { id: 'proc1', name: 'CDD Process V 2.0', current: true, approved: true, generated: true }
+            ];
+
+            function updateStepIcons() {
+                var stepSections = {
+                    'ra': document.querySelector('.era-section:nth-child(1)'),
+                    'pol': document.querySelector('.era-section:nth-child(2)'),
+                    'proc': document.querySelector('.era-section:nth-child(3)'),
+                    'prog': document.querySelector('.era-section:nth-child(4)')
+                };
+                var stepIcons = {
+                    'ra': document.querySelector('.era-section:nth-child(1) i'),
+                    'pol': document.querySelector('.era-section:nth-child(2) i'),
+                    'proc': document.querySelector('.era-section:nth-child(3) i'),
+                    'prog': document.querySelector('.era-section:nth-child(4) i')
+                };
+                var stepLabels = {
+                    'ra': document.querySelector('.era-section:nth-child(1) .era-section-label'),
+                    'pol': document.querySelector('.era-section:nth-child(2) .era-section-label'),
+                    'proc': document.querySelector('.era-section:nth-child(3) .era-section-label'),
+                    'prog': document.querySelector('.era-section:nth-child(4) .era-section-label')
+                };
+
+                steps.forEach(function(step) {
+                    var isActive = modalState.currentStep === step.id;
+                    var isComplete = false;
+
+                    if (step.id === 'ra') isComplete = modalState.selectedRA.length > 0;
+                    if (step.id === 'pol') isComplete = modalState.selectedPol.length > 0;
+                    if (step.id === 'proc') isComplete = modalState.selectedProc.length > 0;
+
+                    var section = stepSections[step.id];
+                    var icon = stepIcons[step.id];
+                    var label = stepLabels[step.id];
+
+                    // Update active section class
+                    if (isActive) {
+                        section.classList.add('active-section');
+                    } else {
+                        section.classList.remove('active-section');
+                    }
+
+                    if (isActive && !isComplete) {
+                        icon.className = 'fas fa-dot-circle era-step-done-fa';
+                        label.className = 'era-section-label active-label';
+                    } else if (isComplete && !isActive) {
+                        icon.className = 'fas fa-check-circle era-step-done-fa';
+                        label.className = 'era-section-label done-label';
+                    } else if (isActive && isComplete) {
+                        icon.className = 'fas fa-dot-circle era-step-done-fa';
+                        label.className = 'era-section-label active-label';
+                    } else {
+                        icon.className = 'fas fa-question-circle era-step-pending-fa';
+                        label.className = 'era-section-label';
+                    }
+                });
+
+                // Update finish icon color
+                var finishIcon = document.getElementById('finishIcon');
+                if (finishIcon) {
+                    if (modalState.currentStep === 'prog') {
+                        finishIcon.style.color = 'rgb(0, 146, 59)';
+                    } else {
+                        finishIcon.style.color = '#b8b8b8';
+                    }
+                }
+            }
+
+            function goToStep(stepId) {
+                var contentArea = document.querySelector('#generateProgramModal .program-modal-content-area');
+                var loader = document.getElementById('stepLoader');
+
+                // Show loader immediately
+                if (loader) loader.classList.add('active');
+
+                // Add fade out animation
+                contentArea.classList.add('step-fade-out');
+
+                // Crossfade: start rendering new content halfway through fade out
+                setTimeout(function() {
+                    modalState.currentStep = stepId;
+                    modalState.visitedSteps[stepId] = true;
+                    updateStepIcons();
+                    renderContent();
+
+                    // Hide loader after content is rendered and fade in completes
+                    setTimeout(function() {
+                        if (loader) loader.classList.remove('active');
+                    }, 500);
+                }, 400); // Start crossfade midway
+            }
+
+            function renderContent() {
+                var contentArea = document.querySelector('#generateProgramModal .program-modal-content-area');
+
+                // Remove any existing animation classes
+                contentArea.classList.remove('step-fade-out', 'step-fade-in');
+                var stepData = {
+                    'ra': { docs: sampleRA, selected: modalState.selectedRA, title: 'Risk Assessment' },
+                    'pol': { docs: samplePol, selected: modalState.selectedPol, title: 'Policy' },
+                    'proc': { docs: sampleProc, selected: modalState.selectedProc, title: 'Process' }
+                };
+
+                // Validation box HTML
+                var validationBoxHTML = '<div class="ukp-modal-info-box" id="programValidationBox" style="display: none; margin-bottom: 24px;"><div class="ukp-modal-info-title">Selection Required</div><p>Please select at least one document to continue.</p></div>';
+
+                if (modalState.currentStep === 'prog') {
+                    // Finalise Program step
+                    contentArea.innerHTML = `
+                        <h3 style="font-size: 20px; font-weight: 700; color: #1a2b35; margin: 0 0 8px 0;">Program Details</h3>
+                        <p style="font-size: 14px; color: #5a6c7a; margin: 0 0 32px 0;">Enter the program details to complete generation.</p>
+                        ${validationBoxHTML}
+
+                        <div style="display: flex; flex-direction: column; gap: 20px;">
+                            <div>
+                                <label style="display: block; font-size: 13px; font-weight: 600; color: #1a2b35; margin-bottom: 6px;">Program Title <span style="color: #d32f2f;">*</span></label>
+                                <input type="text" id="programTitleInput" placeholder="e.g., AML/CTF Program" value="${modalState.programTitle}"
+                                    style="width: 100%; padding: 10px 12px; border: 1px solid #c9d8de; border-radius: 8px; font-size: 13px;">
+                            </div>
+                            <div>
+                                <label style="display: block; font-size: 13px; font-weight: 600; color: #1a2b35; margin-bottom: 6px;">Version <span style="color: #d32f2f;">*</span></label>
+                                <input type="text" id="programVersionInput" placeholder="e.g., 1.0" value="${modalState.programVersion}"
+                                    style="width: 200px; padding: 10px 12px; border: 1px solid #c9d8de; border-radius: 8px; font-size: 13px;">
+                            </div>
+                            <div>
+                                <label style="display: block; font-size: 13px; font-weight: 600; color: #1a2b35; margin-bottom: 6px;">Description</label>
+                                <textarea id="programDescriptionInput" placeholder="Enter a brief description of the program" rows="4"
+                                    style="width: 100%; padding: 10px 12px; border: 1px solid #c9d8de; border-radius: 8px; font-size: 13px; resize: vertical; font-family: inherit;">${modalState.programDescription}</textarea>
+                            </div>
+                        </div>
+                    `;
+
+                    document.getElementById('programTitleInput').addEventListener('input', function(e) {
+                        modalState.programTitle = e.target.value;
+                    });
+                    document.getElementById('programVersionInput').addEventListener('input', function(e) {
+                        modalState.programVersion = e.target.value;
+                    });
+                    document.getElementById('programDescriptionInput').addEventListener('input', function(e) {
+                        modalState.programDescription = e.target.value;
+                    });
+                } else {
+                    // Document selection steps
+                    var data = stepData[modalState.currentStep];
+                    var html = '<h3 style="font-size: 20px; font-weight: 700; color: #1a2b35; margin: 0 0 8px 0;">' + data.title + '</h3>';
+                    html += '<p style="font-size: 14px; color: #5a6c7a; margin: 0 0 32px 0;">Select the current ' + data.title.toLowerCase() + ' documents to include in your program.</p>';
+                    html += validationBoxHTML;
+                    html += '<div style="display: flex; flex-direction: column; gap: 16px;">';
+
+                    data.docs.forEach(function(doc) {
+                        var isSelected = data.selected.indexOf(doc.id) > -1;
+                        var borderStyle = isSelected ? '2px solid rgb(21, 194, 103)' : '1px solid #d0d7de';
+                        var bgColor = 'rgb(255, 255, 255)';
+
+                        html += '<div class="program-doc-item" data-doc-id="' + doc.id + '" style="display: flex;align-items: center;gap: 10px;padding: 14px 25px;border: ' + borderStyle + ';border-radius: 10px;background: ' + bgColor + ';cursor: pointer;transition: all 0.2s;box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);">';
+                        html += '<div style="font-size: 15px; font-weight: 300; color: #1a2b35;">' + doc.name + '</div>';
+                        html += '<span style="padding: 2px 12px; border-radius: 6px; font-size: 11px; font-weight: 200; background: #e8f5e9; color: #388e3c; border: 1px solid #81c784;">Approved</span>';
+                        if (doc.current) html += '<span style="padding: 2px 12px; border-radius: 6px; font-size: 11px; font-weight: 200; background: #e0f2f1; color: #00897b; border: 1px solid #4db6ac;">Current</span>';
+                        if (doc.generated) html += '<span style="padding: 3px 10px; border-radius: 20px; font-size: 11px; color: #2a3840; background: #fff; border: 1px solid #c9d8de; display: inline-flex; align-items: center; gap: 5px;"><i class="fas fa-magic" style="color: #df05e5;"></i>FirmVerify Generated</span>';
+
+                        // Add select button
+                        if (isSelected) {
+                            html += '<button class="program-select-btn selected" style="margin-left: auto; display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; font-size: 14px; font-weight: 500; background: rgb(255, 255, 255); border: 1px solid rgb(23, 140, 78); color: rgb(26, 43, 53); cursor: pointer; transition: all 0.2s; box-shadow: rgba(50, 50, 93, 0.25) 0px 1px 3px -1px, rgba(0, 0, 0, 0.3) 0px 0px 0.3px -1px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" fill="#1a6b40" stroke="#1a6b40"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/></svg>Select</button>';
+                        } else {
+                            html += '<button class="program-select-btn" style="margin-left: auto; display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; font-size: 14px; font-weight: 500; background: #fff; border: 1px solid #d0d7de; color: #1a2b35; cursor: pointer; transition: all 0.2s; box-shadow: rgba(50, 50, 93, 0.25) 0px 1px 3px -1px, rgba(0, 0, 0, 0.3) 0px 0px 0.3px -1px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke="#d0d7de" fill="none"/></svg>Select</button>';
+                        }
+
+                        html += '</div>';
+                    });
+
+                    html += '</div>';
+                    contentArea.innerHTML = html;
+
+                    // Add click handlers
+                    document.querySelectorAll('.program-doc-item').forEach(function(item) {
+                        item.addEventListener('click', function() {
+                            var docId = this.getAttribute('data-doc-id');
+                            var button = this.querySelector('.program-select-btn');
+                            var selectedArray = modalState.currentStep === 'ra' ? modalState.selectedRA :
+                                              modalState.currentStep === 'pol' ? modalState.selectedPol :
+                                              modalState.selectedProc;
+
+                            var idx = selectedArray.indexOf(docId);
+                            if (idx > -1) {
+                                // Deselect
+                                selectedArray.splice(idx, 1);
+                                this.style.border = '1px solid #d0d7de';
+                                this.style.background = 'rgb(255, 255, 255)';
+                                button.style.borderColor = '#d0d7de';
+                                button.classList.remove('selected');
+                                button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke="#d0d7de" fill="none"/></svg>Select';
+                            } else {
+                                // Select
+                                selectedArray.push(docId);
+                                this.style.border = '2px solid rgb(21, 194, 103)';
+                                this.style.background = 'rgb(255, 255, 255)';
+                                button.style.borderColor = 'rgb(23, 140, 78)';
+                                button.classList.add('selected');
+                                button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" fill="#1a6b40" stroke="#1a6b40"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/></svg>Select';
+
+                                // Hide validation box when user selects a document
+                                var validationBox = document.getElementById('programValidationBox');
+                                if (validationBox && validationBox.style.display !== 'none') {
+                                    validationBox.classList.add('fade-out-box');
+                                    setTimeout(function() {
+                                        validationBox.style.display = 'none';
+                                        validationBox.classList.remove('fade-out-box');
+                                    }, 300);
+                                }
+                            }
+
+                            updateStepIcons();
+                        });
+                    });
+                }
+
+                // Update footer buttons
+                var backBtn = document.getElementById('programModalBack');
+                var nextBtn = document.getElementById('programModalNext');
+                var currentIdx = steps.findIndex(function(s) { return s.id === modalState.currentStep; });
+
+                backBtn.style.display = currentIdx === 0 ? 'none' : 'inline-flex';
+
+                if (currentIdx === steps.length - 1) {
+                    nextBtn.textContent = 'Generate Program';
+                    nextBtn.innerHTML = 'Generate Program<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="margin-left: 8px;"><path d="M8.5 2.687c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.790 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/></svg>';
+                } else {
+                    nextBtn.innerHTML = 'Next<i class="fas fa-arrow-right" style="margin-left: 8px;"></i>';
+                }
+
+                // Add fade-in animation after content is rendered
+                setTimeout(function() {
+                    contentArea.classList.add('step-fade-in');
+                }, 10);
+            }
+
+            // Cancel button
+            document.getElementById('programModalCancel').addEventListener('click', function() {
+                generateProgramModal.classList.remove('open');
+                // Reset footer buttons visibility
+                document.querySelector('.program-modal-footer').style.display = 'flex';
+                // Reset state
+                modalState = {
+                    currentStep: 'ra',
+                    visitedSteps: { 'ra': true },
+                    selectedRA: [],
+                    selectedPol: [],
+                    selectedProc: [],
+                    programTitle: '',
+                    programVersion: '',
+                    programDescription: '',
+                    showValidation: false
+                };
+            });
+
+            // Back button
+            document.getElementById('programModalBack').addEventListener('click', function() {
+                var currentIdx = steps.findIndex(function(s) { return s.id === modalState.currentStep; });
+                if (currentIdx > 0) {
+                    goToStep(steps[currentIdx - 1].id);
+                }
+            });
+
+            // Close when clicking overlay
+            generateProgramModal.addEventListener('click', function(e) {
+                if (e.target === generateProgramModal) {
+                    generateProgramModal.classList.remove('open');
+                    // Reset footer buttons visibility in case it was hidden
+                    document.querySelector('.program-modal-footer').style.display = 'flex';
+                }
+            });
+
+            // Next button
+            document.getElementById('programModalNext').addEventListener('click', function() {
+                var currentIdx = steps.findIndex(function(s) { return s.id === modalState.currentStep; });
+                var validationBox = document.getElementById('programValidationBox');
+
+                if (currentIdx === steps.length - 1) {
+                    // Generate Program
+                    if (modalState.programTitle.trim() && modalState.programVersion.trim()) {
+                        // Show success animation
+                        var contentArea = document.querySelector('#generateProgramModal .program-modal-content-area');
+                        contentArea.innerHTML = `
+                            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 20px;">
+                                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                                </svg>
+                                <h3 style="font-size: 24px; font-weight: 700; color: #1a2b35; margin: 32px 0 12px 0;">Program generated</h3>
+                                <p style="font-size: 16px; color: #5a6c7a; margin: 0 0 40px 0;">You have successfully generated a program</p>
+                                <div style="display: flex; gap: 12px; align-items: center;">
+                                    <button id="closeSuccessModal" style="padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; background: #fff; border: 1px solid #c9d8de; color: #1a2b35;">Close Modal</button>
+                                    <button id="downloadProgramBtn" style="padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; background: #1a6b40; border: none; color: #fff; display: inline-flex; align-items: center; gap: 8px;">
+                                        <i class="fas fa-download"></i>
+                                        Download Program
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+
+                        // Hide footer buttons
+                        document.querySelector('.program-modal-footer').style.display = 'none';
+
+                        // Add download button handler
+                        document.getElementById('downloadProgramBtn').addEventListener('click', function() {
+                            alert('Download functionality will be implemented');
+                        });
+
+                        // Add close button handler
+                        document.getElementById('closeSuccessModal').addEventListener('click', function() {
+                            // Reset footer buttons visibility
+                            document.querySelector('.program-modal-footer').style.display = 'flex';
+                            // Reset modal state
+                            modalState = {
+                                currentStep: 'ra',
+                                visitedSteps: { 'ra': true },
+                                selectedRA: [],
+                                selectedPol: [],
+                                selectedProc: [],
+                                programTitle: '',
+                                programVersion: '',
+                                programDescription: '',
+                                showValidation: false
+                            };
+                            // Close modal
+                            generateProgramModal.classList.remove('open');
+                            // Reset content after modal closes
+                            setTimeout(function() {
+                                renderContent();
+                                updateStepIcons();
+                            }, 300);
+                        });
+                    } else {
+                        alert('Please fill in all required fields.');
+                    }
+                } else if (currentIdx < steps.length - 1) {
+                    // Validate selection before proceeding
+                    var currentStepId = modalState.currentStep;
+                    var hasSelection = false;
+
+                    if (currentStepId === 'ra') {
+                        hasSelection = modalState.selectedRA.length > 0;
+                    } else if (currentStepId === 'pol') {
+                        hasSelection = modalState.selectedPol.length > 0;
+                    } else if (currentStepId === 'proc') {
+                        hasSelection = modalState.selectedProc.length > 0;
+                    } else {
+                        hasSelection = true; // Skip validation for other steps
+                    }
+
+                    if (hasSelection) {
+                        // Hide validation box and proceed
+                        if (validationBox && validationBox.style.display !== 'none') {
+                            validationBox.classList.add('fade-out-box');
+                            setTimeout(function() {
+                                validationBox.style.display = 'none';
+                                validationBox.classList.remove('fade-out-box');
+                            }, 300);
+                        }
+                        goToStep(steps[currentIdx + 1].id);
+                    } else {
+                        // Show validation box
+                        if (validationBox) {
+                            validationBox.style.display = 'block';
+                            validationBox.classList.remove('shake-in');
+                            // Trigger reflow to restart animation
+                            void validationBox.offsetWidth;
+                            validationBox.classList.add('shake-in');
+                            // Scroll to top to show the validation message
+                            var contentArea = document.querySelector('.program-modal-content-area');
+                            if (contentArea) contentArea.scrollTop = 0;
+                        }
+                    }
+                }
+            });
+
+            // Sidebar step navigation
+            document.querySelectorAll('.era-section').forEach(function(section, idx) {
+                if (idx < 4) {
+                    section.style.cursor = 'pointer';
+                    section.addEventListener('click', function() {
+                        goToStep(steps[idx].id);
+                    });
+                }
+            });
+
+            // Initialize
+            renderContent();
+            updateStepIcons();
         }
 
         // Clear any existing table data from localStorage
