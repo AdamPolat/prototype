@@ -96,48 +96,55 @@
         <main class="app-main" style="background:#f5f7f8;">
             <div class="content-wrap">
 
-                <h4 class="page-title">Sample Heading</h4>
-
-                <!-- Tabs -->
-                <ul class="nav ra-tabs mb-4">
-                    <li class="nav-item"><a class="nav-link ra-tab active" href="#">Sample Tab Heading</a></li>
-                    <li class="nav-item"><a class="nav-link ra-tab" href="#">Sample Tab Heading</a></li>
-                    <li class="nav-item"><a class="nav-link ra-tab" href="#">Sample Tab Heading</a></li>
-                    <li class="nav-item"><a class="nav-link ra-tab" href="#">Sample Tab Heading</a></li>
-                </ul>
+                <h4 class="page-title">Welcome back, Jeevan 👋</h4>
+                <p style="font-size: 14px; color: #7a8f98; margin-top: 4px; margin-bottom: 24px;">Here's your AML/CTF compliance overview for today.</p>
 
                 <!-- Stat cards row -->
                 <div class="row mb-4">
                     <div class="col-6 col-lg-3 mb-3">
                         <div class="stat-card">
-                            <div class="stat-value">25%</div>
-                            <div class="stat-label">Example Filter selected</div>
+                            <div class="stat-value">247</div>
+                            <div class="stat-label">Active Clients</div>
+                            <div style="font-size: 11px; color: #388e3c; margin-top: 4px;">↑ 12 this quarter</div>
                         </div>
                     </div>
                     <div class="col-6 col-lg-3 mb-3">
                         <div class="stat-card">
-                            <div class="stat-value">15%</div>
-                            <div class="stat-label">Example Filter selected</div>
+                            <div class="stat-value">14</div>
+                            <div class="stat-label">High Risk Clients</div>
+                            <div style="font-size: 11px; color: #e53935; margin-top: 4px;">↑ 2 since last review</div>
                         </div>
                     </div>
                     <div class="col-6 col-lg-3 mb-3">
                         <div class="stat-card">
-                            <div class="stat-value">40%</div>
-                            <div class="stat-label">Example Filter selected</div>
+                            <div class="stat-value">2</div>
+                            <div class="stat-label">Overdue Reviews</div>
+                            <div style="font-size: 11px; color: #7a8f98; margin-top: 4px;">Action required</div>
                         </div>
                     </div>
                     <div class="col-6 col-lg-3 mb-3">
                         <div class="stat-card">
-                            <div class="stat-value">20%</div>
-                            <div class="stat-label">Example Filter selected</div>
+                            <div class="stat-value">3</div>
+                            <div class="stat-label">SMRs Filed (FY26)</div>
+                            <div style="font-size: 11px; color: #388e3c; margin-top: 4px;">All within 3-day window</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Yearly Activity chart -->
                 <div class="dash-card mb-4">
-                    <h6 class="dash-card-title">Yearly Activity</h6>
-                    <div style="position:relative; height:260px;">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+                        <div>
+                            <h6 class="dash-card-title">Transaction Monitoring Activity</h6>
+                            <p class="dash-card-sub" style="margin: 0;">Monthly alerts generated vs. dismissed — FY 2025–26</p>
+                        </div>
+                        <div style="display:flex; gap:14px; font-size:11px; color:#7a8f98; align-items:center;">
+                            <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:3px;background:#19A3A3;border-radius:2px;display:inline-block;"></span>Alerts raised</span>
+                            <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:3px;background:#75A501;border-radius:2px;display:inline-block;"></span>Dismissed</span>
+                            <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:3px;background:#e53935;border-radius:2px;display:inline-block;"></span>Escalated to SMR</span>
+                        </div>
+                    </div>
+                    <div style="position:relative; height:240px;">
                         <canvas id="yearlyChart"></canvas>
                     </div>
                 </div>
@@ -147,19 +154,17 @@
                     <!-- Stats donut -->
                     <div class="col-12 col-lg-3 mb-4">
                         <div class="dash-card h-100">
-                            <h6 class="dash-card-title">Stats</h6>
-                            <p class="dash-card-sub">Example Filter selected</p>
+                            <h6 class="dash-card-title">Client Risk Distribution</h6>
+                            <p class="dash-card-sub">247 active clients · FY 2025–26</p>
                             <div class="d-flex align-items-center justify-content-between mt-3">
                                 <div style="position:relative; width:110px; height:110px; flex-shrink:0;">
                                     <canvas id="donutChart"></canvas>
-                                    <div class="donut-center-label">100%</div>
+                                    <div class="donut-center-label">247</div>
                                 </div>
                                 <div class="chart-legend ml-3">
-                                    <div class="legend-item"><span class="legend-dot" style="background:#aaa"></span>Stat One</div>
-                                    <div class="legend-item"><span class="legend-dot" style="background:#4fc3f7"></span>Stat Two</div>
-                                    <div class="legend-item"><span class="legend-dot" style="background:#f06292"></span>Stat Three</div>
-                                    <div class="legend-item"><span class="legend-dot" style="background:#81c784"></span>Stat Four</div>
-                                    <div class="legend-item"><span class="legend-dot" style="background:#388e3c"></span>Stat Five</div>
+                                    <div class="legend-item"><span class="legend-dot" style="background:#e53935"></span>High risk — 14 (6%)</div>
+                                    <div class="legend-item"><span class="legend-dot" style="background:#FF9700"></span>Medium risk — 68 (28%)</div>
+                                    <div class="legend-item"><span class="legend-dot" style="background:#75A501"></span>Low risk — 165 (67%)</div>
                                 </div>
                             </div>
                         </div>
@@ -168,16 +173,20 @@
                     <!-- Progress Arc -->
                     <div class="col-12 col-lg-3 mb-4">
                         <div class="dash-card h-100">
-                            <h6 class="dash-card-title">Progress Arc</h6>
-                            <p class="dash-card-sub">Example Filter selected</p>
+                            <h6 class="dash-card-title">AML/CTF Training Completion</h6>
+                            <p class="dash-card-sub">Staff training compliance rate</p>
                             <div class="arc-wrap mt-2">
                                 <div class="arc-inner">
                                     <canvas id="arcChart" width="160" height="90"></canvas>
                                     <div class="arc-label">
-                                        <div class="arc-percent">66%</div>
+                                        <div class="arc-percent">78%</div>
                                         <div class="arc-complete">Complete</div>
                                     </div>
                                 </div>
+                            </div>
+                            <div style="margin-top: 12px;">
+                                <span style="display: inline-block; font-size: 11px; padding: 3px 10px; border-radius: 20px; background: #fff7ec; color: #b06000; margin-right: 4px;">3 staff overdue</span>
+                                <span style="display: inline-block; font-size: 11px; padding: 3px 10px; border-radius: 20px; background: #e8f7f7; color: #127b7b;">Next: 14 May 2026</span>
                             </div>
                         </div>
                     </div>
@@ -185,37 +194,39 @@
                     <!-- Progress Linear -->
                     <div class="col-12 col-lg-3 mb-4">
                         <div class="dash-card h-100">
-                            <h6 class="dash-card-title">Progress Linear</h6>
-                            <p class="dash-card-sub">Example Filter selected</p>
+                            <h6 class="dash-card-title">AUSTRAC Reporting Compliance</h6>
+                            <p class="dash-card-sub">Suspicious matter reports on time</p>
                             <div class="mt-4">
                                 <div class="linear-bar-wrap">
                                     <div class="linear-bar-track">
-                                        <div class="linear-bar-fill" style="width:66%"></div>
+                                        <div class="linear-bar-fill" style="width:100%; background: #75A501;"></div>
                                     </div>
                                 </div>
                                 <div class="linear-label-row mt-2">
-                                    <span class="linear-percent">66%</span>
+                                    <span class="linear-percent">100%</span>
                                     <span class="linear-complete">Complete</span>
                                 </div>
+                            </div>
+                            <div style="margin-top: 12px;">
+                                <span style="display: inline-block; font-size: 11px; padding: 3px 10px; border-radius: 20px; background: #f0f7e0; color: #4a6e00; margin-right: 4px;">All SMRs filed</span>
+                                <span style="display: inline-block; font-size: 11px; padding: 3px 10px; border-radius: 20px; background: #f0f7e0; color: #4a6e00;">3 TTRs lodged</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Stats pie -->
+                    <!-- Compliance Status -->
                     <div class="col-12 col-lg-3 mb-4">
                         <div class="dash-card h-100">
-                            <h6 class="dash-card-title">Stats</h6>
-                            <p class="dash-card-sub">Example Filter selected</p>
+                            <h6 class="dash-card-title">Compliance Status</h6>
+                            <p class="dash-card-sub">Current quarter overview</p>
                             <div class="d-flex align-items-center justify-content-between mt-3">
                                 <div style="position:relative; width:110px; height:110px; flex-shrink:0;">
                                     <canvas id="pieChart"></canvas>
                                 </div>
                                 <div class="chart-legend ml-3">
-                                    <div class="legend-item"><span class="legend-dot" style="background:#aaa"></span>Stat One</div>
-                                    <div class="legend-item"><span class="legend-dot" style="background:#4fc3f7"></span>Stat Two</div>
-                                    <div class="legend-item"><span class="legend-dot" style="background:#f06292"></span>Stat Three</div>
-                                    <div class="legend-item"><span class="legend-dot" style="background:#81c784"></span>Stat Four</div>
-                                    <div class="legend-item"><span class="legend-dot" style="background:#388e3c"></span>Stat Five</div>
+                                    <div class="legend-item"><span class="legend-dot" style="background:#75A501"></span>Compliant</div>
+                                    <div class="legend-item"><span class="legend-dot" style="background:#FF9700"></span>Pending</div>
+                                    <div class="legend-item"><span class="legend-dot" style="background:#e53935"></span>Overdue</div>
                                 </div>
                             </div>
                         </div>
@@ -254,58 +265,81 @@
             });
         });
 
-        // ── Yearly Activity Bar Chart ──
-        const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC','JAN','FEB'];
-        const d1 = [48,52,46,48,65,15,18,48,46,50,42,18,18,48];
-        const d2 = [18,38,18,24,33,14,10,18,32,48,22,12,12,18];
+        // ── Transaction Monitoring Activity Bar Chart ──
         new Chart(document.getElementById('yearlyChart'), {
             type: 'bar',
             data: {
-                labels: months,
+                labels: ['Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr'],
                 datasets: [
-                    { label: 'Series A', data: d1, backgroundColor: '#81c784', borderRadius: 3, stack: 'a' },
-                    { label: 'Series B', data: d2, backgroundColor: '#388e3c', borderRadius: 3, stack: 'a' }
+                    {
+                        label: 'Alerts raised',
+                        data: [18,22,15,27,19,24,21,30,26,19],
+                        backgroundColor: 'rgba(25,163,163,0.75)',
+                        borderRadius: 4
+                    },
+                    {
+                        label: 'Dismissed',
+                        data: [14,18,12,22,16,20,17,25,22,14],
+                        backgroundColor: 'rgba(117,165,1,0.7)',
+                        borderRadius: 4
+                    },
+                    {
+                        label: 'Escalated (SMR)',
+                        data: [1,0,0,1,0,0,1,0,0,0],
+                        backgroundColor: 'rgba(229,57,53,0.8)',
+                        borderRadius: 4
+                    }
                 ]
             },
             options: {
-                responsive: true, maintainAspectRatio: false,
+                responsive: true,
+                maintainAspectRatio: false,
                 plugins: { legend: { display: false } },
                 scales: {
-                    x: { stacked: true, grid: { display: false }, ticks: { font: { size: 11 }, color: '#7a8f98' } },
-                    y: { stacked: true, min: 0, max: 100, ticks: { stepSize: 20, font: { size: 11 }, color: '#7a8f98' }, grid: { color: '#eaf0f3' } }
+                    x: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#7a8f98' } },
+                    y: { grid: { color: '#eaf0f3' }, ticks: { font: { size: 11 }, color: '#7a8f98' }, beginAtZero: true }
                 }
             }
         });
 
-        // ── Donut Chart ──
+        // ── Client Risk Distribution Donut Chart ──
         new Chart(document.getElementById('donutChart'), {
             type: 'doughnut',
             data: {
+                labels: ['High','Medium','Low'],
                 datasets: [{
-                    data: [5, 10, 8, 32, 45],
-                    backgroundColor: ['#aaa','#4fc3f7','#f06292','#81c784','#388e3c'],
-                    borderWidth: 2, borderColor: '#fff'
+                    data: [14, 68, 165],
+                    backgroundColor: ['#e53935','#FF9700','#75A501'],
+                    borderWidth: 0,
+                    hoverOffset: 4
                 }]
             },
             options: {
-                cutout: '70%', responsive: true, maintainAspectRatio: true,
-                plugins: { legend: { display: false } }
+                cutout: '68%',
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: { legend: { display: false } },
+                animation: { duration: 800 }
             }
         });
 
-        // ── Pie Chart ──
+        // ── Compliance Status Pie Chart ──
         new Chart(document.getElementById('pieChart'), {
             type: 'pie',
             data: {
+                labels: ['Compliant', 'Pending', 'Overdue'],
                 datasets: [{
-                    data: [5, 10, 8, 32, 45],
-                    backgroundColor: ['#aaa','#4fc3f7','#f06292','#81c784','#388e3c'],
-                    borderWidth: 2, borderColor: '#fff'
+                    data: [245, 0, 2],
+                    backgroundColor: ['#75A501','#FF9700','#e53935'],
+                    borderWidth: 0,
+                    hoverOffset: 4
                 }]
             },
             options: {
-                responsive: true, maintainAspectRatio: true,
-                plugins: { legend: { display: false } }
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: { legend: { display: false } },
+                animation: { duration: 800 }
             }
         });
 
@@ -316,7 +350,7 @@
             const W = canvas.width, H = canvas.height;
             const cx = W / 2, cy = H - 10;
             const r = H - 20;
-            const pct = 0.66;
+            const pct = 0.78;
             // Track
             ctx.beginPath();
             ctx.arc(cx, cy, r, Math.PI, 0);
@@ -328,7 +362,7 @@
             ctx.beginPath();
             ctx.arc(cx, cy, r, Math.PI, Math.PI + pct * Math.PI);
             ctx.lineWidth = 18;
-            ctx.strokeStyle = '#388e3c';
+            ctx.strokeStyle = '#19A3A3';
             ctx.lineCap = 'round';
             ctx.stroke();
         })();
