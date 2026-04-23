@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Details</title>
+    <link rel="icon" type="image/svg+xml" href="images/FV-LOGO.svg">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+    .cd-container {
+        margin: 0 auto;
+        padding: 0 32px 32px 32px;
+    }
+
+    .cd-unified-panel {
+        background: white;
+        border-radius: 12px;
+        border: 1px solid #c5cdd5;
+        display: grid;
+        grid-template-columns: 339px 1fr;
+        overflow: hidden;
+    }
+
+    /* Left Panel */
+    .cd-left-panel {
+        padding: 26px 29px;
+        border-right: 1px solid #ced5df;
+        background: #f8f9fa;
+    }
+
+    .cd-panel-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: #1a2b35;
+        margin-bottom: 24px;
+        line-height: 1.4;
+    }
+
+    .cd-panel-subtitle {
+        font-size: 13px;
+        color: #6a7f89;
+        margin-bottom: 24px;
+        line-height: 1.5;
+    }
+
+    /* Form sections */
+    .cd-section-list {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .cd-section-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 14px 12px;
+        border-radius: 8px;
+        background: transparent;
+        cursor: pointer;
+        transition: background 0.15s;
+        border: 1px solid transparent;
+    }
+
+    .cd-section-item:hover {
+        background: #f0f3f5;
+    }
+
+    .cd-section-item.active {
+        background: #e4ebef;
+    }
+
+    .cd-section-item.complete .cd-section-icon {
+        background: transparent !important;
+        border: none !important;
+        position: relative;
+    }
+
+    .cd-section-item.complete .cd-section-icon i {
+        display: none;
+    }
+
+    .cd-section-item.complete .cd-section-icon::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34.54 34.54"%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bstroke:%2300310b;stroke-miterlimit:10;stroke-width:.5px%7D.cls-1,.cls-2%7Bfill:%23008d3e%7D.cls-3%7Bfill:%23fff%7D%3C/style%3E%3C/defs%3E%3Crect class="cls-1" x=".25" y=".25" width="34.04" height="34.04" rx="9.31" ry="9.31"/%3E%3Cg%3E%3Cpolyline class="cls-2" points="9.46 17.7 14.45 22.68 25.75 11.37"/%3E%3Cpath class="cls-3" d="M8.18,18.98l4.98,4.98c.69.69,1.87.69,2.57,0,3.29-3.29,6.58-6.58,9.87-9.87l1.44-1.44c1.65-1.65-.91-4.22-2.57-2.57-3.29,3.29-6.58,6.58-9.87,9.87-.48.48-.96.96-1.44,1.44h2.57c-1.66-1.66-3.32-3.32-4.98-4.98-1.65-1.65-4.22.91-2.57,2.57h0Z"/%3E%3C/g%3E%3C/svg%3E') center/contain no-repeat;
+    }
+
+    .cd-section-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        flex-shrink: 0;
+    }
+
+    .cd-section-item:nth-child(1) .cd-section-icon {
+        background: #e8f5e9;
+        color: #388e3c;
+    }
+
+    .cd-section-item:nth-child(2) .cd-section-icon {
+        background: #e8f5e9;
+        color: #388e3c;
+    }
+
+    .cd-section-item:nth-child(3) .cd-section-icon {
+        background: #e8f5e9;
+        color: #388e3c;
+    }
+
+    .cd-section-item:nth-child(4) .cd-section-icon {
+        background: #e8f5e9;
+        color: #388e3c;
+    }
+
+    .cd-section-item:nth-child(5) .cd-section-icon {
+        background: #e8f5e9;
+        color: #388e3c;
+    }
+
+    .cd-section-item:nth-child(6) .cd-section-icon {
+        background: #e8f5e9;
+        color: #388e3c;
+    }
+
+    .cd-section-item:nth-child(7) .cd-section-icon {
+        background: #e8f5e9;
+        color: #388e3c;
+    }
+
+    .cd-section-content {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .cd-section-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: #1a2b35;
+        margin-bottom: 3px;
+        line-height: 1.3;
+    }
+
+    .cd-section-desc {
+        font-size: 11px;
+        color: #5a6c7a;
+        line-height: 1.5;
+    }
+
+    /* Progress */
+    .cd-progress-section {
+        margin-top: 28px;
+        padding-top: 24px;
+        border-top: 1px solid #e8eaed;
+    }
+
+    .cd-progress-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .cd-progress-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #1a2b35;
+    }
+
+    .cd-progress-percent {
+        font-size: 12px;
+        font-weight: 700;
+        color: #1a2b35;
+    }
+
+    .cd-progress-bar {
+        height: 6px;
+        background: #e8eaed;
+        border-radius: 3px;
+        overflow: hidden;
+        margin-bottom: 10px;
+    }
+
+    .cd-progress-fill {
+        height: 100%;
+        background: #75A501;
+        border-radius: 3px;
+        transition: width 0.3s ease;
+    }
+
+    .cd-progress-status {
+        font-size: 11px;
+        color: #5a6c7a;
+        line-height: 1.4;
+    }
+
+    /* Right Panel */
+    .cd-right-panel {
+        background: white;
+        padding: 28px 32px;
+        min-height: 600px;
+    }
+
+    .cd-content-title {
+        font-size: 17px;
+        font-weight: 700;
+        color: #1a2b35;
+        margin-bottom: 12px;
+    }
+
+    .cd-content-desc {
+        font-size: 12px;
+        color: #5a6c7a;
+        line-height: 1.65;
+        margin-bottom: 24px;
+    }
+
+    .cd-content-area {
+        color: #1a2b35;
+    }
+
+    /* Form Elements */
+    .cd-form-group {
+        margin-bottom: 24px;
+    }
+
+    .cd-label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: #1a2b35;
+        margin-bottom: 8px;
+    }
+
+    .cd-label .required {
+        color: #EF4444;
+        margin-left: 2px;
+    }
+
+    .cd-input, .cd-select, .cd-textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #bec5d4;
+        border-radius: 6px;
+        font-size: 13px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .cd-input:focus, .cd-select:focus, .cd-textarea:focus {
+        outline: none;
+        border-color: #75A501;
+        box-shadow: 0 0 0 3px rgba(117, 165, 1, 0.1);
+    }
+
+    .cd-textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    .cd-radio-group, .cd-checkbox-group {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .cd-radio-item, .cd-checkbox-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 14px 16px;
+        border: 1px solid #bec5d4;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.15s;
+        background: white;
+    }
+
+    .cd-radio-item:hover, .cd-checkbox-item:hover {
+        border-color: #d1d5db;
+        background: #f9fafb;
+    }
+
+    .cd-radio-item input[type="radio"],
+    .cd-checkbox-item input[type="checkbox"] {
+        margin-top: 2px;
+        flex-shrink: 0;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+    }
+
+    .cd-radio-item.selected, .cd-checkbox-item.selected {
+        border-color: #75A501;
+        background: #f0f7e6;
+    }
+
+    .cd-option-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: #1a2b35;
+        margin-bottom: 4px;
+    }
+
+    .cd-option-desc {
+        font-size: 12px;
+        color: #6b7280;
+        line-height: 1.5;
+    }
+
+    .cd-alert {
+        padding: 12px 16px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .cd-alert-icon {
+        flex-shrink: 0;
+        font-size: 16px;
+    }
+
+    .cd-alert.info {
+        background: #dbeafe;
+        border: 1px solid #93c5fd;
+        color: #1e40af;
+    }
+
+    .cd-alert.warning {
+        background: #fef3c7;
+        border: 1px solid #fcd34d;
+        color: #92400e;
+    }
+
+    .cd-alert.success {
+        background: #d1fae5;
+        border: 1px solid #6ee7b7;
+        color: #065f46;
+    }
+
+    .cd-alert.success strong {
+        color: #065f46;
+    }
+
+    .cd-alert.error {
+        background: #fee2e2;
+        border: 1px solid #fca5a5;
+        color: #991b1b;
+    }
+
+    .cd-form-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .cd-btn {
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s;
+        border: none;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .cd-btn-primary {
+        background: #75A501;
+        color: white;
+    }
+
+    .cd-btn-primary:hover {
+        background: #659001;
+    }
+
+    .cd-btn-secondary {
+        background: white;
+        color: #1a2b35;
+        border: 1px solid #d1d5db;
+    }
+
+    .cd-btn-secondary:hover {
+        background: #f9fafb;
+        border-color: #9ca3af;
+    }
+
+    .cd-bottom-nav {
+        position: sticky;
+        bottom: 0;
+        background: white;
+        border-top: 1px solid #e5e7eb;
+        padding: 16px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 32px -32px -28px -32px;
+    }
+
+    .cd-bottom-nav-info {
+        font-size: 13px;
+        color: #6b7280;
+    }
+
+    .cd-bottom-nav-btns {
+        display: flex;
+        gap: 8px;
+    }
+
+    /* Diagram Styles */
+    .cd-diagram-card {
+        background: white;
+        border: 1px solid #bec5d4;
+        border-radius: 12px;
+        margin-bottom: 24px;
+        overflow: hidden;
+    }
+
+    .cd-diagram-header {
+        padding: 16px 20px;
+        border-bottom: 1px solid #e5e7eb;
+        background: #f9fafb;
+    }
+
+    .cd-diagram-header h3 {
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 4px;
+        color: #1a2b35;
+    }
+
+    .cd-diagram-header p {
+        font-size: 12px;
+        color: #6b7280;
+        margin: 0;
+    }
+
+    .cd-diagram-toolbar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        border-bottom: 1px solid #e5e7eb;
+        flex-wrap: wrap;
+        background: white;
+    }
+
+    .cd-diagram-tool-btn {
+        width: 32px;
+        height: 32px;
+        border: 1px solid #bec5d4;
+        border-radius: 4px;
+        background: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6b7280;
+        transition: all 0.15s;
+        flex-shrink: 0;
+    }
+
+    .cd-diagram-tool-btn:hover {
+        border-color: #75A501;
+        color: #75A501;
+    }
+
+    .cd-diagram-tool-btn.active {
+        border-color: #75A501;
+        background: #f0f7e6;
+        color: #75A501;
+    }
+
+    .cd-diagram-tool-btn.danger-btn:hover {
+        border-color: #EF4444;
+        color: #EF4444;
+        background: #fee2e2;
+    }
+
+    .cd-diagram-add-btn {
+        height: 32px;
+        padding: 0 12px;
+        border: 1px solid #bec5d4;
+        border-radius: 4px;
+        background: white;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 500;
+        color: #6b7280;
+        transition: all 0.15s;
+        white-space: nowrap;
+    }
+
+    .cd-diagram-add-btn:hover {
+        border-color: #75A501;
+        color: #75A501;
+        background: #f0f7e6;
+    }
+
+    .cd-diagram-separator {
+        width: 1px;
+        height: 24px;
+        background: #e5e7eb;
+        margin: 0 4px;
+    }
+
+    .cd-diagram-canvas {
+        position: relative;
+        overflow: hidden;
+        height: 520px;
+        background: #f8fafc;
+    }
+
+    .cd-diagram-legend {
+        padding: 14px 20px;
+        border-top: 1px solid #e5e7eb;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .cd-legend-items {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-size: 12px;
+        color: #6b7280;
+    }
+
+    .cd-legend-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 4px;
+        vertical-align: middle;
+    }
+
+    .cd-diagram-node {
+        position: absolute;
+        border-radius: 6px;
+        border: 2px solid;
+        cursor: move;
+        user-select: none;
+        min-width: 130px;
+        max-width: 180px;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        transition: box-shadow 0.15s;
+    }
+
+    .cd-diagram-node:hover {
+        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+    }
+
+    .cd-diagram-node.selected {
+        box-shadow: 0 0 0 3px rgba(117,165,1,0.25), 0 4px 6px -1px rgba(0,0,0,0.1);
+    }
+
+    .cd-diagram-node.link-source {
+        box-shadow: 0 0 0 3px rgba(59,130,246,0.4), 0 4px 6px -1px rgba(0,0,0,0.1);
+    }
+
+    .cd-diagram-node-header {
+        padding: 7px 10px 5px;
+        border-radius: 5px 5px 0 0;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .cd-diagram-node-body {
+        padding: 6px 10px 8px;
+        background: white;
+        border-radius: 0 0 5px 5px;
+    }
+
+    .cd-diagram-node-name {
+        font-size: 12px;
+        font-weight: 600;
+        color: #1F2937;
+        line-height: 1.3;
+        outline: none;
+        width: 100%;
+        border: none;
+        background: transparent;
+        letter-spacing: -0.01em;
+        cursor: text;
+    }
+
+    .cd-diagram-node-sub {
+        font-size: 10px;
+        color: #9ca3af;
+        margin-top: 2px;
+        outline: none;
+        width: 100%;
+        border: none;
+        background: transparent;
+    }
+
+    .cd-diagram-node-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3px;
+        margin-top: 5px;
+    }
+
+    .cd-diagram-badge {
+        font-size: 9px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        padding: 2px 6px;
+        border-radius: 3px;
+        text-transform: uppercase;
+    }
+
+    .cd-diagram-edge-label {
+        font-size: 10px;
+        font-weight: 500;
+        fill: #6B7280;
+        pointer-events: none;
+    }
+
+    /* Completion Screen */
+    .cd-completion-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 600px;
+        padding: 48px 24px;
+    }
+
+    .cd-completion-box {
+        max-width: 520px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .cd-comp-icon {
+        width: 72px;
+        height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+    }
+
+    .cd-comp-icon svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    .cd-comp-ref {
+        font-family: 'SF Mono', 'Monaco', 'Menlo', monospace;
+        font-size: 16px;
+        letter-spacing: 0.08em;
+        color: #0B6E4F;
+        background: #ECFDF5;
+        border: 1px solid rgba(11,110,79,0.15);
+        padding: 12px 24px;
+        border-radius: 6px;
+        display: inline-block;
+        margin: 16px 0 24px;
+    }
+
+    .cd-completion-box h1 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        letter-spacing: -0.02em;
+        color: #1a2b35;
+    }
+
+    .cd-completion-box p {
+        font-size: 14px;
+        color: #6b7280;
+        line-height: 1.7;
+        margin-bottom: 24px;
+    }
+
+    @media (max-width: 768px) {
+        .cd-form-row {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Page header */
+    .cd-page-header {
+        margin-bottom: 8px;
+        padding: 0 32px;
+    }
+
+    .cd-page-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1a2b35;
+        margin-bottom: 7px;
+        margin-top: 10px;
+    }
+
+    .cd-page-subtitle {
+        font-size: 14px;
+        color: #008fff;
+    }
+
+    .cd-page-subtitle a {
+        color: #008fff;
+        text-decoration: none;
+    }
+
+    .cd-page-subtitle a:hover {
+        text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+        .cd-unified-panel {
+            grid-template-columns: 1fr;
+        }
+
+        .cd-left-panel {
+            border-right: none;
+            border-bottom: 1px solid #e8eaed;
+        }
+    }
+</style>
+</head>
+<body>
+    <!-- Authentication Check -->
+    <script>
+        if (sessionStorage.getItem('isAuthenticated') !== 'true') {
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <!-- Spinner Overlay -->
+    <div id="spinnerOverlay" style="position:fixed; inset:0; background:rgba(0,54,66,0.75); z-index:9999; display:none; align-items:center; justify-content:center; flex-direction:column; opacity:0; transition: opacity 0.4s ease;">
+        <div class="loader"></div>
+    </div>
+
+    <!-- ===== TOP HEADER ===== -->
+    <header class="app-header d-flex align-items-center">
+        <div class="header-logo d-flex align-items-center justify-content-center">
+            <img src="images/FV-LOGO.svg" alt="Logo" width="36" height="36">
+        </div>
+        <div class="header-search flex-grow-1">
+            <div class="header-search-pill d-flex align-items-center">
+                <svg class="header-search-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.099zm-5.242 1.156a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11"/>
+                </svg>
+                <span class="header-search-label">Search:</span>
+                <input type="text" class="header-search-input" placeholder="search for content">
+                <kbd class="header-search-kbd">CMD + SR</kbd>
+            </div>
+        </div>
+        <div class="header-actions d-flex align-items-center">
+            <button class="header-icon-btn" title="Call">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/></svg>
+            </button>
+            <button class="header-icon-btn" title="Logout" id="logoutBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M7.5 1v7h1V1z"/><path d="M3 8.812a5 5 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812"/></svg>
+            </button>
+            <script>
+                document.getElementById('logoutBtn').addEventListener('click', function() {
+                    sessionStorage.removeItem('isAuthenticated');
+                    window.location.href = 'login.html';
+                });
+            </script>
+            <button class="header-icon-btn" title="Apps">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3A1.5 1.5 0 0 1 15 10.5v3A1.5 1.5 0 0 1 13.5 15h-3A1.5 1.5 0 0 1 9 13.5z"/></svg>
+            </button>
+            <button class="header-avatar-btn" title="Profile">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== LAYOUT ===== -->
+    <div class="app-body">
+
+        <!-- ===== SIDEBAR ===== -->
+        <nav class="app-sidebar d-flex flex-column align-items-center py-3">
+            <a class="sidebar-nav-link" href="dashboard.html" title="Dashboard">
+                <span class="sidebar-icon-wrap">
+                    <img src="images/dashboard.svg" alt="Dashboard" width="20" height="20">
+                </span>
+                <span class="sidebar-label">Dashboard</span>
+            </a>
+            <a class="sidebar-nav-link active" href="clients.html" title="Clients">
+                <span class="sidebar-icon-wrap active-icon">
+                    <img src="images/client.svg" alt="Clients" width="20" height="20">
+                </span>
+                <span class="sidebar-label sidebar-label--active">Clients</span>
+            </a>
+            <a class="sidebar-nav-link" href="firm-profile.html" title="Firm">
+                <span class="sidebar-icon-wrap">
+                    <img src="images/firm.svg" alt="Firm" width="20" height="20">
+                </span>
+                <span class="sidebar-label">Firm</span>
+            </a>
+            <a class="sidebar-nav-link" href="settings.html" title="Settings">
+                <span class="sidebar-icon-wrap">
+                    <img src="images/settings.svg" alt="Settings" width="20" height="20">
+                </span>
+                <span class="sidebar-label">Settings</span>
+            </a>
+        </nav>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="app-main" style="background:#f5f7f8; padding-top: 8px;">
+            <!-- Page Header -->
+            <div class="cd-page-header">
+                <h1 class="cd-page-title" id="clientNameTitle">Loading...</h1>
+                <p class="cd-page-subtitle"><a href="clients.html">Client</a> / <span id="clientNameSubtitle">Loading...</span></p>
+            </div>
+
+            <!-- Two Column Layout -->
+            <div class="cd-container">
+                    <div class="cd-unified-panel">
+                        <!-- Left Panel -->
+                        <div class="cd-left-panel">
+                        <h2 class="cd-panel-title">AML/CTF — Tranche 2 Client Identity & Disclosure Form</h2>
+                        <p class="cd-panel-subtitle"></p>
+
+                        <div class="cd-section-list">
+                            <!-- Classification & Scope -->
+                            <div class="cd-section-item active" data-section="0" id="nav-0">
+                                <div class="cd-section-icon">
+                                    <i class="fas fa-sitemap"></i>
+                                </div>
+                                <div class="cd-section-content">
+                                    <div class="cd-section-title">Classification & Scope</div>
+                                    <div class="cd-section-desc">Client type & designated services</div>
+                                </div>
+                            </div>
+
+                            <!-- Structure Diagram -->
+                            <div class="cd-section-item" data-section="1" id="nav-1">
+                                <div class="cd-section-icon">
+                                    <i class="fas fa-project-diagram"></i>
+                                </div>
+                                <div class="cd-section-content">
+                                    <div class="cd-section-title">Structure Diagram</div>
+                                    <div class="cd-section-desc">Ownership & control map</div>
+                                </div>
+                            </div>
+
+                            <!-- KYB - Entities -->
+                            <div class="cd-section-item" data-section="2" id="nav-2">
+                                <div class="cd-section-icon">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div class="cd-section-content">
+                                    <div class="cd-section-title">KYB — Entities</div>
+                                    <div class="cd-section-desc">Companies, trusts & super funds</div>
+                                </div>
+                            </div>
+
+                            <!-- Personal Details -->
+                            <div class="cd-section-item" data-section="3" id="nav-3">
+                                <div class="cd-section-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="cd-section-content">
+                                    <div class="cd-section-title">Personal Details</div>
+                                    <div class="cd-section-desc">Individuals & identity docs</div>
+                                </div>
+                            </div>
+
+                            <!-- Ownership & Funds -->
+                            <div class="cd-section-item" data-section="4" id="nav-4">
+                                <div class="cd-section-icon">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <div class="cd-section-content">
+                                    <div class="cd-section-title">Ownership & Funds</div>
+                                    <div class="cd-section-desc">UBO look-through & source of wealth</div>
+                                </div>
+                            </div>
+
+                            <!-- Accountant Completes -->
+                            <div class="cd-section-item" data-section="5" id="nav-5">
+                                <div class="cd-section-icon">
+                                    <i class="fas fa-file-invoice"></i>
+                                </div>
+                                <div class="cd-section-content">
+                                    <div class="cd-section-title">Accountant Completes</div>
+                                    <div class="cd-section-desc">CDD Risk & KYC<br>Risk rating, PEP/sanctions, verification</div>
+                                </div>
+                            </div>
+
+                            <!-- Approval & Sign-off -->
+                            <div class="cd-section-item" data-section="6" id="nav-6">
+                                <div class="cd-section-icon">
+                                    <i class="fas fa-pen-fancy"></i>
+                                </div>
+                                <div class="cd-section-content">
+                                    <div class="cd-section-title">Approval & Sign-off</div>
+                                    <div class="cd-section-desc">Partner sign-off & engagement letterff</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Progress -->
+                        <div class="cd-progress-section">
+                            <div class="cd-progress-header">
+                                <span class="cd-progress-label">Progress</span>
+                                <span class="cd-progress-percent" id="progressPercentage">57 %</span>
+                            </div>
+                            <div class="cd-progress-bar">
+                                <div class="cd-progress-fill" id="progressBar" style="width: 57%;"></div>
+                            </div>
+                            <div class="cd-progress-status" id="progressStatus">Partner sign-off & engagement letter</div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel -->
+                    <div class="cd-right-panel">
+                        <h2 class="cd-content-title" id="contentTitle">Client Classification</h2>
+                        <p class="cd-content-desc" id="contentDesc">
+                            Complete this step first. The client's classification determines the entire workflow —
+                            getting it wrong either wastes the pre-commencement monitoring carve-out or leaves you non-compliant.
+                        </p>
+
+                        <div id="contentArea" class="cd-content-area">
+                            <!-- Content will be dynamically loaded here -->
+                        </div>
+                    </div>
+                    </div>
+                </div>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Navigation constants
+        const SECTIONS = ['Classification & Scope', 'Structure Diagram', 'KYB — Entities', 'Personal Details', 'Ownership & Funds', 'CDD Risk & KYC', 'Approval & Sign-off'];
+        const TOTAL = SECTIONS.length;
+        let cur = 0;
+
+        // Get client data from URL parameters
+        function getClientData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const clientId = urlParams.get('id');
+
+            // Mock client data - replace with actual API call
+            const clients = {
+                '1': { name: 'Riverside Ventures Pty Ltd', progress: 57, status: 'Partner sign-off & engagement letter' },
+                '2': { name: 'Melbourne Property Group', progress: 45, status: 'Ownership & Funds' },
+                '3': { name: 'Thompson Family Trust', progress: 82, status: 'Final review' },
+                '4': { name: 'Anderson Trading Co', progress: 30, status: 'Personal Details' },
+                '5': { name: 'Harbour Capital Partners', progress: 15, status: 'Structure Diagram' },
+                '6': { name: 'Westside Holdings Group', progress: 68, status: 'Accountant Completes' },
+                '7': { name: 'Collins Street Investments', progress: 90, status: 'Approval & Sign-off' },
+                '8': { name: 'Brighton Bay Traders', progress: 55, status: 'KYB — Entities' },
+                '9': { name: 'Chen Family Enterprises', progress: 40, status: 'Ownership & Funds' },
+                '10': { name: 'Southbank Property Trust', progress: 75, status: 'Accountant Completes' },
+                '11': { name: 'Newport Capital LLC', progress: 20, status: 'Classification & Scope' },
+                '12': { name: 'Williams & Associates', progress: 50, status: 'Personal Details' },
+                '13': { name: 'Fitzroy Retail Group', progress: 35, status: 'Structure Diagram' },
+                '14': { name: 'Parker Consulting', progress: 85, status: 'Approval & Sign-off' },
+                '15': { name: 'Richmond Development Trust', progress: 60, status: 'Ownership & Funds' }
+            };
+
+            return clients[clientId] || clients['1'];
+        }
+
+        // Initialize page
+        function initializePage() {
+            const clientData = getClientData();
+
+            // Update page title and breadcrumb
+            document.getElementById('clientNameTitle').textContent = clientData.name;
+            document.getElementById('clientNameSubtitle').textContent = clientData.name;
+
+            // Update progress
+            document.getElementById('progressPercentage').textContent = clientData.progress + ' %';
+            document.getElementById('progressBar').style.width = clientData.progress + '%';
+            document.getElementById('progressStatus').textContent = clientData.status;
+
+            // Initialize first section
+            goTo(0);
+        }
+
+        // Navigation functions
+        function goTo(n) {
+            if (n < 0) return;
+
+            if (n >= TOTAL) {
+                // Show completion screen
+                showCompletion();
+                return;
+            }
+
+            cur = n;
+            updateSidebar(n);
+            updateProgress(n);
+            loadSection(n);
+            window.scrollTo({top:0, behavior:'smooth'});
+        }
+
+        function showCompletion() {
+            const contentTitle = document.getElementById('contentTitle');
+            const contentDesc = document.getElementById('contentDesc');
+            const contentArea = document.getElementById('contentArea');
+
+            contentTitle.textContent = '';
+            contentDesc.textContent = '';
+
+            const clientData = getClientData();
+            const refNumber = 'BOD-' + clientData.name.substring(0, 6).toUpperCase().replace(/\s/g, '');
+
+            contentArea.innerHTML = `
+                <div class="cd-completion-wrap">
+                    <div class="cd-completion-box">
+                        <div class="cd-comp-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34.54 34.54">
+                                <defs>
+                                    <style>
+                                        .cls-1{stroke:#00310b;stroke-miterlimit:10;stroke-width:.5px}
+                                        .cls-1,.cls-2{fill:#008d3e}
+                                        .cls-3{fill:#fff}
+                                    </style>
+                                </defs>
+                                <rect class="cls-1" x=".25" y=".25" width="34.04" height="34.04" rx="17.02" ry="17.02"/>
+                                <g>
+                                    <polyline class="cls-2" points="9.46 17.7 14.45 22.68 25.75 11.37"/>
+                                    <path class="cls-3" d="M8.18,18.98l4.98,4.98c.69.69,1.87.69,2.57,0,3.29-3.29,6.58-6.58,9.87-9.87l1.44-1.44c1.65-1.65-.91-4.22-2.57-2.57-3.29,3.29-6.58,6.58-9.87,9.87-.48.48-.96.96-1.44,1.44h2.57c-1.66-1.66-3.32-3.32-4.98-4.98-1.65-1.65-4.22.91-2.57,2.57h0Z"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <h1>CDD Record Complete</h1>
+                        <p>The AML/CTF customer due diligence record has been finalised. File all supporting documents against this reference and set your monitoring diary.</p>
+                        <div class="cd-comp-ref">${refNumber}</div>
+                        <div class="cd-alert success" style="text-align:left; margin-bottom:1.5rem">
+                            <span class="cd-alert-icon">📌</span>
+                            <div><strong>Next steps:</strong> File engagement letter and identity documents. Attach the ownership diagram. Enter the next review date in your practice system. If risk is HIGH, notify the AML/CTF Compliance Officer. Lodge any TTR with AUSTRAC. Submit ACR to AUSTRAC by 31 March each year.</div>
+                        </div>
+                        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap">
+                            <button class="cd-btn cd-btn-secondary" onclick="window.print()">🖨 Print / Save PDF</button>
+                            <button class="cd-btn cd-btn-secondary" onclick="window.location.href='clients.html'">Back to Clients</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            updateSidebar(TOTAL);
+            updateProgress(TOTAL);
+        }
+
+        function updateSidebar(n) {
+            for(let i=0; i<TOTAL; i++) {
+                const el = document.getElementById('nav-'+i);
+                if (!el) continue;
+                el.classList.remove('active', 'complete');
+                if (n >= TOTAL) {
+                    // All sections complete
+                    el.classList.add('complete');
+                } else if (i === n) {
+                    el.classList.add('active');
+                } else if (i < n) {
+                    el.classList.add('complete');
+                }
+            }
+        }
+
+        function updateProgress(n) {
+            const pct = n >= TOTAL ? 100 : Math.round((n / TOTAL) * 100);
+            document.getElementById('progressBar').style.width = pct + '%';
+            document.getElementById('progressPercentage').textContent = pct + ' %';
+            document.getElementById('progressStatus').textContent = n >= TOTAL ? 'Complete' : SECTIONS[n];
+        }
+
+        // Section navigation
+        document.querySelectorAll('.cd-section-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const section = parseInt(this.getAttribute('data-section'));
+                goTo(section);
+            });
+        });
+
+        function loadSection(n) {
+            const contentTitle = document.getElementById('contentTitle');
+            const contentDesc = document.getElementById('contentDesc');
+            const contentArea = document.getElementById('contentArea');
+
+            const sectionData = [
+                {
+                    title: 'Client Classification',
+                    desc: 'Complete this step first. The client\'s classification determines the entire workflow — getting it wrong either wastes the pre-commencement monitoring carve-out or leaves you non-compliant.',
+                    content: getClassificationContent()
+                },
+                {
+                    title: 'Structure Diagram',
+                    desc: 'Document the ownership and control structure of the client entity. This helps identify beneficial owners and control persons.',
+                    content: getStructureContent()
+                },
+                {
+                    title: 'KYB — Entities',
+                    desc: 'Collect and verify information about companies, trusts, and superannuation funds associated with this client.',
+                    content: getKYBContent()
+                },
+                {
+                    title: 'Personal Details',
+                    desc: 'Gather personal information and identity documents for all individuals associated with this client.',
+                    content: getPersonalDetailsContent()
+                },
+                {
+                    title: 'Ownership & Funds',
+                    desc: 'Identify ultimate beneficial owners and document the source of wealth and funds for this client.',
+                    content: getOwnershipContent()
+                },
+                {
+                    title: 'Accountant Completes',
+                    desc: 'Complete the customer due diligence risk assessment and know your client procedures including risk rating, PEP/sanctions screening, and verification.',
+                    content: getAccountantContent()
+                },
+                {
+                    title: 'Approval & Sign-off',
+                    desc: 'Final partner review and sign-off on the engagement letter and client onboarding documentation.',
+                    content: getApprovalContent()
+                }
+            ];
+
+            if (sectionData[n]) {
+                contentTitle.textContent = sectionData[n].title;
+                contentDesc.textContent = sectionData[n].desc;
+                contentArea.innerHTML = sectionData[n].content;
+            }
+        }
+
+        function getClassificationContent() {
+            return `
+                <div class="cd-alert warning">
+                    <span class="cd-alert-icon">⚠</span>
+                    <div><strong>Accountant use only — complete before giving anything to the client.</strong> The three classifications below have different legal obligations.</div>
+                </div>
+
+                <div class="cd-form-group">
+                    <label class="cd-label">Client status <span class="required">*</span></label>
+                    <div class="cd-radio-group">
+                        <label class="cd-radio-item">
+                            <input type="radio" name="client-status" value="precomm-no">
+                            <div>
+                                <div class="cd-option-title" style="color:#10B981">Pre-commencement — no new designated services</div>
+                                <div class="cd-option-desc">Existing client before 1 July 2026. No new services being added. <strong>Monitoring only</strong> — do NOT run initial CDD.</div>
+                            </div>
+                        </label>
+                        <label class="cd-radio-item">
+                            <input type="radio" name="client-status" value="precomm-new">
+                            <div>
+                                <div class="cd-option-title" style="color:#F59E0B">Pre-commencement — new designated service being added</div>
+                                <div class="cd-option-desc">Existing client before 1 July 2026, but you are adding a new designated service. <strong>Full CDD/KYC workflow required.</strong></div>
+                            </div>
+                        </label>
+                        <label class="cd-radio-item">
+                            <input type="radio" name="client-status" value="new">
+                            <div>
+                                <div class="cd-option-title" style="color:#0B6E4F">New client — from 1 July 2026</div>
+                                <div class="cd-option-desc">Client did not exist before commencement. <strong>Full CDD/KYC workflow required.</strong></div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="cd-form-group">
+                    <label class="cd-label">Designated services being provided <span class="required">*</span></label>
+                    <div class="cd-checkbox-group">
+                        <label class="cd-checkbox-item">
+                            <input type="checkbox" value="item2">
+                            <div>
+                                <div class="cd-option-title">Item 2 — Assisting in buying, selling or transferring a body corporate</div>
+                                <div class="cd-option-desc">e.g. contracts, due diligence, settlement</div>
+                            </div>
+                        </label>
+                        <label class="cd-checkbox-item">
+                            <input type="checkbox" value="item6">
+                            <div>
+                                <div class="cd-option-title">Item 6 — Assisting in creation or restructuring of a company or trust</div>
+                                <div class="cd-option-desc">e.g. trust deeds, ASIC registrations</div>
+                            </div>
+                        </label>
+                        <label class="cd-checkbox-item">
+                            <input type="checkbox" value="item9">
+                            <div>
+                                <div class="cd-option-title">Item 9 — Providing a registered office service</div>
+                                <div class="cd-option-desc">Most accounting firms fall under this category</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="cd-bottom-nav">
+                    <div class="cd-bottom-nav-info">Step <strong>1</strong> of 7 — Classification & Scope</div>
+                    <div class="cd-bottom-nav-btns">
+                        <button class="cd-btn cd-btn-secondary" onclick="prev()">← Back</button>
+                        <button class="cd-btn cd-btn-primary" onclick="next()">Continue →</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getStructureContent() {
+            // Initialize diagram after content is loaded
+            setTimeout(() => {
+                prefillDiagram();
+            }, 100);
+
+            return `
+                <div class="cd-diagram-card">
+                    <div class="cd-diagram-header">
+                        <h3>Ownership & Control Map</h3>
+                        <p>Drag to reposition nodes. Click a node to edit its label. Add connections using the link tool.</p>
+                    </div>
+                    <div class="cd-diagram-toolbar">
+                        <button class="cd-diagram-tool-btn active" id="tool-select" onclick="setTool('select')" title="Select / Move">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2l5 12 2.5-4.5L14 7z" fill="currentColor"/></svg>
+                        </button>
+                        <button class="cd-diagram-tool-btn" id="tool-link" onclick="setTool('link')" title="Add connection">
+                            <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8h10M10 5l3 3-3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+                        </button>
+                        <div class="cd-diagram-separator"></div>
+                        <button class="cd-diagram-add-btn" onclick="addNode('individual')">＋ Individual</button>
+                        <button class="cd-diagram-add-btn" onclick="addNode('company')">＋ Company</button>
+                        <button class="cd-diagram-add-btn" onclick="addNode('trust')">＋ Trust</button>
+                        <button class="cd-diagram-add-btn" onclick="addNode('smsf')">＋ SMSF</button>
+                        <div style="flex:1"></div>
+                        <button class="cd-diagram-tool-btn" onclick="autoLayout()" title="Auto-layout" style="width:auto;padding:0 10px;font-size:11px;font-weight:600;gap:4px">
+                            <svg width="12" height="12" viewBox="0 0 12 12"><rect x="1" y="1" width="4" height="4" rx="1" fill="currentColor"/><rect x="7" y="1" width="4" height="4" rx="1" fill="currentColor"/><rect x="4" y="7" width="4" height="4" rx="1" fill="currentColor"/></svg>
+                            Layout
+                        </button>
+                        <button class="cd-diagram-tool-btn danger-btn" onclick="clearDiagram()" title="Clear all" style="width:auto;padding:0 10px;font-size:11px;font-weight:600">Clear</button>
+                    </div>
+                    <div class="cd-diagram-canvas" id="diagram-canvas-wrap">
+                        <svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none">
+                            <defs>
+                                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                    <polygon points="0 0, 10 3.5, 0 7" fill="#6B7280"/>
+                                </marker>
+                            </defs>
+                            <g id="edges-layer"></g>
+                        </svg>
+                        <div id="diagram-nodes" style="position:absolute;top:0;left:0;width:100%;height:100%"></div>
+                        <div id="diagram-empty-hint" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#9ca3af;pointer-events:none">
+                            <div style="font-size:2.5rem;margin-bottom:12px;opacity:0.4">⬡</div>
+                            <div style="font-size:13px;font-weight:500;margin-bottom:4px">No structure mapped yet</div>
+                            <div style="font-size:12px">Use the buttons above to add individuals and entities, then connect them</div>
+                        </div>
+                    </div>
+                    <div class="cd-diagram-legend">
+                        <div class="cd-legend-items">
+                            <span><span class="cd-legend-dot" style="background:#1e40af"></span> Individual</span>
+                            <span><span class="cd-legend-dot" style="background:#065F46"></span> Company</span>
+                            <span><span class="cd-legend-dot" style="background:#92400e"></span> Trust</span>
+                            <span><span class="cd-legend-dot" style="background:#065F46"></span> SMSF</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cd-form-group">
+                    <label class="cd-label">Diagram notes / version</label>
+                    <input type="text" class="cd-input" placeholder="e.g. Prepared by firm — current as at April 2026">
+                </div>
+
+                <div class="cd-bottom-nav">
+                    <div class="cd-bottom-nav-info">Step <strong>2</strong> of 7 — Structure Diagram</div>
+                    <div class="cd-bottom-nav-btns">
+                        <button class="cd-btn cd-btn-secondary" onclick="prev()">← Back</button>
+                        <button class="cd-btn cd-btn-primary" onclick="next()">Continue →</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getKYBContent() {
+            return `
+                <div class="cd-alert warning">
+                    <span class="cd-alert-icon">⚠</span>
+                    <div><strong>Include everything.</strong> Even entities not directly related to why you're engaging us. Omitting entities is a compliance failure under the AML/CTF Act.</div>
+                </div>
+
+                <div class="cd-form-group">
+                    <label class="cd-label">Company name <span class="required">*</span></label>
+                    <input type="text" class="cd-input" placeholder="e.g. ABC Trading Pty Ltd">
+                </div>
+
+                <div class="cd-form-row">
+                    <div class="cd-form-group">
+                        <label class="cd-label">ACN / ABN <span class="required">*</span></label>
+                        <input type="text" class="cd-input" placeholder="e.g. 123 456 789">
+                    </div>
+                    <div class="cd-form-group">
+                        <label class="cd-label">Entity type <span class="required">*</span></label>
+                        <select class="cd-select">
+                            <option value="">Select...</option>
+                            <option>Company</option>
+                            <option>Trust</option>
+                            <option>SMSF</option>
+                            <option>Partnership</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="cd-form-group">
+                    <label class="cd-label">Registered address <span class="required">*</span></label>
+                    <textarea class="cd-textarea" placeholder="Enter the registered office address..."></textarea>
+                </div>
+
+                <div class="cd-form-group">
+                    <label class="cd-label">Nature of business</label>
+                    <input type="text" class="cd-input" placeholder="e.g. Retail trade, Property investment">
+                </div>
+
+                <div class="cd-bottom-nav">
+                    <div class="cd-bottom-nav-info">Step <strong>3</strong> of 7 — KYB Entities</div>
+                    <div class="cd-bottom-nav-btns">
+                        <button class="cd-btn cd-btn-secondary" onclick="prev()">← Back</button>
+                        <button class="cd-btn cd-btn-primary" onclick="next()">Continue →</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getPersonalDetailsContent() {
+            return `
+                <div class="cd-alert info">
+                    <span class="cd-alert-icon">ℹ</span>
+                    <div>Collect personal information and identity documents for all individuals associated with this client.</div>
+                </div>
+
+                <div class="cd-form-row">
+                    <div class="cd-form-group">
+                        <label class="cd-label">First name <span class="required">*</span></label>
+                        <input type="text" class="cd-input" placeholder="First name">
+                    </div>
+                    <div class="cd-form-group">
+                        <label class="cd-label">Last name <span class="required">*</span></label>
+                        <input type="text" class="cd-input" placeholder="Last name">
+                    </div>
+                </div>
+
+                <div class="cd-form-row">
+                    <div class="cd-form-group">
+                        <label class="cd-label">Date of birth <span class="required">*</span></label>
+                        <input type="date" class="cd-input">
+                    </div>
+                    <div class="cd-form-group">
+                        <label class="cd-label">Relationship to group <span class="required">*</span></label>
+                        <select class="cd-select">
+                            <option value="">Select...</option>
+                            <option>Director</option>
+                            <option>Shareholder</option>
+                            <option>Trustee</option>
+                            <option>Beneficiary</option>
+                            <option>Appointor</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="cd-form-group">
+                    <label class="cd-label">Residential address <span class="required">*</span></label>
+                    <textarea class="cd-textarea" placeholder="Enter residential address..."></textarea>
+                </div>
+
+                <div class="cd-form-row">
+                    <div class="cd-form-group">
+                        <label class="cd-label">Email address</label>
+                        <input type="email" class="cd-input" placeholder="email@example.com">
+                    </div>
+                    <div class="cd-form-group">
+                        <label class="cd-label">Phone number</label>
+                        <input type="tel" class="cd-input" placeholder="0400 000 000">
+                    </div>
+                </div>
+
+                <div class="cd-bottom-nav">
+                    <div class="cd-bottom-nav-info">Step <strong>4</strong> of 7 — Personal Details</div>
+                    <div class="cd-bottom-nav-btns">
+                        <button class="cd-btn cd-btn-secondary" onclick="prev()">← Back</button>
+                        <button class="cd-btn cd-btn-primary" onclick="next()">Continue →</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getOwnershipContent() {
+            return `
+                <div class="cd-alert info">
+                    <span class="cd-alert-icon">ℹ</span>
+                    <div>There are no right or wrong answers — we just need to understand your financial profile. Please describe your situation honestly.</div>
+                </div>
+
+                <div class="cd-form-group">
+                    <label class="cd-label">Primary sources of income <span class="required">*</span></label>
+                    <div class="cd-checkbox-group">
+                        <label class="cd-checkbox-item">
+                            <input type="checkbox">
+                            <div class="cd-option-title">Business / trading revenue</div>
+                        </label>
+                        <label class="cd-checkbox-item">
+                            <input type="checkbox">
+                            <div class="cd-option-title">Salary or wages</div>
+                        </label>
+                        <label class="cd-checkbox-item">
+                            <input type="checkbox">
+                            <div class="cd-option-title">Investment income (rent, dividends, interest)</div>
+                        </label>
+                        <label class="cd-checkbox-item">
+                            <input type="checkbox">
+                            <div class="cd-option-title">Superannuation contributions</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="cd-form-group">
+                    <label class="cd-label">Describe your source of funds in more detail <span class="required">*</span></label>
+                    <textarea class="cd-textarea" placeholder="e.g. Retail business established in 2010, turnover approx $X per year. Trading company profits distributed to family trust each year..."></textarea>
+                </div>
+
+                <div class="cd-form-group">
+                    <label class="cd-label">Any overseas connections? <span class="required">*</span></label>
+                    <div class="cd-radio-group">
+                        <label class="cd-radio-item">
+                            <input type="radio" name="overseas" value="no">
+                            <div class="cd-option-title">No</div>
+                        </label>
+                        <label class="cd-radio-item">
+                            <input type="radio" name="overseas" value="yes">
+                            <div class="cd-option-title">Yes — describe below</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="cd-bottom-nav">
+                    <div class="cd-bottom-nav-info">Step <strong>5</strong> of 7 — Ownership & Funds</div>
+                    <div class="cd-bottom-nav-btns">
+                        <button class="cd-btn cd-btn-secondary" onclick="prev()">← Back</button>
+                        <button class="cd-btn cd-btn-primary" onclick="next()">Continue →</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getAccountantContent() {
+            return `
+                <div class="cd-alert warning">
+                    <span class="cd-alert-icon">⚠</span>
+                    <div><strong>Accountant use only.</strong> Complete in sequence: A) Risk rating & CDD level → B) Screening → C) Verification</div>
+                </div>
+
+                <div class="cd-form-group">
+                    <label class="cd-label">Overall residual risk <span class="required">*</span></label>
+                    <div class="cd-radio-group">
+                        <label class="cd-radio-item">
+                            <input type="radio" name="risk-level" value="low">
+                            <div>
+                                <div class="cd-option-title" style="color:#10B981">Low</div>
+                                <div class="cd-option-desc">Simple domestic structure, known client, no adverse indicators</div>
+                            </div>
+                        </label>
+                        <label class="cd-radio-item">
+                            <input type="radio" name="risk-level" value="medium">
+                            <div>
+                                <div class="cd-option-title">Medium</div>
+                                <div class="cd-option-desc">Layered structure, multiple entities, standard business</div>
+                            </div>
+                        </label>
+                        <label class="cd-radio-item">
+                            <input type="radio" name="risk-level" value="high">
+                            <div>
+                                <div class="cd-option-title" style="color:#EF4444">High / Critical</div>
+                                <div class="cd-option-desc">PEP confirmed, offshore exposure, complex ownership</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="cd-form-group">
+                    <label class="cd-label">CDD level assigned <span class="required">*</span></label>
+                    <div class="cd-radio-group">
+                        <label class="cd-radio-item">
+                            <input type="radio" name="cdd-level" value="simplified">
+                            <div>
+                                <div class="cd-option-title" style="color:#10B981">Simplified</div>
+                                <div class="cd-option-desc">Qualifying condition confirmed. CO approval required.</div>
+                            </div>
+                        </label>
+                        <label class="cd-radio-item">
+                            <input type="radio" name="cdd-level" value="standard">
+                            <div>
+                                <div class="cd-option-title">Standard</div>
+                                <div class="cd-option-desc">Default for Low/Medium risk with no Enhanced triggers.</div>
+                            </div>
+                        </label>
+                        <label class="cd-radio-item">
+                            <input type="radio" name="cdd-level" value="enhanced">
+                            <div>
+                                <div class="cd-option-title" style="color:#EF4444">Enhanced</div>
+                                <div class="cd-option-desc">Mandatory for High/Critical risk or Enhanced trigger.</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="cd-form-group">
+                    <label class="cd-label">Risk assessment narrative <span class="required">*</span></label>
+                    <textarea class="cd-textarea" placeholder="Summarise the key risk factors, mitigating factors, and basis for the CDD level assigned..."></textarea>
+                </div>
+
+                <div class="cd-bottom-nav">
+                    <div class="cd-bottom-nav-info">Step <strong>6</strong> of 7 — CDD Risk & KYC</div>
+                    <div class="cd-bottom-nav-btns">
+                        <button class="cd-btn cd-btn-secondary" onclick="prev()">← Back</button>
+                        <button class="cd-btn cd-btn-primary" onclick="next()">Continue →</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getApprovalContent() {
+            return `
+                <div class="cd-alert success">
+                    <span class="cd-alert-icon">✓</span>
+                    <div>Final partner review and sign-off on the engagement letter and client onboarding documentation.</div>
+                </div>
+
+                <div class="cd-form-row">
+                    <div class="cd-form-group">
+                        <label class="cd-label">Approved by (Partner) <span class="required">*</span></label>
+                        <input type="text" class="cd-input" placeholder="Partner name">
+                    </div>
+                    <div class="cd-form-group">
+                        <label class="cd-label">Approval date <span class="required">*</span></label>
+                        <input type="date" class="cd-input">
+                    </div>
+                </div>
+
+                <div class="cd-form-group">
+                    <label class="cd-label">Engagement letter signed? <span class="required">*</span></label>
+                    <div class="cd-radio-group">
+                        <label class="cd-radio-item">
+                            <input type="radio" name="engagement-signed" value="yes">
+                            <div class="cd-option-title">Yes — signed and filed</div>
+                        </label>
+                        <label class="cd-radio-item">
+                            <input type="radio" name="engagement-signed" value="pending">
+                            <div class="cd-option-title">Pending client signature</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="cd-form-group">
+                    <label class="cd-label">Partner approval comments</label>
+                    <textarea class="cd-textarea" placeholder="Any additional notes or conditions..."></textarea>
+                </div>
+
+                <div class="cd-bottom-nav">
+                    <div class="cd-bottom-nav-info">Step <strong>7</strong> of 7 — Approval & Sign-off</div>
+                    <div class="cd-bottom-nav-btns">
+                        <button class="cd-btn cd-btn-secondary" onclick="prev()">← Back</button>
+                        <button class="cd-btn cd-btn-primary" onclick="next()">Complete →</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function next() {
+            goTo(cur + 1);
+        }
+
+        function prev() {
+            if (cur > 0) {
+                goTo(cur - 1);
+            }
+        }
+
+        // Diagram functionality
+        const NODE_TYPES = {
+            individual: { color:'#1e40af', bg:'#EFF6FF', label:'Individual', icon:'👤' },
+            company:    { color:'#065F46', bg:'#ECFDF5', label:'Company',    icon:'🏢' },
+            trust:      { color:'#92400e', bg:'#FFFBEB', label:'Trust',      icon:'🤝' },
+            smsf:       { color:'#065F46', bg:'#F0FDF4', label:'SMSF',       icon:'🏦' },
+        };
+
+        const BADGE_STYLES = {
+            Controller:      { bg:'#1e40af', color:'white' },
+            Director:        { bg:'#0B6E4F', color:'white' },
+            Trustee:         { bg:'#92400e', color:'white' },
+            Appointor:       { bg:'#6d28d9', color:'white' },
+            Member:          { bg:'#065F46', color:'white' },
+            UBO:             { bg:'#DC2626', color:'white' },
+            Beneficiary:     { bg:'#D97706', color:'white' },
+            Shareholder:     { bg:'#374151', color:'white' },
+            Company:         { bg:'#6B7280', color:'white' },
+            Trust:           { bg:'#6B7280', color:'white' },
+            SMSF:            { bg:'#6B7280', color:'white' },
+        };
+
+        let diagNodes = [];
+        let diagEdges = [];
+        let diagTool = 'select';
+        let dragState = null;
+        let linkSource = null;
+        let nodeIdSeq = 1;
+
+        function setTool(t) {
+            diagTool = t;
+            document.querySelectorAll('.cd-diagram-tool-btn[id^=tool-]').forEach(b => b.classList.remove('active'));
+            const btn = document.getElementById('tool-' + t);
+            if (btn) btn.classList.add('active');
+            const canvas = document.getElementById('diagram-nodes');
+            if (canvas) canvas.style.cursor = t === 'link' ? 'crosshair' : 'default';
+            if (t !== 'link') { clearLinkSource(); }
+        }
+
+        function clearLinkSource() {
+            linkSource = null;
+            document.querySelectorAll('.cd-diagram-node.link-source').forEach(n => n.classList.remove('link-source'));
+        }
+
+        function addNode(type, name, sub, badges, x, y) {
+            const cfg = NODE_TYPES[type];
+            const id = 'dn-' + (nodeIdSeq++);
+            const canvas = document.getElementById('diagram-canvas-wrap');
+            if (!canvas) return null;
+            const cx = canvas.clientWidth, cy = canvas.clientHeight;
+
+            if (x === undefined) {
+                x = 60 + Math.random() * (cx - 240);
+                y = 60 + Math.random() * (cy - 160);
+            }
+
+            diagNodes.push({ id, type, x, y, name: name||'New '+cfg.label, sub: sub||'', badges: badges||[] });
+            renderDiagramNode(id);
+            updateEmptyHint();
+            return id;
+        }
+
+        function renderDiagramNode(id) {
+            const n = diagNodes.find(x => x.id === id);
+            if (!n) return;
+            const cfg = NODE_TYPES[n.type];
+            let existing = document.getElementById(id);
+            if (existing) existing.remove();
+
+            const el = document.createElement('div');
+            el.className = 'cd-diagram-node';
+            el.id = id;
+            el.style.cssText = `left:${n.x}px;top:${n.y}px;border-color:${cfg.color};`;
+            el.innerHTML = `
+                <div class="cd-diagram-node-header" style="background:${cfg.color};color:white">
+                    <span>${cfg.icon}</span><span>${cfg.label.toUpperCase()}</span>
+                </div>
+                <div class="cd-diagram-node-body">
+                    <div class="cd-diagram-node-name" contenteditable="true" spellcheck="false"
+                         onblur="updateNodeName('${id}',this.textContent)"
+                         onmousedown="event.stopPropagation()">${n.name}</div>
+                    <div class="cd-diagram-node-sub" contenteditable="true" spellcheck="false"
+                         onblur="updateNodeSub('${id}',this.textContent)"
+                         onmousedown="event.stopPropagation()">${n.sub}</div>
+                    ${n.badges.length ? `<div class="cd-diagram-node-badges">${n.badges.map(b => {
+                        const s = BADGE_STYLES[b] || { bg:'#6B7280', color:'white' };
+                        return `<span class="cd-diagram-badge" style="background:${s.bg};color:${s.color}">${b}</span>`;
+                    }).join('')}</div>` : ''}
+                </div>
+                <button onclick="removeNode('${id}')" style="position:absolute;top:4px;right:4px;background:rgba(255,255,255,0.2);border:none;color:white;cursor:pointer;font-size:11px;line-height:1;padding:2px 5px;border-radius:3px;opacity:0.6" onmousedown="event.stopPropagation()" title="Remove">✕</button>`;
+
+            el.addEventListener('mousedown', e => {
+                if (e.target.contentEditable === 'true') return;
+                if (diagTool === 'link') {
+                    if (!linkSource) {
+                        linkSource = id;
+                        el.classList.add('link-source');
+                    } else if (linkSource !== id) {
+                        addEdge(linkSource, id);
+                        clearLinkSource();
+                        setTool('select');
+                    }
+                    return;
+                }
+                dragState = { nodeId: id, startX: e.clientX, startY: e.clientY, nodeStartX: n.x, nodeStartY: n.y };
+                el.classList.add('selected');
+                e.preventDefault();
+            });
+
+            const nodesContainer = document.getElementById('diagram-nodes');
+            if (nodesContainer) nodesContainer.appendChild(el);
+        }
+
+        document.addEventListener('mousemove', e => {
+            if (!dragState) return;
+            const n = diagNodes.find(x => x.id === dragState.nodeId);
+            if (!n) return;
+            n.x = Math.max(0, dragState.nodeStartX + e.clientX - dragState.startX);
+            n.y = Math.max(0, dragState.nodeStartY + e.clientY - dragState.startY);
+            const el = document.getElementById(dragState.nodeId);
+            if (el) { el.style.left = n.x + 'px'; el.style.top = n.y + 'px'; }
+            redrawEdges();
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (dragState) {
+                const el = document.getElementById(dragState.nodeId);
+                if (el) el.classList.remove('selected');
+                dragState = null;
+            }
+        });
+
+        function updateNodeName(id, val) {
+            const n = diagNodes.find(x => x.id === id);
+            if (n) n.name = val.trim() || n.name;
+        }
+
+        function updateNodeSub(id, val) {
+            const n = diagNodes.find(x => x.id === id);
+            if (n) n.sub = val.trim();
+        }
+
+        function removeNode(id) {
+            diagNodes = diagNodes.filter(n => n.id !== id);
+            diagEdges = diagEdges.filter(e => e.from !== id && e.to !== id);
+            const el = document.getElementById(id);
+            if (el) el.remove();
+            redrawEdges();
+            updateEmptyHint();
+        }
+
+        function addEdge(from, to, label) {
+            if (diagEdges.find(e => e.from === from && e.to === to)) return;
+            if (!label) {
+                label = prompt('Connection label (e.g. Director, Trustee of, 50% shareholder):', '') || '';
+            }
+            diagEdges.push({ from, to, label });
+            redrawEdges();
+        }
+
+        function getNodeCentre(id) {
+            const el = document.getElementById(id);
+            if (!el) return null;
+            return { x: parseFloat(el.style.left) + el.offsetWidth/2, y: parseFloat(el.style.top) + el.offsetHeight/2 };
+        }
+
+        function redrawEdges() {
+            const layer = document.getElementById('edges-layer');
+            if (!layer) return;
+            layer.innerHTML = '';
+            diagEdges.forEach(e => {
+                const a = getNodeCentre(e.from), b = getNodeCentre(e.to);
+                if (!a || !b) return;
+                const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+                const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+                line.setAttribute('x1', a.x); line.setAttribute('y1', a.y);
+                line.setAttribute('x2', b.x); line.setAttribute('y2', b.y);
+                line.setAttribute('stroke', '#6B7280');
+                line.setAttribute('stroke-width', '1.5');
+                line.setAttribute('marker-end', 'url(#arrowhead)');
+                layer.appendChild(line);
+                if (e.label) {
+                    const txt = document.createElementNS('http://www.w3.org/2000/svg','text');
+                    txt.setAttribute('x', mx); txt.setAttribute('y', my - 4);
+                    txt.setAttribute('text-anchor', 'middle');
+                    txt.setAttribute('class', 'cd-diagram-edge-label');
+                    txt.textContent = e.label;
+                    layer.appendChild(txt);
+                }
+            });
+        }
+
+        function updateEmptyHint() {
+            const hint = document.getElementById('diagram-empty-hint');
+            if (hint) hint.style.display = diagNodes.length ? 'none' : 'flex';
+        }
+
+        function clearDiagram() {
+            if (!diagNodes.length || confirm('Clear the diagram?')) {
+                diagNodes = []; diagEdges = []; nodeIdSeq = 1;
+                const nodesEl = document.getElementById('diagram-nodes');
+                const edgesEl = document.getElementById('edges-layer');
+                if (nodesEl) nodesEl.innerHTML = '';
+                if (edgesEl) edgesEl.innerHTML = '';
+                updateEmptyHint();
+            }
+        }
+
+        function autoLayout() {
+            if (!diagNodes.length) return;
+            const canvas = document.getElementById('diagram-canvas-wrap');
+            if (!canvas) return;
+            const W = canvas.clientWidth, H = canvas.clientHeight;
+            const individuals = diagNodes.filter(n => n.type === 'individual');
+            const entities = diagNodes.filter(n => n.type !== 'individual');
+            const allRows = [individuals, entities];
+            const rowH = H / (allRows.length + 1);
+            allRows.forEach((row, ri) => {
+                const colW = W / (row.length + 1);
+                row.forEach((n, ci) => {
+                    n.x = colW * (ci + 1) - 80;
+                    n.y = rowH * (ri + 1) - 50;
+                    const el = document.getElementById(n.id);
+                    if (el) { el.style.left = n.x + 'px'; el.style.top = n.y + 'px'; }
+                });
+            });
+            redrawEdges();
+        }
+
+        function prefillDiagram() {
+            clearDiagram();
+            const john  = addNode('individual','John Smith',  'Director · Appointor · Member',   ['Controller', 'UBO'], 80, 50);
+            const mary  = addNode('individual','Mary Smith',   'Director · Member · Beneficiary', ['Controller', 'UBO'], 340, 50);
+            const tcol  = addNode('company', 'Trustee Co Pty Ltd',       'Dirs: John & Mary · Trustee only', ['Company'], 80, 230);
+            const scol  = addNode('company', 'Super Trustee Co Pty Ltd',  'Dirs: John & Mary · SMSF trustee', ['Company'], 340, 230);
+            const trade = addNode('company', 'ABC Trading Pty Ltd',        'Dirs: John & Mary',               ['Company'], 610, 230);
+            const trust = addNode('trust',   'Smith Family Trust',         'Appointor: John Smith',           ['Trust'],   80, 420);
+            const smsf  = addNode('smsf',    'Smith Super Fund',           'Members: John & Mary · Complying',['SMSF'],    340, 420);
+
+            addEdge(john, tcol,  'Director');
+            addEdge(john, scol,  'Director');
+            addEdge(mary, tcol,  'Director');
+            addEdge(mary, scol,  'Director');
+            addEdge(john, trade, 'Director');
+            addEdge(mary, trade, 'Director');
+            addEdge(john, trust, 'Appointor (control)');
+            addEdge(tcol,  trust, 'Trustee of');
+            addEdge(scol,  smsf,  'Trustee of');
+            addEdge(trust, trade, '100% shareholder');
+
+            updateEmptyHint();
+        }
+
+        // Page load spinner
+        (function() {
+            var overlay = document.getElementById('spinnerOverlay');
+            overlay.style.display = 'flex';
+            requestAnimationFrame(function() {
+                requestAnimationFrame(function() {
+                    overlay.style.opacity = '1';
+                });
+            });
+            setTimeout(function() {
+                overlay.style.transition = 'opacity 0.6s ease';
+                overlay.style.opacity = '0';
+                setTimeout(function() { overlay.style.display = 'none'; }, 600);
+            }, 800);
+        })();
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initializePage);
+    </script>
+
+</body>
+</html>

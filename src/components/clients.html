@@ -523,6 +523,7 @@
         // Client data
         var clientsData = [
             {
+                "id": "1",
                 "name": "Riverside Ventures Pty Ltd",
                 "abn": "42 158 923 467",
                 "entityType": "Trust",
@@ -533,6 +534,7 @@
                 "assignedTo": "Kim Davidson"
             },
             {
+                "id": "2",
                 "name": "Melbourne Property Group",
                 "abn": "78 234 891 234",
                 "entityType": "Partnership",
@@ -543,6 +545,7 @@
                 "assignedTo": "Jason Lee"
             },
             {
+                "id": "3",
                 "name": "Thompson Family Trust",
                 "abn": "91 445 672 889",
                 "entityType": "Family",
@@ -553,6 +556,7 @@
                 "assignedTo": "Sarah Mitchell"
             },
             {
+                "id": "4",
                 "name": "Anderson Trading Co",
                 "abn": "55 789 234 156",
                 "entityType": "Individual /Sole Trader",
@@ -563,6 +567,7 @@
                 "assignedTo": "Kim Davidson"
             },
             {
+                "id": "5",
                 "name": "Harbour Capital Partners",
                 "abn": "67 912 445 778",
                 "entityType": "Partnership",
@@ -573,6 +578,7 @@
                 "assignedTo": "Jason Lee"
             },
             {
+                "id": "6",
                 "name": "Westside Holdings Group",
                 "abn": "33 267 893 445",
                 "entityType": "Business Group",
@@ -583,6 +589,7 @@
                 "assignedTo": "Michael Chen"
             },
             {
+                "id": "7",
                 "name": "Collins Street Investments",
                 "abn": "48 556 789 223",
                 "entityType": "Trust",
@@ -593,6 +600,7 @@
                 "assignedTo": "Sarah Mitchell"
             },
             {
+                "id": "8",
                 "name": "Brighton Bay Traders",
                 "abn": "82 334 667 891",
                 "entityType": "Partnership",
@@ -603,6 +611,7 @@
                 "assignedTo": "Kim Davidson"
             },
             {
+                "id": "9",
                 "name": "Chen Family Enterprises",
                 "abn": "29 445 112 667",
                 "entityType": "Family",
@@ -613,6 +622,7 @@
                 "assignedTo": "Jason Lee"
             },
             {
+                "id": "10",
                 "name": "Southbank Property Trust",
                 "abn": "64 778 223 449",
                 "entityType": "Trust",
@@ -623,6 +633,7 @@
                 "assignedTo": "Sarah Mitchell"
             },
             {
+                "id": "11",
                 "name": "Newport Capital LLC",
                 "abn": "51 889 445 112",
                 "entityType": "Business Group",
@@ -633,6 +644,7 @@
                 "assignedTo": "Michael Chen"
             },
             {
+                "id": "12",
                 "name": "Williams & Associates",
                 "abn": "73 223 556 889",
                 "entityType": "Partnership",
@@ -643,6 +655,7 @@
                 "assignedTo": "Jason Lee"
             },
             {
+                "id": "13",
                 "name": "Fitzroy Retail Group",
                 "abn": "88 667 334 221",
                 "entityType": "Business Group",
@@ -653,6 +666,7 @@
                 "assignedTo": "Kim Davidson"
             },
             {
+                "id": "14",
                 "name": "Parker Consulting",
                 "abn": "36 992 778 334",
                 "entityType": "Individual /Sole Trader",
@@ -663,6 +677,7 @@
                 "assignedTo": "Sarah Mitchell"
             },
             {
+                "id": "15",
                 "name": "Richmond Development Trust",
                 "abn": "47 115 889 667",
                 "entityType": "Trust",
@@ -685,6 +700,27 @@
             clientsData.forEach(function(client) {
                 var row = createClientRow(client);
                 tbody.appendChild(row);
+
+                // Add click handler to row
+                row.addEventListener('click', function(e) {
+                    // Don't navigate if clicking on dropdown button
+                    if (e.target.closest('.dropdown')) {
+                        return;
+                    }
+                    const clientId = this.dataset.clientId;
+                    window.location.href = 'client-details.html?id=' + clientId;
+                });
+
+                // Add hover effect
+                row.addEventListener('mouseenter', function() {
+                    if (!this.style.backgroundColor) {
+                        this.style.backgroundColor = '#f8fafb';
+                    }
+                });
+
+                row.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = '';
+                });
             });
         }
 
@@ -694,6 +730,8 @@
             row.dataset.risk = client.riskRating.toLowerCase();
             row.dataset.entityType = client.entityType;
             row.dataset.cddStatus = client.cddStatus;
+            row.dataset.clientId = client.id;
+            row.style.cursor = 'pointer';
 
             // Risk badge
             var riskClass = 'cl-risk-' + client.riskRating.toLowerCase();
