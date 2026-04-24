@@ -776,6 +776,11 @@
             });
         });
 
+        // Create group & Continue button
+        document.querySelector('.ncg-create-btn').addEventListener('click', function() {
+            window.location.href = 'client-details.html?id=1';
+        });
+
         // Advanced filter system
         var activeFilters = {}; // { category: value }
         var currentCategory = null;
