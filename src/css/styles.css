@@ -125,6 +125,129 @@ a {
     color: #fff;
 }
 
+.header-feedback-btn {
+    background: #1a6b40;
+    border: none;
+    color: #fff;
+    padding: 8px 17px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.15s;
+    margin-right: 12px;
+    font-family: 'Noto Sans', Arial, sans-serif;
+}
+
+.header-feedback-btn:hover {
+    background: #155835;
+}
+
+/* Feedback Modal Specific Styles */
+.feedback-question {
+    font-size: 15px;
+    font-weight: 500;
+    color: #1f2937;
+    margin-bottom: 24px;
+}
+
+.feedback-emoji-options {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.feedback-emoji-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.2s;
+    outline: none;
+}
+
+.feedback-emoji-btn:focus {
+    outline: none;
+}
+
+.feedback-emoji-btn:hover {
+    transform: scale(1.1);
+}
+
+.feedback-emoji-btn.selected .feedback-emoji-wrapper {
+    background: #a7f3d0;
+    border: 2px solid #6aa078;
+}
+
+.feedback-emoji-wrapper {
+    width: 60px;
+    height: 60px;
+    background: #E8EAED;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    transition: background 0.2s, border 0.2s;
+    border: 2px solid transparent;
+}
+
+/* Feedback Success State */
+.feedback-form-view {
+    display: block;
+}
+
+.feedback-form-view.hidden {
+    display: none;
+}
+
+.feedback-success-view {
+    display: none;
+    text-align: center;
+    padding: 40px 40px 60px 40px;
+}
+
+.feedback-success-view.active {
+    display: block;
+}
+
+.feedback-success-view .checkmark {
+    margin: 0 auto 30px auto;
+}
+
+.feedback-success-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 16px;
+}
+
+.feedback-success-message {
+    font-size: 16px;
+    color: #6b7280;
+    margin: 0;
+}
+
+.feedback-success-icon {
+    width: 80px;
+    height: 80px;
+    background: #1a6b40;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+
+.feedback-success-icon svg {
+    width: 40px;
+    height: 40px;
+    color: #ffffff;
+}
+
 .header-avatar-btn {
     background: rgba(255,255,255,0.1);
     border: 1.5px solid rgba(255,255,255,0.15);
@@ -1525,6 +1648,10 @@ a {
 
 .ukp-training-badge i {
     color: #df05e5;
+}
+
+.ukp-training-badge-incomplete {
+    color: #d32f2f;
 }
 
 /* Popover */
