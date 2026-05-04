@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="../css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 </head>
 <body>
     <!-- Authentication Check -->
@@ -41,22 +43,58 @@
                 </svg>
                 Feedback
             </button>
-            <button class="header-icon-btn" title="Call">
-                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
-                </svg>
-            </button>
+            <div class="help-menu-wrap" id="helpMenuWrap">
+                <button class="header-icon-btn" id="helpMenuBtn" title="Help" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-question"></i>
+                </button>
+                <div class="help-menu-dropdown" id="helpMenuDropdown">
+                    <a href="#" class="help-menu-item">FirmVerify Help Centre</a>
+                    <a href="#" class="help-menu-item">New Features Notes</a>
+                    <a href="#" class="help-menu-item">Server Status</a>
+                </div>
+            </div>
             <button class="header-icon-btn" title="Logout" id="logoutBtn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M7.5 1v7h1V1z"/>
-                    <path d="M3 8.812a5 5 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812"/>
-                </svg>
+                <i class="fas fa-power-off"></i>
             </button>
-            <button class="header-icon-btn" title="Apps">
-                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3A1.5 1.5 0 0 1 15 10.5v3A1.5 1.5 0 0 1 13.5 15h-3A1.5 1.5 0 0 1 9 13.5z"/>
-                </svg>
-            </button>
+            <!-- App Switcher -->
+            <div class="app-switcher-wrap" id="appSwitcherWrap">
+                <button class="header-icon-btn" id="appSwitcherBtn" title="Apps" aria-haspopup="true" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3A1.5 1.5 0 0 1 15 10.5v3A1.5 1.5 0 0 1 13.5 15h-3A1.5 1.5 0 0 1 9 13.5z"/></svg>
+                </button>
+                <div class="app-switcher-dropdown" id="appSwitcherDropdown" role="dialog" aria-label="App Switcher">
+                    <div class="app-switcher-grid">
+                        <a href="#" class="app-switcher-item">
+                            <div class="app-switcher-icon"><img src="images/logosAsset 1@2x.png" alt="SI 360"></div>
+                            <span class="app-switcher-label">SI 360</span>
+                        </a>
+                        <a href="#" class="app-switcher-item">
+                            <div class="app-switcher-icon"><img src="images/logosAsset 2@2x.png" alt="CAS 360"></div>
+                            <span class="app-switcher-label">CAS 360</span>
+                        </a>
+                        <a href="#" class="app-switcher-item">
+                            <div class="app-switcher-icon"><img src="images/logosAsset 3@2x.png" alt="MyBGL"></div>
+                            <span class="app-switcher-label">MyBGL</span>
+                        </a>
+                        <a href="#" class="app-switcher-item">
+                            <div class="app-switcher-icon"><img src="images/logosAsset 4@2x.png" alt="Integrations"></div>
+                            <span class="app-switcher-label">Integrations</span>
+                        </a>
+                        <a href="#" class="app-switcher-item">
+                            <div class="app-switcher-icon"><img src="images/logosAsset 5@2x.png" alt="Learning"></div>
+                            <span class="app-switcher-label">Learning</span>
+                        </a>
+                        <a href="#" class="app-switcher-item">
+                            <div class="app-switcher-icon"><img src="images/logosAsset 6@2x.png" alt="Users"></div>
+                            <span class="app-switcher-label">Users</span>
+                        </a>
+                    </div>
+                    <div class="app-switcher-divider"></div>
+                    <a href="#" class="app-switcher-change-firm">
+                        <span>Change Firm</span>
+                        <i class="fas fa-exchange-alt"></i>
+                    </a>
+                </div>
+            </div>
             <button class="header-avatar-btn" title="Profile">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
@@ -107,10 +145,15 @@
                 <!-- Tabs -->
                 <ul class="nav ra-tabs mb-4">
                     <li class="nav-item">
-                        <a class="nav-link ra-tab active" href="#">Email Template</a>
+                        <a class="nav-link ra-tab active" href="#" data-tab="email-template">Email Template</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ra-tab" href="#" data-tab="document-templates">Document Templates</a>
                     </li>
                 </ul>
 
+                <!-- Email Template Tab -->
+                <div id="tab-email-template" class="settings-tab-pane">
                 <!-- Email Template Layout - Connected Panel -->
                 <div style="background: #fff; border: 1px solid #c9d3d6; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: grid; grid-template-columns: 380px 1fr; overflow: hidden; height: calc(100vh - 220px);">
 
@@ -118,61 +161,84 @@
                     <div style="background: #fff; padding: 24px; border-right: 1px solid #d1d7df; overflow-y: auto;">
                         <h5 style="font-size: 16px; font-weight: 600; color: #1a2b35; margin-bottom: 16px;">Template Library</h5>
 
-                        <!-- Search and Add Button -->
+                        <!-- Search -->
                         <div style="display: flex; gap: 8px; margin-bottom: 16px;">
                             <div class="cl-search">
                                 <i class="fas fa-search cl-search-icon"></i>
                                 <input type="text" class="cl-search-input" placeholder="Search">
                             </div>
-                            <button style="width: 50px; height: 50px; background: #1a6b40; border: none; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                                <svg style="width: 13px; height: 13px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.46 13.51">
-                                    <path fill="#fff" d="M9.59,7.46c-1.39,0-2.52,1.16-2.52,2.58v3.46h-1.67v-3.46c0-1.43-1.13-2.58-2.52-2.58H0v-1.73h2.87c1.39,0,2.52-1.16,2.52-2.58V0h1.67v3.15c0,1.43,1.13,2.58,2.52,2.58h2.87v1.73h-2.87Z"/>
-                                </svg>
-                            </button>
                         </div>
 
                         <!-- Template List -->
                         <div>
-                            <div class="template-item-card active" style="padding: 16px; border-radius: 8px; margin-bottom: 8px; cursor: pointer; background: #f4f7f9;">
-                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 4px;">
-                                    <div style="font-size: 14px; font-weight: 600; color: #1a2b35;">Send for Review</div>
-                                    <div style="font-size: 11px; color: #6e7781; white-space: nowrap; margin-left: 8px;">Created • 12min ago</div>
+                            <div class="template-item-card active" data-et-card="0" style="padding: 16px; border-radius: 8px; margin-bottom: 8px; cursor: pointer; background: #f4f7f9; display: flex; align-items: center; gap: 14px;">
+                                <span class="et-envelope-icon" style="flex-shrink:0; display:inline-flex;">
+                                    <svg class="et-envelope-closed" width="43" height="30" viewBox="0 0 51.3 35.73" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#6b7f87" d="M22.65,21.13L2.43.91C.97,1.88,0,3.55,0,5.42v24.69c0,2.98,2.44,5.42,5.42,5.42h40.45c2.98,0,5.42-2.44,5.42-5.42V5.42c0-1.45-.58-2.78-1.52-3.75l-19.46,19.46c-2.11,2.11-5.56,2.11-7.67,0Z"/><path fill="#2c515b" d="M5.56,35.73h40.45c1.11,0,2.14-.34,3-.91L29.24,14.6c-2.11-2.11-5.56-2.11-7.67,0L1.66,34.06c.99,1.03,2.37,1.67,3.9,1.67Z"/><path fill="#133541" d="M45.87,0H5.42c-1.11,0-2.14.34-3,.91l20.22,20.22c2.11,2.11,5.56,2.11,7.67,0L49.77,1.67c-.99-1.03-2.37-1.67-3.9-1.67Z"/></svg>
+                                    <svg class="et-envelope-open" width="40" height="40" viewBox="0 0 48.5 48.69" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#133541" d="M46.86,19.63c.88.83,1.43,1.96,1.43,3.2v21.07c0,2.55-2.29,4.63-5.09,4.63H5.25c-2.8,0-5.09-2.08-5.09-4.63v-21.07c0-1.6,1-2.89,2.28-3.85L22.28.94c1.4-1.27,3.68-1.25,5.05.05l19.53,18.64Z"/><rect fill="#ddd" x="3.56" y="6.32" width="41.79" height="41.63" rx="5.03" ry="5.03"/><path fill="#6b7f87" d="M5.09,48.53h37.95c1.47,0,2.79-.58,3.72-1.49L5.17,18.63c-.84-.57-1.96-.49-2.7.19l-.19.17c-1.28.97-2.28,2.25-2.28,3.85v21.07c0,2.55,2.29,4.63,5.09,4.63Z"/><path fill="#6b7f87" d="M43.41,48.55H5.46c-1.47,0-2.79-.58-3.72-1.49l41.99-28.76c.73-.5,1.7-.43,2.35.16l.36.32c1.28.97,2.07,2.45,2.07,4.06v21.07c0,2.55-2.29,4.63-5.09,4.63Z"/><path fill="#2c515b" d="M5.38,48.69h37.95c1.04,0,2-.29,2.81-.78l-18.55-17.25c-1.98-1.8-5.22-1.8-7.2,0L1.72,47.27c.93.88,2.23,1.42,3.66,1.42Z"/><rect fill="#051426" x="13.33" y="12.13" width="9.04" height="1.28" rx=".64" ry=".64"/><rect fill="#051426" x="19.68" y="21.03" width="9.04" height="1.28" rx=".64" ry=".64"/><rect fill="#051426" x="13.33" y="16.6" width="20.64" height="1.28" rx=".64" ry=".64"/></svg>
+                                </span>
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 4px;">
+                                        <div style="font-size: 14px; font-weight: 600; color: #1a2b35;">Send for Review</div>
+                                        <div style="font-size: 11px; color: #6e7781; white-space: nowrap; margin-left: 8px;">Created • 12min ago</div>
+                                    </div>
+                                    <div style="font-size: 12px; color: #6e7781; margin-bottom: 4px;">Figma Files</div>
+                                    <div style="font-size: 12px; color: #848d97;">Thank you for your prompt response.</div>
                                 </div>
-                                <div style="font-size: 12px; color: #6e7781; margin-bottom: 4px;">Figma Files</div>
-                                <div style="font-size: 12px; color: #848d97;">Thank you for your prompt response.</div>
                             </div>
 
-                            <div class="template-item-card" style="padding: 16px; border-radius: 8px; margin-bottom: 8px; cursor: pointer;">
-                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 4px;">
-                                    <div style="font-size: 14px; font-weight: 600; color: #1a2b35;">Send for Review</div>
-                                    <div style="font-size: 11px; color: #6e7781; white-space: nowrap; margin-left: 8px;">Created • 12min ago</div>
+                            <div class="template-item-card" data-et-card="1" style="padding: 16px; border-radius: 8px; margin-bottom: 8px; cursor: pointer; display: flex; align-items: center; gap: 14px;">
+                                <span class="et-envelope-icon" style="flex-shrink:0; display:inline-flex;">
+                                    <svg class="et-envelope-closed" width="43" height="30" viewBox="0 0 51.3 35.73" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#6b7f87" d="M22.65,21.13L2.43.91C.97,1.88,0,3.55,0,5.42v24.69c0,2.98,2.44,5.42,5.42,5.42h40.45c2.98,0,5.42-2.44,5.42-5.42V5.42c0-1.45-.58-2.78-1.52-3.75l-19.46,19.46c-2.11,2.11-5.56,2.11-7.67,0Z"/><path fill="#2c515b" d="M5.56,35.73h40.45c1.11,0,2.14-.34,3-.91L29.24,14.6c-2.11-2.11-5.56-2.11-7.67,0L1.66,34.06c.99,1.03,2.37,1.67,3.9,1.67Z"/><path fill="#133541" d="M45.87,0H5.42c-1.11,0-2.14.34-3,.91l20.22,20.22c2.11,2.11,5.56,2.11,7.67,0L49.77,1.67c-.99-1.03-2.37-1.67-3.9-1.67Z"/></svg>
+                                    <svg class="et-envelope-open" width="40" height="40" viewBox="0 0 48.5 48.69" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#133541" d="M46.86,19.63c.88.83,1.43,1.96,1.43,3.2v21.07c0,2.55-2.29,4.63-5.09,4.63H5.25c-2.8,0-5.09-2.08-5.09-4.63v-21.07c0-1.6,1-2.89,2.28-3.85L22.28.94c1.4-1.27,3.68-1.25,5.05.05l19.53,18.64Z"/><rect fill="#ddd" x="3.56" y="6.32" width="41.79" height="41.63" rx="5.03" ry="5.03"/><path fill="#6b7f87" d="M5.09,48.53h37.95c1.47,0,2.79-.58,3.72-1.49L5.17,18.63c-.84-.57-1.96-.49-2.7.19l-.19.17c-1.28.97-2.28,2.25-2.28,3.85v21.07c0,2.55,2.29,4.63,5.09,4.63Z"/><path fill="#6b7f87" d="M43.41,48.55H5.46c-1.47,0-2.79-.58-3.72-1.49l41.99-28.76c.73-.5,1.7-.43,2.35.16l.36.32c1.28.97,2.07,2.45,2.07,4.06v21.07c0,2.55-2.29,4.63-5.09,4.63Z"/><path fill="#2c515b" d="M5.38,48.69h37.95c1.04,0,2-.29,2.81-.78l-18.55-17.25c-1.98-1.8-5.22-1.8-7.2,0L1.72,47.27c.93.88,2.23,1.42,3.66,1.42Z"/><rect fill="#051426" x="13.33" y="12.13" width="9.04" height="1.28" rx=".64" ry=".64"/><rect fill="#051426" x="19.68" y="21.03" width="9.04" height="1.28" rx=".64" ry=".64"/><rect fill="#051426" x="13.33" y="16.6" width="20.64" height="1.28" rx=".64" ry=".64"/></svg>
+                                </span>
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 4px;">
+                                        <div style="font-size: 14px; font-weight: 600; color: #1a2b35;">Send for Review</div>
+                                        <div style="font-size: 11px; color: #6e7781; white-space: nowrap; margin-left: 8px;">Created • 12min ago</div>
+                                    </div>
+                                    <div style="font-size: 12px; color: #6e7781; margin-bottom: 4px;">Figma Files</div>
+                                    <div style="font-size: 12px; color: #848d97;">Thank you for your prompt response.</div>
                                 </div>
-                                <div style="font-size: 12px; color: #6e7781; margin-bottom: 4px;">Figma Files</div>
-                                <div style="font-size: 12px; color: #848d97;">Thank you for your prompt response.</div>
                             </div>
 
-                            <div class="template-item-card" style="padding: 16px; border-radius: 8px; margin-bottom: 8px; cursor: pointer;">
-                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 4px;">
-                                    <div style="font-size: 14px; font-weight: 600; color: #1a2b35;">Send for Review</div>
-                                    <div style="font-size: 11px; color: #6e7781; white-space: nowrap; margin-left: 8px;">Created • 12min ago</div>
+                            <div class="template-item-card" data-et-card="2" style="padding: 16px; border-radius: 8px; margin-bottom: 8px; cursor: pointer; display: flex; align-items: center; gap: 14px;">
+                                <span class="et-envelope-icon" style="flex-shrink:0; display:inline-flex;">
+                                    <svg class="et-envelope-closed" width="43" height="30" viewBox="0 0 51.3 35.73" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#6b7f87" d="M22.65,21.13L2.43.91C.97,1.88,0,3.55,0,5.42v24.69c0,2.98,2.44,5.42,5.42,5.42h40.45c2.98,0,5.42-2.44,5.42-5.42V5.42c0-1.45-.58-2.78-1.52-3.75l-19.46,19.46c-2.11,2.11-5.56,2.11-7.67,0Z"/><path fill="#2c515b" d="M5.56,35.73h40.45c1.11,0,2.14-.34,3-.91L29.24,14.6c-2.11-2.11-5.56-2.11-7.67,0L1.66,34.06c.99,1.03,2.37,1.67,3.9,1.67Z"/><path fill="#133541" d="M45.87,0H5.42c-1.11,0-2.14.34-3,.91l20.22,20.22c2.11,2.11,5.56,2.11,7.67,0L49.77,1.67c-.99-1.03-2.37-1.67-3.9-1.67Z"/></svg>
+                                    <svg class="et-envelope-open" width="40" height="40" viewBox="0 0 48.5 48.69" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#133541" d="M46.86,19.63c.88.83,1.43,1.96,1.43,3.2v21.07c0,2.55-2.29,4.63-5.09,4.63H5.25c-2.8,0-5.09-2.08-5.09-4.63v-21.07c0-1.6,1-2.89,2.28-3.85L22.28.94c1.4-1.27,3.68-1.25,5.05.05l19.53,18.64Z"/><rect fill="#ddd" x="3.56" y="6.32" width="41.79" height="41.63" rx="5.03" ry="5.03"/><path fill="#6b7f87" d="M5.09,48.53h37.95c1.47,0,2.79-.58,3.72-1.49L5.17,18.63c-.84-.57-1.96-.49-2.7.19l-.19.17c-1.28.97-2.28,2.25-2.28,3.85v21.07c0,2.55,2.29,4.63,5.09,4.63Z"/><path fill="#6b7f87" d="M43.41,48.55H5.46c-1.47,0-2.79-.58-3.72-1.49l41.99-28.76c.73-.5,1.7-.43,2.35.16l.36.32c1.28.97,2.07,2.45,2.07,4.06v21.07c0,2.55-2.29,4.63-5.09,4.63Z"/><path fill="#2c515b" d="M5.38,48.69h37.95c1.04,0,2-.29,2.81-.78l-18.55-17.25c-1.98-1.8-5.22-1.8-7.2,0L1.72,47.27c.93.88,2.23,1.42,3.66,1.42Z"/><rect fill="#051426" x="13.33" y="12.13" width="9.04" height="1.28" rx=".64" ry=".64"/><rect fill="#051426" x="19.68" y="21.03" width="9.04" height="1.28" rx=".64" ry=".64"/><rect fill="#051426" x="13.33" y="16.6" width="20.64" height="1.28" rx=".64" ry=".64"/></svg>
+                                </span>
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 4px;">
+                                        <div style="font-size: 14px; font-weight: 600; color: #1a2b35;">Send for Review</div>
+                                        <div style="font-size: 11px; color: #6e7781; white-space: nowrap; margin-left: 8px;">Created • 12min ago</div>
+                                    </div>
+                                    <div style="font-size: 12px; color: #6e7781; margin-bottom: 4px;">Figma Files</div>
+                                    <div style="font-size: 12px; color: #848d97;">Thank you for your prompt response.</div>
                                 </div>
-                                <div style="font-size: 12px; color: #6e7781; margin-bottom: 4px;">Figma Files</div>
-                                <div style="font-size: 12px; color: #848d97;">Thank you for your prompt response.</div>
                             </div>
 
-                            <div class="template-item-card" style="padding: 16px; border-radius: 8px; margin-bottom: 8px; cursor: pointer;">
-                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 4px;">
-                                    <div style="font-size: 14px; font-weight: 600; color: #1a2b35;">Send for Review</div>
-                                    <div style="font-size: 11px; color: #6e7781; white-space: nowrap; margin-left: 8px;">Created • 12min ago</div>
+                            <div class="template-item-card" data-et-card="3" style="padding: 16px; border-radius: 8px; margin-bottom: 8px; cursor: pointer; display: flex; align-items: center; gap: 14px;">
+                                <span class="et-envelope-icon" style="flex-shrink:0; display:inline-flex;">
+                                    <svg class="et-envelope-closed" width="43" height="30" viewBox="0 0 51.3 35.73" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#6b7f87" d="M22.65,21.13L2.43.91C.97,1.88,0,3.55,0,5.42v24.69c0,2.98,2.44,5.42,5.42,5.42h40.45c2.98,0,5.42-2.44,5.42-5.42V5.42c0-1.45-.58-2.78-1.52-3.75l-19.46,19.46c-2.11,2.11-5.56,2.11-7.67,0Z"/><path fill="#2c515b" d="M5.56,35.73h40.45c1.11,0,2.14-.34,3-.91L29.24,14.6c-2.11-2.11-5.56-2.11-7.67,0L1.66,34.06c.99,1.03,2.37,1.67,3.9,1.67Z"/><path fill="#133541" d="M45.87,0H5.42c-1.11,0-2.14.34-3,.91l20.22,20.22c2.11,2.11,5.56,2.11,7.67,0L49.77,1.67c-.99-1.03-2.37-1.67-3.9-1.67Z"/></svg>
+                                    <svg class="et-envelope-open" width="40" height="40" viewBox="0 0 48.5 48.69" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#133541" d="M46.86,19.63c.88.83,1.43,1.96,1.43,3.2v21.07c0,2.55-2.29,4.63-5.09,4.63H5.25c-2.8,0-5.09-2.08-5.09-4.63v-21.07c0-1.6,1-2.89,2.28-3.85L22.28.94c1.4-1.27,3.68-1.25,5.05.05l19.53,18.64Z"/><rect fill="#ddd" x="3.56" y="6.32" width="41.79" height="41.63" rx="5.03" ry="5.03"/><path fill="#6b7f87" d="M5.09,48.53h37.95c1.47,0,2.79-.58,3.72-1.49L5.17,18.63c-.84-.57-1.96-.49-2.7.19l-.19.17c-1.28.97-2.28,2.25-2.28,3.85v21.07c0,2.55,2.29,4.63,5.09,4.63Z"/><path fill="#6b7f87" d="M43.41,48.55H5.46c-1.47,0-2.79-.58-3.72-1.49l41.99-28.76c.73-.5,1.7-.43,2.35.16l.36.32c1.28.97,2.07,2.45,2.07,4.06v21.07c0,2.55-2.29,4.63-5.09,4.63Z"/><path fill="#2c515b" d="M5.38,48.69h37.95c1.04,0,2-.29,2.81-.78l-18.55-17.25c-1.98-1.8-5.22-1.8-7.2,0L1.72,47.27c.93.88,2.23,1.42,3.66,1.42Z"/><rect fill="#051426" x="13.33" y="12.13" width="9.04" height="1.28" rx=".64" ry=".64"/><rect fill="#051426" x="19.68" y="21.03" width="9.04" height="1.28" rx=".64" ry=".64"/><rect fill="#051426" x="13.33" y="16.6" width="20.64" height="1.28" rx=".64" ry=".64"/></svg>
+                                </span>
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 4px;">
+                                        <div style="font-size: 14px; font-weight: 600; color: #1a2b35;">Send for Review</div>
+                                        <div style="font-size: 11px; color: #6e7781; white-space: nowrap; margin-left: 8px;">Created • 12min ago</div>
+                                    </div>
+                                    <div style="font-size: 12px; color: #6e7781; margin-bottom: 4px;">Figma Files</div>
+                                    <div style="font-size: 12px; color: #848d97;">Thank you for your prompt response.</div>
                                 </div>
-                                <div style="font-size: 12px; color: #6e7781; margin-bottom: 4px;">Figma Files</div>
-                                <div style="font-size: 12px; color: #848d97;">Thank you for your prompt response.</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Template Detail (Right Column) -->
-                    <div style="background: #f4f7f9; padding: 32px; overflow-y: auto;">
+                    <div id="et-right" style="background: #f4f7f9; padding: 32px; overflow-y: auto; position: relative;">
+                        <div class="dt-step-loader" id="et-step-loader">
+                            <div class="dt-step-loader-spinner"></div>
+                        </div>
+                        <div id="et-right-content" style="transition: opacity 0.25s ease;">
                         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 32px;">
                             <div>
                                 <h4 style="font-size: 20px; font-weight: 700; color: #1a2b35; margin-bottom: 8px;">Send for Review</h4>
@@ -191,7 +257,7 @@
                             <div class="version-card" style="background: #fff; border: 1px solid #d0d7de; border-radius: 8px; padding: 20px; display: flex; gap: 16px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06); position: relative;">
                                 <div style="width: 48px; height: 48px; background: #e4ebf2; border: 1px solid #c7c7c7; color: #457093; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 300; flex-shrink: 0;">SR</div>
                                 <div style="flex: 1;">
-                                    <div style="font-size: 15px; font-weight: 600; color: #1a2b35; margin-bottom: 6px;">Send for Review</div>
+                                    <div style="font-size: 15px; font-weight: 600; color: #1a2b35; margin-bottom: 6px; display:flex; align-items:center; gap:8px;">Send for Review <span class="dt-master-badge">Master</span><span class="dt-default-badge">Default</span></div>
                                     <div style="font-size: 12px; color: #6e7781;">Modified 17 Apr 2026 at 11:15 AM by Sarah Mitchell</div>
                                 </div>
                                 <div class="version-dropdown-wrap">
@@ -235,7 +301,7 @@
                             <div class="version-card" style="background: #fff; border: 1px solid #d0d7de; border-radius: 8px; padding: 20px; display: flex; gap: 16px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06); position: relative;">
                                 <div style="width: 48px; height: 48px; background: #e4ebf2; border: 1px solid #c7c7c7; color: #457093; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 300; flex-shrink: 0;">SR</div>
                                 <div style="flex: 1;">
-                                    <div style="font-size: 15px; font-weight: 600; color: #1a2b35; margin-bottom: 6px;">Send for Review</div>
+                                    <div style="font-size: 15px; font-weight: 600; color: #1a2b35; margin-bottom: 6px; display:flex; align-items:center; gap:8px;">Send for Review</div>
                                     <div style="font-size: 12px; color: #6e7781;">Modified 17 Apr 2026 at 11:15 AM by Sarah Mitchell</div>
                                 </div>
                                 <div class="version-dropdown-wrap">
@@ -276,9 +342,37 @@
                                 </div>
                             </div>
                         </div>
+                        </div><!-- /et-right-content -->
                     </div>
 
                 </div>
+                </div><!-- /tab-email-template -->
+
+                <!-- Document Templates Tab -->
+                <div id="tab-document-templates" class="settings-tab-pane" style="display:none;">
+                <div style="background: #fff; border: 1px solid #c9d3d6; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: grid; grid-template-columns: 380px 1fr; overflow: hidden; height: calc(100vh - 220px);">
+
+                    <!-- Template Library (Left Column) -->
+                    <div style="background: #fff; padding: 24px; border-right: 1px solid #d1d7df; overflow-y: auto;">
+                        <h5 style="font-size: 16px; font-weight: 600; color: #1a2b35; margin-bottom: 16px;">Template Library</h5>
+                        <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+                            <div class="cl-search">
+                                <i class="fas fa-search cl-search-icon"></i>
+                                <input type="text" class="cl-search-input" placeholder="Search">
+                            </div>
+                        </div>
+                        <div id="dt-template-list"></div>
+                    </div>
+
+                    <!-- Template Detail (Right Column) -->
+                    <div id="dt-right" style="background: #f4f7f9; padding: 32px; overflow-y: auto; position: relative;">
+                        <div class="dt-step-loader" id="dt-step-loader">
+                            <div class="dt-step-loader-spinner"></div>
+                        </div>
+                    </div>
+
+                </div>
+                </div><!-- /tab-document-templates -->
 
                 <style>
                     .template-item-card:hover {
@@ -287,6 +381,11 @@
                     .template-item-card.active {
                         background: #f4f7f9 !important;
                     }
+                    /* Folder icon toggle */
+                    .doc-folder-icon .folder-open-svg { display: none; }
+                    .doc-folder-icon .folder-closed-svg { display: inline; }
+                    .template-item-card.active .doc-folder-icon .folder-closed-svg { display: none; }
+                    .template-item-card.active .doc-folder-icon .folder-open-svg { display: inline; }
                     .cl-search {
                         flex: 1; display: flex; align-items: center; gap: 10px;
                         background: #f8f8f8; border: 1px solid #c9d8de; border-radius: 8px;
@@ -378,19 +477,29 @@
                     <p class="feedback-question">What was your experience while using product?</p>
                     <div class="feedback-emoji-options">
                         <button class="feedback-emoji-btn" data-rating="1" title="Very Dissatisfied">
-                            <div class="feedback-emoji-wrapper">😭</div>
+                            <div class="feedback-emoji-wrapper" style="padding: 10px;">
+                                <dotlottie-player src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f62d/lottie.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop></dotlottie-player>
+                            </div>
                         </button>
                         <button class="feedback-emoji-btn" data-rating="2" title="Dissatisfied">
-                            <div class="feedback-emoji-wrapper">😢</div>
+                            <div class="feedback-emoji-wrapper" style="padding: 10px;">
+                                <dotlottie-player src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f622/lottie.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop></dotlottie-player>
+                            </div>
                         </button>
                         <button class="feedback-emoji-btn" data-rating="3" title="Neutral">
-                            <div class="feedback-emoji-wrapper">😐</div>
+                            <div class="feedback-emoji-wrapper" style="padding: 10px;">
+                                <dotlottie-player src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f610/lottie.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop></dotlottie-player>
+                            </div>
                         </button>
                         <button class="feedback-emoji-btn" data-rating="4" title="Satisfied">
-                            <div class="feedback-emoji-wrapper">😊</div>
+                            <div class="feedback-emoji-wrapper" style="padding: 10px;">
+                                <dotlottie-player src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f60a/lottie.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop></dotlottie-player>
+                            </div>
                         </button>
                         <button class="feedback-emoji-btn" data-rating="5" title="Very Satisfied">
-                            <div class="feedback-emoji-wrapper">😄</div>
+                            <div class="feedback-emoji-wrapper" style="padding: 10px;">
+                                <dotlottie-player src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f604/lottie.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop></dotlottie-player>
+                            </div>
                         </button>
                     </div>
                     <div class="ukp-modal-form">
@@ -401,11 +510,10 @@
                     </div>
                 </div>
                 <div id="feedbackSuccessView" class="feedback-success-view">
-                    <div class="feedback-success-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
-                        </svg>
-                    </div>
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
                     <h3 class="feedback-success-title">Feedback sent</h3>
                     <p class="feedback-success-message">Thank you for your feedback.</p>
                 </div>
@@ -436,6 +544,17 @@
                 setTimeout(function() { overlay.style.display = 'none'; }, 600);
             }, 1800);
         })();
+
+        // Tab switching
+        document.querySelectorAll('.ra-tab[data-tab]').forEach(function(tab) {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.ra-tab').forEach(function(t) { t.classList.remove('active'); });
+                document.querySelectorAll('.settings-tab-pane').forEach(function(p) { p.style.display = 'none'; });
+                this.classList.add('active');
+                document.getElementById('tab-' + this.dataset.tab).style.display = 'block';
+            });
+        });
 
         // Logout
         if (document.getElementById("logoutBtn")) {
@@ -613,6 +732,46 @@
         }, 100);
     </script>
 
+    <!-- Document Templates Delete Modal -->
+    <div class="gen-modal-overlay" id="dt-delete-modal">
+        <div class="gen-modal">
+            <div class="gen-modal-content">
+                <div class="gen-modal-header">
+                    <h5 class="gen-modal-title">Delete Confirmation</h5>
+                </div>
+                <div class="gen-modal-body">
+                    <div class="gen-info-box">
+                        <div class="gen-info-title">Warning!</div>
+                        <p class="gen-info-text">Are you sure you want to delete this version?<br>This action cannot be undone.</p>
+                    </div>
+                </div>
+                <div class="gen-modal-footer">
+                    <button class="btn gen-btn-cancel" id="dt-delete-cancel">Cancel</button>
+                    <button class="btn gen-btn-continue" id="dt-delete-confirm">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Document Templates Toast -->
+    <div id="dt-toast" style="position:fixed; bottom:32px; left:50%; transform:translateX(-50%) translateY(16px); background:#1a2b35; color:#fff; padding:12px 24px; border-radius:8px; font-size:13px; font-weight:500; z-index:9998; opacity:0; transition:opacity 0.25s, transform 0.25s; pointer-events:none;"></div>
+
+    <style>
+        #dt-toast.dt-toast-show { opacity:1; transform:translateX(-50%) translateY(0); }
+        /* Email template envelope icon toggle */
+        .et-envelope-icon .et-envelope-open { display: none; }
+        .et-envelope-icon .et-envelope-closed { display: inline; }
+        .template-item-card.active .et-envelope-icon .et-envelope-closed { display: none; }
+        .template-item-card.active .et-envelope-icon .et-envelope-open { display: inline; }
+        .dt-default-badge { background:#daf0e9; color:#1a6b40; font-size:11px; font-weight:600; padding:3px 10px; border-radius:6px; }
+        .dt-master-badge { background:#e8f0fe; color:#1a56b0; font-size:11px; font-weight:600; padding:3px 10px; border-radius:7px; }
+        .dt-step-loader { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:10; opacity:0; visibility:hidden; transition:opacity 0.3s ease, visibility 0.3s ease; }
+        .dt-step-loader.active { opacity:1; visibility:visible; }
+        .dt-step-loader-spinner { width:50px; height:50px; border:4px solid rgba(26,107,64,0.2); border-top-color:#1a6b40; border-radius:50%; animation:dt-spin 0.8s linear infinite; }
+        @keyframes dt-spin { to { transform:rotate(360deg); } }
+        #dt-right-content { transition: opacity 0.25s ease; }
+    </style>
+
     <!-- Delete Confirmation Modal -->
     <div class="gen-modal-overlay" id="deleteVersionModal">
         <div class="gen-modal">
@@ -746,6 +905,58 @@ ${DocumentName}</textarea>
             resize: vertical;
             font-family: 'Noto Sans', sans-serif;
         }
+
+        /* Animated Checkmark */
+        .checkmark {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #fff;
+            stroke-miterlimit: 10;
+            margin: 0 auto 30px auto;
+            box-shadow: inset 0px 0px 0px #7ac142;
+            animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
+        }
+
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #7ac142;
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes scale {
+            0%, 100% {
+                transform: none;
+            }
+            50% {
+                transform: scale3d(1.1, 1.1, 1);
+            }
+        }
+
+        @keyframes fill {
+            100% {
+                box-shadow: inset 0px 0px 0px 30px #7ac142;
+            }
+        }
     </style>
 
     <script>
@@ -815,6 +1026,405 @@ ${DocumentName}</textarea>
                 });
             }
         }, 100);
+
+        // ===== EMAIL TEMPLATE left-panel loader =====
+        (function() {
+            var activeEtCard = 0;
+            document.querySelectorAll('.template-item-card[data-et-card]').forEach(function(card) {
+                card.addEventListener('click', function() {
+                    var idx = parseInt(this.dataset.etCard);
+                    if (idx === activeEtCard) return;
+                    activeEtCard = idx;
+
+                    // Update active state
+                    document.querySelectorAll('.template-item-card[data-et-card]').forEach(function(c) {
+                        c.classList.remove('active');
+                        c.style.background = '';
+                    });
+                    this.classList.add('active');
+                    this.style.background = '#f4f7f9';
+
+                    var content = document.getElementById('et-right-content');
+                    var loader = document.getElementById('et-step-loader');
+
+                    // Fade out
+                    if (content) content.style.opacity = '0';
+                    setTimeout(function() {
+                        if (loader) loader.classList.add('active');
+                    }, 150);
+                    setTimeout(function() {
+                        if (loader) loader.classList.remove('active');
+                        if (content) content.style.opacity = '1';
+                    }, 600);
+                });
+            });
+        })();
+
+        // ===== DOCUMENT TEMPLATES =====
+        (function() {
+            var FOLDER_SVG = '<span class="doc-folder-icon" style="flex-shrink:0; display:inline-flex;">' +
+                '<svg class="folder-closed-svg" width="51" height="43" viewBox="0 0 48 40" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+                '<path fill="#133541" d="M2 11 C2 7.134 5.134 4 9 4 H18.343 C19.404 4 20.421 4.421 21.172 5.172 L23.828 7.828 C24.579 8.579 25.596 9 26.657 9 H39 C42.866 9 46 12.134 46 16 V31 C46 34.866 42.866 38 39 38 H9 C5.134 38 2 34.866 2 31 V11 Z"/>' +
+                '<path fill="#6b7f87" d="M2 18 C2 14.134 5.134 11 9 11 H39 C42.866 11 46 14.134 46 18 V31 C46 34.866 42.866 38 39 38 H9 C5.134 38 2 34.866 2 31 V18 Z"/>' +
+                '</svg>' +
+                '<svg class="folder-open-svg" width="51" height="34" viewBox="0 0 54.36 35.49" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+                '<path fill="#133541" d="M46.76,29.29v-15.18c0-2.62-1.02-5.19-2.98-6.92-1.07-.95-2.19-1.55-3.06-1.93s-1.74-.54-2.66-.54h-11.19c-1.78,0-3.5-.68-4.8-1.91l-.83-.79c-1.38-1.31-3.21-2.03-5.11-2.03H6.2C2.77,0,0,2.77,0,6.2v23.1c0,3.42,2.77,6.2,6.2,6.2h34.37c3.42,0,6.2-2.77,6.2-6.2Z"/>' +
+                '<path fill="#6b7f87" d="M40.57,35.49l-35.34-.17c-3.51,0-5.48-3.31-4.2-6.73l5.01-13.44c1.28-3.42,5.15-6.2,8.66-6.2h35.22c3.51,0,5.31,2.77,4.04,6.2l-5.01,13.44c-1.28,3.42-4.87,6.9-8.37,6.9Z"/>' +
+                '</svg>' +
+                '</span>';
+
+            var MENU_DOTS_SVG = '<svg width="4" height="16" viewBox="0 0 4 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="2" fill="#6e7781"/><circle cx="2" cy="8" r="2" fill="#6e7781"/><circle cx="2" cy="14" r="2" fill="#6e7781"/></svg>';
+
+            var TEMPLATES = [
+                { id: 'fra', initials: 'FRA', name: 'Firm Risk Assessment', desc: 'Firm level risk assessment used to identify, assess and mitigate ML/TF/PF risks', versions: [{ id: 1, name: 'Firm Risk Assessment', isDefault: true, isMaster: true, date: '17 Apr 2026 at 11:15 AM', author: 'Sarah Mitchell' }] },
+                { id: 'fp',  initials: 'FP',  name: 'Firm Policy',          desc: "The firm's overarching policy document adopted by the practice to meet its AML obligations", versions: [{ id: 1, name: 'Firm Policy', isDefault: true, isMaster: true, date: '17 Apr 2026 at 11:15 AM', author: 'Sarah Mitchell' }] },
+                { id: 'fpr', initials: 'FPr', name: 'Firm Process',         desc: "The firm's overarching operational processes adopted by the practice to meet its AML obligations", versions: [{ id: 1, name: 'Firm Process', isDefault: true, isMaster: true, date: '17 Apr 2026 at 11:15 AM', author: 'Sarah Mitchell' }] },
+                { id: 'fpg', initials: 'FPg', name: 'Firm Program',         desc: "The firm's compliance framework — combining risk assessments, policies, and procedures.", versions: [{ id: 1, name: 'Firm Program', isDefault: true, isMaster: true, date: '17 Apr 2026 at 11:15 AM', author: 'Sarah Mitchell' }] }
+            ];
+
+            var selectedTemplateId = TEMPLATES[0].id;
+            var versionCounter = 100;
+            var pendingDeleteVersionId = null;
+            var pendingDeleteTemplateId = null;
+
+            function getTemplate(id) {
+                return TEMPLATES.find(function(t) { return t.id === id; });
+            }
+
+            function showDtToast(msg) {
+                var toast = document.getElementById('dt-toast');
+                if (!toast) return;
+                toast.textContent = msg;
+                toast.classList.add('dt-toast-show');
+                setTimeout(function() { toast.classList.remove('dt-toast-show'); }, 2800);
+            }
+
+            function renderLeftPanel() {
+                var list = document.getElementById('dt-template-list');
+                if (!list) return;
+                var html = '';
+                TEMPLATES.forEach(function(t, i) {
+                    var isActive = t.id === selectedTemplateId;
+                    html += '<div class="template-item-card' + (isActive ? ' active' : '') + '" data-dt-id="' + t.id + '" style="padding:16px; border-radius:8px; margin-bottom:2px; cursor:pointer;' + (isActive ? ' background:#f4f7f9;' : '') + ' display:flex; align-items:center; gap:14px;">';
+                    html += FOLDER_SVG;
+                    html += '<div><div style="font-size:14px; font-weight:600; color:#1a2b35; margin-bottom:4px;">' + t.name + '</div>';
+                    html += '<div style="font-size:12px; color:#848d97;">' + t.desc + '</div></div>';
+                    html += '</div>';
+                    if (i < TEMPLATES.length - 1) {
+                        html += '<div style="height:1px; background:#e8edf0; margin:0 4px;"></div>';
+                    }
+                });
+                list.innerHTML = html;
+
+                list.querySelectorAll('.template-item-card[data-dt-id]').forEach(function(card) {
+                    card.addEventListener('click', function() {
+                        if (this.dataset.dtId === selectedTemplateId) return;
+                        selectedTemplateId = this.dataset.dtId;
+                        renderLeftPanel();
+                        renderRightPanel(true);
+                    });
+                });
+            }
+
+            function buildVersionCard(tpl, ver) {
+                var html = '<div class="version-card dt-version-card" data-version-id="' + ver.id + '" style="background:#fff; border:1px solid #d0d7de; border-radius:8px; padding:20px; display:flex; gap:16px; box-shadow:0 1px 3px rgba(0,0,0,0.06); position:relative;">';
+                html += '<div style="width:48px; height:48px; background:#e4ebf2; border:1px solid #c7c7c7; color:#457093; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:300; flex-shrink:0;">' + tpl.initials + '</div>';
+                html += '<div style="flex:1;">';
+                html += '<div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">';
+                html += '<span style="font-size:15px; font-weight:600; color:#1a2b35;">' + ver.name + '</span>';
+                if (ver.isMaster) {
+                    html += '<span class="dt-master-badge">Master</span>';
+                }
+                if (ver.isDefault) {
+                    html += '<span class="dt-default-badge">Default</span>';
+                }
+                html += '</div>';
+                html += '<div style="font-size:12px; color:#6e7781;">Modified ' + ver.date + ' by ' + ver.author + '</div>';
+                html += '</div>';
+                html += '<div class="version-dropdown-wrap">';
+                html += '<button class="version-menu-btn">' + MENU_DOTS_SVG + '</button>';
+                html += '<div class="version-dropdown-menu">';
+                html += '<div class="version-dropdown-item dt-action-download" data-vid="' + ver.id + '"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14Z" fill="#1a2b35"/><path d="M7.25 7.689V2a.75.75 0 0 1 1.5 0v5.689l1.97-1.97a.749.749 0 1 1 1.06 1.06l-3.25 3.25a.749.749 0 0 1-1.06 0L4.22 6.779a.749.749 0 1 1 1.06-1.06l1.97 1.97Z" fill="#1a2b35"/></svg>Download</div>';
+                if (!ver.isDefault) {
+                    html += '<div class="version-dropdown-item dt-action-default" data-vid="' + ver.id + '"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm3.78-9.72a.75.75 0 0 0-1.06-1.06L6.75 9.19 5.28 7.72a.75.75 0 0 0-1.06 1.06l2 2a.75.75 0 0 0 1.06 0l4.5-4.5z" fill="#1a2b35"/></svg>Set as Default</div>';
+                }
+                if (!ver.isMaster) {
+                    html += '<div class="version-dropdown-item version-dropdown-item-danger dt-action-delete" data-vid="' + ver.id + '"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 1.75V3h2.25a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1 0-1.5H5V1.75C5 .784 5.784 0 6.75 0h2.5C10.216 0 11 .784 11 1.75ZM4.496 6.675l.66 6.6a.25.25 0 0 0 .249.225h5.19a.25.25 0 0 0 .249-.225l.66-6.6a.75.75 0 0 1 1.492.149l-.66 6.6A1.748 1.748 0 0 1 10.595 15h-5.19a1.75 1.75 0 0 1-1.741-1.575l-.66-6.6a.75.75 0 1 1 1.492-.15ZM6.5 1.75V3h3V1.75a.25.25 0 0 0-.25-.25h-2.5a.25.25 0 0 0-.25.25Z" fill="#d1242f"/></svg>Delete</div>';
+                }
+                html += '</div></div></div>';
+                return html;
+            }
+
+            function renderRightPanel(animated) {
+                var right = document.getElementById('dt-right');
+                if (!right) return;
+                var tpl = getTemplate(selectedTemplateId);
+                if (!tpl) return;
+
+                var doRender = function() {
+                    var loader = document.getElementById('dt-step-loader');
+
+                    var html = '<div id="dt-right-content" style="opacity:0; transition:opacity 0.25s ease;">';
+                    html += '<div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:32px;">';
+                    html += '<div><h4 style="font-size:20px; font-weight:700; color:#1a2b35; margin-bottom:8px;">' + tpl.name + '</h4>';
+                    html += '<p style="font-size:13px; color:#6e7781; margin:0;">' + tpl.desc + '</p></div>';
+                    html += '<button id="dt-upload-btn" class="btn btn-generate cl-add-btn" style="gap:8px; flex-shrink:0;">Upload... <i class="fa-solid fa-upload"></i></button>';
+                    html += '</div>';
+                    html += '<div id="dt-versions-list" style="display:flex; flex-direction:column; gap:16px;">';
+                    tpl.versions.forEach(function(ver) { html += buildVersionCard(tpl, ver); });
+                    html += '</div></div>';
+
+                    // Preserve loader element, replace rest
+                    var loaderEl = document.getElementById('dt-step-loader');
+                    right.innerHTML = html;
+                    if (loaderEl) right.appendChild(loaderEl);
+
+                    // Fade in content
+                    var content = document.getElementById('dt-right-content');
+                    setTimeout(function() {
+                        if (content) content.style.opacity = '1';
+                        if (loader) loader.classList.remove('active');
+                    }, 10);
+
+                    // Wire Upload
+                    document.getElementById('dt-upload-btn').addEventListener('click', function() {
+                        versionCounter++;
+                        var now = new Date();
+                        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                        var dateStr = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear() + ' at ' + now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0') + ' ' + (now.getHours() >= 12 ? 'PM' : 'AM');
+                        var newVer = { id: versionCounter, name: 'Custom Version ' + (tpl.versions.length), isDefault: false, isMaster: false, date: dateStr, author: 'You' };
+                        tpl.versions.push(newVer);
+                        var list = document.getElementById('dt-versions-list');
+                        var div = document.createElement('div');
+                        div.innerHTML = buildVersionCard(tpl, newVer);
+                        var card = div.firstChild;
+                        card.style.opacity = '0';
+                        card.style.transition = 'opacity 300ms ease';
+                        list.appendChild(card);
+                        setTimeout(function() { card.style.opacity = '1'; }, 10);
+                        wireVersionCard(card, tpl);
+                        showDtToast('New version uploaded');
+                    });
+
+                    // Wire existing version cards
+                    right.querySelectorAll('.dt-version-card').forEach(function(card) {
+                        wireVersionCard(card, tpl);
+                    });
+                };
+
+                if (animated) {
+                    var content = document.getElementById('dt-right-content');
+                    var loader = document.getElementById('dt-step-loader');
+                    // Fade out content
+                    if (content) content.style.opacity = '0';
+                    // Show loader after brief delay
+                    setTimeout(function() {
+                        if (loader) loader.classList.add('active');
+                    }, 150);
+                    // Render after transition
+                    setTimeout(doRender, 450);
+                } else {
+                    doRender();
+                }
+            }
+
+            function wireVersionCard(card, tpl) {
+                var menuBtn = card.querySelector('.version-menu-btn');
+                var menu = card.querySelector('.version-dropdown-menu');
+                if (menuBtn) {
+                    menuBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        var isOpen = menu.classList.contains('show');
+                        document.querySelectorAll('.version-dropdown-menu').forEach(function(m) { m.classList.remove('show'); });
+                        if (!isOpen) menu.classList.add('show');
+                    });
+                }
+
+                var downloadBtn = card.querySelector('.dt-action-download');
+                if (downloadBtn) {
+                    downloadBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        document.querySelectorAll('.version-dropdown-menu').forEach(function(m) { m.classList.remove('show'); });
+                        showDtToast('Downloading document...');
+                    });
+                }
+
+                var defaultBtn = card.querySelector('.dt-action-default');
+                if (defaultBtn) {
+                    defaultBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        var vid = parseInt(this.dataset.vid);
+                        tpl.versions.forEach(function(v) { v.isDefault = (v.id === vid); });
+                        document.querySelectorAll('.version-dropdown-menu').forEach(function(m) { m.classList.remove('show'); });
+                        renderRightPanel();
+                        showDtToast('Default version updated');
+                    });
+                }
+
+                var deleteBtn = card.querySelector('.dt-action-delete');
+                if (deleteBtn) {
+                    deleteBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        pendingDeleteVersionId = parseInt(this.dataset.vid);
+                        pendingDeleteTemplateId = tpl.id;
+                        document.querySelectorAll('.version-dropdown-menu').forEach(function(m) { m.classList.remove('show'); });
+                        var modal = document.getElementById('dt-delete-modal');
+                        if (modal) modal.classList.add('open');
+                    });
+                }
+            }
+
+            // Delete modal confirm/cancel
+            document.addEventListener('DOMContentLoaded', function() {
+                var modal = document.getElementById('dt-delete-modal');
+                if (!modal) return;
+                document.getElementById('dt-delete-confirm').addEventListener('click', function() {
+                    modal.classList.remove('open');
+                    var t = getTemplate(pendingDeleteTemplateId);
+                    if (t) {
+                        var idx = t.versions.findIndex(function(v) { return v.id === pendingDeleteVersionId; });
+                        if (idx > -1) {
+                            var wasDefault = t.versions[idx].isDefault;
+                            t.versions.splice(idx, 1);
+                            if (wasDefault && t.versions.length > 0) t.versions[0].isDefault = true;
+                        }
+                    }
+                    pendingDeleteVersionId = null;
+                    pendingDeleteTemplateId = null;
+                    renderRightPanel();
+                    showDtToast('Version deleted');
+                });
+                document.getElementById('dt-delete-cancel').addEventListener('click', function() {
+                    modal.classList.remove('open');
+                    pendingDeleteVersionId = null;
+                    pendingDeleteTemplateId = null;
+                });
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.classList.remove('open');
+                        pendingDeleteVersionId = null;
+                        pendingDeleteTemplateId = null;
+                    }
+                });
+            });
+
+            // Close menus on outside click
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.version-dropdown-wrap')) {
+                    document.querySelectorAll('.version-dropdown-menu').forEach(function(m) { m.classList.remove('show'); });
+                }
+            });
+
+            // Initial render
+            renderLeftPanel();
+            renderRightPanel();
+        })();
+
+        // Emoji animation on hover
+        document.addEventListener('DOMContentLoaded', function() {
+            const emojiButtons = document.querySelectorAll('.feedback-emoji-btn');
+
+            emojiButtons.forEach(function(btn) {
+                const player = btn.querySelector('dotlottie-player');
+
+                btn.addEventListener('mouseenter', function() {
+                    if (player) {
+                        player.play();
+                    }
+                });
+
+                btn.addEventListener('mouseleave', function() {
+                    if (player) {
+                        player.stop();
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        // Help Menu toggle
+        (function() {
+            var btn = document.getElementById('helpMenuBtn');
+            var dropdown = document.getElementById('helpMenuDropdown');
+            var wrap = document.getElementById('helpMenuWrap');
+
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (wrap.classList.contains('open')) {
+                    wrap.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                } else {
+                    dropdown.style.display = 'block';
+                    requestAnimationFrame(function() {
+                        wrap.classList.add('open');
+                        btn.setAttribute('aria-expanded', 'true');
+                    });
+                }
+            });
+
+            dropdown.addEventListener('transitionend', function() {
+                if (!wrap.classList.contains('open')) {
+                    dropdown.style.display = 'none';
+                }
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!wrap.contains(e.target)) {
+                    wrap.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    wrap.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        })();
+    </script>
+
+    <script>
+        // App Switcher toggle
+        (function() {
+            var btn = document.getElementById('appSwitcherBtn');
+            var dropdown = document.getElementById('appSwitcherDropdown');
+            var wrap = document.getElementById('appSwitcherWrap');
+
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (wrap.classList.contains('open')) {
+                    wrap.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                } else {
+                    dropdown.style.display = 'block';
+                    requestAnimationFrame(function() {
+                        wrap.classList.add('open');
+                        btn.setAttribute('aria-expanded', 'true');
+                    });
+                }
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!wrap.contains(e.target)) {
+                    wrap.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            dropdown.addEventListener('transitionend', function() {
+                if (!wrap.classList.contains('open')) {
+                    dropdown.style.display = 'none';
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    wrap.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        })();
     </script>
 </body>
 </html>

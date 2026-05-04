@@ -55,7 +55,7 @@ a {
     gap: 8px;
     display: inline-flex;
     align-items: center;
-    width: 300px;
+    width: 400px;
     transition: width 0.25s ease;
 }
 
@@ -103,13 +103,13 @@ a {
 
 .header-actions {
     padding: 0 16px;
-    gap: 4px;
+    gap: 6px;
 }
 
 .header-icon-btn {
-    background: transparent;
+    background: #004754;
     border: none;
-    color: #7fa8b2;
+    color: #accdd5;
     width: 36px;
     height: 36px;
     border-radius: 8px;
@@ -143,6 +143,181 @@ a {
 
 .header-feedback-btn:hover {
     background: #155835;
+}
+
+/* Help Menu */
+.help-menu-wrap {
+    position: relative;
+}
+
+.help-menu-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: #fff;
+    border: 1px solid #bababa;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
+    padding: 8px 0;
+    width: 260px;
+    z-index: 1000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.help-menu-wrap.open .help-menu-dropdown {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.help-menu-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: -2px -2px 5px rgba(0,0,0,0.06);
+}
+
+.help-menu-item {
+    display: block;
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #1a3a4a;
+    font-family: 'Noto Sans', Arial, sans-serif;
+    text-decoration: none;
+    transition: background 0.15s;
+}
+
+.help-menu-item:hover {
+    background: #f0f4f8;
+    text-decoration: none;
+    color: #1a3a4a;
+}
+
+/* App Switcher */
+.app-switcher-wrap {
+    position: relative;
+}
+
+.app-switcher-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background: #fff;
+    border: 1px solid #bababa;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
+    padding: 20px;
+    width: 370px;
+    z-index: 1000;
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.app-switcher-wrap.open .app-switcher-dropdown {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Caret pointing up toward the button */
+.app-switcher-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 10px;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    transform: rotate(45deg);
+    border-radius: 3px;
+    box-shadow: -2px -2px 5px rgba(0,0,0,0.06);
+}
+
+.app-switcher-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px 8px;
+    margin-bottom: 20px;
+}
+
+.app-switcher-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 8px 4px;
+    transition: background 0.15s;
+}
+
+.app-switcher-item:hover {
+    background: #f0f4f8;
+    text-decoration: none;
+}
+
+.app-switcher-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.app-switcher-icon svg,
+.app-switcher-icon img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+.app-switcher-label {
+    font-size: 12px;
+    color: #1a3a4a;
+    font-weight: 500;
+    font-family: 'Noto Sans', Arial, sans-serif;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.app-switcher-divider {
+    height: 1px;
+    background: #e5eaee;
+    margin: 0 -4px 14px;
+}
+
+.app-switcher-change-firm {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border: 1.5px solid #b8e0f5;
+    border-radius: 10px;
+    color: #1a80d9;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Noto Sans', Arial, sans-serif;
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.app-switcher-change-firm:hover {
+    background: #eaf5fd;
+    border-color: #1a80d9;
+    text-decoration: none;
+    color: #1a80d9;
 }
 
 /* Feedback Modal Specific Styles */
@@ -180,6 +355,12 @@ a {
 .feedback-emoji-btn.selected .feedback-emoji-wrapper {
     background: #a7f3d0;
     border: 2px solid #6aa078;
+}
+
+/* Modal Overlay Blur Effect */
+.ukp-modal-overlay.open {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .feedback-emoji-wrapper {

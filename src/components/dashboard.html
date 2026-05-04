@@ -9,7 +9,62 @@
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/dashboard.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+    <style>
+        /* Animated Checkmark */
+        .checkmark {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #fff;
+            stroke-miterlimit: 10;
+            margin: 0 auto 30px auto;
+            box-shadow: inset 0px 0px 0px #7ac142;
+            animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
+        }
+
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #7ac142;
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes scale {
+            0%, 100% {
+                transform: none;
+            }
+            50% {
+                transform: scale3d(1.1, 1.1, 1);
+            }
+        }
+
+        @keyframes fill {
+            100% {
+                box-shadow: inset 0px 0px 0px 30px #7ac142;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Authentication Check -->
@@ -46,11 +101,18 @@
                 </svg>
                 Feedback
             </button>
-            <button class="header-icon-btn" title="Call">
-                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42a18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/></svg>
-            </button>
+            <div class="help-menu-wrap" id="helpMenuWrap">
+                <button class="header-icon-btn" id="helpMenuBtn" title="Help" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-question"></i>
+                </button>
+                <div class="help-menu-dropdown" id="helpMenuDropdown">
+                    <a href="#" class="help-menu-item">FirmVerify Help Centre</a>
+                    <a href="#" class="help-menu-item">New Features Notes</a>
+                    <a href="#" class="help-menu-item">Server Status</a>
+                </div>
+            </div>
             <button class="header-icon-btn" title="Logout" id="logoutBtn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M7.5 1v7h1V1z"/><path d="M3 8.812a5 5 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812"/></svg>
+                <i class="fas fa-power-off"></i>
             </button>
             <script>
                 document.getElementById('logoutBtn').addEventListener('click', function() {
@@ -58,9 +120,57 @@
                     window.location.href = 'login.html';
                 });
             </script>
-            <button class="header-icon-btn" title="Apps">
-                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3A1.5 1.5 0 0 1 15 10.5v3A1.5 1.5 0 0 1 13.5 15h-3A1.5 1.5 0 0 1 9 13.5z"/></svg>
-            </button>
+            <!-- App Switcher -->
+            <div class="app-switcher-wrap" id="appSwitcherWrap">
+                <button class="header-icon-btn" id="appSwitcherBtn" title="Apps" aria-haspopup="true" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3A1.5 1.5 0 0 1 15 10.5v3A1.5 1.5 0 0 1 13.5 15h-3A1.5 1.5 0 0 1 9 13.5z"/></svg>
+                </button>
+                <div class="app-switcher-dropdown" id="appSwitcherDropdown" role="dialog" aria-label="App Switcher">
+                    <div class="app-switcher-grid">
+                        <a href="#" class="app-switcher-item">
+                            <div class="app-switcher-icon">
+                                <img src="images/logosAsset 1@2x.png" alt="SI 360">
+                            </div>
+                            <span class="app-switcher-label">SI 360</span>
+                        </a>
+                        <a href="#" class="app-switcher-item">
+                            <div class="app-switcher-icon">
+                                <img src="images/logosAsset 2@2x.png" alt="CAS 360">
+                            </div>
+                            <span class="app-switcher-label">CAS 360</span>
+                        </a>
+                        <a href="#" class="app-switcher-item">
+                            <div class="app-switcher-icon">
+                                <img src="images/logosAsset 3@2x.png" alt="MyBGL">
+                            </div>
+                            <span class="app-switcher-label">MyBGL</span>
+                        </a>
+                        <a href="#" class="app-switcher-item">
+                            <div class="app-switcher-icon">
+                                <img src="images/logosAsset 4@2x.png" alt="Integrations">
+                            </div>
+                            <span class="app-switcher-label">Integrations</span>
+                        </a>
+                        <a href="#" class="app-switcher-item">
+                            <div class="app-switcher-icon">
+                                <img src="images/logosAsset 5@2x.png" alt="Learning">
+                            </div>
+                            <span class="app-switcher-label">Learning</span>
+                        </a>
+                        <a href="#" class="app-switcher-item">
+                            <div class="app-switcher-icon">
+                                <img src="images/logosAsset 6@2x.png" alt="Users">
+                            </div>
+                            <span class="app-switcher-label">Users</span>
+                        </a>
+                    </div>
+                    <div class="app-switcher-divider"></div>
+                    <a href="#" class="app-switcher-change-firm">
+                        <span>Change Firm</span>
+                        <i class="fas fa-exchange-alt"></i>
+                    </a>
+                </div>
+            </div>
             <button class="header-avatar-btn" title="Profile">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/></svg>
             </button>
@@ -252,19 +362,29 @@
                     <p class="feedback-question">What was your experience while using product?</p>
                     <div class="feedback-emoji-options">
                         <button class="feedback-emoji-btn" data-rating="1" title="Very Dissatisfied">
-                            <div class="feedback-emoji-wrapper">😭</div>
+                            <div class="feedback-emoji-wrapper" style="padding: 10px;">
+                                <dotlottie-player src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f62d/lottie.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop></dotlottie-player>
+                            </div>
                         </button>
                         <button class="feedback-emoji-btn" data-rating="2" title="Dissatisfied">
-                            <div class="feedback-emoji-wrapper">😢</div>
+                            <div class="feedback-emoji-wrapper" style="padding: 10px;">
+                                <dotlottie-player src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f622/lottie.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop></dotlottie-player>
+                            </div>
                         </button>
                         <button class="feedback-emoji-btn" data-rating="3" title="Neutral">
-                            <div class="feedback-emoji-wrapper">😐</div>
+                            <div class="feedback-emoji-wrapper" style="padding: 10px;">
+                                <dotlottie-player src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f610/lottie.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop></dotlottie-player>
+                            </div>
                         </button>
                         <button class="feedback-emoji-btn" data-rating="4" title="Satisfied">
-                            <div class="feedback-emoji-wrapper">😊</div>
+                            <div class="feedback-emoji-wrapper" style="padding: 10px;">
+                                <dotlottie-player src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f60a/lottie.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop></dotlottie-player>
+                            </div>
                         </button>
                         <button class="feedback-emoji-btn" data-rating="5" title="Very Satisfied">
-                            <div class="feedback-emoji-wrapper">😄</div>
+                            <div class="feedback-emoji-wrapper" style="padding: 10px;">
+                                <dotlottie-player src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f604/lottie.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop></dotlottie-player>
+                            </div>
                         </button>
                     </div>
                     <div class="ukp-modal-form">
@@ -275,11 +395,10 @@
                     </div>
                 </div>
                 <div id="feedbackSuccessView" class="feedback-success-view">
-                    <div class="feedback-success-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
-                        </svg>
-                    </div>
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
                     <h3 class="feedback-success-title">Feedback sent</h3>
                     <p class="feedback-success-message">Thank you for your feedback.</p>
                 </div>
@@ -295,6 +414,28 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="../js/feedback.js"></script>
+    <script>
+        // Emoji animation on hover
+        document.addEventListener('DOMContentLoaded', function() {
+            const emojiButtons = document.querySelectorAll('.feedback-emoji-btn');
+
+            emojiButtons.forEach(function(btn) {
+                const player = btn.querySelector('dotlottie-player');
+
+                btn.addEventListener('mouseenter', function() {
+                    if (player) {
+                        player.play();
+                    }
+                });
+
+                btn.addEventListener('mouseleave', function() {
+                    if (player) {
+                        player.stop();
+                    }
+                });
+            });
+        });
+    </script>
     <script>
         // Page load spinner
         (function() {
@@ -420,6 +561,92 @@
             ctx.strokeStyle = '#19A3A3';
             ctx.lineCap = 'round';
             ctx.stroke();
+        })();
+    </script>
+
+    <script>
+        // Help Menu toggle
+        (function() {
+            var btn = document.getElementById('helpMenuBtn');
+            var dropdown = document.getElementById('helpMenuDropdown');
+            var wrap = document.getElementById('helpMenuWrap');
+
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (wrap.classList.contains('open')) {
+                    wrap.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                } else {
+                    dropdown.style.display = 'block';
+                    requestAnimationFrame(function() {
+                        wrap.classList.add('open');
+                        btn.setAttribute('aria-expanded', 'true');
+                    });
+                }
+            });
+
+            dropdown.addEventListener('transitionend', function() {
+                if (!wrap.classList.contains('open')) {
+                    dropdown.style.display = 'none';
+                }
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!wrap.contains(e.target)) {
+                    wrap.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    wrap.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        })();
+    </script>
+
+    <script>
+        // App Switcher toggle
+        (function() {
+            var btn = document.getElementById('appSwitcherBtn');
+            var dropdown = document.getElementById('appSwitcherDropdown');
+            var wrap = document.getElementById('appSwitcherWrap');
+
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (wrap.classList.contains('open')) {
+                    wrap.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                } else {
+                    dropdown.style.display = 'block';
+                    requestAnimationFrame(function() {
+                        wrap.classList.add('open');
+                        btn.setAttribute('aria-expanded', 'true');
+                    });
+                }
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!wrap.contains(e.target)) {
+                    wrap.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            dropdown.addEventListener('transitionend', function() {
+                if (!wrap.classList.contains('open')) {
+                    dropdown.style.display = 'none';
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    wrap.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+            });
         })();
     </script>
 </body>
