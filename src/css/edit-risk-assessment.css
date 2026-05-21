@@ -998,3 +998,49 @@ input.era-expand-textarea {
     font-weight: 600;
     color: #1a2b35;
 }
+
+/* ===== RESPONSIBILITY TAG DROPDOWN ===== */
+
+.era-responsibility-select {
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    border-radius: 20px;
+    padding: 6px 28px 6px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23333' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+    transition: opacity 0.12s;
+}
+
+.era-responsibility-select:focus {
+    outline: none;
+}
+
+.era-responsibility-select[data-val="all-personnel"] {
+    background-color: #d1fae5;
+    color: #065f46;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23065f46' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+}
+
+.era-responsibility-select[data-val="client-facing"] {
+    background-color: #fef3c7;
+    color: #92400e;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%2392400e' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+}
+
+.era-responsibility-select[data-val="compliance-officer"] {
+    background-color: #dbeafe;
+    color: #1e40af;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%231e40af' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+}
+
+.era-responsibility-select[data-val="senior-management"] {
+    background-color: #ede9fe;
+    color: #5b21b6;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%235b21b6' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+}
