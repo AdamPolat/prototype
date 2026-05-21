@@ -760,7 +760,7 @@
 
 .era-risk-table-head-3col {
     display: grid;
-    grid-template-columns: auto 1fr 60px;
+    grid-template-columns: auto 1fr 140px 60px;
     padding: 10px 16px 10px 0px;
     font-size: 12.5px;
     font-weight: 600;
@@ -786,13 +786,17 @@
 
 .era-risk-row-rf {
     display: grid;
-    grid-template-columns: auto 1fr 60px;
+    grid-template-columns: auto 1fr 140px 60px;
     align-items: center;
     padding: 12px 16px;
     border-bottom: 1px solid #bfccd2;
     gap: 10px;
     cursor: pointer;
     transition: background 0.12s;
+}
+
+.era-risk-row-rf--no-badge {
+    grid-template-columns: auto 1fr 60px;
 }
 
 .era-risk-row-rf:hover {
