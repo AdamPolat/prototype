@@ -799,6 +799,14 @@
     grid-template-columns: auto 1fr 60px;
 }
 
+.era-risk-row-rf--with-resp {
+    grid-template-columns: auto 1fr auto 60px;
+}
+
+.era-risk-table-head-3col--process {
+    grid-template-columns: auto 1fr auto 60px;
+}
+
 .era-risk-row-rf:hover {
     background: #f7fafc;
 }

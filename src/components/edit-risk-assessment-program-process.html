@@ -391,32 +391,31 @@
                             <p class="era-content-desc">Standard customer due diligence procedures that apply to all clients when entering a new business relationship or conducting designated services.</p>
                             <div class="era-risk-card">
                                 <div class="era-risk-card-header">Process Items</div>
-                                <div class="era-risk-table-head-3col">
+                                <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
                                     <span>Actions</span>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Verify the identity of all new clients before providing a designated service or establishing a business relationship.</span>
-                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
-                                </div>
-                                <div class="era-row-expand">
-                                    <div class="era-expand-section-title">Title</div>
-                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Verify the identity of all new clients before providing a designated service or establishing a business relationship.">
-                                    <div class="era-expand-section-title">Summary</div>
-                                    <textarea class="era-expand-textarea">Collect and verify government-issued photo ID and a secondary proof of address for all new clients. Record document type, number, and expiry date in the client file.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
                                     <select class="era-responsibility-select" data-val="client-facing" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
                                         <option value="all-personnel">All Personnel</option>
                                         <option value="client-facing" selected>Client-Facing Staff</option>
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Collect and record the nature and purpose of the business relationship at client onboarding.</span>
+                                    <select class="era-responsibility-select" data-val="client-facing" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
+                                        <option value="all-personnel">All Personnel</option>
+                                        <option value="client-facing" selected>Client-Facing Staff</option>
+                                        <option value="compliance-officer">Compliance Officer</option>
+                                        <option value="senior-management">Senior Management</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -424,17 +423,16 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Collect and record the nature and purpose of the business relationship at client onboarding.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">Complete the client intake form capturing the client's stated purpose for the engagement, expected transaction types, and source of funds where relevant.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
+                                </div>
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Identify and verify the beneficial owners of all entities (companies, trusts, partnerships) before onboarding.</span>
                                     <select class="era-responsibility-select" data-val="client-facing" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
                                         <option value="all-personnel">All Personnel</option>
                                         <option value="client-facing" selected>Client-Facing Staff</option>
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
-                                </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
-                                    <span class="era-row-arrow">&#9654;</span>
-                                    <span class="era-row-text">Identify and verify the beneficial owners of all entities (companies, trusts, partnerships) before onboarding.</span>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -442,17 +440,16 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Identify and verify the beneficial owners of all entities (companies, trusts, partnerships) before onboarding.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">Obtain corporate documents (ASIC extract, trust deed, partnership agreement) and identify any individual holding 25% or more ownership or control. Verify their identity using standard CDD procedures.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
-                                    <select class="era-responsibility-select" data-val="client-facing" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
-                                        <option value="all-personnel">All Personnel</option>
-                                        <option value="client-facing" selected>Client-Facing Staff</option>
-                                        <option value="compliance-officer">Compliance Officer</option>
-                                        <option value="senior-management">Senior Management</option>
-                                    </select>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Assign an initial ML/TF risk rating to each client at onboarding using the firm's risk assessment methodology.</span>
+                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
+                                        <option value="all-personnel">All Personnel</option>
+                                        <option value="client-facing">Client-Facing Staff</option>
+                                        <option value="compliance-officer" selected>Compliance Officer</option>
+                                        <option value="senior-management">Senior Management</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -460,13 +457,13 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Assign an initial ML/TF risk rating to each client at onboarding using the firm's risk assessment methodology.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">Use the client risk rating matrix to classify each client as Low, Medium, or High risk based on client type, service, geography, and other risk factors identified during onboarding.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
-                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
-                                        <option value="all-personnel">All Personnel</option>
-                                        <option value="client-facing">Client-Facing Staff</option>
-                                        <option value="compliance-officer" selected>Compliance Officer</option>
-                                        <option value="senior-management">Senior Management</option>
-                                    </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-row-expand">
+                                    <div class="era-expand-section-title">Title</div>
+                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Verify the identity of all new clients before providing a designated service or establishing a business relationship.">
+                                    <div class="era-expand-section-title">Summary</div>
+                                    <textarea class="era-expand-textarea">Collect and verify government-issued photo ID and a secondary proof of address for all new clients. Record document type, number, and expiry date in the client file.</textarea>
                                 </div>
                             </div>
                             <button class="era-add-btn">Add Item +</button>
@@ -482,32 +479,31 @@
                             <p class="era-content-desc">Enhanced due diligence procedures applied to higher-risk clients, including PEPs, high-risk jurisdictions, and complex structures.</p>
                             <div class="era-risk-card">
                                 <div class="era-risk-card-header">Process Items</div>
-                                <div class="era-risk-table-head-3col">
+                                <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
                                     <span>Actions</span>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Obtain senior management approval before establishing a relationship with a high-risk client.</span>
-                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
-                                </div>
-                                <div class="era-row-expand">
-                                    <div class="era-expand-section-title">Title</div>
-                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Obtain senior management approval before establishing a relationship with a high-risk client.">
-                                    <div class="era-expand-section-title">Summary</div>
-                                    <textarea class="era-expand-textarea">Before onboarding any client classified as High risk, escalate to the Compliance Officer and document written approval from Senior Management. File the approval record in the client file.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
                                     <select class="era-responsibility-select" data-val="senior-management" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
                                         <option value="all-personnel">All Personnel</option>
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management" selected>Senior Management</option>
                                     </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Obtain additional information on the source of funds and source of wealth for high-risk clients.</span>
+                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
+                                        <option value="all-personnel">All Personnel</option>
+                                        <option value="client-facing">Client-Facing Staff</option>
+                                        <option value="compliance-officer" selected>Compliance Officer</option>
+                                        <option value="senior-management">Senior Management</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -515,17 +511,16 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Obtain additional information on the source of funds and source of wealth for high-risk clients.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">Request supporting documentation such as bank statements, tax returns, or business financials to corroborate the client's stated source of funds and wealth. Document findings in the client file.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
+                                </div>
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Apply enhanced monitoring to high-risk client transactions on an ongoing basis.</span>
                                     <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
                                         <option value="all-personnel">All Personnel</option>
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
-                                </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
-                                    <span class="era-row-arrow">&#9654;</span>
-                                    <span class="era-row-text">Apply enhanced monitoring to high-risk client transactions on an ongoing basis.</span>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -533,13 +528,13 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Apply enhanced monitoring to high-risk client transactions on an ongoing basis.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">Review high-risk client activity at least every 6 months. Flag any unusual transactions for further investigation and document the review outcome.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
-                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
-                                        <option value="all-personnel">All Personnel</option>
-                                        <option value="client-facing">Client-Facing Staff</option>
-                                        <option value="compliance-officer" selected>Compliance Officer</option>
-                                        <option value="senior-management">Senior Management</option>
-                                    </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-row-expand">
+                                    <div class="era-expand-section-title">Title</div>
+                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Obtain senior management approval before establishing a relationship with a high-risk client.">
+                                    <div class="era-expand-section-title">Summary</div>
+                                    <textarea class="era-expand-textarea">Before onboarding any client classified as High risk, escalate to the Compliance Officer and document written approval from Senior Management. File the approval record in the client file.</textarea>
                                 </div>
                             </div>
                             <button class="era-add-btn">Add Item +</button>
@@ -555,32 +550,31 @@
                             <p class="era-content-desc">Reduced CDD measures applicable to clients assessed as presenting a demonstrably lower risk of ML/TF.</p>
                             <div class="era-risk-card">
                                 <div class="era-risk-card-header">Process Items</div>
-                                <div class="era-risk-table-head-3col">
+                                <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
                                     <span>Actions</span>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Apply simplified CDD measures to clients that present a demonstrably lower ML/TF risk.</span>
-                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
-                                </div>
-                                <div class="era-row-expand">
-                                    <div class="era-expand-section-title">Title</div>
-                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Apply simplified CDD measures to clients that present a demonstrably lower ML/TF risk.">
-                                    <div class="era-expand-section-title">Summary</div>
-                                    <textarea class="era-expand-textarea">Where permitted under a documented risk-based approach, collect reduced identity information for low-risk clients (e.g. government bodies, listed companies). Record the basis for applying simplified CDD in the client file.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
                                     <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
                                         <option value="all-personnel">All Personnel</option>
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Document the rationale for applying simplified CDD for each applicable client.</span>
+                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
+                                        <option value="all-personnel">All Personnel</option>
+                                        <option value="client-facing">Client-Facing Staff</option>
+                                        <option value="compliance-officer" selected>Compliance Officer</option>
+                                        <option value="senior-management">Senior Management</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -588,13 +582,13 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Document the rationale for applying simplified CDD for each applicable client.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">Maintain a written record in the client file stating the risk factors that support the simplified CDD determination, including client type and nature of services.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
-                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
-                                        <option value="all-personnel">All Personnel</option>
-                                        <option value="client-facing">Client-Facing Staff</option>
-                                        <option value="compliance-officer" selected>Compliance Officer</option>
-                                        <option value="senior-management">Senior Management</option>
-                                    </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-row-expand">
+                                    <div class="era-expand-section-title">Title</div>
+                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Apply simplified CDD measures to clients that present a demonstrably lower ML/TF risk.">
+                                    <div class="era-expand-section-title">Summary</div>
+                                    <textarea class="era-expand-textarea">Where permitted under a documented risk-based approach, collect reduced identity information for low-risk clients (e.g. government bodies, listed companies). Record the basis for applying simplified CDD in the client file.</textarea>
                                 </div>
                             </div>
                             <button class="era-add-btn">Add Item +</button>
@@ -610,32 +604,31 @@
                             <p class="era-content-desc">Procedures for monitoring client relationships and transactions on a continuing basis to detect changes in risk profile.</p>
                             <div class="era-risk-card">
                                 <div class="era-risk-card-header">Process Items</div>
-                                <div class="era-risk-table-head-3col">
+                                <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
                                     <span>Actions</span>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Monitor client transactions on an ongoing basis to ensure consistency with the firm's knowledge of the client.</span>
-                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
-                                </div>
-                                <div class="era-row-expand">
-                                    <div class="era-expand-section-title">Title</div>
-                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Monitor client transactions on an ongoing basis to ensure consistency with the firm's knowledge of the client.">
-                                    <div class="era-expand-section-title">Summary</div>
-                                    <textarea class="era-expand-textarea">Review transaction activity at regular intervals appropriate to the client's risk rating. Flag any transactions that appear unusual, inconsistent with the known business profile, or lacking an apparent lawful purpose.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
                                     <select class="era-responsibility-select" data-val="all-personnel" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
                                         <option value="all-personnel" selected>All Personnel</option>
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Update client CDD records whenever there is a material change in client circumstances.</span>
+                                    <select class="era-responsibility-select" data-val="client-facing" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
+                                        <option value="all-personnel">All Personnel</option>
+                                        <option value="client-facing" selected>Client-Facing Staff</option>
+                                        <option value="compliance-officer">Compliance Officer</option>
+                                        <option value="senior-management">Senior Management</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -643,17 +636,16 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Update client CDD records whenever there is a material change in client circumstances.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">When a client notifies the firm of a change (e.g. new beneficial owners, change of address, change of business), update the client file promptly and re-assess the risk rating if required.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
-                                    <select class="era-responsibility-select" data-val="client-facing" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
-                                        <option value="all-personnel">All Personnel</option>
-                                        <option value="client-facing" selected>Client-Facing Staff</option>
-                                        <option value="compliance-officer">Compliance Officer</option>
-                                        <option value="senior-management">Senior Management</option>
-                                    </select>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Conduct periodic reviews of client files to confirm CDD information remains current and accurate.</span>
+                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
+                                        <option value="all-personnel">All Personnel</option>
+                                        <option value="client-facing">Client-Facing Staff</option>
+                                        <option value="compliance-officer" selected>Compliance Officer</option>
+                                        <option value="senior-management">Senior Management</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -661,13 +653,13 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Conduct periodic reviews of client files to confirm CDD information remains current and accurate.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">Schedule file reviews based on client risk rating: High risk — annually; Medium risk — every 2 years; Low risk — every 3 years. Document the outcome of each review.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
-                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
-                                        <option value="all-personnel">All Personnel</option>
-                                        <option value="client-facing">Client-Facing Staff</option>
-                                        <option value="compliance-officer" selected>Compliance Officer</option>
-                                        <option value="senior-management">Senior Management</option>
-                                    </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-row-expand">
+                                    <div class="era-expand-section-title">Title</div>
+                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Monitor client transactions on an ongoing basis to ensure consistency with the firm's knowledge of the client.">
+                                    <div class="era-expand-section-title">Summary</div>
+                                    <textarea class="era-expand-textarea">Review transaction activity at regular intervals appropriate to the client's risk rating. Flag any transactions that appear unusual, inconsistent with the known business profile, or lacking an apparent lawful purpose.</textarea>
                                 </div>
                             </div>
                             <button class="era-add-btn">Add Item +</button>
@@ -683,32 +675,31 @@
                             <p class="era-content-desc">Procedures for screening clients and associated parties against sanctions lists and registers.</p>
                             <div class="era-risk-card">
                                 <div class="era-risk-card-header">Process Items</div>
-                                <div class="era-risk-table-head-3col">
+                                <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
                                     <span>Actions</span>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Screen all new clients against applicable sanctions lists before onboarding.</span>
-                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
-                                </div>
-                                <div class="era-row-expand">
-                                    <div class="era-expand-section-title">Title</div>
-                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Screen all new clients against applicable sanctions lists before onboarding.">
-                                    <div class="era-expand-section-title">Summary</div>
-                                    <textarea class="era-expand-textarea">Before establishing a business relationship, run the client's full name, date of birth, and entity details through the firm's sanctions screening tool. Record the screening result and date in the client file.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
                                     <select class="era-responsibility-select" data-val="client-facing" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
                                         <option value="all-personnel">All Personnel</option>
                                         <option value="client-facing" selected>Client-Facing Staff</option>
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Screen existing clients against sanctions lists on a periodic basis and upon triggering events.</span>
+                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
+                                        <option value="all-personnel">All Personnel</option>
+                                        <option value="client-facing">Client-Facing Staff</option>
+                                        <option value="compliance-officer" selected>Compliance Officer</option>
+                                        <option value="senior-management">Senior Management</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -716,17 +707,16 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Screen existing clients against sanctions lists on a periodic basis and upon triggering events.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">Re-screen all active clients at least annually and immediately upon receiving notification of a sanctions list update. Document the screening outcome and any escalations.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
-                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
-                                        <option value="all-personnel">All Personnel</option>
-                                        <option value="client-facing">Client-Facing Staff</option>
-                                        <option value="compliance-officer" selected>Compliance Officer</option>
-                                        <option value="senior-management">Senior Management</option>
-                                    </select>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Escalate any potential sanctions matches to the Compliance Officer immediately.</span>
+                                    <select class="era-responsibility-select" data-val="all-personnel" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
+                                        <option value="all-personnel" selected>All Personnel</option>
+                                        <option value="client-facing">Client-Facing Staff</option>
+                                        <option value="compliance-officer">Compliance Officer</option>
+                                        <option value="senior-management">Senior Management</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -734,13 +724,13 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Escalate any potential sanctions matches to the Compliance Officer immediately.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">If a screening result returns a potential match, do not proceed with the transaction. Refer the matter to the Compliance Officer within 24 hours for review and determination before any further action is taken.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
-                                    <select class="era-responsibility-select" data-val="all-personnel" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
-                                        <option value="all-personnel" selected>All Personnel</option>
-                                        <option value="client-facing">Client-Facing Staff</option>
-                                        <option value="compliance-officer">Compliance Officer</option>
-                                        <option value="senior-management">Senior Management</option>
-                                    </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-row-expand">
+                                    <div class="era-expand-section-title">Title</div>
+                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Screen all new clients against applicable sanctions lists before onboarding.">
+                                    <div class="era-expand-section-title">Summary</div>
+                                    <textarea class="era-expand-textarea">Before establishing a business relationship, run the client's full name, date of birth, and entity details through the firm's sanctions screening tool. Record the screening result and date in the client file.</textarea>
                                 </div>
                             </div>
                             <button class="era-add-btn">Add Item +</button>
@@ -756,32 +746,31 @@
                             <p class="era-content-desc">Procedures for identifying politically exposed persons and applying appropriate enhanced due diligence.</p>
                             <div class="era-risk-card">
                                 <div class="era-risk-card-header">Process Items</div>
-                                <div class="era-risk-table-head-3col">
+                                <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
                                     <span>Actions</span>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Screen all new clients and beneficial owners for PEP status at onboarding.</span>
-                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
-                                </div>
-                                <div class="era-row-expand">
-                                    <div class="era-expand-section-title">Title</div>
-                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Screen all new clients and beneficial owners for PEP status at onboarding.">
-                                    <div class="era-expand-section-title">Summary</div>
-                                    <textarea class="era-expand-textarea">Check each individual against a commercially available PEP database and publicly available sources. Record the screening result and date. Where a PEP is identified, escalate to the Compliance Officer before proceeding.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
                                     <select class="era-responsibility-select" data-val="client-facing" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
                                         <option value="all-personnel">All Personnel</option>
                                         <option value="client-facing" selected>Client-Facing Staff</option>
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Obtain senior management approval before establishing a business relationship with a PEP.</span>
+                                    <select class="era-responsibility-select" data-val="senior-management" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
+                                        <option value="all-personnel">All Personnel</option>
+                                        <option value="client-facing">Client-Facing Staff</option>
+                                        <option value="compliance-officer">Compliance Officer</option>
+                                        <option value="senior-management" selected>Senior Management</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -789,17 +778,16 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Obtain senior management approval before establishing a business relationship with a PEP.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">Where a PEP is identified, submit the case to Senior Management for approval. Document the approval decision and the supporting rationale in the client file.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
-                                    <select class="era-responsibility-select" data-val="senior-management" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
-                                        <option value="all-personnel">All Personnel</option>
-                                        <option value="client-facing">Client-Facing Staff</option>
-                                        <option value="compliance-officer">Compliance Officer</option>
-                                        <option value="senior-management" selected>Senior Management</option>
-                                    </select>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Apply enhanced ongoing monitoring to all PEP relationships.</span>
+                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
+                                        <option value="all-personnel">All Personnel</option>
+                                        <option value="client-facing">Client-Facing Staff</option>
+                                        <option value="compliance-officer" selected>Compliance Officer</option>
+                                        <option value="senior-management">Senior Management</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -807,13 +795,13 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Apply enhanced ongoing monitoring to all PEP relationships.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">Review PEP client files at least every 12 months. Document the source of funds and wealth, and verify that transaction activity remains consistent with the client's known profile.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
-                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
-                                        <option value="all-personnel">All Personnel</option>
-                                        <option value="client-facing">Client-Facing Staff</option>
-                                        <option value="compliance-officer" selected>Compliance Officer</option>
-                                        <option value="senior-management">Senior Management</option>
-                                    </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-row-expand">
+                                    <div class="era-expand-section-title">Title</div>
+                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Screen all new clients and beneficial owners for PEP status at onboarding.">
+                                    <div class="era-expand-section-title">Summary</div>
+                                    <textarea class="era-expand-textarea">Check each individual against a commercially available PEP database and publicly available sources. Record the screening result and date. Where a PEP is identified, escalate to the Compliance Officer before proceeding.</textarea>
                                 </div>
                             </div>
                             <button class="era-add-btn">Add Item +</button>
@@ -829,32 +817,31 @@
                             <p class="era-content-desc">Procedures for reviewing negative news and media sources as part of the client due diligence process.</p>
                             <div class="era-risk-card">
                                 <div class="era-risk-card-header">Process Items</div>
-                                <div class="era-risk-table-head-3col">
+                                <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
                                     <span>Actions</span>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Conduct adverse media checks on all new clients and beneficial owners at onboarding.</span>
-                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
-                                </div>
-                                <div class="era-row-expand">
-                                    <div class="era-expand-section-title">Title</div>
-                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Conduct adverse media checks on all new clients and beneficial owners at onboarding.">
-                                    <div class="era-expand-section-title">Summary</div>
-                                    <textarea class="era-expand-textarea">Search publicly available media, court records, and regulatory databases for any negative news involving the client or their associates. Document the search results and any relevant findings in the client file.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
                                     <select class="era-responsibility-select" data-val="client-facing" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
                                         <option value="all-personnel">All Personnel</option>
                                         <option value="client-facing" selected>Client-Facing Staff</option>
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Re-run adverse media checks on high-risk clients at least annually.</span>
+                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
+                                        <option value="all-personnel">All Personnel</option>
+                                        <option value="client-facing">Client-Facing Staff</option>
+                                        <option value="compliance-officer" selected>Compliance Officer</option>
+                                        <option value="senior-management">Senior Management</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -862,13 +849,13 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Re-run adverse media checks on high-risk clients at least annually.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">For clients rated High risk, schedule annual adverse media reviews. Record the results and update the risk rating if new material information is identified.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
-                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
-                                        <option value="all-personnel">All Personnel</option>
-                                        <option value="client-facing">Client-Facing Staff</option>
-                                        <option value="compliance-officer" selected>Compliance Officer</option>
-                                        <option value="senior-management">Senior Management</option>
-                                    </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-row-expand">
+                                    <div class="era-expand-section-title">Title</div>
+                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Conduct adverse media checks on all new clients and beneficial owners at onboarding.">
+                                    <div class="era-expand-section-title">Summary</div>
+                                    <textarea class="era-expand-textarea">Search publicly available media, court records, and regulatory databases for any negative news involving the client or their associates. Document the search results and any relevant findings in the client file.</textarea>
                                 </div>
                             </div>
                             <button class="era-add-btn">Add Item +</button>
@@ -884,32 +871,31 @@
                             <p class="era-content-desc">Procedures for screening staff involved in the firm's AML/CTF program before commencement and on an ongoing basis.</p>
                             <div class="era-risk-card">
                                 <div class="era-risk-card-header">Process Items</div>
-                                <div class="era-risk-table-head-3col">
+                                <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
                                     <span>Actions</span>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Conduct background checks on all new employees and contractors in roles relevant to the AML/CTF program before they commence.</span>
-                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
-                                </div>
-                                <div class="era-row-expand">
-                                    <div class="era-expand-section-title">Title</div>
-                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Conduct background checks on all new employees and contractors in roles relevant to the AML/CTF program before they commence.">
-                                    <div class="era-expand-section-title">Summary</div>
-                                    <textarea class="era-expand-textarea">Obtain police checks, reference checks, and identity verification for all staff in designated roles. Record outcomes in the personnel file. Do not allow individuals with relevant criminal convictions to hold AML/CTF-sensitive roles without Compliance Officer approval.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
                                     <select class="era-responsibility-select" data-val="senior-management" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
                                         <option value="all-personnel">All Personnel</option>
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management" selected>Senior Management</option>
                                     </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Review the suitability of personnel in AML/CTF roles on a periodic basis.</span>
+                                    <select class="era-responsibility-select" data-val="senior-management" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
+                                        <option value="all-personnel">All Personnel</option>
+                                        <option value="client-facing">Client-Facing Staff</option>
+                                        <option value="compliance-officer">Compliance Officer</option>
+                                        <option value="senior-management" selected>Senior Management</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -917,13 +903,13 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Review the suitability of personnel in AML/CTF roles on a periodic basis.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">Conduct annual suitability assessments for staff in roles with AML/CTF responsibilities. Document the review outcome and any actions taken.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
-                                    <select class="era-responsibility-select" data-val="senior-management" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
-                                        <option value="all-personnel">All Personnel</option>
-                                        <option value="client-facing">Client-Facing Staff</option>
-                                        <option value="compliance-officer">Compliance Officer</option>
-                                        <option value="senior-management" selected>Senior Management</option>
-                                    </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-row-expand">
+                                    <div class="era-expand-section-title">Title</div>
+                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Conduct background checks on all new employees and contractors in roles relevant to the AML/CTF program before they commence.">
+                                    <div class="era-expand-section-title">Summary</div>
+                                    <textarea class="era-expand-textarea">Obtain police checks, reference checks, and identity verification for all staff in designated roles. Record outcomes in the personnel file. Do not allow individuals with relevant criminal convictions to hold AML/CTF-sensitive roles without Compliance Officer approval.</textarea>
                                 </div>
                             </div>
                             <button class="era-add-btn">Add Item +</button>
@@ -939,32 +925,31 @@
                             <p class="era-content-desc">Procedures for delivering AML/CTF training to all relevant personnel.</p>
                             <div class="era-risk-card">
                                 <div class="era-risk-card-header">Process Items</div>
-                                <div class="era-risk-table-head-3col">
+                                <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
                                     <span>Actions</span>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Provide AML/CTF induction training to all new employees before they commence client-facing duties.</span>
-                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
-                                </div>
-                                <div class="era-row-expand">
-                                    <div class="era-expand-section-title">Title</div>
-                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Provide AML/CTF induction training to all new employees before they commence client-facing duties.">
-                                    <div class="era-expand-section-title">Summary</div>
-                                    <textarea class="era-expand-textarea">Deliver induction training covering the firm's AML/CTF obligations, red flags, reporting obligations, and this program. Record attendance and completion dates in the training register.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
                                     <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
                                         <option value="all-personnel">All Personnel</option>
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Deliver refresher AML/CTF training to all staff at least annually.</span>
+                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
+                                        <option value="all-personnel">All Personnel</option>
+                                        <option value="client-facing">Client-Facing Staff</option>
+                                        <option value="compliance-officer" selected>Compliance Officer</option>
+                                        <option value="senior-management">Senior Management</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -972,17 +957,16 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Deliver refresher AML/CTF training to all staff at least annually.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">Schedule annual training sessions appropriate to each staff member's role and risk exposure. Update training materials to reflect any legislative or regulatory changes. Record completion in the training register.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
-                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
-                                        <option value="all-personnel">All Personnel</option>
-                                        <option value="client-facing">Client-Facing Staff</option>
-                                        <option value="compliance-officer" selected>Compliance Officer</option>
-                                        <option value="senior-management">Senior Management</option>
-                                    </select>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Provide role-specific training to staff with elevated AML/CTF responsibilities.</span>
+                                    <select class="era-responsibility-select" data-val="senior-management" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
+                                        <option value="all-personnel">All Personnel</option>
+                                        <option value="client-facing">Client-Facing Staff</option>
+                                        <option value="compliance-officer">Compliance Officer</option>
+                                        <option value="senior-management" selected>Senior Management</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -990,13 +974,13 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Provide role-specific training to staff with elevated AML/CTF responsibilities.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">Deliver additional training to the Compliance Officer, senior management, and client-facing staff on topics relevant to their specific responsibilities, such as enhanced CDD, SMR obligations, and escalation procedures.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
-                                    <select class="era-responsibility-select" data-val="senior-management" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
-                                        <option value="all-personnel">All Personnel</option>
-                                        <option value="client-facing">Client-Facing Staff</option>
-                                        <option value="compliance-officer">Compliance Officer</option>
-                                        <option value="senior-management" selected>Senior Management</option>
-                                    </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-row-expand">
+                                    <div class="era-expand-section-title">Title</div>
+                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Provide AML/CTF induction training to all new employees before they commence client-facing duties.">
+                                    <div class="era-expand-section-title">Summary</div>
+                                    <textarea class="era-expand-textarea">Deliver induction training covering the firm's AML/CTF obligations, red flags, reporting obligations, and this program. Record attendance and completion dates in the training register.</textarea>
                                 </div>
                             </div>
                             <button class="era-add-btn">Add Item +</button>
@@ -1012,32 +996,31 @@
                             <p class="era-content-desc">Procedures for identifying, escalating, and reporting suspicious matters to AUSTRAC.</p>
                             <div class="era-risk-card">
                                 <div class="era-risk-card-header">Process Items</div>
-                                <div class="era-risk-table-head-3col">
+                                <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
                                     <span>Actions</span>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Identify and document any transaction or activity that gives rise to a suspicion of ML/TF/PF.</span>
-                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
-                                </div>
-                                <div class="era-row-expand">
-                                    <div class="era-expand-section-title">Title</div>
-                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Identify and document any transaction or activity that gives rise to a suspicion of ML/TF/PF.">
-                                    <div class="era-expand-section-title">Summary</div>
-                                    <textarea class="era-expand-textarea">Any staff member who identifies a potentially suspicious matter must immediately document the circumstances, including the client's name, the nature of the activity, and the basis for suspicion. Do not inform the client.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
                                     <select class="era-responsibility-select" data-val="all-personnel" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
                                         <option value="all-personnel" selected>All Personnel</option>
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Escalate all potential suspicious matters to the Compliance Officer within 24 hours of detection.</span>
+                                    <select class="era-responsibility-select" data-val="all-personnel" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
+                                        <option value="all-personnel" selected>All Personnel</option>
+                                        <option value="client-facing">Client-Facing Staff</option>
+                                        <option value="compliance-officer">Compliance Officer</option>
+                                        <option value="senior-management">Senior Management</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -1045,17 +1028,16 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Escalate all potential suspicious matters to the Compliance Officer within 24 hours of detection.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">Submit the documented suspicious matter to the Compliance Officer using the internal escalation form. The Compliance Officer will assess the matter and determine whether a Suspicious Matter Report (SMR) is required.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
-                                    <select class="era-responsibility-select" data-val="all-personnel" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
-                                        <option value="all-personnel" selected>All Personnel</option>
-                                        <option value="client-facing">Client-Facing Staff</option>
-                                        <option value="compliance-officer">Compliance Officer</option>
-                                        <option value="senior-management">Senior Management</option>
-                                    </select>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Submit an SMR to AUSTRAC within the required timeframe where reporting is required.</span>
+                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
+                                        <option value="all-personnel">All Personnel</option>
+                                        <option value="client-facing">Client-Facing Staff</option>
+                                        <option value="compliance-officer" selected>Compliance Officer</option>
+                                        <option value="senior-management">Senior Management</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -1063,13 +1045,13 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Submit an SMR to AUSTRAC within the required timeframe where reporting is required.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">Where the Compliance Officer determines that reporting is required, submit the SMR to AUSTRAC via AUSTRAC Online within 24 hours (where terrorism financing is suspected) or 3 business days (all other suspicious matters). Record the submission reference number.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
-                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
-                                        <option value="all-personnel">All Personnel</option>
-                                        <option value="client-facing">Client-Facing Staff</option>
-                                        <option value="compliance-officer" selected>Compliance Officer</option>
-                                        <option value="senior-management">Senior Management</option>
-                                    </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-row-expand">
+                                    <div class="era-expand-section-title">Title</div>
+                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Identify and document any transaction or activity that gives rise to a suspicion of ML/TF/PF.">
+                                    <div class="era-expand-section-title">Summary</div>
+                                    <textarea class="era-expand-textarea">Any staff member who identifies a potentially suspicious matter must immediately document the circumstances, including the client's name, the nature of the activity, and the basis for suspicion. Do not inform the client.</textarea>
                                 </div>
                             </div>
                             <button class="era-add-btn">Add Item +</button>
@@ -1085,32 +1067,31 @@
                             <p class="era-content-desc">Procedures for identifying and reporting threshold transactions (physical currency transfers of AUD 10,000 or more) to AUSTRAC.</p>
                             <div class="era-risk-card">
                                 <div class="era-risk-card-header">Process Items</div>
-                                <div class="era-risk-table-head-3col">
+                                <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
                                     <span>Actions</span>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Identify and record all physical currency transactions of AUD 10,000 or more.</span>
-                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
-                                </div>
-                                <div class="era-row-expand">
-                                    <div class="era-expand-section-title">Title</div>
-                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Identify and record all physical currency transactions of AUD 10,000 or more.">
-                                    <div class="era-expand-section-title">Summary</div>
-                                    <textarea class="era-expand-textarea">All staff must identify and flag any transaction involving AUD 10,000 or more in physical currency. Do not structure transactions to avoid the threshold. Record the transaction details immediately.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
                                     <select class="era-responsibility-select" data-val="all-personnel" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
                                         <option value="all-personnel" selected>All Personnel</option>
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Submit a Threshold Transaction Report (TTR) to AUSTRAC within 10 business days.</span>
+                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
+                                        <option value="all-personnel">All Personnel</option>
+                                        <option value="client-facing">Client-Facing Staff</option>
+                                        <option value="compliance-officer" selected>Compliance Officer</option>
+                                        <option value="senior-management">Senior Management</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -1118,13 +1099,13 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Submit a Threshold Transaction Report (TTR) to AUSTRAC within 10 business days.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">The Compliance Officer must submit a TTR to AUSTRAC via AUSTRAC Online within 10 business days of the transaction. Record the submission confirmation reference in the transaction log.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
-                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
-                                        <option value="all-personnel">All Personnel</option>
-                                        <option value="client-facing">Client-Facing Staff</option>
-                                        <option value="compliance-officer" selected>Compliance Officer</option>
-                                        <option value="senior-management">Senior Management</option>
-                                    </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-row-expand">
+                                    <div class="era-expand-section-title">Title</div>
+                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Identify and record all physical currency transactions of AUD 10,000 or more.">
+                                    <div class="era-expand-section-title">Summary</div>
+                                    <textarea class="era-expand-textarea">All staff must identify and flag any transaction involving AUD 10,000 or more in physical currency. Do not structure transactions to avoid the threshold. Record the transaction details immediately.</textarea>
                                 </div>
                             </div>
                             <button class="era-add-btn">Add Item +</button>
@@ -1140,32 +1121,31 @@
                             <p class="era-content-desc">Procedures for maintaining AML/CTF records in compliance with legislative requirements.</p>
                             <div class="era-risk-card">
                                 <div class="era-risk-card-header">Process Items</div>
-                                <div class="era-risk-table-head-3col">
+                                <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
                                     <span>Actions</span>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Retain all CDD records, transaction records, and AML/CTF program documents for a minimum of 7 years.</span>
-                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
-                                </div>
-                                <div class="era-row-expand">
-                                    <div class="era-expand-section-title">Title</div>
-                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Retain all CDD records, transaction records, and AML/CTF program documents for a minimum of 7 years.">
-                                    <div class="era-expand-section-title">Summary</div>
-                                    <textarea class="era-expand-textarea">Store client identification records, transaction records, risk assessments, reports to AUSTRAC, and training records for at least 7 years from the date the record was created or the business relationship ended. Records must be retrievable within a reasonable timeframe.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
                                     <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
                                         <option value="all-personnel">All Personnel</option>
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Ensure records are stored securely and protected from unauthorised access.</span>
+                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
+                                        <option value="all-personnel">All Personnel</option>
+                                        <option value="client-facing">Client-Facing Staff</option>
+                                        <option value="compliance-officer" selected>Compliance Officer</option>
+                                        <option value="senior-management">Senior Management</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -1173,13 +1153,13 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Ensure records are stored securely and protected from unauthorised access.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">Maintain records in a secure system with access controls. Apply data retention and disposal policies consistent with the firm's privacy obligations. Document the storage location of key record types.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
-                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
-                                        <option value="all-personnel">All Personnel</option>
-                                        <option value="client-facing">Client-Facing Staff</option>
-                                        <option value="compliance-officer" selected>Compliance Officer</option>
-                                        <option value="senior-management">Senior Management</option>
-                                    </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-row-expand">
+                                    <div class="era-expand-section-title">Title</div>
+                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Retain all CDD records, transaction records, and AML/CTF program documents for a minimum of 7 years.">
+                                    <div class="era-expand-section-title">Summary</div>
+                                    <textarea class="era-expand-textarea">Store client identification records, transaction records, risk assessments, reports to AUSTRAC, and training records for at least 7 years from the date the record was created or the business relationship ended. Records must be retrievable within a reasonable timeframe.</textarea>
                                 </div>
                             </div>
                             <button class="era-add-btn">Add Item +</button>
@@ -1195,32 +1175,31 @@
                             <p class="era-content-desc">Procedures for reviewing and updating the firm's ML/TF risk assessment on a regular basis.</p>
                             <div class="era-risk-card">
                                 <div class="era-risk-card-header">Process Items</div>
-                                <div class="era-risk-table-head-3col">
+                                <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
                                     <span>Actions</span>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Review the firm's ML/TF risk assessment at least every 2 years or following a material change.</span>
-                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
-                                </div>
-                                <div class="era-row-expand">
-                                    <div class="era-expand-section-title">Title</div>
-                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Review the firm's ML/TF risk assessment at least every 2 years or following a material change.">
-                                    <div class="era-expand-section-title">Summary</div>
-                                    <textarea class="era-expand-textarea">Schedule a formal review of the risk assessment in line with the review cycle. Triggering events include: changes to services offered, new client types, changes to the regulatory environment, or a significant compliance incident. Document the review outcome and update the risk assessment if required.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
                                     <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
                                         <option value="all-personnel">All Personnel</option>
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Escalate material changes to the risk assessment to Senior Management for sign-off.</span>
+                                    <select class="era-responsibility-select" data-val="senior-management" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
+                                        <option value="all-personnel">All Personnel</option>
+                                        <option value="client-facing">Client-Facing Staff</option>
+                                        <option value="compliance-officer">Compliance Officer</option>
+                                        <option value="senior-management" selected>Senior Management</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -1228,13 +1207,13 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Escalate material changes to the risk assessment to Senior Management for sign-off.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">Where the risk assessment review results in a material change to the firm's risk profile or controls, present the updated assessment to Senior Management for review and approval before implementation.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
-                                    <select class="era-responsibility-select" data-val="senior-management" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
-                                        <option value="all-personnel">All Personnel</option>
-                                        <option value="client-facing">Client-Facing Staff</option>
-                                        <option value="compliance-officer">Compliance Officer</option>
-                                        <option value="senior-management" selected>Senior Management</option>
-                                    </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-row-expand">
+                                    <div class="era-expand-section-title">Title</div>
+                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Review the firm's ML/TF risk assessment at least every 2 years or following a material change.">
+                                    <div class="era-expand-section-title">Summary</div>
+                                    <textarea class="era-expand-textarea">Schedule a formal review of the risk assessment in line with the review cycle. Triggering events include: changes to services offered, new client types, changes to the regulatory environment, or a significant compliance incident. Document the review outcome and update the risk assessment if required.</textarea>
                                 </div>
                             </div>
                             <button class="era-add-btn">Add Item +</button>
@@ -1250,32 +1229,31 @@
                             <p class="era-content-desc">Procedures for reviewing and updating the AML/CTF program to ensure it remains effective and up to date.</p>
                             <div class="era-risk-card">
                                 <div class="era-risk-card-header">Process Items</div>
-                                <div class="era-risk-table-head-3col">
+                                <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
                                     <span>Actions</span>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Review the AML/CTF program at least every 2 years or following a material trigger event.</span>
-                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
-                                </div>
-                                <div class="era-row-expand">
-                                    <div class="era-expand-section-title">Title</div>
-                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Review the AML/CTF program at least every 2 years or following a material trigger event.">
-                                    <div class="era-expand-section-title">Summary</div>
-                                    <textarea class="era-expand-textarea">Conduct a formal review of this program document, assess whether procedures remain fit for purpose, and update content to reflect any changes to the risk assessment, regulatory requirements, or operational practices. Record the review date and outcome.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
                                     <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
                                         <option value="all-personnel">All Personnel</option>
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Test the effectiveness of the AML/CTF program periodically through audits or independent reviews.</span>
+                                    <select class="era-responsibility-select" data-val="senior-management" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
+                                        <option value="all-personnel">All Personnel</option>
+                                        <option value="client-facing">Client-Facing Staff</option>
+                                        <option value="compliance-officer">Compliance Officer</option>
+                                        <option value="senior-management" selected>Senior Management</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -1283,13 +1261,13 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Test the effectiveness of the AML/CTF program periodically through audits or independent reviews.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">Arrange an internal or independent review of the program at least every 3 years. Document findings and implement any recommended improvements. Report the outcome to Senior Management.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
-                                    <select class="era-responsibility-select" data-val="senior-management" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
-                                        <option value="all-personnel">All Personnel</option>
-                                        <option value="client-facing">Client-Facing Staff</option>
-                                        <option value="compliance-officer">Compliance Officer</option>
-                                        <option value="senior-management" selected>Senior Management</option>
-                                    </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-row-expand">
+                                    <div class="era-expand-section-title">Title</div>
+                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Review the AML/CTF program at least every 2 years or following a material trigger event.">
+                                    <div class="era-expand-section-title">Summary</div>
+                                    <textarea class="era-expand-textarea">Conduct a formal review of this program document, assess whether procedures remain fit for purpose, and update content to reflect any changes to the risk assessment, regulatory requirements, or operational practices. Record the review date and outcome.</textarea>
                                 </div>
                             </div>
                             <button class="era-add-btn">Add Item +</button>
@@ -1305,32 +1283,31 @@
                             <p class="era-content-desc">Procedures for escalating AML/CTF matters to the appropriate level of management.</p>
                             <div class="era-risk-card">
                                 <div class="era-risk-card-header">Process Items</div>
-                                <div class="era-risk-table-head-3col">
+                                <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
                                     <span>Actions</span>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">Escalate any matter involving potential ML/TF activity, regulatory breach, or program failure to the Compliance Officer immediately.</span>
-                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
-                                </div>
-                                <div class="era-row-expand">
-                                    <div class="era-expand-section-title">Title</div>
-                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Escalate any matter involving potential ML/TF activity, regulatory breach, or program failure to the Compliance Officer immediately.">
-                                    <div class="era-expand-section-title">Summary</div>
-                                    <textarea class="era-expand-textarea">Staff must not attempt to resolve AML/CTF incidents independently. Any matter involving suspected ML/TF, a potential breach of AML/CTF obligations, or a failure in program controls must be referred to the Compliance Officer without delay. Use the internal escalation form.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
                                     <select class="era-responsibility-select" data-val="all-personnel" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
                                         <option value="all-personnel" selected>All Personnel</option>
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
                                     <span class="era-row-arrow">&#9654;</span>
                                     <span class="era-row-text">The Compliance Officer must escalate matters of significance to Senior Management within 24 hours.</span>
+                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
+                                        <option value="all-personnel">All Personnel</option>
+                                        <option value="client-facing">Client-Facing Staff</option>
+                                        <option value="compliance-officer" selected>Compliance Officer</option>
+                                        <option value="senior-management">Senior Management</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -1338,17 +1315,16 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="The Compliance Officer must escalate matters of significance to Senior Management within 24 hours.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">Where a matter poses a material risk to the firm or requires a management decision (e.g. client termination, SMR filing, regulatory notification), the Compliance Officer must brief Senior Management within 24 hours and document the briefing.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
+                                </div>
+                                <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
+                                    <span class="era-row-arrow">&#9654;</span>
+                                    <span class="era-row-text">Maintain a log of all escalated matters and their resolution.</span>
                                     <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
                                         <option value="all-personnel">All Personnel</option>
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
-                                </div>
-                                <div class="era-risk-row-rf era-risk-row-rf--no-badge">
-                                    <span class="era-row-arrow">&#9654;</span>
-                                    <span class="era-row-text">Maintain a log of all escalated matters and their resolution.</span>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -1356,13 +1332,13 @@
                                     <input type="text" class="era-expand-textarea era-title-textarea" value="Maintain a log of all escalated matters and their resolution.">
                                     <div class="era-expand-section-title">Summary</div>
                                     <textarea class="era-expand-textarea">The Compliance Officer must maintain a register of all internal escalations, recording the date, nature of the matter, action taken, and outcome. Review the register quarterly and report trends to Senior Management.</textarea>
-                                    <div class="era-expand-section-title">Responsibility</div>
-                                    <select class="era-responsibility-select" data-val="compliance-officer" onchange="var m={'all-personnel':'all-personnel','client-facing':'client-facing','compliance-officer':'compliance-officer','senior-management':'senior-management'}; this.dataset.val=m[this.value]||'all-personnel';">
-                                        <option value="all-personnel">All Personnel</option>
-                                        <option value="client-facing">Client-Facing Staff</option>
-                                        <option value="compliance-officer" selected>Compliance Officer</option>
-                                        <option value="senior-management">Senior Management</option>
-                                    </select>
+                                    <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+                                </div>
+                                <div class="era-row-expand">
+                                    <div class="era-expand-section-title">Title</div>
+                                    <input type="text" class="era-expand-textarea era-title-textarea" value="Escalate any matter involving potential ML/TF activity, regulatory breach, or program failure to the Compliance Officer immediately.">
+                                    <div class="era-expand-section-title">Summary</div>
+                                    <textarea class="era-expand-textarea">Staff must not attempt to resolve AML/CTF incidents independently. Any matter involving suspected ML/TF, a potential breach of AML/CTF obligations, or a failure in program controls must be referred to the Compliance Officer without delay. Use the internal escalation form.</textarea>
                                 </div>
                             </div>
                             <button class="era-add-btn">Add Item +</button>
@@ -1847,6 +1823,11 @@
             if (rowText) rowText.textContent = e.target.value.trim() || 'New process item...';
         });
 
+        // Prevent responsibility select from toggling row expand
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.era-responsibility-select')) e.stopPropagation();
+        }, true);
+
         // Row expand/collapse — delegated so it works for dynamically added rows
         document.addEventListener('click', function(e) {
             var row = e.target.closest('.era-risk-row-rf');
@@ -2007,12 +1988,12 @@
                 var card = panel.querySelector('.era-risk-card');
 
                 var row = document.createElement('div');
-                row.className = 'era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--open';
-                row.innerHTML = '<span class="era-row-arrow">&#9660;</span><span class="era-row-text">New process item...</span><button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>';
+                row.className = 'era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp era-risk-row-rf--open';
+                row.innerHTML = '<span class="era-row-arrow">&#9660;</span><span class="era-row-text">New process item...</span><select class="era-responsibility-select" data-val="all-personnel" onchange="var m={\'all-personnel\':\'all-personnel\',\'client-facing\':\'client-facing\',\'compliance-officer\':\'compliance-officer\',\'senior-management\':\'senior-management\'}; this.dataset.val=m[this.value]||\'all-personnel\';"><option value="all-personnel" selected>All Personnel</option><option value="client-facing">Client-Facing Staff</option><option value="compliance-officer">Compliance Officer</option><option value="senior-management">Senior Management</option></select><button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>';
 
                 var expandSection = document.createElement('div');
                 expandSection.className = 'era-row-expand open';
-                expandSection.innerHTML = '<div class="era-expand-section-title">Title</div><input type="text" class="era-expand-textarea era-title-textarea" placeholder="Enter title..."><div class="era-expand-section-title">Summary</div><textarea class="era-expand-textarea" placeholder="Enter summary..."></textarea><div class="era-expand-section-title">Responsibility</div><select class="era-responsibility-select" data-val="all-personnel" onchange="var m={\'all-personnel\':\'all-personnel\',\'client-facing\':\'client-facing\',\'compliance-officer\':\'compliance-officer\',\'senior-management\':\'senior-management\'}; this.dataset.val=m[this.value]||\'all-personnel\';"><option value="all-personnel" selected>All Personnel</option><option value="client-facing">Client-Facing Staff</option><option value="compliance-officer">Compliance Officer</option><option value="senior-management">Senior Management</option></select>';
+                expandSection.innerHTML = '<div class="era-expand-section-title">Title</div><input type="text" class="era-expand-textarea era-title-textarea" placeholder="Enter title..."><div class="era-expand-section-title">Summary</div><textarea class="era-expand-textarea" placeholder="Enter summary..."></textarea>';
 
                 card.appendChild(row);
                 card.appendChild(expandSection);
