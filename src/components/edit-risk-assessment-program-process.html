@@ -394,6 +394,7 @@
                                 <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
+                                    <span>Required</span>
                                     <span>Actions</span>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -405,6 +406,10 @@
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -415,6 +420,10 @@
                                         <option value="client-facing" selected>Client-Facing Staff</option>
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -433,6 +442,10 @@
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-row-expand">
@@ -449,6 +462,10 @@
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -482,6 +499,7 @@
                                 <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
+                                    <span>Required</span>
                                     <span>Actions</span>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -493,6 +511,10 @@
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management" selected>Senior Management</option>
                                     </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -503,6 +525,10 @@
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -520,6 +546,10 @@
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -553,6 +583,7 @@
                                 <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
+                                    <span>Required</span>
                                     <span>Actions</span>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -564,6 +595,10 @@
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <select class="era-mandatory-select" data-val="optional" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory">Mandatory</option>
+                                        <option value="optional" selected>Optional</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -574,6 +609,10 @@
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="optional" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory">Mandatory</option>
+                                        <option value="optional" selected>Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -607,6 +646,7 @@
                                 <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
+                                    <span>Required</span>
                                     <span>Actions</span>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -618,6 +658,10 @@
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -628,6 +672,10 @@
                                         <option value="client-facing" selected>Client-Facing Staff</option>
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -645,6 +693,10 @@
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="optional" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory">Mandatory</option>
+                                        <option value="optional" selected>Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -678,6 +730,7 @@
                                 <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
+                                    <span>Required</span>
                                     <span>Actions</span>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -689,6 +742,10 @@
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -699,6 +756,10 @@
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="optional" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory">Mandatory</option>
+                                        <option value="optional" selected>Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -716,6 +777,10 @@
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -749,6 +814,7 @@
                                 <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
+                                    <span>Required</span>
                                     <span>Actions</span>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -760,6 +826,10 @@
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -770,6 +840,10 @@
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management" selected>Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -787,6 +861,10 @@
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -820,6 +898,7 @@
                                 <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
+                                    <span>Required</span>
                                     <span>Actions</span>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -831,6 +910,10 @@
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <select class="era-mandatory-select" data-val="optional" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory">Mandatory</option>
+                                        <option value="optional" selected>Optional</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -841,6 +924,10 @@
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="optional" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory">Mandatory</option>
+                                        <option value="optional" selected>Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -874,6 +961,7 @@
                                 <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
+                                    <span>Required</span>
                                     <span>Actions</span>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -885,6 +973,10 @@
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management" selected>Senior Management</option>
                                     </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -895,6 +987,10 @@
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management" selected>Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="optional" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory">Mandatory</option>
+                                        <option value="optional" selected>Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -928,6 +1024,7 @@
                                 <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
+                                    <span>Required</span>
                                     <span>Actions</span>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -939,6 +1036,10 @@
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -949,6 +1050,10 @@
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -966,6 +1071,10 @@
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management" selected>Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="optional" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory">Mandatory</option>
+                                        <option value="optional" selected>Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -999,6 +1108,7 @@
                                 <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
+                                    <span>Required</span>
                                     <span>Actions</span>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -1010,6 +1120,10 @@
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -1020,6 +1134,10 @@
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -1037,6 +1155,10 @@
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -1070,6 +1192,7 @@
                                 <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
+                                    <span>Required</span>
                                     <span>Actions</span>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -1081,6 +1204,10 @@
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -1091,6 +1218,10 @@
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -1124,6 +1255,7 @@
                                 <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
+                                    <span>Required</span>
                                     <span>Actions</span>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -1135,6 +1267,10 @@
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -1145,6 +1281,10 @@
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -1178,6 +1318,7 @@
                                 <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
+                                    <span>Required</span>
                                     <span>Actions</span>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -1189,6 +1330,10 @@
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -1199,6 +1344,10 @@
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management" selected>Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -1232,6 +1381,7 @@
                                 <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
+                                    <span>Required</span>
                                     <span>Actions</span>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -1243,6 +1393,10 @@
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -1253,6 +1407,10 @@
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management" selected>Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="optional" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory">Mandatory</option>
+                                        <option value="optional" selected>Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -1286,6 +1444,7 @@
                                 <div class="era-risk-table-head-3col era-risk-table-head-3col--process">
                                     <span>Item</span>
                                     <span>Responsibility</span>
+                                    <span>Required</span>
                                     <span>Actions</span>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -1297,6 +1456,10 @@
                                         <option value="compliance-officer">Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
                                     </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
+                                    </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
                                 <div class="era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp">
@@ -1307,6 +1470,10 @@
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -1324,6 +1491,10 @@
                                         <option value="client-facing">Client-Facing Staff</option>
                                         <option value="compliance-officer" selected>Compliance Officer</option>
                                         <option value="senior-management">Senior Management</option>
+                                    </select>
+                                    <select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;">
+                                        <option value="mandatory" selected>Mandatory</option>
+                                        <option value="optional">Optional</option>
                                     </select>
                                     <button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
                                 </div>
@@ -1823,9 +1994,9 @@
             if (rowText) rowText.textContent = e.target.value.trim() || 'New process item...';
         });
 
-        // Prevent responsibility select from toggling row expand
+        // Prevent responsibility/mandatory selects from toggling row expand
         document.addEventListener('click', function(e) {
-            if (e.target.closest('.era-responsibility-select')) e.stopPropagation();
+            if (e.target.closest('.era-responsibility-select, .era-mandatory-select')) e.stopPropagation();
         }, true);
 
         // Row expand/collapse — delegated so it works for dynamically added rows
@@ -1989,7 +2160,7 @@
 
                 var row = document.createElement('div');
                 row.className = 'era-risk-row-rf era-risk-row-rf--no-badge era-risk-row-rf--with-resp era-risk-row-rf--open';
-                row.innerHTML = '<span class="era-row-arrow">&#9660;</span><span class="era-row-text">New process item...</span><select class="era-responsibility-select" data-val="all-personnel" onchange="var m={\'all-personnel\':\'all-personnel\',\'client-facing\':\'client-facing\',\'compliance-officer\':\'compliance-officer\',\'senior-management\':\'senior-management\'}; this.dataset.val=m[this.value]||\'all-personnel\';"><option value="all-personnel" selected>All Personnel</option><option value="client-facing">Client-Facing Staff</option><option value="compliance-officer">Compliance Officer</option><option value="senior-management">Senior Management</option></select><button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>';
+                row.innerHTML = '<span class="era-row-arrow">&#9660;</span><span class="era-row-text">New process item...</span><select class="era-responsibility-select" data-val="all-personnel" onchange="var m={\'all-personnel\':\'all-personnel\',\'client-facing\':\'client-facing\',\'compliance-officer\':\'compliance-officer\',\'senior-management\':\'senior-management\'}; this.dataset.val=m[this.value]||\'all-personnel\';"><option value="all-personnel" selected>All Personnel</option><option value="client-facing">Client-Facing Staff</option><option value="compliance-officer">Compliance Officer</option><option value="senior-management">Senior Management</option></select><select class="era-mandatory-select" data-val="mandatory" onchange="this.dataset.val=this.value;"><option value="mandatory" selected>Mandatory</option><option value="optional">Optional</option></select><button class="era-row-delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>';
 
                 var expandSection = document.createElement('div');
                 expandSection.className = 'era-row-expand open';
