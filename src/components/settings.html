@@ -219,6 +219,15 @@
                     <li class="nav-item">
                         <a class="nav-link ra-tab" href="#" data-tab="document-templates">Document Templates</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link ra-tab" href="#" data-tab="audit-log">Audit Log</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ra-tab" href="#" data-tab="audit-log-2">Audit Log 2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ra-tab" href="#" data-tab="audit-log-3">Audit Log 3</a>
+                    </li>
                 </ul>
 
                 <!-- Email Template Tab -->
@@ -445,6 +454,1631 @@
 
                 </div>
                 </div><!-- /tab-document-templates -->
+
+                <!-- Audit Log Tab -->
+                <div id="tab-audit-log" class="settings-tab-pane" style="display:none;">
+
+                    <!-- Filter action bar -->
+                    <div class="al-action-bar">
+                        <div class="cl-filter-wrap">
+                            <button class="cl-filter-btn" id="alAddFilterBtn">
+                                Add Filter
+                                <span class="cl-filter-count" id="alFilterCount" style="display:none;">0</span>
+                                <i class="fas fa-sliders-h"></i>
+                            </button>
+                            <div class="cl-filter-dropdown" id="alFilterDropdown">
+                                <div class="cl-filter-option" data-category="user">User</div>
+                                <div class="cl-filter-option" data-category="module">Module</div>
+                                <div class="cl-filter-option" data-category="action">Action</div>
+                                <div class="cl-filter-option" data-category="dateRange">Date Range</div>
+                            </div>
+                            <div class="cl-filter-value-dropdown" id="alFilterValueDropdown"></div>
+                        </div>
+
+                        <div class="al-cl-search">
+                            <i class="fas fa-search al-cl-search-icon"></i>
+                            <input type="text" class="al-cl-search-input" id="alSearchInput" placeholder="Search: search for content">
+                        </div>
+                    </div>
+
+                    <!-- Active filter pills -->
+                    <div class="cl-active-filters" id="alActiveFilters"></div>
+
+                    <!-- Table -->
+                    <div style="flex:1; overflow-y:auto;">
+                        <div class="ukp-table-wrap">
+                            <table class="ukp-table" id="al-table">
+                                <thead>
+                                    <tr>
+                                        <th>Timestamp (UTC)</th>
+                                        <th>User</th>
+                                        <th>Action</th>
+                                        <th>Module</th>
+                                        <th>Changed Field</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="al-table-body"></tbody>
+                            </table>
+                        </div>
+                        <div id="al-empty-state" class="cl-empty">
+                            <img src="images/default_state.svg" alt="Nothing found">
+                            <h6>Nothing has been found</h6>
+                            <p>Try adjusting your filters or search term.</p>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div id="al-pagination" style="display:flex; align-items:center; justify-content:space-between; padding:12px 24px; border-top:1px solid #e0e8ec; background:#f7fafc; flex-shrink:0; font-size:13px; color:#4a6470;">
+                        <span id="al-page-info"></span>
+                        <div style="display:flex; gap:6px;">
+                            <button id="al-prev-btn" style="height:32px; padding:0 14px; background:#fff; border:1px solid #c8d8df; border-radius:7px; font-size:13px; color:#1a2b35; cursor:pointer;">← Prev</button>
+                            <button id="al-next-btn" style="height:32px; padding:0 14px; background:#fff; border:1px solid #c8d8df; border-radius:7px; font-size:13px; color:#1a2b35; cursor:pointer;">Next →</button>
+                        </div>
+                    </div>
+
+                </div><!-- /tab-audit-log -->
+
+                <!-- Audit Log 2 Tab -->
+                <div id="tab-audit-log-2" class="settings-tab-pane" style="display:none;">
+
+                    <!-- Filter action bar -->
+                    <div class="al-action-bar">
+                        <div class="cl-filter-wrap">
+                            <button class="cl-filter-btn" id="alAddFilterBtn2">
+                                Add Filter
+                                <span class="cl-filter-count" id="alFilterCount2" style="display:none;">0</span>
+                                <i class="fas fa-sliders-h"></i>
+                            </button>
+                            <div class="cl-filter-dropdown" id="alFilterDropdown2">
+                                <div class="cl-filter-option" data-category="user">User</div>
+                                <div class="cl-filter-option" data-category="module">Module</div>
+                                <div class="cl-filter-option" data-category="action">Action</div>
+                                <div class="cl-filter-option" data-category="dateRange">Date Range</div>
+                            </div>
+                            <div class="cl-filter-value-dropdown" id="alFilterValueDropdown2"></div>
+                        </div>
+
+                        <div class="al-cl-search">
+                            <i class="fas fa-search al-cl-search-icon"></i>
+                            <input type="text" class="al-cl-search-input" id="alSearchInput2" placeholder="Search: search for content">
+                        </div>
+                    </div>
+
+                    <!-- Active filter pills -->
+                    <div class="cl-active-filters" id="alActiveFilters2"></div>
+
+                    <!-- Timeline -->
+                    <div style="flex:1; overflow-y:auto; padding-bottom:24px;">
+                        <div id="al2-timeline"></div>
+                        <div id="al-empty-state-2" class="cl-empty">
+                            <img src="images/default_state.svg" alt="Nothing found">
+                            <h6>Nothing has been found</h6>
+                            <p>Try adjusting your filters or search term.</p>
+                        </div>
+                    </div>
+
+                </div><!-- /tab-audit-log-2 -->
+
+                <!-- Audit Log 3 Tab -->
+                <div id="tab-audit-log-3" class="settings-tab-pane" style="display:none;">
+
+                    <!-- Filter action bar -->
+                    <div class="al-action-bar">
+                        <div class="cl-filter-wrap">
+                            <button class="cl-filter-btn" id="alAddFilterBtn3">
+                                Add Filter
+                                <span class="cl-filter-count" id="alFilterCount3" style="display:none;">0</span>
+                                <i class="fas fa-sliders-h"></i>
+                            </button>
+                            <div class="cl-filter-dropdown" id="alFilterDropdown3">
+                                <div class="cl-filter-option" data-category="user">User</div>
+                                <div class="cl-filter-option" data-category="module">Module</div>
+                                <div class="cl-filter-option" data-category="action">Action</div>
+                                <div class="cl-filter-option" data-category="dateRange">Date Range</div>
+                            </div>
+                            <div class="cl-filter-value-dropdown" id="alFilterValueDropdown3"></div>
+                        </div>
+                        <div class="al-cl-search">
+                            <i class="fas fa-search al-cl-search-icon"></i>
+                            <input type="text" class="al-cl-search-input" id="alSearchInput3" placeholder="Search: search for content">
+                        </div>
+                    </div>
+
+                    <!-- Active filter pills -->
+                    <div class="cl-active-filters" id="alActiveFilters3"></div>
+
+                    <!-- Timeline v3 -->
+                    <div style="flex:1; overflow-y:auto; padding-bottom:24px;">
+                        <div id="al3-timeline"></div>
+                        <div id="al-empty-state-3" class="cl-empty">
+                            <img src="images/default_state.svg" alt="Nothing found">
+                            <h6>Nothing has been found</h6>
+                            <p>Try adjusting your filters or search term.</p>
+                        </div>
+                    </div>
+
+                </div><!-- /tab-audit-log-3 -->
+
+                <!-- Audit Log row detail panel -->
+                <div id="al-detail-panel" style="display:none; position:fixed; top:0; right:0; width:460px; height:100vh; background:#fff; border-left:1px solid #c8d8df; box-shadow:-4px 0 24px rgba(0,0,0,0.10); z-index:1100; flex-direction:column; overflow:hidden;">
+                    <div style="display:flex; align-items:center; justify-content:space-between; padding:20px 24px; border-bottom:1px solid #e0e8ec; background:#f7fafc;">
+                        <span style="font-size:15px; font-weight:700; color:#1a2b35;">Log Entry Detail</span>
+                        <button id="al-detail-close" style="background:none; border:none; cursor:pointer; color:#4a6470; font-size:20px; line-height:1;">&times;</button>
+                    </div>
+                    <div id="al-detail-body" style="padding:24px; overflow-y:auto; flex:1; font-size:13px; color:#1a2b35;"></div>
+                </div>
+                <div id="al-detail-overlay" style="display:none; position:fixed; inset:0; z-index:1099; background:rgba(0,0,0,0.18);"></div>
+
+                <style>
+                    .al-filter-input {
+                        border: 1px solid #c8d8df;
+                        border-radius: 8px;
+                        padding: 0 12px;
+                        font-size: 13px;
+                        color: #1a2b35;
+                        background: #fff;
+                        font-family: inherit;
+                        outline: none;
+                        width: 100%;
+                    }
+                    .al-filter-input:focus { border-color: #1a6b40; }
+                    /* Clients-style filter system for audit log */
+                    .cl-filter-wrap { position: relative; display: inline-block; }
+                    .cl-filter-btn {
+                        height: 52px; padding: 0 16px; border-radius: 8px;
+                        background: #fff; border: 1px solid #c9d8de; font-size: 13px;
+                        font-weight: 500; color: #1a2b35; cursor: pointer;
+                        display: inline-flex; align-items: center; gap: 6px;
+                        transition: background 0.15s, border-color 0.15s;
+                    }
+                    .cl-filter-btn:hover { background: #f5f7f8; border-color: #a8b8c0; }
+                    .cl-filter-btn:focus { outline: none; }
+                    .cl-filter-count {
+                        display: inline-flex; align-items: center; justify-content: center;
+                        min-width: 20px; height: 20px; padding: 0 6px;
+                        background: #02d14c; color: #fff; border-radius: 10px;
+                        font-size: 11px; font-weight: 700; margin-left: 4px;
+                    }
+                    .cl-filter-dropdown {
+                        display: none; position: absolute; top: calc(100% + 4px); left: 0;
+                        background: #fff; border: 1px solid #c9d8de; border-radius: 10px;
+                        box-shadow: 0 6px 20px rgba(0,0,0,0.12); z-index: 300;
+                        min-width: 200px; overflow: hidden;
+                    }
+                    .cl-filter-value-dropdown {
+                        display: none; position: absolute; top: 0;
+                        background: #fff; border: 1px solid #c9d8de; border-radius: 10px;
+                        box-shadow: 0 6px 20px rgba(0,0,0,0.12); z-index: 301;
+                        min-width: 180px; overflow: hidden;
+                    }
+                    .cl-filter-dropdown.open, .cl-filter-value-dropdown.open { display: block; }
+                    .cl-filter-option, .cl-filter-value-option {
+                        padding: 10px 16px; font-size: 13px; color: #1a2b35;
+                        cursor: pointer; transition: background 0.12s;
+                    }
+                    .cl-filter-option:hover, .cl-filter-value-option:hover { background: #f5f7f8; }
+                    .cl-filter-option.active { background: #f5f7f8; }
+                    .cl-filter-value-option { display: flex; justify-content: space-between; align-items: center; }
+                    .cl-filter-value-label { flex: 1; }
+                    .cl-active-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+                    .cl-filter-pill {
+                        display: inline-flex; align-items: center; gap: 8px;
+                        padding: 10px 12px 10px 14px; background: #dce5e8; border-radius: 9px;
+                        font-size: 13px; color: #1a2b35;
+                    }
+                    .cl-filter-pill-label { font-weight: 500; }
+                    .cl-filter-pill-value { font-weight: 600; }
+                    .cl-filter-pill-remove {
+                        width: 23px; height: 23px; border-radius: 38%;
+                        background: #dce5e8; border: none; cursor: pointer;
+                        display: flex; align-items: center; justify-content: center;
+                        font-size: 24px; color: #6a7f89; transition: background 0.12s;
+                    }
+                    .cl-filter-pill-remove:hover { background: #e0e8ea; }
+                    .cl-add-filter-pill {
+                        display: inline-flex; align-items: center; justify-content: center;
+                        width: 43px; height: 42px; border-radius: 21%;
+                        background: #dce5e8; border: none; cursor: pointer;
+                        font-size: 24px; color: #1a2b35; font-weight: 300;
+                        transition: background 0.12s;
+                    }
+                    .cl-add-filter-pill:hover { background: #d5e4e7; }
+                    .al-action-bar { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; }
+                    .al-cl-search {
+                        flex: 1; display: flex; align-items: center; gap: 10px;
+                        background: #fff; border: 1px solid #c9d8de; border-radius: 8px;
+                        padding: 0 14px; height: 52px;
+                    }
+                    .al-cl-search-icon { color: #8aa8b2; font-size: 13px; }
+                    .al-cl-search-input { border: none; outline: none; font-size: 13px; color: #1a2b35; background: transparent; width: 100%; }
+                    .al-cl-search-input::placeholder { color: #8aa8b2; }
+                    .al-cl-empty { display:none; flex-direction:column; align-items:center; justify-content:center; padding:60px 20px; text-align:center; opacity:0; transition:opacity 300ms ease; }
+                    .al-cl-empty.visible { display:flex; opacity:1; }
+                    .al-cl-empty img { width:220px; margin-bottom:24px; }
+                    .al-cl-empty h6 { font-size:16px; font-weight:700; color:#1a2b35; margin-bottom:10px; }
+                    .al-cl-empty p { font-size:13.5px; color:#7a8f98; line-height:1.7; margin:0; }
+                    .cl-empty { display:none; flex-direction:column; align-items:center; justify-content:center; padding:60px 20px; text-align:center; opacity:0; transition:opacity 300ms ease; }
+                    .cl-empty.visible { display:flex; opacity:1; }
+                    .cl-empty img { width:220px; margin-bottom:24px; }
+                    .cl-empty h6 { font-size:16px; font-weight:700; color:#1a2b35; margin-bottom:10px; }
+                    .cl-empty p { font-size:13.5px; color:#7a8f98; line-height:1.7; margin:0; }
+                    #al-table tbody tr { cursor: pointer; }
+                    /* Date range picker */
+                    .al-drp { padding: 0; min-width: 520px; }
+                    .al-drp-header { padding: 14px 16px 10px; border-bottom: 1px solid #edf1f3; }
+                    .al-drp-display {
+                        display: inline-flex; align-items: center; gap: 8px;
+                        padding: 7px 14px; border: 1.5px solid #c9d8de; border-radius: 8px;
+                        font-size: 13px; font-weight: 500; color: #1a2b35; cursor: pointer;
+                        background: #fff;
+                    }
+                    .al-drp-body { display: flex; }
+                    .al-drp-shortcuts {
+                        width: 120px; flex-shrink: 0; padding: 12px 0;
+                        border-right: 1px solid #edf1f3;
+                    }
+                    .al-drp-shortcut {
+                        padding: 9px 18px; font-size: 13px; color: #1a2b35;
+                        cursor: pointer; transition: background 0.12s;
+                    }
+                    .al-drp-shortcut:hover { background: #f5f7f8; }
+                    .al-drp-shortcut.al-drp-reset { color: #1a6b40; font-weight: 600; }
+                    .al-drp-cal { padding: 16px; flex: 1; }
+                    .al-drp-cal-header {
+                        display: flex; align-items: center; justify-content: space-between;
+                        margin-bottom: 14px;
+                    }
+                    .al-drp-cal-title { font-size: 14px; font-weight: 700; color: #1a2b35; }
+                    .al-drp-nav {
+                        background: none; border: none; cursor: pointer;
+                        color: #6a7f89; font-size: 16px; padding: 4px 8px; line-height: 1;
+                    }
+                    .al-drp-nav:hover { color: #1a2b35; }
+                    .al-drp-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+                    .al-drp-dow {
+                        text-align: center; font-size: 11px; font-weight: 700;
+                        color: #6a7f89; padding: 6px 0;
+                    }
+                    .al-drp-day {
+                        aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+                        font-size: 13px; color: #1a2b35; cursor: pointer; border-radius: 50%;
+                        transition: background 0.1s, color 0.1s; position: relative; z-index: 1;
+                    }
+                    .al-drp-day:hover:not(.al-drp-empty) { background: #e8f0f4; }
+                    .al-drp-day.al-drp-empty { cursor: default; color: #b0bec5; }
+                    .al-drp-day.al-drp-other { color: #b0bec5; }
+                    .al-drp-day.al-drp-start, .al-drp-day.al-drp-end {
+                        background: #1a6b40; color: #fff; font-weight: 700;
+                    }
+                    .al-drp-day.al-drp-in-range {
+                        background: #dff0e8; border-radius: 0; color: #1a2b35;
+                    }
+                    .al-drp-day.al-drp-start { border-radius: 50% 0 0 50%; }
+                    .al-drp-day.al-drp-end   { border-radius: 0 50% 50% 0; }
+                    .al-drp-day.al-drp-start.al-drp-end { border-radius: 50%; }
+                    .al-drp-footer {
+                        padding: 10px 16px; border-top: 1px solid #edf1f3;
+                        display: flex; justify-content: flex-end; gap: 8px;
+                    }
+                    .al-drp-apply {
+                        height: 32px; padding: 0 18px; background: #1a6b40; color: #fff;
+                        border: none; border-radius: 7px; font-size: 13px; font-weight: 600; cursor: pointer;
+                    }
+                    .al-drp-cancel {
+                        height: 32px; padding: 0 14px; background: #fff; color: #4a6470;
+                        border: 1px solid #c8d8df; border-radius: 7px; font-size: 13px; cursor: pointer;
+                    }
+                    .al-action-badge {
+                        display: inline-block;
+                        padding: 3px 10px;
+                        border-radius: 7px;
+                        font-size: 11.5px;
+                        font-weight: 500;
+                        white-space: nowrap;
+                    }
+                    .al-action-save    { background:#dcfce7; color:#166534; }
+                    .al-action-update  { background:#dbeafe; color:#1e40af; }
+                    .al-action-delete  { background:#fee2e2; color:#991b1b; }
+                    .al-action-archive { background:#fef3c7; color:#92400e; }
+                    .al-action-review  { background:#ede9fe; color:#5b21b6; }
+                    .al-detail-row {
+                        display: flex;
+                        padding: 10px 0;
+                        border-bottom: 1px solid #edf1f3;
+                        gap: 12px;
+                    }
+                    .al-detail-row:last-child { border-bottom: none; }
+                    .al-detail-label {
+                        font-size: 12px;
+                        font-weight: 600;
+                        color: #4a6470;
+                        width: 130px;
+                        flex-shrink: 0;
+                    }
+                    .al-detail-value {
+                        font-size: 13px;
+                        color: #1a2b35;
+                    }
+                    #al-prev-btn:disabled, #al-next-btn:disabled {
+                        opacity: 0.4;
+                        cursor: not-allowed;
+                    }
+                    /* ── Audit Log 2 Timeline ── */
+                    .al2-date-group { margin-bottom: 4px; }
+                    .al2-date-header {
+                        display: flex; align-items: center; gap: 10px;
+                        padding: 9px 16px; background: #edf1f3; border-radius: 8px;
+                        border: 1px solid #c1e1e9;
+                        cursor: pointer; user-select: none;
+                    }
+                    .al2-date-header:hover { background: #e4eaed; }
+                    .al2-date-label { font-size: 13px; font-weight: 700; color: #1a2b35; flex: 1; }
+                    .al2-date-count {
+                        display: inline-flex; align-items: center; justify-content: center;
+                        min-width: 22px; height: 22px; padding: 0 6px;
+                        background: #c8d8df; color: #1a2b35; border-radius: 11px;
+                        font-size: 11px; font-weight: 700;
+                    }
+                    .al2-date-chevron { font-size: 11px; color: #6a7f89; transition: transform 0.2s; }
+                    .al2-entries { padding: 4px 0 8px; }
+                    .al2-entry {
+                        display: flex; gap: 15px; padding: 14px 16px 14px 20px;
+                        margin: 10px 1px 17px;
+                        background: #ffffff; border-radius: 7px;
+                        border: 1px solid #c1e1e9;
+                        cursor: pointer; transition: background 0.12s;
+                    }
+                    .al2-entry:hover { background: #f7fafa; }
+                    .al2-entry:last-child { margin-bottom: 4px; }
+                    .al2-entry-left {
+                        display: flex; flex-direction: column; align-items: center;
+                        padding-top: 4px; flex-shrink: 0;
+                    }
+                    .al2-dot {
+                        width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0;
+                    }
+                    .al2-dot-green  { background: #22c55e; }
+                    .al2-dot-blue   { background: #3b82f6; }
+                    .al2-dot-red    { background: #ef4444; }
+                    .al2-dot-orange { background: #f97316; }
+                    .al2-dot-purple { background: #8b5cf6; }
+                    .al2-entry-body { flex: 1; min-width: 0; }
+                    .al2-entry-meta {
+                        display: flex; align-items: center; gap: 6px;
+                        font-size: 12px; color: #6a7f89; margin-bottom: 5px; flex-wrap: wrap;
+                    }
+                    .al2-time { font-weight: 600; color: #4a6470; }
+                    .al2-dot-sep { color: #b0bec5; }
+                    .al2-type-pill {
+                        display: inline-flex; align-items: center;
+                        padding: 2px 8px; background: #e8f0f4;
+                        border-radius: 5px; font-size: 11px; font-weight: 600;
+                        color: #1a6b40;
+                    }
+                    .al2-source { font-size: 12px; color: #6a7f89; }
+                    .al2-entry-title {
+                        font-size: 13.5px; font-weight: 700; color: #1a2b35; margin-bottom: 3px;
+                    }
+                    .al2-entry-path {
+                        font-size: 12px; color: #8aa8b2; margin-bottom: 8px;
+                        border-bottom: 1px dashed #c8d8df; display: inline-block; padding-bottom: 1px;
+                    }
+                    .al2-entry-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+                    .al2-tag {
+                        display: inline-flex; align-items: center; gap: 5px;
+                        padding: 3px 9px; border-radius: 6px; font-size: 11.5px; font-weight: 500;
+                    }
+                    .al2-tag i { font-size: 10px; }
+                    .al2-tag-user   { background: #f0f4f5; color: #4a6470; }
+                    .al2-tag-action { background: #dcfce7; color: #166534; }
+                    .al2-tag-module { background: #f1f5f9; color: #64748b; }
+
+                    /* ── Audit Log 3 Timeline ── */
+                    .al3-group { margin-bottom: 32px; }
+                    .al3-group-header {
+                        display: flex; align-items: center; justify-content: space-between;
+                        padding: 0 0 14px; cursor: pointer; user-select: none;
+                    }
+                    .al3-group-header-left { display: flex; align-items: center; gap: 12px; }
+                    .al3-group-chevron-btn {
+                        width: 32px; height: 32px; border-radius: 50%;
+                        background: #f0f4f5; border: 1px solid #d8e3e7;
+                        display: flex; align-items: center; justify-content: center;
+                        cursor: pointer; flex-shrink: 0;
+                        transition: background 0.12s;
+                    }
+                    .al3-group-chevron-btn:hover { background: #e4eaed; }
+                    .al3-group-chevron-btn i { font-size: 11px; color: #4a6470; transition: transform 0.2s; }
+                    .al3-group-title { font-size: 15px; font-weight: 700; color: #1a2b35; }
+                    .al3-group-count { font-size: 13px; color: #8aa8b2; font-weight: 500; }
+                    .al3-entries { position: relative; padding-left: 52px; }
+                    .al3-entries::before {
+                        content: ''; position: absolute; left: 14px; top: 0; bottom: 0;
+                        width: 2px; background: #e0e8ec; border-radius: 1px;
+                    }
+                    .al3-row { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 12px; position: relative; }
+                    .al3-row-left {
+                        display: flex; align-items: flex-start; gap: 0;
+                        position: absolute; left: 0; width: 52px;
+                        justify-content: flex-start; padding-left: 6px;
+                        padding-top: 14px;
+                    }
+                    .al3-dot {
+                        width: 12px; height: 12px; border-radius: 50%;
+                        border: 2px solid #fff; box-shadow: 0 0 0 2px #c8d8df;
+                        background: #3b82f6; flex-shrink: 0;
+                        position: absolute; left: 9px;
+                    }
+                    .al3-dot-green  { background: #22c55e; box-shadow: 0 0 0 2px #bbf7d0; }
+                    .al3-dot-blue   { background: #3b82f6; box-shadow: 0 0 0 2px #bfdbfe; }
+                    .al3-dot-red    { background: #ef4444; box-shadow: 0 0 0 2px #fecaca; }
+                    .al3-dot-orange { background: #f97316; box-shadow: 0 0 0 2px #fed7aa; }
+                    .al3-dot-purple { background: #8b5cf6; box-shadow: 0 0 0 2px #ddd6fe; }
+                    .al3-time {
+                        font-size: 12px; color: #8aa8b2; white-space: nowrap;
+                        min-width: 56px; padding-top: 16px; flex-shrink: 0;
+                        text-align: right;
+                    }
+                    .al3-card {
+                        flex: 1; background: #fff; border: 1px solid #e0e8ec;
+                        border-radius: 10px; padding: 14px 16px;
+                        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+                        cursor: pointer; transition: box-shadow 0.15s, border-color 0.15s;
+                    }
+                    .al3-card:hover { box-shadow: 0 3px 10px rgba(0,0,0,0.08); border-color: #c8d8df; }
+                    .al3-card-top {
+                        display: flex; align-items: center; justify-content: space-between;
+                        margin-bottom: 8px;
+                    }
+                    .al3-card-top-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+                    .al3-avatar {
+                        width: 28px; height: 28px; border-radius: 50%;
+                        background: #e4ebf2; border: 1px solid #c7d8df;
+                        display: flex; align-items: center; justify-content: center;
+                        font-size: 11px; font-weight: 700; color: #457093; flex-shrink: 0;
+                    }
+                    .al3-user { font-size: 13.5px; font-weight: 700; color: #1a2b35; }
+                    .al3-verb { font-size: 13px; color: #6a7f89; }
+                    .al3-entity-pill {
+                        display: inline-flex; align-items: center;
+                        padding: 2px 9px; border-radius: 5px;
+                        border: 1px solid #c8d8df; font-size: 12px; font-weight: 600;
+                        color: #1a2b35; background: #f5f8fa;
+                    }
+                    .al3-status-badge {
+                        display: inline-flex; align-items: center; justify-content: center;
+                        padding: 3px 10px; border-radius: 6px;
+                        font-size: 11.5px; font-weight: 700; flex-shrink: 0;
+                    }
+                    .al3-badge-save    { background: #dcfce7; color: #166534; }
+                    .al3-badge-update  { background: #dbeafe; color: #1e40af; }
+                    .al3-badge-delete  { background: #fee2e2; color: #991b1b; }
+                    .al3-badge-archive { background: #fef3c7; color: #92400e; }
+                    .al3-badge-review  { background: #ede9fe; color: #5b21b6; }
+                    .al3-card-body {
+                        font-size: 13px; color: #4a6470; margin-bottom: 10px;
+                        line-height: 1.5;
+                    }
+                    .al3-card-footer {
+                        display: flex; align-items: center; justify-content: space-between;
+                        flex-wrap: wrap; gap: 8px;
+                    }
+                    .al3-resolution {
+                        font-size: 12px; font-weight: 600; color: #6a7f89;
+                    }
+                    .al3-resolution.resolved { color: #1a6b40; }
+                    .al3-resolution-date { font-size: 12px; color: #8aa8b2; margin-left: 6px; }
+                    .al3-field-tag {
+                        display: inline-flex; align-items: center; gap: 4px;
+                        padding: 2px 9px; background: #f0f4f5; border-radius: 5px;
+                        font-size: 11.5px; color: #4a6470;
+                    }
+                    .al3-field-tag i { font-size: 9px; }
+                </style>
+
+                <script>
+                (function() {
+                    var ALL_ROWS = [
+                        { ts:'26/05/2026 09:14:22', user:'Jeremy Hofsteede', action:'UPDATE', module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',                    field:'Firm Details',     entity:'firm_001' },
+                        { ts:'26/05/2026 09:12:05', user:'Jeremy Hofsteede', action:'SAVE',   module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',                    field:'Address',          entity:'firm_001' },
+                        { ts:'25/05/2026 16:48:30', user:'Sarah Mitchell',   action:'SAVE',   module:'FIRM_USER_TRAINING',  moduleLabel:'Firm Users - Training',           field:'Training Record',  entity:'usr_042'  },
+                        { ts:'25/05/2026 15:30:11', user:'Sarah Mitchell',   action:'UPDATE', module:'FIRM_USER_DETAILS',   moduleLabel:'Firm Users - Details',            field:'Personal Details', entity:'usr_042'  },
+                        { ts:'25/05/2026 14:22:58', user:'David Chen',       action:'SEND_FOR_REVIEW', module:'FIRM_POLICY', moduleLabel:'Firm Policy / Process',          field:'N/A',              entity:'pol_007'  },
+                        { ts:'24/05/2026 11:05:44', user:'Jeremy Hofsteede', action:'APPROVE_REVIEW',  module:'FIRM_POLICY', moduleLabel:'Firm Policy / Process',          field:'N/A',              entity:'pol_006'  },
+                        { ts:'24/05/2026 10:58:02', user:'Sarah Mitchell',   action:'SAVE',   module:'FIRM_USER',           moduleLabel:'Firm Users / Key Personnel',       field:'N/A',              entity:'usr_043'  },
+                        { ts:'23/05/2026 17:34:19', user:'David Chen',       action:'UPDATE', module:'FIRM_POLICY',         moduleLabel:'Firm Policy / Process',           field:'next_review_date', entity:'pol_007'  },
+                        { ts:'23/05/2026 16:10:03', user:'Jeremy Hofsteede', action:'DELETE', module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',                    field:'Designated Services', entity:'firm_001' },
+                        { ts:'23/05/2026 14:55:27', user:'Jeremy Hofsteede', action:'SAVE',   module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',                    field:'Industry Segments',entity:'firm_001' },
+                        { ts:'22/05/2026 13:20:45', user:'Sarah Mitchell',   action:'DELETE', module:'FIRM_USER_TRAINING',  moduleLabel:'Firm Users - Training',           field:'Training Record',  entity:'usr_040'  },
+                        { ts:'22/05/2026 11:04:38', user:'David Chen',       action:'ARCHIVE',module:'FIRM_USER',           moduleLabel:'Firm Users / Key Personnel',       field:'N/A',              entity:'usr_038'  },
+                        { ts:'21/05/2026 09:30:11', user:'Jeremy Hofsteede', action:'MARK_AS_CURRENT', module:'FIRM_POLICY', moduleLabel:'Firm Policy / Process',         field:'N/A',              entity:'pol_005'  },
+                        { ts:'20/05/2026 15:12:54', user:'Sarah Mitchell',   action:'SAVE',   module:'FIRM_USER_DETAILS',   moduleLabel:'Firm Users - Details',            field:'Personal Details', entity:'usr_037'  },
+                        { ts:'19/05/2026 10:44:22', user:'David Chen',       action:'REJECT_REVIEW', module:'FIRM_POLICY',  moduleLabel:'Firm Policy / Process',           field:'N/A',              entity:'pol_004'  },
+                        { ts:'18/05/2026 14:08:37', user:'Jeremy Hofsteede', action:'UPDATE', module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',                    field:'Address',          entity:'firm_001' },
+                        { ts:'17/05/2026 09:22:14', user:'Sarah Mitchell',   action:'SAVE',   module:'FIRM_USER_TRAINING',  moduleLabel:'Firm Users - Training',           field:'Training Record',  entity:'usr_042'  },
+                        { ts:'16/05/2026 16:55:03', user:'David Chen',       action:'SAVE',   module:'FIRM_POLICY',         moduleLabel:'Firm Policy / Process',           field:'N/A',              entity:'pol_007'  },
+                        { ts:'15/05/2026 11:30:48', user:'Jeremy Hofsteede', action:'UPDATE', module:'FIRM_USER_DETAILS',   moduleLabel:'Firm Users - Details',            field:'Personal Details', entity:'usr_042'  },
+                        { ts:'14/05/2026 10:15:22', user:'Sarah Mitchell',   action:'DELETE', module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',                    field:'Firm Details',     entity:'firm_001' },
+                        { ts:'13/05/2026 09:44:17', user:'David Chen',       action:'ARCHIVE',module:'FIRM_USER',           moduleLabel:'Firm Users / Key Personnel',       field:'N/A',              entity:'usr_035'  },
+                        { ts:'12/05/2026 14:32:09', user:'Jeremy Hofsteede', action:'SAVE',   module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',                    field:'Designated Services', entity:'firm_001' },
+                        { ts:'11/05/2026 11:18:55', user:'Sarah Mitchell',   action:'CANCEL_REVIEW', module:'FIRM_POLICY',  moduleLabel:'Firm Policy / Process',           field:'N/A',              entity:'pol_003'  },
+                        { ts:'10/05/2026 09:05:44', user:'David Chen',       action:'UPDATE', module:'FIRM_POLICY',         moduleLabel:'Firm Policy / Process',           field:'next_review_date', entity:'pol_002'  },
+                        { ts:'09/05/2026 15:42:30', user:'Jeremy Hofsteede', action:'SAVE',   module:'FIRM_USER',           moduleLabel:'Firm Users / Key Personnel',       field:'N/A',              entity:'usr_034'  },
+                        { ts:'08/05/2026 10:28:14', user:'Sarah Mitchell',   action:'UPDATE', module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',                    field:'Firm Details',     entity:'firm_001' },
+                        { ts:'07/05/2026 09:14:08', user:'David Chen',       action:'SAVE',   module:'FIRM_USER_TRAINING',  moduleLabel:'Firm Users - Training',           field:'Training Record',  entity:'usr_033'  },
+                    ];
+
+                    var PAGE_SIZE = 25;
+                    var currentPage = 1;
+                    var filteredRows = ALL_ROWS.slice();
+
+                    function actionClass(action) {
+                        if (action === 'SAVE' || action === 'MARK_AS_CURRENT') return 'al-action-save';
+                        if (action === 'UPDATE') return 'al-action-update';
+                        if (action === 'DELETE') return 'al-action-delete';
+                        if (action === 'ARCHIVE') return 'al-action-archive';
+                        return 'al-action-review';
+                    }
+
+                    function actionLabel(action) {
+                        var map = {
+                            'SAVE':'Save','UPDATE':'Update','DELETE':'Delete','ARCHIVE':'Archive',
+                            'SEND_FOR_REVIEW':'Send for Review','APPROVE_REVIEW':'Approve Review',
+                            'REJECT_REVIEW':'Reject Review','CANCEL_REVIEW':'Cancel Review',
+                            'MARK_AS_CURRENT':'Mark as Current','MARK_AS_NON_CURRENT':'Mark as Non-Current'
+                        };
+                        return map[action] || action;
+                    }
+
+                    function render() {
+                        var body = document.getElementById('al-table-body');
+                        var table = document.getElementById('al-table');
+                        var empty = document.getElementById('al-empty-state');
+                        if (!body) return;
+                        var total = filteredRows.length;
+                        var start = (currentPage - 1) * PAGE_SIZE;
+                        var end = Math.min(start + PAGE_SIZE, total);
+                        var page = filteredRows.slice(start, end);
+
+                        if (total === 0) {
+                            body.innerHTML = '';
+                            if (table) table.style.display = 'none';
+                            if (empty) {
+                                empty.style.display = 'flex';
+                                requestAnimationFrame(function() { requestAnimationFrame(function() { empty.classList.add('visible'); }); });
+                            }
+                        } else {
+                            if (table) table.style.display = '';
+                            if (empty) { empty.classList.remove('visible'); empty.style.display = 'none'; }
+                            var html = '';
+                            page.forEach(function(row, i) {
+                                html += '<tr data-al-idx="' + (start + i) + '">';
+                                html += '<td style="color:#4a6470; font-size:12px; white-space:nowrap;">' + row.ts + '</td>';
+                                html += '<td>' + row.user + '</td>';
+                                html += '<td><span class="al-action-badge ' + actionClass(row.action) + '">' + actionLabel(row.action) + '</span></td>';
+                                html += '<td>' + row.moduleLabel + '</td>';
+                                html += '<td style="color:#4a6470;">' + row.field + '</td>';
+                                html += '<td><i class="fas fa-chevron-right" style="font-size:11px; color:#b0bec5;"></i></td>';
+                                html += '</tr>';
+                            });
+                            body.innerHTML = html;
+
+                            body.querySelectorAll('tr').forEach(function(tr) {
+                                tr.addEventListener('click', function() {
+                                    openDetail(filteredRows[parseInt(this.dataset.alIdx)]);
+                                });
+                            });
+                        }
+
+                        var info = document.getElementById('al-page-info');
+                        if (info) info.textContent = total === 0 ? '' : 'Showing ' + (start+1) + '–' + end + ' of ' + total + ' entries';
+                        var prevBtn = document.getElementById('al-prev-btn');
+                        var nextBtn = document.getElementById('al-next-btn');
+                        if (prevBtn) prevBtn.disabled = currentPage <= 1;
+                        if (nextBtn) nextBtn.disabled = end >= total;
+                    }
+
+                    function openDetail(row) {
+                        var panel = document.getElementById('al-detail-panel');
+                        var overlay = document.getElementById('al-detail-overlay');
+                        var body = document.getElementById('al-detail-body');
+                        if (!panel || !body) return;
+                        var fields = [
+                            ['Timestamp (UTC)', row.ts],
+                            ['User', row.user],
+                            ['Action', '<span class="al-action-badge ' + actionClass(row.action) + '">' + actionLabel(row.action) + '</span>'],
+                            ['Module', row.moduleLabel],
+                            ['Entity ID', row.entity],
+                            ['Changed Field', row.field]
+                        ];
+                        var html = '';
+                        fields.forEach(function(f) {
+                            html += '<div class="al-detail-row"><span class="al-detail-label">' + f[0] + '</span><span class="al-detail-value">' + f[1] + '</span></div>';
+                        });
+                        body.innerHTML = html;
+                        panel.style.display = 'flex';
+                        overlay.style.display = 'block';
+                    }
+
+                    function closeDetail() {
+                        var panel = document.getElementById('al-detail-panel');
+                        var overlay = document.getElementById('al-detail-overlay');
+                        if (panel) panel.style.display = 'none';
+                        if (overlay) overlay.style.display = 'none';
+                    }
+
+                    document.getElementById('al-detail-close').addEventListener('click', closeDetail);
+                    document.getElementById('al-detail-overlay').addEventListener('click', closeDetail);
+
+                    // Clients-style filter system
+                    var alActiveFilters = {};
+                    var alCurrentCategory = null;
+                    var alFilterDefs = {
+                        user: {
+                            label: 'User',
+                            options: ['Jeremy Hofsteede', 'Sarah Mitchell', 'David Chen']
+                        },
+                        module: {
+                            label: 'Module',
+                            options: ['Firm Profile', 'Firm Users / Key Personnel', 'Firm Users - Details', 'Firm Users - Training', 'Firm Policy / Process']
+                        },
+                        action: {
+                            label: 'Action',
+                            options: ['Save', 'Update', 'Delete', 'Archive', 'Send for Review', 'Approve Review', 'Reject Review', 'Cancel Review', 'Mark as Current']
+                        },
+                        dateRange: {
+                            label: 'Date Range',
+                            type: 'date'
+                        }
+                    };
+                    var alModuleMap = {
+                        'Firm Profile': 'FIRM_PROFILE',
+                        'Firm Users / Key Personnel': 'FIRM_USER',
+                        'Firm Users - Details': 'FIRM_USER_DETAILS',
+                        'Firm Users - Training': 'FIRM_USER_TRAINING',
+                        'Firm Policy / Process': 'FIRM_POLICY'
+                    };
+                    var alActionMap = {
+                        'Save': 'SAVE', 'Update': 'UPDATE', 'Delete': 'DELETE',
+                        'Archive': 'ARCHIVE', 'Send for Review': 'SEND_FOR_REVIEW',
+                        'Approve Review': 'APPROVE_REVIEW', 'Reject Review': 'REJECT_REVIEW',
+                        'Cancel Review': 'CANCEL_REVIEW', 'Mark as Current': 'MARK_AS_CURRENT'
+                    };
+
+                    function parseRowDate(ts) {
+                        // ts format: dd/mm/yyyy hh:mm:ss
+                        var parts = ts.split(' ')[0].split('/');
+                        return new Date(parts[2], parts[1] - 1, parts[0]);
+                    }
+
+                    function applyAlFilters() {
+                        var query = (document.getElementById('alSearchInput').value || '').toLowerCase();
+                        var dateFrom = alActiveFilters.dateRange ? alActiveFilters.dateRange.from : null;
+                        var dateTo   = alActiveFilters.dateRange ? alActiveFilters.dateRange.to   : null;
+                        filteredRows = ALL_ROWS.filter(function(r) {
+                            if (alActiveFilters.user && r.user !== alActiveFilters.user) return false;
+                            if (alActiveFilters.module && r.module !== alModuleMap[alActiveFilters.module]) return false;
+                            if (alActiveFilters.action && r.action !== alActionMap[alActiveFilters.action]) return false;
+                            if (dateFrom || dateTo) {
+                                var d = parseRowDate(r.ts);
+                                if (dateFrom && d < new Date(dateFrom)) return false;
+                                if (dateTo   && d > new Date(dateTo))   return false;
+                            }
+                            if (query && (r.user + r.moduleLabel + r.field + r.ts).toLowerCase().indexOf(query) === -1) return false;
+                            return true;
+                        });
+                        currentPage = 1;
+                        render();
+                    }
+
+                    function addAlFilter(category, value) {
+                        alActiveFilters[category] = value;
+                        renderAlPills();
+                        updateAlCount();
+                        applyAlFilters();
+                    }
+
+                    function removeAlFilter(category) {
+                        delete alActiveFilters[category];
+                        renderAlPills();
+                        updateAlCount();
+                        applyAlFilters();
+                    }
+
+                    function updateAlCount() {
+                        var count = Object.keys(alActiveFilters).length;
+                        var el = document.getElementById('alFilterCount');
+                        if (count > 0) { el.textContent = count; el.style.display = 'inline-flex'; }
+                        else { el.style.display = 'none'; }
+                    }
+
+                    function renderAlPills() {
+                        var container = document.getElementById('alActiveFilters');
+                        container.innerHTML = '';
+                        Object.keys(alActiveFilters).forEach(function(cat) {
+                            var raw = alActiveFilters[cat];
+                            var def = alFilterDefs[cat];
+                            var displayValue = (cat === 'dateRange') ? raw.label : raw;
+                            var pill = document.createElement('div');
+                            pill.className = 'cl-filter-pill';
+                            pill.innerHTML =
+                                '<span class="cl-filter-pill-label">' + def.label + ':</span> ' +
+                                '<span class="cl-filter-pill-value">' + displayValue + '</span>' +
+                                '<button class="cl-filter-pill-remove" data-category="' + cat + '">&times;</button>';
+                            pill.querySelector('.cl-filter-pill-remove').addEventListener('click', function() {
+                                removeAlFilter(this.dataset.category);
+                            });
+                            container.appendChild(pill);
+                        });
+                        if (Object.keys(alActiveFilters).length > 0) {
+                            var addBtn = document.createElement('button');
+                            addBtn.className = 'cl-add-filter-pill';
+                            addBtn.textContent = '+';
+                            addBtn.addEventListener('click', function(e) {
+                                e.stopPropagation();
+                                document.getElementById('alFilterDropdown').classList.add('open');
+                            });
+                            container.appendChild(addBtn);
+                        }
+                    }
+
+                    // Filter dropdown wiring
+                    document.getElementById('alAddFilterBtn').addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        document.getElementById('alFilterDropdown').classList.toggle('open');
+                        document.getElementById('alFilterValueDropdown').classList.remove('open');
+                    });
+
+                    document.querySelectorAll('#alFilterDropdown .cl-filter-option').forEach(function(opt) {
+                        opt.addEventListener('mouseenter', function() {
+                            document.querySelectorAll('#alFilterDropdown .cl-filter-option').forEach(function(o) { o.classList.remove('active'); });
+                            this.classList.add('active');
+                            alCurrentCategory = this.dataset.category;
+                            var def = alFilterDefs[alCurrentCategory];
+                            var valDd = document.getElementById('alFilterValueDropdown');
+                            valDd.innerHTML = '';
+
+                            if (def.type === 'date') {
+                                var existing = alActiveFilters.dateRange || {};
+                                var drpState = {
+                                    year: new Date().getFullYear(),
+                                    month: new Date().getMonth(),
+                                    startDate: existing.from ? new Date(existing.from) : null,
+                                    endDate:   existing.to   ? new Date(existing.to)   : null,
+                                    selecting: existing.from ? null : 'start'
+                                };
+
+                                function fmtDate(d) {
+                                    if (!d) return '';
+                                    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+                                }
+                                function fmtDisplay(d) {
+                                    if (!d) return '';
+                                    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                                    return d.getDate() + ' ' + months[d.getMonth()] + ' ' + String(d.getFullYear()).slice(2);
+                                }
+
+                                function buildDrp() {
+                                    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+                                    var dows = ['Mo','Tu','We','Th','Fr','Sa','Su'];
+                                    var y = drpState.year, m = drpState.month;
+                                    var firstDay = new Date(y, m, 1).getDay(); // 0=Sun
+                                    firstDay = firstDay === 0 ? 6 : firstDay - 1; // Mon=0
+                                    var daysInMonth = new Date(y, m+1, 0).getDate();
+                                    var daysInPrev  = new Date(y, m, 0).getDate();
+
+                                    var displayStr = drpState.startDate && drpState.endDate
+                                        ? fmtDisplay(drpState.startDate) + ' – ' + fmtDisplay(drpState.endDate)
+                                        : drpState.startDate ? fmtDisplay(drpState.startDate) + ' – …' : 'Select range';
+
+                                    var html = '<div class="al-drp">';
+                                    html += '<div class="al-drp-header"><span class="al-drp-display"><i class="fas fa-calendar-alt" style="color:#6a7f89; font-size:12px;"></i>' + displayStr + ' <i class="fas fa-chevron-down" style="font-size:10px; color:#6a7f89;"></i></span></div>';
+                                    html += '<div class="al-drp-body">';
+
+                                    // Shortcuts
+                                    html += '<div class="al-drp-shortcuts">';
+                                    var shortcuts = [
+                                        { label: 'Today',        days: 0  },
+                                        { label: 'Yesterday',    days: -1 },
+                                        { label: 'Last week',    days: -7 },
+                                        { label: 'Last month',   days: -30 },
+                                        { label: 'Last quarter', days: -90 }
+                                    ];
+                                    shortcuts.forEach(function(s) {
+                                        html += '<div class="al-drp-shortcut" data-shortcut="' + s.days + '">' + s.label + '</div>';
+                                    });
+                                    html += '<div class="al-drp-shortcut al-drp-reset" data-shortcut="reset">Reset</div>';
+                                    html += '</div>';
+
+                                    // Calendar
+                                    html += '<div class="al-drp-cal">';
+                                    html += '<div class="al-drp-cal-header">';
+                                    html += '<button class="al-drp-nav" id="alDrpPrev">&#8249;</button>';
+                                    html += '<span class="al-drp-cal-title">' + months[m] + ' ' + y + '</span>';
+                                    html += '<button class="al-drp-nav" id="alDrpNext">&#8250;</button>';
+                                    html += '</div>';
+                                    html += '<div class="al-drp-grid">';
+                                    dows.forEach(function(d) { html += '<div class="al-drp-dow">' + d + '</div>'; });
+
+                                    // Prev month trailing days
+                                    for (var i = 0; i < firstDay; i++) {
+                                        var day = daysInPrev - firstDay + 1 + i;
+                                        html += '<div class="al-drp-day al-drp-empty">' + day + '</div>';
+                                    }
+                                    // Current month days
+                                    for (var d2 = 1; d2 <= daysInMonth; d2++) {
+                                        var thisDate = new Date(y, m, d2);
+                                        var cls = 'al-drp-day';
+                                        var isStart = drpState.startDate && thisDate.getTime() === drpState.startDate.getTime();
+                                        var isEnd   = drpState.endDate   && thisDate.getTime() === drpState.endDate.getTime();
+                                        var inRange = drpState.startDate && drpState.endDate && thisDate > drpState.startDate && thisDate < drpState.endDate;
+                                        if (isStart) cls += ' al-drp-start';
+                                        if (isEnd)   cls += ' al-drp-end';
+                                        if (inRange) cls += ' al-drp-in-range';
+                                        html += '<div class="' + cls + '" data-date="' + fmtDate(thisDate) + '">' + d2 + '</div>';
+                                    }
+                                    // Next month leading days
+                                    var totalCells = firstDay + daysInMonth;
+                                    var remaining = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+                                    for (var n = 1; n <= remaining; n++) {
+                                        html += '<div class="al-drp-day al-drp-other">' + n + '</div>';
+                                    }
+                                    html += '</div></div>'; // grid + cal
+
+                                    html += '</div>'; // body
+                                    html += '<div class="al-drp-footer">';
+                                    html += '<button class="al-drp-cancel" id="alDrpCancel">Cancel</button>';
+                                    html += '<button class="al-drp-apply" id="alDrpApply">Apply</button>';
+                                    html += '</div></div>';
+
+                                    valDd.innerHTML = html;
+
+                                    // Nav
+                                    valDd.querySelector('#alDrpPrev').addEventListener('click', function(e) {
+                                        e.stopPropagation();
+                                        drpState.month--;
+                                        if (drpState.month < 0) { drpState.month = 11; drpState.year--; }
+                                        buildDrp();
+                                    });
+                                    valDd.querySelector('#alDrpNext').addEventListener('click', function(e) {
+                                        e.stopPropagation();
+                                        drpState.month++;
+                                        if (drpState.month > 11) { drpState.month = 0; drpState.year++; }
+                                        buildDrp();
+                                    });
+
+                                    // Day clicks
+                                    valDd.querySelectorAll('.al-drp-day[data-date]').forEach(function(el) {
+                                        el.addEventListener('click', function(e) {
+                                            e.stopPropagation();
+                                            var d = new Date(this.dataset.date);
+                                            if (!drpState.startDate || drpState.endDate || drpState.selecting === 'start') {
+                                                drpState.startDate = d;
+                                                drpState.endDate = null;
+                                                drpState.selecting = 'end';
+                                            } else {
+                                                if (d < drpState.startDate) {
+                                                    drpState.endDate = drpState.startDate;
+                                                    drpState.startDate = d;
+                                                } else {
+                                                    drpState.endDate = d;
+                                                }
+                                                drpState.selecting = 'start';
+                                            }
+                                            buildDrp();
+                                        });
+                                    });
+
+                                    // Shortcuts
+                                    valDd.querySelectorAll('.al-drp-shortcut[data-shortcut]').forEach(function(el) {
+                                        el.addEventListener('click', function(e) {
+                                            e.stopPropagation();
+                                            var v = this.dataset.shortcut;
+                                            if (v === 'reset') {
+                                                drpState.startDate = null;
+                                                drpState.endDate = null;
+                                                drpState.selecting = 'start';
+                                            } else {
+                                                var today = new Date(); today.setHours(0,0,0,0);
+                                                var offset = parseInt(v);
+                                                var from = new Date(today);
+                                                from.setDate(from.getDate() + offset);
+                                                drpState.startDate = offset === 0 ? today : from;
+                                                drpState.endDate   = offset === 0 ? today : today;
+                                                drpState.year  = drpState.startDate.getFullYear();
+                                                drpState.month = drpState.startDate.getMonth();
+                                            }
+                                            buildDrp();
+                                        });
+                                    });
+
+                                    // Apply
+                                    valDd.querySelector('#alDrpApply').addEventListener('click', function(e) {
+                                        e.stopPropagation();
+                                        if (drpState.startDate) {
+                                            alActiveFilters.dateRange = {
+                                                from: fmtDate(drpState.startDate),
+                                                to:   drpState.endDate ? fmtDate(drpState.endDate) : fmtDate(drpState.startDate),
+                                                label: fmtDisplay(drpState.startDate) + (drpState.endDate ? ' – ' + fmtDisplay(drpState.endDate) : '')
+                                            };
+                                            renderAlPills();
+                                            updateAlCount();
+                                            applyAlFilters();
+                                        }
+                                        document.getElementById('alFilterDropdown').classList.remove('open');
+                                        valDd.classList.remove('open');
+                                    });
+
+                                    // Cancel
+                                    valDd.querySelector('#alDrpCancel').addEventListener('click', function(e) {
+                                        e.stopPropagation();
+                                        document.getElementById('alFilterDropdown').classList.remove('open');
+                                        valDd.classList.remove('open');
+                                    });
+                                }
+
+                                buildDrp();
+                                valDd.addEventListener('click', function(e) { e.stopPropagation(); });
+                            } else {
+                                def.options.forEach(function(val) {
+                                    var opt2 = document.createElement('div');
+                                    opt2.className = 'cl-filter-value-option';
+                                    opt2.innerHTML = '<span class="cl-filter-value-label">' + val + '</span>';
+                                    opt2.addEventListener('click', function() {
+                                        addAlFilter(alCurrentCategory, val);
+                                        document.getElementById('alFilterDropdown').classList.remove('open');
+                                        valDd.classList.remove('open');
+                                    });
+                                    valDd.appendChild(opt2);
+                                });
+                            }
+
+                            var rect = document.getElementById('alFilterDropdown').getBoundingClientRect();
+                            valDd.style.left = (rect.width + 4) + 'px';
+                            valDd.style.top = '0px';
+                            valDd.classList.add('open');
+                        });
+                    });
+
+                    var alCloseValTimer;
+                    document.getElementById('alFilterDropdown').addEventListener('mouseleave', function() {
+                        alCloseValTimer = setTimeout(function() {
+                            document.getElementById('alFilterValueDropdown').classList.remove('open');
+                            document.querySelectorAll('#alFilterDropdown .cl-filter-option').forEach(function(o) { o.classList.remove('active'); });
+                        }, 100);
+                    });
+                    document.getElementById('alFilterValueDropdown').addEventListener('mouseenter', function() { clearTimeout(alCloseValTimer); });
+                    document.getElementById('alFilterValueDropdown').addEventListener('mouseleave', function() {
+                        document.getElementById('alFilterValueDropdown').classList.remove('open');
+                        document.querySelectorAll('#alFilterDropdown .cl-filter-option').forEach(function(o) { o.classList.remove('active'); });
+                    });
+
+                    document.addEventListener('click', function() {
+                        document.getElementById('alFilterDropdown').classList.remove('open');
+                        document.getElementById('alFilterValueDropdown').classList.remove('open');
+                    });
+
+                    document.getElementById('alSearchInput').addEventListener('input', applyAlFilters);
+
+                    document.getElementById('al-prev-btn').addEventListener('click', function() {
+                        if (currentPage > 1) { currentPage--; render(); }
+                    });
+                    document.getElementById('al-next-btn').addEventListener('click', function() {
+                        if (currentPage * PAGE_SIZE < filteredRows.length) { currentPage++; render(); }
+                    });
+
+                    // Initial render when tab becomes active
+                    document.querySelector('[data-tab="audit-log"]').addEventListener('click', function() {
+                        setTimeout(render, 0);
+                    });
+                })();
+
+                // ── Audit Log 2 ──────────────────────────────────────────
+                (function() {
+                    var ALL_ROWS = [
+                        { ts:'26/05/2026 09:14:22', user:'Jeremy Hofsteede', action:'UPDATE', module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',                    field:'Firm Details',     entity:'firm_001' },
+                        { ts:'26/05/2026 09:12:05', user:'Jeremy Hofsteede', action:'SAVE',   module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',                    field:'Address',          entity:'firm_001' },
+                        { ts:'25/05/2026 16:48:30', user:'Sarah Mitchell',   action:'SAVE',   module:'FIRM_USER_TRAINING',  moduleLabel:'Firm Users - Training',           field:'Training Record',  entity:'usr_042'  },
+                        { ts:'25/05/2026 15:30:11', user:'Sarah Mitchell',   action:'UPDATE', module:'FIRM_USER_DETAILS',   moduleLabel:'Firm Users - Details',            field:'Personal Details', entity:'usr_042'  },
+                        { ts:'25/05/2026 14:22:58', user:'David Chen',       action:'SEND_FOR_REVIEW', module:'FIRM_POLICY', moduleLabel:'Firm Policy / Process',          field:'N/A',              entity:'pol_007'  },
+                        { ts:'24/05/2026 11:05:44', user:'Jeremy Hofsteede', action:'APPROVE_REVIEW',  module:'FIRM_POLICY', moduleLabel:'Firm Policy / Process',          field:'N/A',              entity:'pol_006'  },
+                        { ts:'24/05/2026 10:58:02', user:'Sarah Mitchell',   action:'SAVE',   module:'FIRM_USER',           moduleLabel:'Firm Users / Key Personnel',       field:'N/A',              entity:'usr_043'  },
+                        { ts:'23/05/2026 17:34:19', user:'David Chen',       action:'UPDATE', module:'FIRM_POLICY',         moduleLabel:'Firm Policy / Process',           field:'next_review_date', entity:'pol_007'  },
+                        { ts:'23/05/2026 16:10:03', user:'Jeremy Hofsteede', action:'DELETE', module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',                    field:'Designated Services', entity:'firm_001' },
+                        { ts:'23/05/2026 14:55:27', user:'Jeremy Hofsteede', action:'SAVE',   module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',                    field:'Industry Segments',entity:'firm_001' },
+                        { ts:'22/05/2026 13:20:45', user:'Sarah Mitchell',   action:'DELETE', module:'FIRM_USER_TRAINING',  moduleLabel:'Firm Users - Training',           field:'Training Record',  entity:'usr_040'  },
+                        { ts:'22/05/2026 11:04:38', user:'David Chen',       action:'ARCHIVE',module:'FIRM_USER',           moduleLabel:'Firm Users / Key Personnel',       field:'N/A',              entity:'usr_038'  },
+                        { ts:'21/05/2026 09:30:11', user:'Jeremy Hofsteede', action:'MARK_AS_CURRENT', module:'FIRM_POLICY', moduleLabel:'Firm Policy / Process',         field:'N/A',              entity:'pol_005'  },
+                        { ts:'20/05/2026 15:12:54', user:'Sarah Mitchell',   action:'SAVE',   module:'FIRM_USER_DETAILS',   moduleLabel:'Firm Users - Details',            field:'Personal Details', entity:'usr_037'  },
+                        { ts:'19/05/2026 10:44:22', user:'David Chen',       action:'REJECT_REVIEW', module:'FIRM_POLICY',  moduleLabel:'Firm Policy / Process',           field:'N/A',              entity:'pol_004'  },
+                        { ts:'18/05/2026 14:08:37', user:'Jeremy Hofsteede', action:'UPDATE', module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',                    field:'Address',          entity:'firm_001' },
+                        { ts:'17/05/2026 09:22:14', user:'Sarah Mitchell',   action:'SAVE',   module:'FIRM_USER_TRAINING',  moduleLabel:'Firm Users - Training',           field:'Training Record',  entity:'usr_042'  },
+                        { ts:'16/05/2026 16:55:03', user:'David Chen',       action:'SAVE',   module:'FIRM_POLICY',         moduleLabel:'Firm Policy / Process',           field:'N/A',              entity:'pol_007'  },
+                        { ts:'15/05/2026 11:30:48', user:'Jeremy Hofsteede', action:'UPDATE', module:'FIRM_USER_DETAILS',   moduleLabel:'Firm Users - Details',            field:'Personal Details', entity:'usr_042'  },
+                        { ts:'14/05/2026 10:15:22', user:'Sarah Mitchell',   action:'DELETE', module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',                    field:'Firm Details',     entity:'firm_001' },
+                        { ts:'13/05/2026 09:44:17', user:'David Chen',       action:'ARCHIVE',module:'FIRM_USER',           moduleLabel:'Firm Users / Key Personnel',       field:'N/A',              entity:'usr_035'  },
+                        { ts:'12/05/2026 14:32:09', user:'Jeremy Hofsteede', action:'SAVE',   module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',                    field:'Designated Services', entity:'firm_001' },
+                        { ts:'11/05/2026 11:18:55', user:'Sarah Mitchell',   action:'CANCEL_REVIEW', module:'FIRM_POLICY',  moduleLabel:'Firm Policy / Process',           field:'N/A',              entity:'pol_003'  },
+                        { ts:'10/05/2026 09:05:44', user:'David Chen',       action:'UPDATE', module:'FIRM_POLICY',         moduleLabel:'Firm Policy / Process',           field:'next_review_date', entity:'pol_002'  },
+                        { ts:'09/05/2026 15:42:30', user:'Jeremy Hofsteede', action:'SAVE',   module:'FIRM_USER',           moduleLabel:'Firm Users / Key Personnel',       field:'N/A',              entity:'usr_034'  },
+                        { ts:'08/05/2026 10:28:14', user:'Sarah Mitchell',   action:'UPDATE', module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',                    field:'Firm Details',     entity:'firm_001' },
+                        { ts:'07/05/2026 09:14:08', user:'David Chen',       action:'SAVE',   module:'FIRM_USER_TRAINING',  moduleLabel:'Firm Users - Training',           field:'Training Record',  entity:'usr_033'  },
+                    ];
+
+                    var filteredRows = ALL_ROWS.slice();
+
+                    function actionClass(action) {
+                        if (action === 'SAVE' || action === 'MARK_AS_CURRENT') return 'al-action-save';
+                        if (action === 'UPDATE') return 'al-action-update';
+                        if (action === 'DELETE') return 'al-action-delete';
+                        if (action === 'ARCHIVE') return 'al-action-archive';
+                        return 'al-action-review';
+                    }
+                    function actionLabel(action) {
+                        var map = { 'SAVE':'Save','UPDATE':'Update','DELETE':'Delete','ARCHIVE':'Archive','SEND_FOR_REVIEW':'Send for Review','APPROVE_REVIEW':'Approve Review','REJECT_REVIEW':'Reject Review','CANCEL_REVIEW':'Cancel Review','MARK_AS_CURRENT':'Mark as Current','MARK_AS_NON_CURRENT':'Mark as Non-Current' };
+                        return map[action] || action;
+                    }
+                    function dotClass(action) {
+                        if (action === 'DELETE') return 'al2-dot-red';
+                        if (action === 'SAVE' || action === 'MARK_AS_CURRENT') return 'al2-dot-green';
+                        if (action === 'UPDATE') return 'al2-dot-blue';
+                        if (action === 'ARCHIVE') return 'al2-dot-orange';
+                        return 'al2-dot-purple';
+                    }
+                    function fmtDateHeader(tsDate) {
+                        var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+                        var d = new Date(tsDate);
+                        return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+                    }
+                    function moduleTypeLabel(module) {
+                        if (module === 'FIRM_PROFILE') return 'Firm';
+                        if (module === 'FIRM_USER' || module === 'FIRM_USER_DETAILS' || module === 'FIRM_USER_TRAINING') return 'User';
+                        if (module === 'FIRM_POLICY') return 'Policy';
+                        return 'Record';
+                    }
+
+                    function render() {
+                        var timeline = document.getElementById('al2-timeline');
+                        var empty = document.getElementById('al-empty-state-2');
+                        if (!timeline) return;
+                        var total = filteredRows.length;
+                        if (total === 0) {
+                            timeline.innerHTML = '';
+                            if (empty) {
+                                empty.style.display = 'flex';
+                                requestAnimationFrame(function() { requestAnimationFrame(function() { empty.classList.add('visible'); }); });
+                            }
+                            return;
+                        }
+                        if (empty) { empty.classList.remove('visible'); empty.style.display = 'none'; }
+
+                        // Group rows by date (dd/mm/yyyy)
+                        var groups = [];
+                        var groupMap = {};
+                        filteredRows.forEach(function(row, idx) {
+                            var dateKey = row.ts.split(' ')[0]; // dd/mm/yyyy
+                            if (!groupMap[dateKey]) {
+                                groupMap[dateKey] = { dateKey: dateKey, rows: [] };
+                                groups.push(groupMap[dateKey]);
+                            }
+                            groupMap[dateKey].rows.push({ row: row, idx: idx });
+                        });
+
+                        var html = '';
+                        groups.forEach(function(g) {
+                            var parts = g.dateKey.split('/');
+                            var dateObj = new Date(parts[2], parts[1]-1, parts[0]);
+                            var groupId = 'al2-grp-' + g.dateKey.replace(/\//g,'-');
+                            html += '<div class="al2-date-group">';
+                            html += '<div class="al2-date-header" data-group="' + groupId + '">';
+                            html += '<span class="al2-date-label">' + fmtDateHeader(dateObj) + '</span>';
+                            html += '<span class="al2-date-count">' + g.rows.length + '</span>';
+                            html += '<i class="fas fa-chevron-down al2-date-chevron"></i>';
+                            html += '</div>';
+                            html += '<div class="al2-entries" id="' + groupId + '">';
+                            g.rows.forEach(function(item) {
+                                var row = item.row;
+                                var time = row.ts.split(' ')[1].substring(0,5); // hh:mm
+                                var typeLabel = moduleTypeLabel(row.module);
+                                var title = row.field !== 'N/A' ? row.field : row.moduleLabel;
+                                var path = row.moduleLabel + (row.entity ? ' · ' + row.entity : '');
+                                html += '<div class="al2-entry" data-al2-idx="' + item.idx + '">';
+                                html += '<div class="al2-entry-left">';
+                                html += '<div class="al2-dot ' + dotClass(row.action) + '"></div>';
+                                html += '</div>';
+                                html += '<div class="al2-entry-body">';
+                                html += '<div class="al2-entry-meta">';
+                                html += '<span class="al2-time">' + time + '</span>';
+                                html += '<span class="al2-dot-sep">·</span>';
+                                html += '<span class="al2-type-pill">' + typeLabel + '</span>';
+                                html += '<span class="al2-dot-sep">·</span>';
+                                html += '<span class="al2-source">' + row.user + '</span>';
+                                html += '</div>';
+                                html += '<div class="al2-entry-title">' + title + '</div>';
+                                html += '<div class="al2-entry-path">' + path + '</div>';
+                                html += '<div class="al2-entry-tags">';
+                                html += '<span class="al2-tag al2-tag-user"><i class="fas fa-user"></i>' + row.user + '</span>';
+                                html += '<span class="al2-tag al2-tag-action"><i class="fas fa-tag"></i>' + actionLabel(row.action) + '</span>';
+                                html += '<span class="al2-tag al2-tag-module"><i class="fas fa-circle"></i>' + row.moduleLabel + '</span>';
+                                html += '</div>';
+                                html += '</div>';
+                                html += '</div>';
+                            });
+                            html += '</div>';
+                            html += '</div>';
+                        });
+                        timeline.innerHTML = html;
+
+                        // Collapsible groups
+                        timeline.querySelectorAll('.al2-date-header').forEach(function(header) {
+                            header.addEventListener('click', function() {
+                                var groupId = this.dataset.group;
+                                var entries = document.getElementById(groupId);
+                                var chevron = this.querySelector('.al2-date-chevron');
+                                var collapsed = entries.style.display === 'none';
+                                entries.style.display = collapsed ? '' : 'none';
+                                chevron.style.transform = collapsed ? '' : 'rotate(-90deg)';
+                            });
+                        });
+
+                        // Entry click → detail panel
+                        timeline.querySelectorAll('.al2-entry').forEach(function(el) {
+                            el.addEventListener('click', function() {
+                                openDetail(filteredRows[parseInt(this.dataset.al2Idx)]);
+                            });
+                        });
+                    }
+
+                    function openDetail(row) {
+                        var panel = document.getElementById('al-detail-panel');
+                        var overlay = document.getElementById('al-detail-overlay');
+                        var body = document.getElementById('al-detail-body');
+                        if (!panel || !body) return;
+                        var fields = [['Timestamp (UTC)', row.ts],['User', row.user],['Action', '<span class="al-action-badge ' + actionClass(row.action) + '">' + actionLabel(row.action) + '</span>'],['Module', row.moduleLabel],['Entity ID', row.entity],['Changed Field', row.field]];
+                        var html = '';
+                        fields.forEach(function(f) { html += '<div class="al-detail-row"><span class="al-detail-label">' + f[0] + '</span><span class="al-detail-value">' + f[1] + '</span></div>'; });
+                        body.innerHTML = html;
+                        panel.style.display = 'flex';
+                        overlay.style.display = 'block';
+                    }
+
+                    var alActiveFilters = {};
+                    var alCurrentCategory = null;
+                    var alFilterDefs = {
+                        user:      { label: 'User',    options: ['Jeremy Hofsteede', 'Sarah Mitchell', 'David Chen'] },
+                        module:    { label: 'Module',  options: ['Firm Profile', 'Firm Users / Key Personnel', 'Firm Users - Details', 'Firm Users - Training', 'Firm Policy / Process'] },
+                        action:    { label: 'Action',  options: ['Save', 'Update', 'Delete', 'Archive', 'Send for Review', 'Approve Review', 'Reject Review', 'Cancel Review', 'Mark as Current'] },
+                        dateRange: { label: 'Date Range', type: 'date' }
+                    };
+                    var alModuleMap = { 'Firm Profile':'FIRM_PROFILE','Firm Users / Key Personnel':'FIRM_USER','Firm Users - Details':'FIRM_USER_DETAILS','Firm Users - Training':'FIRM_USER_TRAINING','Firm Policy / Process':'FIRM_POLICY' };
+                    var alActionMap = { 'Save':'SAVE','Update':'UPDATE','Delete':'DELETE','Archive':'ARCHIVE','Send for Review':'SEND_FOR_REVIEW','Approve Review':'APPROVE_REVIEW','Reject Review':'REJECT_REVIEW','Cancel Review':'CANCEL_REVIEW','Mark as Current':'MARK_AS_CURRENT' };
+
+                    function parseRowDate(ts) { var parts = ts.split(' ')[0].split('/'); return new Date(parts[2], parts[1]-1, parts[0]); }
+
+                    function applyAlFilters() {
+                        var query = (document.getElementById('alSearchInput2').value || '').toLowerCase();
+                        var dateFrom = alActiveFilters.dateRange ? alActiveFilters.dateRange.from : null;
+                        var dateTo   = alActiveFilters.dateRange ? alActiveFilters.dateRange.to   : null;
+                        filteredRows = ALL_ROWS.filter(function(r) {
+                            if (alActiveFilters.user   && r.user   !== alActiveFilters.user) return false;
+                            if (alActiveFilters.module && r.module !== alModuleMap[alActiveFilters.module]) return false;
+                            if (alActiveFilters.action && r.action !== alActionMap[alActiveFilters.action]) return false;
+                            if (dateFrom || dateTo) { var d = parseRowDate(r.ts); if (dateFrom && d < new Date(dateFrom)) return false; if (dateTo && d > new Date(dateTo)) return false; }
+                            if (query && (r.user + r.moduleLabel + r.field + r.ts).toLowerCase().indexOf(query) === -1) return false;
+                            return true;
+                        });
+                        render();
+                    }
+
+                    function addAlFilter(cat, val) { alActiveFilters[cat] = val; renderAlPills(); updateAlCount(); applyAlFilters(); }
+                    function removeAlFilter(cat)   { delete alActiveFilters[cat]; renderAlPills(); updateAlCount(); applyAlFilters(); }
+
+                    function updateAlCount() {
+                        var count = Object.keys(alActiveFilters).length;
+                        var el = document.getElementById('alFilterCount2');
+                        if (count > 0) { el.textContent = count; el.style.display = 'inline-flex'; } else { el.style.display = 'none'; }
+                    }
+
+                    function renderAlPills() {
+                        var container = document.getElementById('alActiveFilters2');
+                        container.innerHTML = '';
+                        Object.keys(alActiveFilters).forEach(function(cat) {
+                            var raw = alActiveFilters[cat];
+                            var def = alFilterDefs[cat];
+                            var displayValue = (cat === 'dateRange') ? raw.label : raw;
+                            var pill = document.createElement('div');
+                            pill.className = 'cl-filter-pill';
+                            pill.innerHTML = '<span class="cl-filter-pill-label">' + def.label + ':</span> <span class="cl-filter-pill-value">' + displayValue + '</span><button class="cl-filter-pill-remove" data-category="' + cat + '">&times;</button>';
+                            pill.querySelector('.cl-filter-pill-remove').addEventListener('click', function() { removeAlFilter(this.dataset.category); });
+                            container.appendChild(pill);
+                        });
+                        if (Object.keys(alActiveFilters).length > 0) {
+                            var addBtn = document.createElement('button');
+                            addBtn.className = 'cl-add-filter-pill'; addBtn.textContent = '+';
+                            addBtn.addEventListener('click', function(e) { e.stopPropagation(); document.getElementById('alFilterDropdown2').classList.add('open'); });
+                            container.appendChild(addBtn);
+                        }
+                    }
+
+                    document.getElementById('alAddFilterBtn2').addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        document.getElementById('alFilterDropdown2').classList.toggle('open');
+                        document.getElementById('alFilterValueDropdown2').classList.remove('open');
+                    });
+
+                    document.querySelectorAll('#alFilterDropdown2 .cl-filter-option').forEach(function(opt) {
+                        opt.addEventListener('mouseenter', function() {
+                            document.querySelectorAll('#alFilterDropdown2 .cl-filter-option').forEach(function(o) { o.classList.remove('active'); });
+                            this.classList.add('active');
+                            alCurrentCategory = this.dataset.category;
+                            var def = alFilterDefs[alCurrentCategory];
+                            var valDd = document.getElementById('alFilterValueDropdown2');
+                            valDd.innerHTML = '';
+
+                            if (def.type === 'date') {
+                                var existing = alActiveFilters.dateRange || {};
+                                var drpState = { year: new Date().getFullYear(), month: new Date().getMonth(), startDate: existing.from ? new Date(existing.from) : null, endDate: existing.to ? new Date(existing.to) : null, selecting: existing.from ? null : 'start' };
+                                function fmtDate(d) { if (!d) return ''; return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+                                function fmtDisplay(d) { if (!d) return ''; var m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; return d.getDate() + ' ' + m[d.getMonth()] + ' ' + String(d.getFullYear()).slice(2); }
+                                function buildDrp() {
+                                    var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+                                    var dows=['Mo','Tu','We','Th','Fr','Sa','Su'];
+                                    var y=drpState.year, m=drpState.month;
+                                    var firstDay=new Date(y,m,1).getDay(); firstDay=firstDay===0?6:firstDay-1;
+                                    var daysInMonth=new Date(y,m+1,0).getDate(), daysInPrev=new Date(y,m,0).getDate();
+                                    var displayStr=drpState.startDate&&drpState.endDate?fmtDisplay(drpState.startDate)+' – '+fmtDisplay(drpState.endDate):drpState.startDate?fmtDisplay(drpState.startDate)+' – …':'Select range';
+                                    var html='<div class="al-drp"><div class="al-drp-header"><span class="al-drp-display"><i class="fas fa-calendar-alt" style="color:#6a7f89;font-size:12px;"></i>'+displayStr+' <i class="fas fa-chevron-down" style="font-size:10px;color:#6a7f89;"></i></span></div><div class="al-drp-body"><div class="al-drp-shortcuts">';
+                                    [{ label:'Today',days:0},{ label:'Yesterday',days:-1},{ label:'Last week',days:-7},{ label:'Last month',days:-30},{ label:'Last quarter',days:-90}].forEach(function(s){ html+='<div class="al-drp-shortcut" data-shortcut="'+s.days+'">'+s.label+'</div>'; });
+                                    html+='<div class="al-drp-shortcut al-drp-reset" data-shortcut="reset">Reset</div></div><div class="al-drp-cal"><div class="al-drp-cal-header"><button class="al-drp-nav" id="alDrpPrev2">&#8249;</button><span class="al-drp-cal-title">'+months[m]+' '+y+'</span><button class="al-drp-nav" id="alDrpNext2">&#8250;</button></div><div class="al-drp-grid">';
+                                    dows.forEach(function(d){ html+='<div class="al-drp-dow">'+d+'</div>'; });
+                                    for(var i=0;i<firstDay;i++){ html+='<div class="al-drp-day al-drp-empty">'+(daysInPrev-firstDay+1+i)+'</div>'; }
+                                    for(var d2=1;d2<=daysInMonth;d2++){ var thisDate=new Date(y,m,d2); var cls='al-drp-day'; var isStart=drpState.startDate&&thisDate.getTime()===drpState.startDate.getTime(); var isEnd=drpState.endDate&&thisDate.getTime()===drpState.endDate.getTime(); var inRange=drpState.startDate&&drpState.endDate&&thisDate>drpState.startDate&&thisDate<drpState.endDate; if(isStart)cls+=' al-drp-start'; if(isEnd)cls+=' al-drp-end'; if(inRange)cls+=' al-drp-in-range'; html+='<div class="'+cls+'" data-date="'+fmtDate(thisDate)+'">'+d2+'</div>'; }
+                                    var totalCells=firstDay+daysInMonth; var remaining=totalCells%7===0?0:7-(totalCells%7); for(var n=1;n<=remaining;n++){ html+='<div class="al-drp-day al-drp-other">'+n+'</div>'; }
+                                    html+='</div></div></div><div class="al-drp-footer"><button class="al-drp-cancel" id="alDrpCancel2">Cancel</button><button class="al-drp-apply" id="alDrpApply2">Apply</button></div></div>';
+                                    valDd.innerHTML=html;
+                                    valDd.querySelector('#alDrpPrev2').addEventListener('click',function(e){e.stopPropagation();drpState.month--;if(drpState.month<0){drpState.month=11;drpState.year--;}buildDrp();});
+                                    valDd.querySelector('#alDrpNext2').addEventListener('click',function(e){e.stopPropagation();drpState.month++;if(drpState.month>11){drpState.month=0;drpState.year++;}buildDrp();});
+                                    valDd.querySelectorAll('.al-drp-day[data-date]').forEach(function(el){el.addEventListener('click',function(e){e.stopPropagation();var d=new Date(this.dataset.date);if(!drpState.startDate||drpState.endDate||drpState.selecting==='start'){drpState.startDate=d;drpState.endDate=null;drpState.selecting='end';}else{if(d<drpState.startDate){drpState.endDate=drpState.startDate;drpState.startDate=d;}else{drpState.endDate=d;}drpState.selecting='start';}buildDrp();});});
+                                    valDd.querySelectorAll('.al-drp-shortcut[data-shortcut]').forEach(function(el){el.addEventListener('click',function(e){e.stopPropagation();var v=this.dataset.shortcut;if(v==='reset'){drpState.startDate=null;drpState.endDate=null;drpState.selecting='start';}else{var today=new Date();today.setHours(0,0,0,0);var offset=parseInt(v);var from=new Date(today);from.setDate(from.getDate()+offset);drpState.startDate=offset===0?today:from;drpState.endDate=offset===0?today:today;drpState.year=drpState.startDate.getFullYear();drpState.month=drpState.startDate.getMonth();}buildDrp();});});
+                                    valDd.querySelector('#alDrpApply2').addEventListener('click',function(e){e.stopPropagation();if(drpState.startDate){alActiveFilters.dateRange={from:fmtDate(drpState.startDate),to:drpState.endDate?fmtDate(drpState.endDate):fmtDate(drpState.startDate),label:fmtDisplay(drpState.startDate)+(drpState.endDate?' – '+fmtDisplay(drpState.endDate):'')};renderAlPills();updateAlCount();applyAlFilters();}document.getElementById('alFilterDropdown2').classList.remove('open');valDd.classList.remove('open');});
+                                    valDd.querySelector('#alDrpCancel2').addEventListener('click',function(e){e.stopPropagation();document.getElementById('alFilterDropdown2').classList.remove('open');valDd.classList.remove('open');});
+                                }
+                                buildDrp();
+                                valDd.addEventListener('click', function(e) { e.stopPropagation(); });
+                            } else {
+                                def.options.forEach(function(val) {
+                                    var opt2 = document.createElement('div');
+                                    opt2.className = 'cl-filter-value-option';
+                                    opt2.innerHTML = '<span class="cl-filter-value-label">' + val + '</span>';
+                                    opt2.addEventListener('click', function() { addAlFilter(alCurrentCategory, val); document.getElementById('alFilterDropdown2').classList.remove('open'); valDd.classList.remove('open'); });
+                                    valDd.appendChild(opt2);
+                                });
+                            }
+                            var rect = document.getElementById('alFilterDropdown2').getBoundingClientRect();
+                            valDd.style.left = (rect.width + 4) + 'px'; valDd.style.top = '0px';
+                            valDd.classList.add('open');
+                        });
+                    });
+
+                    var alCloseValTimer;
+                    document.getElementById('alFilterDropdown2').addEventListener('mouseleave', function() { alCloseValTimer = setTimeout(function() { document.getElementById('alFilterValueDropdown2').classList.remove('open'); document.querySelectorAll('#alFilterDropdown2 .cl-filter-option').forEach(function(o){o.classList.remove('active');}); }, 100); });
+                    document.getElementById('alFilterValueDropdown2').addEventListener('mouseenter', function() { clearTimeout(alCloseValTimer); });
+                    document.getElementById('alFilterValueDropdown2').addEventListener('mouseleave', function() { document.getElementById('alFilterValueDropdown2').classList.remove('open'); document.querySelectorAll('#alFilterDropdown2 .cl-filter-option').forEach(function(o){o.classList.remove('active');}); });
+                    document.addEventListener('click', function() { document.getElementById('alFilterDropdown2').classList.remove('open'); document.getElementById('alFilterValueDropdown2').classList.remove('open'); });
+
+                    document.getElementById('alSearchInput2').addEventListener('input', applyAlFilters);
+
+                    document.querySelector('[data-tab="audit-log-2"]').addEventListener('click', function() { setTimeout(render, 0); });
+                })();
+
+                // ── Audit Log 3 ──────────────────────────────────────────
+                (function() {
+                    var ALL_ROWS = [
+                        { ts:'26/05/2026 09:14:22', user:'Jeremy Hofsteede', action:'UPDATE', module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',              field:'Firm Details',        entity:'firm_001' },
+                        { ts:'26/05/2026 09:12:05', user:'Jeremy Hofsteede', action:'SAVE',   module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',              field:'Address',             entity:'firm_001' },
+                        { ts:'25/05/2026 16:48:30', user:'Sarah Mitchell',   action:'SAVE',   module:'FIRM_USER_TRAINING',  moduleLabel:'Firm Users - Training',     field:'Training Record',     entity:'usr_042'  },
+                        { ts:'25/05/2026 15:30:11', user:'Sarah Mitchell',   action:'UPDATE', module:'FIRM_USER_DETAILS',   moduleLabel:'Firm Users - Details',      field:'Personal Details',    entity:'usr_042'  },
+                        { ts:'25/05/2026 14:22:58', user:'David Chen',       action:'SEND_FOR_REVIEW', module:'FIRM_POLICY', moduleLabel:'Firm Policy / Process',   field:'N/A',                 entity:'pol_007'  },
+                        { ts:'24/05/2026 11:05:44', user:'Jeremy Hofsteede', action:'APPROVE_REVIEW',  module:'FIRM_POLICY', moduleLabel:'Firm Policy / Process',   field:'N/A',                 entity:'pol_006'  },
+                        { ts:'24/05/2026 10:58:02', user:'Sarah Mitchell',   action:'SAVE',   module:'FIRM_USER',           moduleLabel:'Firm Users / Key Personnel', field:'N/A',               entity:'usr_043'  },
+                        { ts:'23/05/2026 17:34:19', user:'David Chen',       action:'UPDATE', module:'FIRM_POLICY',         moduleLabel:'Firm Policy / Process',     field:'next_review_date',    entity:'pol_007'  },
+                        { ts:'23/05/2026 16:10:03', user:'Jeremy Hofsteede', action:'DELETE', module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',              field:'Designated Services', entity:'firm_001' },
+                        { ts:'23/05/2026 14:55:27', user:'Jeremy Hofsteede', action:'SAVE',   module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',              field:'Industry Segments',   entity:'firm_001' },
+                        { ts:'22/05/2026 13:20:45', user:'Sarah Mitchell',   action:'DELETE', module:'FIRM_USER_TRAINING',  moduleLabel:'Firm Users - Training',     field:'Training Record',     entity:'usr_040'  },
+                        { ts:'22/05/2026 11:04:38', user:'David Chen',       action:'ARCHIVE', module:'FIRM_USER',          moduleLabel:'Firm Users / Key Personnel', field:'N/A',               entity:'usr_038'  },
+                        { ts:'21/05/2026 09:30:11', user:'Jeremy Hofsteede', action:'MARK_AS_CURRENT', module:'FIRM_POLICY', moduleLabel:'Firm Policy / Process',   field:'N/A',                 entity:'pol_005'  },
+                        { ts:'20/05/2026 15:12:54', user:'Sarah Mitchell',   action:'SAVE',   module:'FIRM_USER_DETAILS',   moduleLabel:'Firm Users - Details',      field:'Personal Details',    entity:'usr_037'  },
+                        { ts:'19/05/2026 10:44:22', user:'David Chen',       action:'REJECT_REVIEW', module:'FIRM_POLICY',  moduleLabel:'Firm Policy / Process',     field:'N/A',               entity:'pol_004'  },
+                        { ts:'18/05/2026 14:08:37', user:'Jeremy Hofsteede', action:'UPDATE', module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',              field:'Address',             entity:'firm_001' },
+                        { ts:'17/05/2026 09:22:14', user:'Sarah Mitchell',   action:'SAVE',   module:'FIRM_USER_TRAINING',  moduleLabel:'Firm Users - Training',     field:'Training Record',     entity:'usr_042'  },
+                        { ts:'16/05/2026 16:55:03', user:'David Chen',       action:'SAVE',   module:'FIRM_POLICY',         moduleLabel:'Firm Policy / Process',     field:'N/A',                 entity:'pol_007'  },
+                        { ts:'15/05/2026 11:30:48', user:'Jeremy Hofsteede', action:'UPDATE', module:'FIRM_USER_DETAILS',   moduleLabel:'Firm Users - Details',      field:'Personal Details',    entity:'usr_042'  },
+                        { ts:'14/05/2026 10:15:22', user:'Sarah Mitchell',   action:'DELETE', module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',              field:'Firm Details',        entity:'firm_001' },
+                        { ts:'13/05/2026 09:44:17', user:'David Chen',       action:'ARCHIVE', module:'FIRM_USER',          moduleLabel:'Firm Users / Key Personnel', field:'N/A',               entity:'usr_035'  },
+                        { ts:'12/05/2026 14:32:09', user:'Jeremy Hofsteede', action:'SAVE',   module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',              field:'Designated Services', entity:'firm_001' },
+                        { ts:'11/05/2026 11:18:55', user:'Sarah Mitchell',   action:'CANCEL_REVIEW', module:'FIRM_POLICY',  moduleLabel:'Firm Policy / Process',     field:'N/A',               entity:'pol_003'  },
+                        { ts:'10/05/2026 09:05:44', user:'David Chen',       action:'UPDATE', module:'FIRM_POLICY',         moduleLabel:'Firm Policy / Process',     field:'next_review_date',    entity:'pol_002'  },
+                        { ts:'09/05/2026 15:42:30', user:'Jeremy Hofsteede', action:'SAVE',   module:'FIRM_USER',           moduleLabel:'Firm Users / Key Personnel', field:'N/A',               entity:'usr_034'  },
+                        { ts:'08/05/2026 10:28:14', user:'Sarah Mitchell',   action:'UPDATE', module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',              field:'Firm Details',        entity:'firm_001' },
+                        { ts:'07/05/2026 09:14:08', user:'David Chen',       action:'SAVE',   module:'FIRM_USER_TRAINING',  moduleLabel:'Firm Users - Training',     field:'Training Record',     entity:'usr_033'  },
+                    ];
+
+                    var filteredRows = ALL_ROWS.slice();
+
+                    var RESOLVED_ACTIONS = ['SAVE', 'APPROVE_REVIEW', 'MARK_AS_CURRENT'];
+
+                    function badgeClass(action) {
+                        if (action === 'SAVE' || action === 'MARK_AS_CURRENT') return 'al3-badge-save';
+                        if (action === 'UPDATE') return 'al3-badge-update';
+                        if (action === 'DELETE') return 'al3-badge-delete';
+                        if (action === 'ARCHIVE') return 'al3-badge-archive';
+                        return 'al3-badge-review';
+                    }
+                    function badgeLabel(action) {
+                        var map = { 'SAVE':'Saved','UPDATE':'Updated','DELETE':'Deleted','ARCHIVE':'Archived','SEND_FOR_REVIEW':'Sent for Review','APPROVE_REVIEW':'Approved','REJECT_REVIEW':'Rejected','CANCEL_REVIEW':'Cancelled','MARK_AS_CURRENT':'Marked Current','MARK_AS_NON_CURRENT':'Non-Current' };
+                        return map[action] || action;
+                    }
+                    function dotClass3(action) {
+                        if (action === 'DELETE') return 'al3-dot-red';
+                        if (action === 'SAVE' || action === 'MARK_AS_CURRENT') return 'al3-dot-green';
+                        if (action === 'UPDATE') return 'al3-dot-blue';
+                        if (action === 'ARCHIVE') return 'al3-dot-orange';
+                        return 'al3-dot-purple';
+                    }
+                    function verbFor(action) {
+                        var map = { 'SAVE':'saved record on','UPDATE':'updated record on','DELETE':'deleted record from','ARCHIVE':'archived record from','SEND_FOR_REVIEW':'sent for review on','APPROVE_REVIEW':'approved review on','REJECT_REVIEW':'rejected review on','CANCEL_REVIEW':'cancelled review on','MARK_AS_CURRENT':'marked as current on' };
+                        return map[action] || 'acted on';
+                    }
+                    function initials(name) {
+                        return name.split(' ').map(function(p) { return p[0]; }).join('').substring(0,2).toUpperCase();
+                    }
+                    function fmtDateGroup(dateKey) {
+                        var parts = dateKey.split('/');
+                        var d = new Date(parts[2], parts[1]-1, parts[0]);
+                        var today = new Date(); today.setHours(0,0,0,0);
+                        var yesterday = new Date(today); yesterday.setDate(yesterday.getDate()-1);
+                        if (d.getTime() === today.getTime()) return 'Today';
+                        if (d.getTime() === yesterday.getTime()) return 'Yesterday';
+                        var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+                        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                        return days[d.getDay()] + ', ' + String(d.getDate()).padStart(2,'0') + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+                    }
+                    function isResolved(action) {
+                        return RESOLVED_ACTIONS.indexOf(action) !== -1;
+                    }
+
+                    function render() {
+                        var timeline = document.getElementById('al3-timeline');
+                        var empty = document.getElementById('al-empty-state-3');
+                        if (!timeline) return;
+                        if (filteredRows.length === 0) {
+                            timeline.innerHTML = '';
+                            if (empty) { empty.style.display = 'flex'; requestAnimationFrame(function() { requestAnimationFrame(function() { empty.classList.add('visible'); }); }); }
+                            return;
+                        }
+                        if (empty) { empty.classList.remove('visible'); empty.style.display = 'none'; }
+
+                        // Group by date
+                        var groups = [];
+                        var groupMap = {};
+                        filteredRows.forEach(function(row, idx) {
+                            var dateKey = row.ts.split(' ')[0];
+                            if (!groupMap[dateKey]) {
+                                groupMap[dateKey] = { dateKey: dateKey, rows: [] };
+                                groups.push(groupMap[dateKey]);
+                            }
+                            groupMap[dateKey].rows.push({ row: row, idx: idx });
+                        });
+
+                        var html = '';
+                        groups.forEach(function(g) {
+                            var groupId = 'al3-grp-' + g.dateKey.replace(/\//g,'-');
+                            var resolved = g.rows.filter(function(r) { return isResolved(r.row.action); }).length;
+                            html += '<div class="al3-group">';
+                            // Group header
+                            html += '<div class="al3-group-header" data-group="' + groupId + '">';
+                            html += '<div class="al3-group-header-left">';
+                            html += '<div class="al3-group-chevron-btn"><i class="fas fa-chevron-down"></i></div>';
+                            html += '<span class="al3-group-title">' + fmtDateGroup(g.dateKey) + '</span>';
+                            html += '</div>';
+                            html += '<span class="al3-group-count">' + resolved + ' / ' + g.rows.length + '</span>';
+                            html += '</div>';
+                            // Entries
+                            html += '<div class="al3-entries" id="' + groupId + '" style="position:relative;">';
+                            g.rows.forEach(function(item) {
+                                var row = item.row;
+                                var time = row.ts.split(' ')[1].substring(0,5);
+                                var resolved = isResolved(row.action);
+                                var fieldText = row.field !== 'N/A' ? row.field : row.moduleLabel;
+                                html += '<div class="al3-row" data-al3-idx="' + item.idx + '">';
+                                html += '<div class="al3-dot ' + dotClass3(row.action) + '" style="position:absolute;left:-43px;top:16px;"></div>';
+                                html += '<div class="al3-time">' + time + '</div>';
+                                html += '<div class="al3-card">';
+                                html += '<div class="al3-card-top">';
+                                html += '<div class="al3-card-top-left">';
+                                html += '<div class="al3-avatar">' + initials(row.user) + '</div>';
+                                html += '<span class="al3-user">' + row.user + '</span>';
+                                html += '<span class="al3-verb">' + verbFor(row.action) + '</span>';
+                                html += '<span class="al3-entity-pill">' + row.moduleLabel + ' · ' + row.entity + '</span>';
+                                html += '</div>';
+                                html += '<span class="al3-status-badge ' + badgeClass(row.action) + '">' + badgeLabel(row.action) + '</span>';
+                                html += '</div>';
+                                html += '<div class="al3-card-body">' + (row.field !== 'N/A' ? 'Changed field: <strong>' + row.field + '</strong>' : 'No specific field recorded for this action.') + '</div>';
+                                html += '<div class="al3-card-footer">';
+                                html += '<div>';
+                                html += '<span class="al3-resolution' + (resolved ? ' resolved' : '') + '">' + (resolved ? 'Resolved' : 'Unresolved') + '</span>';
+                                if (resolved) { html += '<span class="al3-resolution-date">' + row.ts + '</span>'; }
+                                html += '</div>';
+                                html += '<span class="al3-field-tag"><i class="fas fa-layer-group"></i>' + row.moduleLabel + '</span>';
+                                html += '</div>';
+                                html += '</div>';
+                                html += '</div>';
+                            });
+                            html += '</div>';
+                            html += '</div>';
+                        });
+                        timeline.innerHTML = html;
+
+                        // Collapsible
+                        timeline.querySelectorAll('.al3-group-header').forEach(function(header) {
+                            header.addEventListener('click', function() {
+                                var groupId = this.dataset.group;
+                                var entries = document.getElementById(groupId);
+                                var chevron = this.querySelector('.al3-group-chevron-btn i');
+                                var collapsed = entries.style.display === 'none';
+                                entries.style.display = collapsed ? '' : 'none';
+                                chevron.style.transform = collapsed ? '' : 'rotate(-90deg)';
+                            });
+                        });
+
+                        // Click to detail
+                        timeline.querySelectorAll('.al3-row').forEach(function(el) {
+                            el.addEventListener('click', function() {
+                                openDetail(filteredRows[parseInt(this.dataset.al3Idx)]);
+                            });
+                        });
+                    }
+
+                    function openDetail(row) {
+                        var panel = document.getElementById('al-detail-panel');
+                        var overlay = document.getElementById('al-detail-overlay');
+                        var body = document.getElementById('al-detail-body');
+                        if (!panel || !body) return;
+                        function ac(a) { if(a==='SAVE'||a==='MARK_AS_CURRENT')return'al-action-save'; if(a==='UPDATE')return'al-action-update'; if(a==='DELETE')return'al-action-delete'; if(a==='ARCHIVE')return'al-action-archive'; return'al-action-review'; }
+                        function al(a) { var m={'SAVE':'Save','UPDATE':'Update','DELETE':'Delete','ARCHIVE':'Archive','SEND_FOR_REVIEW':'Send for Review','APPROVE_REVIEW':'Approve Review','REJECT_REVIEW':'Reject Review','CANCEL_REVIEW':'Cancel Review','MARK_AS_CURRENT':'Mark as Current'}; return m[a]||a; }
+                        var fields = [['Timestamp (UTC)',row.ts],['User',row.user],['Action','<span class="al-action-badge '+ac(row.action)+'">'+al(row.action)+'</span>'],['Module',row.moduleLabel],['Entity ID',row.entity],['Changed Field',row.field]];
+                        var html = '';
+                        fields.forEach(function(f) { html += '<div class="al-detail-row"><span class="al-detail-label">'+f[0]+'</span><span class="al-detail-value">'+f[1]+'</span></div>'; });
+                        body.innerHTML = html;
+                        panel.style.display = 'flex';
+                        overlay.style.display = 'block';
+                    }
+
+                    // Filter system
+                    var alActiveFilters = {};
+                    var alCurrentCategory = null;
+                    var alFilterDefs = {
+                        user:      { label: 'User',       options: ['Jeremy Hofsteede', 'Sarah Mitchell', 'David Chen'] },
+                        module:    { label: 'Module',     options: ['Firm Profile', 'Firm Users / Key Personnel', 'Firm Users - Details', 'Firm Users - Training', 'Firm Policy / Process'] },
+                        action:    { label: 'Action',     options: ['Save', 'Update', 'Delete', 'Archive', 'Send for Review', 'Approve Review', 'Reject Review', 'Cancel Review', 'Mark as Current'] },
+                        dateRange: { label: 'Date Range', type: 'date' }
+                    };
+                    var alModuleMap = { 'Firm Profile':'FIRM_PROFILE','Firm Users / Key Personnel':'FIRM_USER','Firm Users - Details':'FIRM_USER_DETAILS','Firm Users - Training':'FIRM_USER_TRAINING','Firm Policy / Process':'FIRM_POLICY' };
+                    var alActionMap = { 'Save':'SAVE','Update':'UPDATE','Delete':'DELETE','Archive':'ARCHIVE','Send for Review':'SEND_FOR_REVIEW','Approve Review':'APPROVE_REVIEW','Reject Review':'REJECT_REVIEW','Cancel Review':'CANCEL_REVIEW','Mark as Current':'MARK_AS_CURRENT' };
+
+                    function parseRowDate(ts) { var p=ts.split(' ')[0].split('/'); return new Date(p[2],p[1]-1,p[0]); }
+
+                    function applyAlFilters() {
+                        var query = (document.getElementById('alSearchInput3').value || '').toLowerCase();
+                        var dateFrom = alActiveFilters.dateRange ? alActiveFilters.dateRange.from : null;
+                        var dateTo   = alActiveFilters.dateRange ? alActiveFilters.dateRange.to   : null;
+                        filteredRows = ALL_ROWS.filter(function(r) {
+                            if (alActiveFilters.user   && r.user   !== alActiveFilters.user) return false;
+                            if (alActiveFilters.module && r.module !== alModuleMap[alActiveFilters.module]) return false;
+                            if (alActiveFilters.action && r.action !== alActionMap[alActiveFilters.action]) return false;
+                            if (dateFrom || dateTo) { var d=parseRowDate(r.ts); if(dateFrom && d<new Date(dateFrom))return false; if(dateTo && d>new Date(dateTo))return false; }
+                            if (query && (r.user+r.moduleLabel+r.field+r.ts).toLowerCase().indexOf(query)===-1) return false;
+                            return true;
+                        });
+                        render();
+                    }
+
+                    function addAlFilter(cat, val) { alActiveFilters[cat]=val; renderAlPills(); updateAlCount(); applyAlFilters(); }
+                    function removeAlFilter(cat)   { delete alActiveFilters[cat]; renderAlPills(); updateAlCount(); applyAlFilters(); }
+
+                    function updateAlCount() {
+                        var count = Object.keys(alActiveFilters).length;
+                        var el = document.getElementById('alFilterCount3');
+                        if (count>0){el.textContent=count;el.style.display='inline-flex';}else{el.style.display='none';}
+                    }
+
+                    function renderAlPills() {
+                        var container = document.getElementById('alActiveFilters3');
+                        container.innerHTML = '';
+                        Object.keys(alActiveFilters).forEach(function(cat) {
+                            var raw=alActiveFilters[cat]; var def=alFilterDefs[cat];
+                            var displayValue=(cat==='dateRange')?raw.label:raw;
+                            var pill=document.createElement('div'); pill.className='cl-filter-pill';
+                            pill.innerHTML='<span class="cl-filter-pill-label">'+def.label+':</span> <span class="cl-filter-pill-value">'+displayValue+'</span><button class="cl-filter-pill-remove" data-category="'+cat+'">&times;</button>';
+                            pill.querySelector('.cl-filter-pill-remove').addEventListener('click',function(){removeAlFilter(this.dataset.category);});
+                            container.appendChild(pill);
+                        });
+                        if (Object.keys(alActiveFilters).length>0) {
+                            var addBtn=document.createElement('button'); addBtn.className='cl-add-filter-pill'; addBtn.textContent='+';
+                            addBtn.addEventListener('click',function(e){e.stopPropagation();document.getElementById('alFilterDropdown3').classList.add('open');});
+                            container.appendChild(addBtn);
+                        }
+                    }
+
+                    document.getElementById('alAddFilterBtn3').addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        document.getElementById('alFilterDropdown3').classList.toggle('open');
+                        document.getElementById('alFilterValueDropdown3').classList.remove('open');
+                    });
+
+                    document.querySelectorAll('#alFilterDropdown3 .cl-filter-option').forEach(function(opt) {
+                        opt.addEventListener('mouseenter', function() {
+                            document.querySelectorAll('#alFilterDropdown3 .cl-filter-option').forEach(function(o){o.classList.remove('active');});
+                            this.classList.add('active');
+                            alCurrentCategory = this.dataset.category;
+                            var def = alFilterDefs[alCurrentCategory];
+                            var valDd = document.getElementById('alFilterValueDropdown3');
+                            valDd.innerHTML = '';
+                            if (def.type === 'date') {
+                                var existing = alActiveFilters.dateRange || {};
+                                var drpState = { year:new Date().getFullYear(), month:new Date().getMonth(), startDate:existing.from?new Date(existing.from):null, endDate:existing.to?new Date(existing.to):null, selecting:existing.from?null:'start' };
+                                function fmtDate(d){if(!d)return'';return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+                                function fmtDisplay(d){if(!d)return'';var m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return d.getDate()+' '+m[d.getMonth()]+' '+String(d.getFullYear()).slice(2);}
+                                function buildDrp() {
+                                    var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+                                    var dows=['Mo','Tu','We','Th','Fr','Sa','Su'];
+                                    var y=drpState.year,m=drpState.month;
+                                    var firstDay=new Date(y,m,1).getDay();firstDay=firstDay===0?6:firstDay-1;
+                                    var daysInMonth=new Date(y,m+1,0).getDate(),daysInPrev=new Date(y,m,0).getDate();
+                                    var displayStr=drpState.startDate&&drpState.endDate?fmtDisplay(drpState.startDate)+' – '+fmtDisplay(drpState.endDate):drpState.startDate?fmtDisplay(drpState.startDate)+' – …':'Select range';
+                                    var html='<div class="al-drp"><div class="al-drp-header"><span class="al-drp-display"><i class="fas fa-calendar-alt" style="color:#6a7f89;font-size:12px;"></i>'+displayStr+' <i class="fas fa-chevron-down" style="font-size:10px;color:#6a7f89;"></i></span></div><div class="al-drp-body"><div class="al-drp-shortcuts">';
+                                    [{label:'Today',days:0},{label:'Yesterday',days:-1},{label:'Last week',days:-7},{label:'Last month',days:-30},{label:'Last quarter',days:-90}].forEach(function(s){html+='<div class="al-drp-shortcut" data-shortcut="'+s.days+'">'+s.label+'</div>';});
+                                    html+='<div class="al-drp-shortcut al-drp-reset" data-shortcut="reset">Reset</div></div><div class="al-drp-cal"><div class="al-drp-cal-header"><button class="al-drp-nav" id="alDrpPrev3">&#8249;</button><span class="al-drp-cal-title">'+months[m]+' '+y+'</span><button class="al-drp-nav" id="alDrpNext3">&#8250;</button></div><div class="al-drp-grid">';
+                                    dows.forEach(function(d){html+='<div class="al-drp-dow">'+d+'</div>';});
+                                    for(var i=0;i<firstDay;i++){html+='<div class="al-drp-day al-drp-empty">'+(daysInPrev-firstDay+1+i)+'</div>';}
+                                    for(var d2=1;d2<=daysInMonth;d2++){var td=new Date(y,m,d2);var cls='al-drp-day';var iS=drpState.startDate&&td.getTime()===drpState.startDate.getTime();var iE=drpState.endDate&&td.getTime()===drpState.endDate.getTime();var iR=drpState.startDate&&drpState.endDate&&td>drpState.startDate&&td<drpState.endDate;if(iS)cls+=' al-drp-start';if(iE)cls+=' al-drp-end';if(iR)cls+=' al-drp-in-range';html+='<div class="'+cls+'" data-date="'+fmtDate(td)+'">'+d2+'</div>';}
+                                    var tc=firstDay+daysInMonth;var rem=tc%7===0?0:7-(tc%7);for(var n=1;n<=rem;n++){html+='<div class="al-drp-day al-drp-other">'+n+'</div>';}
+                                    html+='</div></div></div><div class="al-drp-footer"><button class="al-drp-cancel" id="alDrpCancel3">Cancel</button><button class="al-drp-apply" id="alDrpApply3">Apply</button></div></div>';
+                                    valDd.innerHTML=html;
+                                    valDd.querySelector('#alDrpPrev3').addEventListener('click',function(e){e.stopPropagation();drpState.month--;if(drpState.month<0){drpState.month=11;drpState.year--;}buildDrp();});
+                                    valDd.querySelector('#alDrpNext3').addEventListener('click',function(e){e.stopPropagation();drpState.month++;if(drpState.month>11){drpState.month=0;drpState.year++;}buildDrp();});
+                                    valDd.querySelectorAll('.al-drp-day[data-date]').forEach(function(el){el.addEventListener('click',function(e){e.stopPropagation();var d=new Date(this.dataset.date);if(!drpState.startDate||drpState.endDate||drpState.selecting==='start'){drpState.startDate=d;drpState.endDate=null;drpState.selecting='end';}else{if(d<drpState.startDate){drpState.endDate=drpState.startDate;drpState.startDate=d;}else{drpState.endDate=d;}drpState.selecting='start';}buildDrp();});});
+                                    valDd.querySelectorAll('.al-drp-shortcut[data-shortcut]').forEach(function(el){el.addEventListener('click',function(e){e.stopPropagation();var v=this.dataset.shortcut;if(v==='reset'){drpState.startDate=null;drpState.endDate=null;drpState.selecting='start';}else{var today=new Date();today.setHours(0,0,0,0);var offset=parseInt(v);var from=new Date(today);from.setDate(from.getDate()+offset);drpState.startDate=offset===0?today:from;drpState.endDate=offset===0?today:today;drpState.year=drpState.startDate.getFullYear();drpState.month=drpState.startDate.getMonth();}buildDrp();});});
+                                    valDd.querySelector('#alDrpApply3').addEventListener('click',function(e){e.stopPropagation();if(drpState.startDate){alActiveFilters.dateRange={from:fmtDate(drpState.startDate),to:drpState.endDate?fmtDate(drpState.endDate):fmtDate(drpState.startDate),label:fmtDisplay(drpState.startDate)+(drpState.endDate?' – '+fmtDisplay(drpState.endDate):'')};renderAlPills();updateAlCount();applyAlFilters();}document.getElementById('alFilterDropdown3').classList.remove('open');valDd.classList.remove('open');});
+                                    valDd.querySelector('#alDrpCancel3').addEventListener('click',function(e){e.stopPropagation();document.getElementById('alFilterDropdown3').classList.remove('open');valDd.classList.remove('open');});
+                                }
+                                buildDrp();
+                                valDd.addEventListener('click',function(e){e.stopPropagation();});
+                            } else {
+                                def.options.forEach(function(val) {
+                                    var opt2=document.createElement('div'); opt2.className='cl-filter-value-option';
+                                    opt2.innerHTML='<span class="cl-filter-value-label">'+val+'</span>';
+                                    opt2.addEventListener('click',function(){addAlFilter(alCurrentCategory,val);document.getElementById('alFilterDropdown3').classList.remove('open');valDd.classList.remove('open');});
+                                    valDd.appendChild(opt2);
+                                });
+                            }
+                            var rect=document.getElementById('alFilterDropdown3').getBoundingClientRect();
+                            valDd.style.left=(rect.width+4)+'px';valDd.style.top='0px';
+                            valDd.classList.add('open');
+                        });
+                    });
+
+                    var alCloseValTimer3;
+                    document.getElementById('alFilterDropdown3').addEventListener('mouseleave',function(){alCloseValTimer3=setTimeout(function(){document.getElementById('alFilterValueDropdown3').classList.remove('open');document.querySelectorAll('#alFilterDropdown3 .cl-filter-option').forEach(function(o){o.classList.remove('active');});},100);});
+                    document.getElementById('alFilterValueDropdown3').addEventListener('mouseenter',function(){clearTimeout(alCloseValTimer3);});
+                    document.getElementById('alFilterValueDropdown3').addEventListener('mouseleave',function(){document.getElementById('alFilterValueDropdown3').classList.remove('open');document.querySelectorAll('#alFilterDropdown3 .cl-filter-option').forEach(function(o){o.classList.remove('active');});});
+                    document.addEventListener('click',function(){document.getElementById('alFilterDropdown3').classList.remove('open');document.getElementById('alFilterValueDropdown3').classList.remove('open');});
+
+                    document.getElementById('alSearchInput3').addEventListener('input', applyAlFilters);
+                    document.querySelector('[data-tab="audit-log-3"]').addEventListener('click', function() { setTimeout(render, 0); });
+                })();
+                </script>
 
                 <style>
                     .template-item-card:hover {

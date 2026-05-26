@@ -827,8 +827,10 @@
     transition: opacity 0.12s;
 }
 
+.era-mandatory-select,
 .era-mandatory-select:focus {
     outline: none;
+    box-shadow: none;
 }
 
 .era-mandatory-select[data-val="mandatory"] {
@@ -1064,8 +1066,10 @@ input.era-expand-textarea {
     transition: opacity 0.12s;
 }
 
+.era-responsibility-select,
 .era-responsibility-select:focus {
     outline: none;
+    box-shadow: none;
 }
 
 .era-responsibility-select[data-val="all-personnel"] {
