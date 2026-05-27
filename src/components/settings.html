@@ -458,6 +458,10 @@
                 <!-- Audit Log Tab -->
                 <div id="tab-audit-log" class="settings-tab-pane" style="display:none;">
 
+                    <!-- Sentinel for sticky shadow detection -->
+                    <div id="al-sticky-sentinel" style="height:1px; margin-bottom:-1px;"></div>
+                    <!-- Sticky filter bar -->
+                    <div class="al-sticky-bar" id="alStickyBar">
                     <!-- Filter action bar -->
                     <div class="al-action-bar">
                         <div class="cl-filter-wrap">
@@ -483,6 +487,7 @@
 
                     <!-- Active filter pills -->
                     <div class="cl-active-filters" id="alActiveFilters"></div>
+                    </div><!-- /al-sticky-bar -->
 
                     <!-- Table -->
                     <div style="flex:1; overflow-y:auto;">
@@ -490,8 +495,8 @@
                             <table class="ukp-table" id="al-table">
                                 <thead>
                                     <tr>
-                                        <th>Timestamp (UTC)</th>
                                         <th>User</th>
+                                        <th>Timestamp (UTC)</th>
                                         <th>Action</th>
                                         <th>Module</th>
                                         <th>Changed Field</th>
@@ -611,6 +616,23 @@
                 <div id="al-detail-overlay" style="display:none; position:fixed; inset:0; z-index:1099; background:rgba(0,0,0,0.18);"></div>
 
                 <style>
+                    /* Sticky filter bar inside audit log */
+                    .al-sticky-bar {
+                        position: sticky;
+                        top: var(--app-header-h, 47px);
+                        z-index: 100;
+                        background: #f5f7f8;
+                        padding-bottom: 0px;
+                        padding-top: 0px;
+                        box-shadow: none;
+                        transform: translateY(0);
+                        transition: box-shadow 0.2s ease, transform 0.2s ease, padding-top 0.2s ease;
+                    }
+                    .al-sticky-bar.scrolled {
+                        box-shadow: 0px 2px 0px 0px rgba(0,0,0,0.06);
+                        transform: translateY(0px);
+                        padding-top: 19px;
+                    }
                     .al-filter-input {
                         border: 1px solid #c8d8df;
                         border-radius: 8px;
@@ -1053,9 +1075,10 @@
                             if (empty) { empty.classList.remove('visible'); empty.style.display = 'none'; }
                             var html = '';
                             page.forEach(function(row, i) {
+                                var initials = row.user.split(' ').map(function(p){return p[0];}).join('').substring(0,2).toUpperCase();
                                 html += '<tr data-al-idx="' + (start + i) + '">';
+                                html += '<td><div style="display:flex;align-items:center;gap:10px;"><div style="width:33px;height:33px;background:#e4ebf2;border:1px solid #c7c7c7;color:#457093;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;">' + initials + '</div>' + row.user + '</div></td>';
                                 html += '<td style="color:#4a6470; font-size:12px; white-space:nowrap;">' + row.ts + '</td>';
-                                html += '<td>' + row.user + '</td>';
                                 html += '<td><span class="al-action-badge ' + actionClass(row.action) + '">' + actionLabel(row.action) + '</span></td>';
                                 html += '<td>' + row.moduleLabel + '</td>';
                                 html += '<td style="color:#4a6470;">' + row.field + '</td>';
@@ -2184,12 +2207,12 @@
                     <div class="feedback-emoji-options">
                         <button class="feedback-emoji-btn" data-rating="1" title="Very Dissatisfied">
                             <div class="feedback-emoji-wrapper" style="padding: 10px;">
-                                <dotlottie-player src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f62d/lottie.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop></dotlottie-player>
+                                <dotlottie-player src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f620/lottie.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop></dotlottie-player>
                             </div>
                         </button>
                         <button class="feedback-emoji-btn" data-rating="2" title="Dissatisfied">
                             <div class="feedback-emoji-wrapper" style="padding: 10px;">
-                                <dotlottie-player src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f622/lottie.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop></dotlottie-player>
+                                <dotlottie-player src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f641/lottie.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop></dotlottie-player>
                             </div>
                         </button>
                         <button class="feedback-emoji-btn" data-rating="3" title="Neutral">
@@ -2204,7 +2227,7 @@
                         </button>
                         <button class="feedback-emoji-btn" data-rating="5" title="Very Satisfied">
                             <div class="feedback-emoji-wrapper" style="padding: 10px;">
-                                <dotlottie-player src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f604/lottie.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop></dotlottie-player>
+                                <dotlottie-player src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f60d/lottie.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop></dotlottie-player>
                             </div>
                         </button>
                     </div>
@@ -2249,6 +2272,35 @@
                 overlay.style.opacity = '0';
                 setTimeout(function() { overlay.style.display = 'none'; }, 600);
             }, 1800);
+        })();
+
+        // Set sticky filter bar offset from app header height
+        (function() {
+            var appHeader = document.querySelector('.app-header');
+            if (appHeader) {
+                var update = function() {
+                    document.documentElement.style.setProperty('--app-header-h', appHeader.offsetHeight + 'px');
+                };
+                update();
+                window.addEventListener('resize', update);
+            }
+        })();
+
+        // Sticky filter bar: add .scrolled when sentinel leaves viewport
+        (function() {
+            var sentinel = document.getElementById('al-sticky-sentinel');
+            var bar = document.getElementById('alStickyBar');
+            if (!sentinel || !bar) return;
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (!entry.isIntersecting) {
+                        bar.classList.add('scrolled');
+                    } else {
+                        bar.classList.remove('scrolled');
+                    }
+                });
+            }, { threshold: 0 });
+            observer.observe(sentinel);
         })();
 
         // Tab switching
