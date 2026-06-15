@@ -417,6 +417,163 @@ a {
     line-height: 1;
 }
 
+.header-live-chat-btn {
+    background: #004754;
+    border: 2px solid #1e4a52;
+    color: #fff;
+    padding: 7px 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: background 0.15s;
+    margin-right: 2px;
+    font-family: Inter, Arial, sans-serif;
+    white-space: nowrap;
+}
+.header-live-chat-btn:hover { background: #24505a; }
+.header-live-chat-btn .live-chat-icon { position:relative; display:flex; align-items:center; }
+.header-live-chat-btn .live-chat-dot {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    width: 9px;
+    height: 9px;
+    background: #2ecc71;
+    border-radius: 50%;
+    border: 1.5px solid #1a3a40;
+}
+
+/* ── Live Chat Panel ─────────────────────────────────── */
+#fvLiveChatPanel {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 340px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+    display: flex;
+    flex-direction: column;
+    z-index: 99999;
+    font-family: Inter, Arial, sans-serif;
+    transform: translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s;
+}
+#fvLiveChatPanel.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+#fvLiveChatPanel.minimised #fvLiveChatBody,
+#fvLiveChatPanel.minimised #fvLiveChatFooter { display: none; }
+
+#fvLiveChatHeader {
+    background: #1a3a40;
+    padding: 13px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+#fvLiveChatHeader .lc-agent-avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: #2ecc71;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; flex-shrink: 0;
+}
+#fvLiveChatHeader .lc-agent-info { flex: 1; min-width: 0; }
+#fvLiveChatHeader .lc-agent-name { font-size: 13px; font-weight: 700; color: #fff; }
+#fvLiveChatHeader .lc-agent-status { font-size: 11.5px; color: rgba(255,255,255,0.65); margin-top: 1px; }
+#fvLiveChatHeader .lc-btn {
+    background: rgba(255,255,255,0.12);
+    border: none; cursor: pointer;
+    color: #fff; border-radius: 6px;
+    width: 26px; height: 26px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; flex-shrink: 0; margin-left: 2px;
+    transition: background 0.15s;
+}
+#fvLiveChatHeader .lc-btn:hover { background: rgba(255,255,255,0.22); }
+
+#fvLiveChatBody {
+    background: #f5f7f8;
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-height: 360px;
+    min-height: 200px;
+}
+.lc-msg-row { display: flex; align-items: flex-end; gap: 8px; }
+.lc-msg-row.lc-mine { flex-direction: row-reverse; }
+.lc-msg-avatar {
+    width: 28px; height: 28px; border-radius: 50%;
+    overflow: hidden; flex-shrink: 0;
+    background: #c7d4d9;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: #1a3a40;
+}
+.lc-msg-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.lc-msg-col { display: flex; flex-direction: column; gap: 3px; max-width: 78%; }
+.lc-msg-row.lc-mine .lc-msg-col { align-items: flex-end; }
+.lc-msg-sender { font-size: 11px; font-weight: 600; color: #7a8f98; }
+.lc-msg-row.lc-mine .lc-msg-sender { text-align: right; }
+.lc-msg-bubble {
+    padding: 9px 13px;
+    border-radius: 16px;
+    font-size: 13px;
+    line-height: 1.45;
+    word-break: break-word;
+}
+.lc-msg-row.lc-mine .lc-msg-bubble { background: #1a6b40; color: #fff; border-bottom-right-radius: 4px; }
+.lc-msg-row.lc-theirs .lc-msg-bubble { background: #fff; color: #1a2b35; border-bottom-left-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.07); }
+.lc-msg-time { font-size: 10.5px; color: #aab5bb; margin-top: 1px; }
+.lc-msg-row.lc-mine .lc-msg-time { text-align: right; }
+
+#fvLiveChatFooter {
+    background: #fff;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-top: 1px solid #e8edf0;
+    flex-shrink: 0;
+}
+#fvLiveChatInput {
+    flex: 1;
+    border: none;
+    background: #f0f4f6;
+    border-radius: 20px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-family: Inter, Arial, sans-serif;
+    color: #1a2b35;
+    outline: none;
+    resize: none;
+    max-height: 80px;
+    line-height: 1.4;
+}
+#fvLiveChatInput::placeholder { color: #aab5bb; }
+#fvLiveChatSend {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: #1a3a40;
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.15s;
+}
+#fvLiveChatSend:hover { background: #24505a; }
+#fvLiveChatSend svg { color: #fff; }
+
 .header-feedback-btn {
     background: #1a6b40;
     border: none;
@@ -1245,7 +1402,13 @@ a {
 .gen-modal-header {
     background: #003642;
     padding: 22px 28px;
+    display: flex; align-items: center; justify-content: space-between;
 }
+.gen-modal-header .header-live-chat-btn {
+    margin-right: 0; padding: 6px 13px; font-size: 12px; border-radius: 10px;
+    background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2); flex-shrink: 0;
+}
+.gen-modal-header .header-live-chat-btn:hover { background: rgba(255,255,255,0.22); }
 
 .gen-modal-title {
     color: #fff;
@@ -2182,7 +2345,13 @@ a {
 .ukp-modal-header {
     background: #1a3a40; color: #fff; padding: 22px 32px;
     border-radius: 14px 14px 0 0; font-size: 17px; font-weight: 700;
+    display: flex; align-items: center; justify-content: space-between;
 }
+.ukp-modal-header .header-live-chat-btn {
+    margin-right: 0; padding: 6px 13px; font-size: 12px; border-radius: 10px;
+    background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2);
+}
+.ukp-modal-header .header-live-chat-btn:hover { background: rgba(255,255,255,0.22); }
 .ukp-modal-body { padding: 28px 32px; }
 .ukp-modal-info-box {
     background: #fdf8ec; border: 1px solid #e8d89a; border-radius: 10px;
