@@ -1868,6 +1868,7 @@ a {
     border: 1.5px dashed #b8cdd4;
     border-radius: 12px;
     background: #f5f9fb;
+    margin-top: 24px;
     padding: 28px 20px;
     text-align: center;
     cursor: pointer;

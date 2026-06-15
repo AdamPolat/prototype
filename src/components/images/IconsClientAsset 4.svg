@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21">
+  <defs>
+    <style>
+      .cls-1 {
+        opacity: .71;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.5px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_4" data-name="Layer 4">
+    <g id="Money-Payments-Finance_Finance_Savings_saving-safe-1" data-name="Money-Payments-Finance / Finance/Savings / saving-safe-1" class="cls-1">
+      <g id="Group_58" data-name="Group 58">
+        <g id="saving-safe-1">
+          <path id="Rectangle-path_25" data-name="Rectangle-path 25" class="cls-2" d="M.75,2.25c0-.83.67-1.5,1.5-1.5h19.5c.83,0,1.5.67,1.5,1.5v15c0,.83-.67,1.5-1.5,1.5H2.25c-.83,0-1.5-.67-1.5-1.5V2.25Z"/>
+          <path id="Rectangle-path_26" data-name="Rectangle-path 26" class="cls-2" d="M5.25,5.25c0-.83.67-1.5,1.5-1.5h12c.83,0,1.5.67,1.5,1.5v9c0,.83-.67,1.5-1.5,1.5H6.75c-.83,0-1.5-.67-1.5-1.5V5.25Z"/>
+          <path id="Shape_398" data-name="Shape 398" class="cls-2" d="M3.75,18.75v1.5"/>
+          <path id="Shape_399" data-name="Shape 399" class="cls-2" d="M20.25,18.75v1.5"/>
+          <path id="Shape_400" data-name="Shape 400" class="cls-2" d="M3.75,8.25h3"/>
+          <path id="Shape_401" data-name="Shape 401" class="cls-2" d="M3.75,12.75h3"/>
+          <path id="Shape_402" data-name="Shape 402" class="cls-2" d="M13.88,11.25c.21,0,.38.17.38.38s-.17.38-.38.38-.38-.17-.38-.38.17-.38.38-.38"/>
+          <path id="Shape_403" data-name="Shape 403" class="cls-2" d="M16.88,11.25c.21,0,.38.17.38.38s-.17.38-.38.38-.38-.17-.38-.38.17-.38.38-.38"/>
+          <path id="Shape_404" data-name="Shape 404" class="cls-2" d="M13.88,7.5c.21,0,.38.17.38.38s-.17.38-.38.38-.38-.17-.38-.38.17-.38.38-.38"/>
+          <path id="Shape_405" data-name="Shape 405" class="cls-2" d="M16.88,7.5c.21,0,.38.17.38.38s-.17.38-.38.38-.38-.17-.38-.38.17-.38.38-.38"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

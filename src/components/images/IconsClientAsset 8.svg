@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1 {
+        opacity: .71;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.5px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_4" data-name="Layer 4">
+    <g id="Building-Construction_Buildings_building-house" data-name="Building-Construction / Buildings / building-house" class="cls-1">
+      <g id="Group_28" data-name="Group 28">
+        <g id="building-house">
+          <path id="Shape_242" data-name="Shape 242" class="cls-2" d="M14.25,17.25v6h-6"/>
+          <path id="Shape_243" data-name="Shape 243" class="cls-2" d="M11.25,20.25v3"/>
+          <path id="Shape_244" data-name="Shape 244" class="cls-2" d="M8.25,17.85v5.4H2.25v-4.5"/>
+          <path id="Shape_245" data-name="Shape 245" class="cls-2" d="M7.5,18.75l3.75-4.5h-6.75l-3.75,4.5h6.75Z"/>
+          <path id="Shape_246" data-name="Shape 246" class="cls-2" d="M15.75,18.75l-4.5-4.5"/>
+          <path id="Shape_247" data-name="Shape 247" class="cls-2" d="M11.97,6.75L17.25.75h-6.75l-5.28,6h6.75Z"/>
+          <path id="Shape_248" data-name="Shape 248" class="cls-2" d="M23.25,6.75L17.25.75"/>
+          <path id="Shape_249" data-name="Shape 249" class="cls-2" d="M12.75,5.86v5.39"/>
+          <path id="Shape_250" data-name="Shape 250" class="cls-2" d="M21.75,5.25v13.5h-3"/>
+          <path id="Shape_251" data-name="Shape 251" class="cls-2" d="M6.75,11.25v-4.5"/>
+          <path id="Shape_252" data-name="Shape 252" class="cls-2" d="M15.75,7.5v.75"/>
+          <path id="Shape_253" data-name="Shape 253" class="cls-2" d="M18.75,7.5v.75"/>
+          <path id="Shape_254" data-name="Shape 254" class="cls-2" d="M15.75,11.25v.75"/>
+          <path id="Shape_255" data-name="Shape 255" class="cls-2" d="M18.75,11.25v.75"/>
+          <path id="Shape_256" data-name="Shape 256" class="cls-2" d="M18.75,15v.75"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

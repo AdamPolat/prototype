@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.9 19.85">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.5px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_4" data-name="Layer 4">
+    <g id="Interface-Essential_FaceID_face-id-4" data-name="Interface-Essential / FaceID / face-id-4">
+      <g id="Group_85" data-name="Group 85">
+        <g id="face-id-4">
+          <path id="Oval_47" data-name="Oval 47" class="cls-1" d="M8.95,11.38c2.94,0,5.31-2.38,5.31-5.31S11.89.75,8.95.75,3.64,3.13,3.64,6.06s2.38,5.31,5.31,5.31Z"/>
+          <path id="Shape_413" data-name="Shape 413" class="cls-1" d="M17.15,19.1c-1.23-3.48-4.51-5.8-8.2-5.8S1.98,15.62.75,19.1"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

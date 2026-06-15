@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1 {
+        opacity: .71;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.5px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_4" data-name="Layer 4">
+    <g id="Interface-Essential_FaceID_face-id-4" data-name="Interface-Essential / FaceID / face-id-4" class="cls-1">
+      <g id="Group_85" data-name="Group 85">
+        <g id="face-id-4">
+          <path id="Shape_409" data-name="Shape 409" class="cls-2" d="M23.25,18.75v3c0,.83-.67,1.5-1.5,1.5h-3"/>
+          <path id="Shape_410" data-name="Shape 410" class="cls-2" d="M18.75.75h3c.83,0,1.5.67,1.5,1.5v3"/>
+          <path id="Shape_411" data-name="Shape 411" class="cls-2" d="M.75,5.25v-3c0-.83.67-1.5,1.5-1.5h3"/>
+          <path id="Shape_412" data-name="Shape 412" class="cls-2" d="M5.25,23.25h-3c-.83,0-1.5-.67-1.5-1.5v-3"/>
+          <path id="Oval_47" data-name="Oval 47" class="cls-2" d="M12,13.13c2.28,0,4.12-1.85,4.12-4.12s-1.85-4.12-4.12-4.12-4.12,1.85-4.12,4.12,1.85,4.12,4.12,4.12Z"/>
+          <path id="Shape_413" data-name="Shape 413" class="cls-2" d="M18.36,19.12c-.95-2.7-3.5-4.5-6.36-4.5s-5.41,1.8-6.36,4.5"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

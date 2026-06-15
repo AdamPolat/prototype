@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 23.1">
+  <defs>
+    <style>
+      .cls-1 {
+        opacity: .71;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.5px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_4" data-name="Layer 4">
+    <g id="Building-Construction_Buildings_building-1" data-name="Building-Construction / Buildings / building-1" class="cls-1">
+      <g id="Group_23" data-name="Group 23">
+        <g id="building-1">
+          <path id="Shape_138" data-name="Shape 138" class="cls-2" d="M20.25,3.63v18.72"/>
+          <path id="Shape_139" data-name="Shape 139" class="cls-2" d="M3.75,3.63h16.5"/>
+          <path id="Shape_140" data-name="Shape 140" class="cls-2" d="M3.75,22.35V3.63"/>
+          <path id="Shape_141" data-name="Shape 141" class="cls-2" d="M20.25,22.35H3.75"/>
+          <path id="Shape_142" data-name="Shape 142" class="cls-2" d="M20.25,3.63H3.75l1.5-2.88h13.5l1.5,2.88h0Z"/>
+          <path id="Shape_143" data-name="Shape 143" class="cls-2" d="M.75,22.35h22.5"/>
+          <path id="Shape_144" data-name="Shape 144" class="cls-2" d="M14.25,20.19c0-1.19-1.01-2.16-2.25-2.16s-2.25.97-2.25,2.16v2.16h4.5v-2.16Z"/>
+          <path id="Shape_145" data-name="Shape 145" class="cls-2" d="M7.5,6.15c.21,0,.38.16.38.36"/>
+          <path id="Shape_146" data-name="Shape 146" class="cls-2" d="M7.12,6.51c0-.2.17-.36.38-.36"/>
+          <path id="Shape_147" data-name="Shape 147" class="cls-2" d="M7.5,6.87c-.21,0-.38-.16-.38-.36"/>
+          <path id="Shape_148" data-name="Shape 148" class="cls-2" d="M7.88,6.51c0,.2-.17.36-.38.36"/>
+          <path id="Shape_149" data-name="Shape 149" class="cls-2" d="M7.5,10.47c.21,0,.38.16.38.36"/>
+          <path id="Shape_150" data-name="Shape 150" class="cls-2" d="M7.12,10.83c0-.2.17-.36.38-.36"/>
+          <path id="Shape_151" data-name="Shape 151" class="cls-2" d="M7.5,11.19c-.21,0-.38-.16-.38-.36"/>
+          <path id="Shape_152" data-name="Shape 152" class="cls-2" d="M7.88,10.83c0,.2-.17.36-.38.36"/>
+          <path id="Shape_153" data-name="Shape 153" class="cls-2" d="M7.5,14.79c.21,0,.38.16.38.36"/>
+          <path id="Shape_154" data-name="Shape 154" class="cls-2" d="M7.12,15.15c0-.2.17-.36.38-.36"/>
+          <path id="Shape_155" data-name="Shape 155" class="cls-2" d="M7.5,15.51c-.21,0-.38-.16-.38-.36"/>
+          <path id="Shape_156" data-name="Shape 156" class="cls-2" d="M7.88,15.15c0,.2-.17.36-.38.36"/>
+          <path id="Shape_157" data-name="Shape 157" class="cls-2" d="M12,6.15c.21,0,.38.16.38.36"/>
+          <path id="Shape_158" data-name="Shape 158" class="cls-2" d="M11.62,6.51c0-.2.17-.36.38-.36"/>
+          <path id="Shape_159" data-name="Shape 159" class="cls-2" d="M12,6.87c-.21,0-.38-.16-.38-.36"/>
+          <path id="Shape_160" data-name="Shape 160" class="cls-2" d="M12.38,6.51c0,.2-.17.36-.38.36"/>
+          <path id="Shape_161" data-name="Shape 161" class="cls-2" d="M12,10.47c.21,0,.38.16.38.36"/>
+          <path id="Shape_162" data-name="Shape 162" class="cls-2" d="M11.62,10.83c0-.2.17-.36.38-.36"/>
+          <path id="Shape_163" data-name="Shape 163" class="cls-2" d="M12,11.19c-.21,0-.38-.16-.38-.36"/>
+          <path id="Shape_164" data-name="Shape 164" class="cls-2" d="M12.38,10.83c0,.2-.17.36-.38.36"/>
+          <path id="Shape_165" data-name="Shape 165" class="cls-2" d="M12,14.79c.21,0,.38.16.38.36"/>
+          <path id="Shape_166" data-name="Shape 166" class="cls-2" d="M11.62,15.15c0-.2.17-.36.38-.36"/>
+          <path id="Shape_167" data-name="Shape 167" class="cls-2" d="M12,15.51c-.21,0-.38-.16-.38-.36"/>
+          <path id="Shape_168" data-name="Shape 168" class="cls-2" d="M12.38,15.15c0,.2-.17.36-.38.36"/>
+          <path id="Shape_169" data-name="Shape 169" class="cls-2" d="M16.5,6.15c.21,0,.38.16.38.36"/>
+          <path id="Shape_170" data-name="Shape 170" class="cls-2" d="M16.12,6.51c0-.2.17-.36.38-.36"/>
+          <path id="Shape_171" data-name="Shape 171" class="cls-2" d="M16.5,6.87c-.21,0-.38-.16-.38-.36"/>
+          <path id="Shape_172" data-name="Shape 172" class="cls-2" d="M16.88,6.51c0,.2-.17.36-.38.36"/>
+          <path id="Shape_173" data-name="Shape 173" class="cls-2" d="M16.5,10.47c.21,0,.38.16.38.36"/>
+          <path id="Shape_174" data-name="Shape 174" class="cls-2" d="M16.12,10.83c0-.2.17-.36.38-.36"/>
+          <path id="Shape_175" data-name="Shape 175" class="cls-2" d="M16.5,11.19c-.21,0-.38-.16-.38-.36"/>
+          <path id="Shape_176" data-name="Shape 176" class="cls-2" d="M16.88,10.83c0,.2-.17.36-.38.36"/>
+          <path id="Shape_177" data-name="Shape 177" class="cls-2" d="M16.5,14.79c.21,0,.38.16.38.36"/>
+          <path id="Shape_178" data-name="Shape 178" class="cls-2" d="M16.12,15.15c0-.2.17-.36.38-.36"/>
+          <path id="Shape_179" data-name="Shape 179" class="cls-2" d="M16.5,15.51c-.21,0-.38-.16-.38-.36"/>
+          <path id="Shape_180" data-name="Shape 180" class="cls-2" d="M16.88,15.15c0,.2-.17.36-.38.36"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

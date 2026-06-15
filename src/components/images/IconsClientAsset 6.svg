@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1 {
+        opacity: .71;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.5px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_4" data-name="Layer 4">
+    <g id="Users_Geometric-Full-Body-Multiple-Users_multiple-circle" data-name="Users / Geometric-Full-Body-Multiple-Users / multiple-circle" class="cls-1">
+      <g id="Group_237" data-name="Group 237">
+        <g id="Regular_237" data-name="Regular 237">
+          <path id="Oval_313" data-name="Oval 313" class="cls-2" d="M12,6.75c1.66,0,3-1.34,3-3s-1.34-3-3-3-3,1.34-3,3,1.34,3,3,3Z"/>
+          <path id="Shape_961" data-name="Shape 961" class="cls-2" d="M15.75,14.25v-2.25c0-2.07-1.68-3.75-3.75-3.75s-3.75,1.68-3.75,3.75v2.25h1.5l.75,6h3l.75-6h1.5Z"/>
+          <path id="Oval_314" data-name="Oval 314" class="cls-2" d="M4.5,8.25c1.24,0,2.25-1.01,2.25-2.25s-1.01-2.25-2.25-2.25-2.25,1.01-2.25,2.25,1.01,2.25,2.25,2.25Z"/>
+          <path id="Shape_962" data-name="Shape 962" class="cls-2" d="M5.7,9.95c-1.14-.39-2.4-.2-3.39.51-.98.7-1.56,1.84-1.56,3.04v.75h1.5l.75,4.5h3l.38-2.26"/>
+          <path id="Oval_315" data-name="Oval 315" class="cls-2" d="M19.5,8.25c1.24,0,2.25-1.01,2.25-2.25s-1.01-2.25-2.25-2.25-2.25,1.01-2.25,2.25,1.01,2.25,2.25,2.25Z"/>
+          <path id="Shape_963" data-name="Shape 963" class="cls-2" d="M18.3,9.95c1.14-.39,2.4-.2,3.39.51.98.7,1.56,1.84,1.56,3.04v.75h-1.5l-.75,4.5h-3l-.38-2.26"/>
+          <path id="Shape_964" data-name="Shape 964" class="cls-2" d="M23.25,21c0,1.24-5.04,2.25-11.25,2.25S.75,22.24.75,21"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
