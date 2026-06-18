@@ -31,36 +31,57 @@
             font-size: 11px; font-weight: 700; margin-left: 4px;
         }
 
+        /* Filter panel — single checkbox panel */
         .cl-filter-dropdown {
             display: none; position: absolute; top: calc(100% + 4px); left: 0;
-            background: #fff; border: 1px solid #c9d8de; border-radius: 10px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.12); z-index: 300;
-            min-width: 200px; overflow: hidden;
+            background: #fff; border: 1px solid #c9d8de; border-radius: 12px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.13); z-index: 300;
+            width: 260px; max-height: 480px; overflow-y: auto;
         }
-        .cl-filter-value-dropdown {
-            display: none; position: absolute; top: calc(100% + 4px);
-            background: #fff; border: 1px solid #c9d8de; border-radius: 10px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.12); z-index: 301;
-            min-width: 180px; overflow: hidden;
+        .cl-filter-dropdown.open { display: block; }
+        /* hide the old value dropdown — no longer used */
+        .cl-filter-value-dropdown { display: none !important; }
+
+        .cl-filter-section { border-bottom: 1px solid #eef2f4; }
+        .cl-filter-section:last-child { border-bottom: none; }
+        .cl-filter-section-head {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 16px; cursor: pointer; user-select: none;
         }
-        
-        .cl-filter-value-dropdown:has(.cl-date-picker) {
-            min-width: 320px;
+        .cl-filter-section-head:hover { background: #f8fafb; }
+        .cl-filter-section-title {
+            font-size: 13px; font-weight: 600; color: #1a2b35;
         }
-        .cl-filter-dropdown.open, .cl-filter-value-dropdown.open { display: block; }
-        .cl-filter-option, .cl-filter-value-option {
-            padding: 10px 16px; font-size: 13px; color: #1a2b35;
-            cursor: pointer; transition: background 0.12s;
+        .cl-filter-section-chevron {
+            font-size: 11px; color: #6a7f89;
+            transition: transform 0.18s ease;
         }
-        .cl-filter-option:hover, .cl-filter-value-option:hover { background: #f5f7f8; }
-        .cl-filter-option.active { background: #f5f7f8; }
-        .cl-filter-value-option {
-            display: flex; justify-content: space-between; align-items: center;
+        .cl-filter-section.open .cl-filter-section-chevron { transform: rotate(180deg); }
+        .cl-filter-section-body { display: none; padding: 4px 0 10px; }
+        .cl-filter-section.open .cl-filter-section-body { display: block; }
+
+        .cl-filter-cb-row {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 7px 16px; cursor: pointer;
         }
-        .cl-filter-value-label { flex: 1; }
-        .cl-filter-value-count {
-            color: #6a7f89; font-size: 12px; margin-left: 12px;
+        .cl-filter-cb-row:hover { background: #f8fafb; }
+        .cl-filter-cb-left { display: flex; align-items: center; gap: 10px; }
+        .cl-filter-cb {
+            width: 16px; height: 16px; border: 1.5px solid #b0bec5; border-radius: 4px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; background: #fff; transition: background 0.12s, border-color 0.12s;
         }
+        .cl-filter-cb.checked {
+            background: #2d6a35; border-color: #2d6a35;
+        }
+        .cl-filter-cb.checked::after {
+            content: ''; display: block;
+            width: 9px; height: 5px;
+            border-left: 2px solid #fff; border-bottom: 2px solid #fff;
+            transform: rotate(-45deg) translateY(-1px);
+        }
+        .cl-filter-cb-label { font-size: 13px; color: #1a2b35; }
+        .cl-filter-cb-count { font-size: 12px; color: #8aa8b2; }
 
         /* Date picker */
         .cl-date-picker {
@@ -222,6 +243,165 @@
             background: #4a7c3f; color: #fff; font-size: 13px; font-weight: 600; cursor: pointer;
         }
         .ncg-create-btn:hover { background: #3d6835; }
+
+        /* Feature notification */
+        @keyframes featFlipIn {
+            0%   { opacity: 0; transform: perspective(600px) rotateX(-30deg) translateY(-16px); }
+            60%  { opacity: 1; transform: perspective(600px) rotateX(4deg)   translateY(2px); }
+            100% { opacity: 1; transform: perspective(600px) rotateX(0deg)   translateY(0); }
+        }
+        .feat-notif {
+            position: fixed;
+            top: 78px;
+            right: 20px;
+            z-index: 1100;
+            width: 520px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.16);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 18px 48px 18px 0;
+            overflow: visible;
+            gap: 0;
+            opacity: 0;
+            pointer-events: none;
+            transform-origin: top center;
+        }
+        .feat-notif.open {
+            opacity: 1; pointer-events: all;
+            animation: featFlipIn 0.45s cubic-bezier(0.34, 1.3, 0.64, 1) forwards;
+        }
+        .feat-notif-img-wrap {
+            flex-shrink: 0; width: 130px; height: 110px;
+            background: #eef7f0; border-radius: 12px; margin: 0 16px 0 16px;
+            display: flex; align-items: flex-end; justify-content: center;
+            overflow: hidden;
+        }
+        .feat-notif-img-wrap img {
+            height: 106px; width: auto; object-fit: contain;
+        }
+        .feat-notif-body {
+            flex: 1; min-width: 0;
+        }
+        .feat-notif-title {
+            font-size: 15px; font-weight: 700; color: #1a2b35;
+            line-height: 1.45; margin: 0 0 12px;
+        }
+        .feat-notif-cta {
+            padding: 10px 22px; background: #2d6a35; color: #fff;
+            border: none; border-radius: 8px; font-size: 13px; font-weight: 600;
+            cursor: pointer; transition: background 0.15s; white-space: nowrap;
+        }
+        .feat-notif-cta:hover { background: #235528; }
+        .feat-notif-close {
+            position: absolute; top: -12px; right: -12px;
+            width: 34px; height: 34px; border-radius: 50%;
+            background: #1a2b35; border: none; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 13px; transition: background 0.15s;
+            flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+        }
+        .feat-notif-close:hover { background: #0f1e26; }
+
+        /* Group entity — single card row */
+        .cl-group-row td {
+            padding: 0 !important;
+            border: none !important;
+            border-radius: 0 !important;
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+        .cl-group-row { box-shadow: none !important; }
+
+        /* Outer card that wraps header + expand body */
+        .cl-group-card {
+            background: #fff;
+            border: 1px solid #dce8ed;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            transition: box-shadow 0.12s;
+        }
+        .cl-group-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.10); }
+
+        /* Top header bar inside the card */
+        .cl-group-header {
+            display: flex; align-items: center;
+            padding: 0; cursor: pointer;
+            gap: 0;
+        }
+        .cl-group-header-col {
+            font-size: 13px; color: #2a3840;
+            flex-shrink: 0;
+        }
+        /* Group header cols — widths set by JS to match thead exactly */
+        .cl-group-header-col {
+            flex-shrink: 0; overflow: hidden; box-sizing: border-box;
+            padding: 12px 16px; text-align: left; vertical-align: middle;
+        }
+        .cl-group-col-name { display: flex; align-items: center; gap: 10px; justify-content: flex-start; text-align: left; }
+        .cl-group-col-name .cl-name-info { text-align: left; }
+        .cl-group-col-actions { text-align: right; }
+
+        .cl-group-avatar-stack { display: flex; align-items: center; }
+        .cl-group-avatar-stack .ukp-avatar-img {
+            width: 30px; height: 30px; border-radius: 50%;
+            border: 2px solid #fff; margin-left: -10px; object-fit: cover;
+        }
+        .cl-group-avatar-stack .ukp-avatar-img:first-child { margin-left: 0; }
+
+        .cl-group-chevron {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 22px; height: 22px; border-radius: 50%;
+            background: #eef2f4; margin-left: 8px; flex-shrink: 0;
+            transition: transform 0.22s ease; color: #5a7280; font-size: 11px;
+        }
+        .cl-group-card.expanded .cl-group-chevron { transform: rotate(180deg); }
+
+        /* Expand body */
+        .cl-group-body {
+            display: none;
+            border-top: 1px solid #eef2f4;
+            padding: 14px 14px 14px 14px;
+            background: #f6f8fa;
+        }
+        .cl-group-card.expanded .cl-group-body { display: block; }
+
+        /* Sub-table header bar */
+        .cl-group-subtable-header {
+            display: flex; align-items: center;
+            background: #edf1f3; border-radius: 8px;
+            padding: 9px 14px; margin-bottom: 10px;
+            font-size: 12px; font-weight: 600; color: #6a7f89;
+            text-align: left;
+        }
+        .cl-group-subtable-header .cl-gsth-col { flex-shrink: 0; }
+        .cl-gsth-name   { flex: 0 0 30%; }
+        .cl-gsth-bgl    { flex: 0 0 16%; }
+        .cl-gsth-risk   { flex: 0 0 14%; }
+        .cl-gsth-check  { flex: 0 0 18%; }
+        .cl-gsth-review { flex: 1; }
+        .cl-gsth-act    { flex: 0 0 30px; }
+
+        /* Member mini-cards */
+        .cl-group-member-card {
+            display: flex; align-items: center;
+            background: #fff; border: 1px solid #dce8ed; border-radius: 10px;
+            padding: 10px 14px; margin-bottom: 8px; cursor: default;
+            transition: box-shadow 0.12s;
+            position: relative; text-align: left;
+        }
+        .cl-group-member-card:last-child { margin-bottom: 0; }
+        .cl-group-member-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .cl-gmc-col { flex-shrink: 0; font-size: 13px; color: #2a3840; }
+        .cl-gmc-name   { flex: 0 0 30%; display: flex; align-items: center; gap: 10px; justify-content: flex-start; }
+        .cl-gmc-bgl    { flex: 0 0 16%; }
+        .cl-gmc-risk   { flex: 0 0 14%; }
+        .cl-gmc-check  { flex: 0 0 18%; }
+        .cl-gmc-review { flex: 1; }
+        .cl-gmc-act    { flex: 0 0 30px; text-align: right; }
 
         /* Empty state */
         .cl-empty { display:none; flex-direction:column; align-items:center; justify-content:center; padding:60px 20px; text-align:center; opacity:0; transition:opacity 300ms ease; }
@@ -456,6 +636,20 @@
         </div>
     </header>
 
+    <!-- ===== FEATURE NOTIFICATION ===== -->
+    <div class="feat-notif" id="featNotif">
+        <div class="feat-notif-img-wrap">
+            <img src="images/Asset 2Logomsark.png" alt="New features">
+        </div>
+        <div class="feat-notif-body">
+            <div class="feat-notif-title">Hi! 👋 We have implemented new features to make your life easier! ⭐</div>
+            <button class="feat-notif-cta">Add CTA</button>
+        </div>
+        <button class="feat-notif-close" id="featNotifClose" aria-label="Close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
     <div class="app-body">
 
         <!-- ===== SIDEBAR ===== -->
@@ -515,17 +709,8 @@
                             <i class="fas fa-sliders-h"></i>
                         </button>
 
-                        <!-- Filter category dropdown -->
-                        <div class="cl-filter-dropdown" id="clFilterDropdown">
-                            <div class="cl-filter-option" data-category="entityType">Entity Type</div>
-                            <div class="cl-filter-option" data-category="riskRating">Risk Rating</div>
-                            <div class="cl-filter-option" data-category="cddStatus">CDD Status</div>
-                            <div class="cl-filter-option" data-category="lastCddDate">Last CDD Date</div>
-                            <div class="cl-filter-option" data-category="nextReviewDate">Next Review Date</div>
-                        </div>
-
-                        <!-- Filter value dropdown -->
-                        <div class="cl-filter-value-dropdown" id="clFilterValueDropdown"></div>
+                        <!-- Filter panel (rebuilt by JS) -->
+                        <div class="cl-filter-dropdown" id="clFilterDropdown"></div>
                     </div>
 
                     <div class="cl-search">
@@ -567,6 +752,40 @@
 
             </div>
         </main>
+    </div>
+
+    <!-- Group member popover -->
+    <div class="ukp-popover" id="clGroupPopover" style="position:fixed; width:360px;">
+        <div class="ukp-popover-header">
+            <img src="images/new_image.jpg" class="ukp-popover-avatar" id="cgpAvatar" alt="avatar">
+            <div>
+                <div class="ukp-popover-name" id="cgpName">—</div>
+                <div class="ukp-popover-role" id="cgpRole">—</div>
+            </div>
+        </div>
+        <hr class="ukp-popover-divider">
+        <div class="ukp-popover-row" style="margin-bottom:14px;">
+            <div>
+                <div class="ukp-popover-field-label">Company Name</div>
+                <div class="ukp-popover-field-value font-weight-bold" id="cgpCompanyName">—</div>
+            </div>
+            <div>
+                <div class="ukp-popover-field-label">Entity Type:</div>
+                <div class="ukp-popover-field-value" style="color:#0068ff;" id="cgpEntityType">—</div>
+            </div>
+        </div>
+        <div class="ukp-popover-row" style="margin-bottom:16px;">
+            <div>
+                <div class="ukp-popover-field-label">Last Review:</div>
+                <div class="ukp-popover-field-value font-weight-bold" id="cgpLastReview">—</div>
+            </div>
+            <div>
+                <div class="ukp-popover-field-label">Last Review:</div>
+                <div class="ukp-popover-field-value font-weight-bold" id="cgpNextReview">—</div>
+            </div>
+        </div>
+        <div class="ukp-popover-field-value font-weight-bold" style="margin-bottom:8px;">Designated Services</div>
+        <div style="background:#f0f2f5; border-radius:10px; padding:12px 14px; font-size:13px; color:#2a3840; line-height:1.6;" id="cgpNote">—</div>
     </div>
 
     <!-- Add Group Wizard Modal -->
@@ -1497,7 +1716,8 @@
     <style>
         /* Add Group Wizard extras */
         /* Vertical sidebar stepper */
-        .agw-stepper-step { display:flex;align-items:center;gap:0;padding:0 24px;cursor:default; }
+        .agw-stepper-step { display:flex;align-items:center;gap:0;padding:0 24px;cursor:default;border-radius:8px;transition:background .15s; }
+        .agw-stepper-step[onclick]:hover { background:rgba(255,255,255,0.08); }
         .agw-step-circle {
             width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;
             font-size:11px;font-weight:700;border:2px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.45);
@@ -1804,7 +2024,10 @@
                 var inner       = skipped ? '—'
                     : hasError  ? '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><line x1="3" y1="3" x2="9" y2="9" stroke="#fff" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="3" x2="3" y2="9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>'
                     : (s < step ? '<i class="fa-solid fa-check" style="font-size:11px;"></i>' : s);
-                el.innerHTML += '<div class="agw-stepper-step">'
+                var isNavigable = !skipped && (s < step || hasError);
+                var stepStyle   = isNavigable ? 'cursor:pointer;' : '';
+                var clickAttr   = isNavigable ? ' onclick="agwGoTo(' + s + ')"' : '';
+                el.innerHTML += '<div class="agw-stepper-step" style="' + stepStyle + '"' + clickAttr + '>'
                     + '<div class="agw-step-circle ' + circleClass + '">' + inner + '</div>'
                     + '<span class="agw-step-label ' + labelClass + '">' + label + '</span>'
                     + '</div>';
@@ -2939,8 +3162,30 @@
         };
 
         window.agwSaveWizardForLater = function(){
-            // Placeholder — wire to draft persistence when backend is ready
-            alert('Your progress has been saved. You can return to complete this client record at any time.');
+            var name = ((document.getElementById('agwClientName')||{}).value||'').trim() || 'Unnamed Client';
+            var rmEl = document.getElementById('agwAssignRM');
+            var rm   = rmEl ? (rmEl.options[rmEl.selectedIndex]||{}).text || '—' : '—';
+            var type = selectedType || '—';
+
+            // Build a draft client entry matching the clientsData schema
+            var draft = {
+                id:         'draft-' + Date.now(),
+                name:       name,
+                abn:        '—',
+                entityType: type,
+                riskRating: 'Low',
+                cddStatus:  'Draft',
+                lastCdd:    '—',
+                nextReview: '—',
+                assignedTo: rm,
+                isDraft:    true
+            };
+            clientsData.unshift(draft);
+            renderClients();
+
+            // Close the wizard
+            document.getElementById('ncgOverlay').classList.remove('open');
+            agwReset();
         };
 
         // Render a compact rep card (prototype style)
@@ -3881,11 +4126,159 @@
         (function() {
             var o = document.getElementById('spinnerOverlay');
             requestAnimationFrame(function() { requestAnimationFrame(function() { o.style.opacity = '1'; }); });
-            setTimeout(function() { o.style.transition = 'opacity 0.6s ease'; o.style.opacity = '0'; setTimeout(function() { o.style.display = 'none'; }, 600); }, 1800);
+            setTimeout(function() {
+                o.style.transition = 'opacity 0.6s ease'; o.style.opacity = '0';
+                setTimeout(function() {
+                    o.style.display = 'none';
+                    if (!sessionStorage.getItem('featNotifDismissed')) {
+                        document.getElementById('featNotif').classList.add('open');
+                    }
+                }, 600);
+            }, 1800);
         })();
 
         // Client data
         var clientsData = [
+            {
+                "id": "grp-1",
+                "name": "Sunrise Group Holdings",
+                "abn": "Group Entity",
+                "entityType": "Business Group",
+                "riskRating": "High",
+                "cddStatus": "Current",
+                "lastCdd": "10/03/26",
+                "nextReview": "10/03/27",
+                "assignedTo": "Kim Davidson",
+                "isGroup": true,
+                "members": [
+                    {
+                        "id": "grp-1-m1",
+                        "name": "Eleanor Hartley",
+                        "role": "Senior Manager",
+                        "bglCheck": "Complete",
+                        "riskRating": "Low",
+                        "checkDate": "17th of July 2026",
+                        "nextReview": "17th of July 2026",
+                        "email": "e.hartley@sunrise.com.au",
+                        "phone": "03 9456 7890",
+                        "address": "256 Collins St, Melbourne VIC 3000",
+                        "trainingStatus": "Complete",
+                        "position": "Director"
+                    },
+                    {
+                        "id": "grp-1-m2",
+                        "name": "Marcus Webb",
+                        "role": "AML/CTF Compliance Officer",
+                        "bglCheck": "Complete",
+                        "riskRating": "Low",
+                        "checkDate": "17th of July 2026",
+                        "nextReview": "17th of July 2026",
+                        "email": "m.webb@sunrise.com.au",
+                        "phone": "03 9456 7891",
+                        "address": "256 Collins St, Melbourne VIC 3000",
+                        "trainingStatus": "Complete",
+                        "position": "Compliance Officer"
+                    },
+                    {
+                        "id": "grp-1-m3",
+                        "name": "Priya Nair",
+                        "role": "Governing Body",
+                        "bglCheck": "Complete",
+                        "riskRating": "Medium",
+                        "checkDate": "17th of July 2026",
+                        "nextReview": "17th of July 2026",
+                        "email": "p.nair@sunrise.com.au",
+                        "phone": "03 9456 7892",
+                        "address": "12 Spring St, Melbourne VIC 3000",
+                        "trainingStatus": "Incomplete",
+                        "position": "Board Member"
+                    },
+                    {
+                        "id": "grp-1-m4",
+                        "name": "James Thornton",
+                        "role": "AML/CTF Compliance Officer",
+                        "bglCheck": "Complete",
+                        "riskRating": "",
+                        "checkDate": "",
+                        "nextReview": "",
+                        "email": "j.thornton@sunrise.com.au",
+                        "phone": "03 9456 7893",
+                        "address": "78 Bourke St, Melbourne VIC 3000",
+                        "trainingStatus": "Complete",
+                        "position": "Manager"
+                    },
+                    {
+                        "id": "grp-1-m5",
+                        "name": "Sofia Bianchi",
+                        "role": "AML/CTF Compliance Officer",
+                        "bglCheck": "Failed",
+                        "riskRating": "",
+                        "checkDate": "",
+                        "nextReview": "",
+                        "email": "s.bianchi@sunrise.com.au",
+                        "phone": "03 9456 7894",
+                        "address": "45 Flinders Lane, Melbourne VIC 3000",
+                        "trainingStatus": "Incomplete",
+                        "position": "Officer"
+                    }
+                ]
+            },
+            {
+                "id": "grp-2",
+                "name": "Meridian Capital Group",
+                "abn": "Group Entity",
+                "entityType": "Business Group",
+                "riskRating": "Medium",
+                "cddStatus": "Due Soon",
+                "lastCdd": "04/09/25",
+                "nextReview": "04/03/26",
+                "assignedTo": "Jason Lee",
+                "isGroup": true,
+                "members": [
+                    {
+                        "id": "grp-2-m1",
+                        "name": "Daniel Okafor",
+                        "role": "Senior Manager",
+                        "bglCheck": "Complete",
+                        "riskRating": "Low",
+                        "checkDate": "17th of July 2026",
+                        "nextReview": "17th of July 2026",
+                        "email": "d.okafor@meridian.com.au",
+                        "phone": "03 8800 1234",
+                        "address": "100 Queen St, Melbourne VIC 3000",
+                        "trainingStatus": "Complete",
+                        "position": "Director"
+                    },
+                    {
+                        "id": "grp-2-m2",
+                        "name": "Claire Fontaine",
+                        "role": "AML/CTF Compliance Officer",
+                        "bglCheck": "Complete",
+                        "riskRating": "Medium",
+                        "checkDate": "17th of July 2026",
+                        "nextReview": "17th of July 2026",
+                        "email": "c.fontaine@meridian.com.au",
+                        "phone": "03 8800 1235",
+                        "address": "100 Queen St, Melbourne VIC 3000",
+                        "trainingStatus": "Complete",
+                        "position": "Compliance Officer"
+                    },
+                    {
+                        "id": "grp-2-m3",
+                        "name": "Liam Fitzgerald",
+                        "role": "Governing Body",
+                        "bglCheck": "Failed",
+                        "riskRating": "",
+                        "checkDate": "",
+                        "nextReview": "",
+                        "email": "l.fitzgerald@meridian.com.au",
+                        "phone": "03 8800 1236",
+                        "address": "22 Exhibition St, Melbourne VIC 3000",
+                        "trainingStatus": "Incomplete",
+                        "position": "Board Member"
+                    }
+                ]
+            },
             {
                 "id": "1",
                 "name": "Riverside Ventures Pty Ltd",
@@ -4055,37 +4448,136 @@
 
         // Render clients immediately
         renderClients();
+        syncGroupColWidths();
         setupArchiveFunctionality();
+
+        function syncGroupColWidths() {
+            requestAnimationFrame(function() {
+                var ths = document.querySelectorAll('.ukp-table thead th');
+                if (!ths.length) return;
+                document.querySelectorAll('.cl-group-header').forEach(function(header) {
+                    var cols = header.querySelectorAll('.cl-group-header-col');
+                    cols.forEach(function(col, i) {
+                        if (ths[i]) col.style.width = ths[i].getBoundingClientRect().width + 'px';
+                    });
+                });
+            });
+        }
+
+        window.addEventListener('resize', syncGroupColWidths);
 
         function renderClients() {
             var tbody = document.getElementById('clientsTableBody');
             tbody.innerHTML = '';
 
             clientsData.forEach(function(client) {
+                if (client.isGroup) {
+                    tbody.appendChild(createGroupRow(client).headerRow);
+                    return;
+                }
+
                 var row = createClientRow(client);
                 tbody.appendChild(row);
 
-                // Add click handler to row
                 row.addEventListener('click', function(e) {
-                    // Don't navigate if clicking on dropdown button
-                    if (e.target.closest('.dropdown')) {
-                        return;
-                    }
-                    const clientId = this.dataset.clientId;
-                    window.location.href = 'client-details.html?id=' + clientId;
+                    if (e.target.closest('.dropdown')) return;
+                    window.location.href = 'client-details.html?id=' + this.dataset.clientId;
                 });
 
-                // Add hover effect
                 row.addEventListener('mouseenter', function() {
-                    if (!this.style.backgroundColor) {
-                        this.style.backgroundColor = '#f8fafb';
-                    }
+                    if (!this.style.backgroundColor) this.style.backgroundColor = '#f8fafb';
                 });
-
                 row.addEventListener('mouseleave', function() {
                     this.style.backgroundColor = '';
                 });
             });
+        }
+
+        function createGroupRow(client) {
+            var row = document.createElement('tr');
+            row.className = 'cl-group-row';
+
+            var td = document.createElement('td');
+            td.colSpan = 8;
+
+            var riskClass = 'cl-risk-' + client.riskRating.toLowerCase();
+            var riskIcon  = client.riskRating === 'Low' ? 'fa-face-smile' : client.riskRating === 'Medium' ? 'fa-face-meh' : 'fa-face-frown';
+            var cddColor  = client.cddStatus === 'Current' ? '#00923b' : client.cddStatus === 'Overdue' ? '#c0392b' : '#b85c00';
+            var cddSVG    = '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="' + cddColor + '" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>';
+
+            var avatarStack = client.members.slice(0, 3).map(function() {
+                return '<img src="images/new_image.jpg" class="ukp-avatar-img" alt="" style="width:30px;height:30px;">';
+            }).join('');
+
+            var memberCards = client.members.map(function(m) {
+                var bglBadge = m.bglCheck === 'Complete'
+                    ? '<span class="cl-cdd-badge" style="color:#00923b;border-color:#a8d8b4;"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#00923b" viewBox="0 0 16 16" style="margin-right:4px;flex-shrink:0;"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>Complete</span>'
+                    : '<span class="cl-cdd-badge" style="color:#c0392b;border-color:#f4b8b8;"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#c0392b" viewBox="0 0 16 16" style="margin-right:4px;flex-shrink:0;"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/></svg>Failed</span>';
+                var riskCell = m.riskRating
+                    ? '<span class="cl-risk-badge cl-risk-' + m.riskRating.toLowerCase() + '">' + m.riskRating + '</span>'
+                    : '<span style="color:#b0bec5;">—</span>';
+                return '<div class="cl-group-member-card"' +
+                    ' data-name="' + m.name + '"' +
+                    ' data-role="' + m.role + '"' +
+                    ' data-bgl="' + m.bglCheck + '"' +
+                    ' data-email="' + m.email + '"' +
+                    ' data-phone="' + m.phone + '"' +
+                    ' data-address="' + m.address + '"' +
+                    ' data-training="' + m.trainingStatus + '"' +
+                    ' data-position="' + m.position + '"' +
+                    ' data-entity-type="' + (m.entityType || m.role) + '"' +
+                    ' data-last-review="' + (m.checkDate || '—') + '"' +
+                    ' data-next-review="' + (m.nextReview || '—') + '"' +
+                    ' data-note="' + (m.note || '2 staff members have not completed initial AML/CTF training. Client-facing staff must complete training before conducting CDD with clients. Training must be refreshed annually, or when the program is materially updated.') + '">' +
+                    '<div class="cl-gmc-col cl-gmc-name"><img src="images/new_image.jpg" class="ukp-avatar-img" alt=""><div class="cl-name-info" style="text-align:left;"><div class="cl-name">' + m.name + '</div><div class="cl-abn">' + m.role + '</div></div></div>' +
+                    '<div class="cl-gmc-col cl-gmc-bgl">' + bglBadge + '</div>' +
+                    '<div class="cl-gmc-col cl-gmc-risk">' + riskCell + '</div>' +
+                    '<div class="cl-gmc-col cl-gmc-check">' + (m.checkDate || '<span style="color:#b0bec5;">—</span>') + '</div>' +
+                    '<div class="cl-gmc-col cl-gmc-review">' + (m.nextReview || '<span style="color:#b0bec5;">—</span>') + '</div>' +
+                    '<div class="cl-gmc-col cl-gmc-act"><div class="dropdown"><button class="btn btn-action dropdown-toggle">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a></div></div></div>' +
+                    '</div>';
+            }).join('');
+
+            td.innerHTML =
+                '<div class="cl-group-card" id="cl-group-card-' + client.id + '">' +
+                    '<div class="cl-group-header">' +
+                        '<div class="cl-group-header-col cl-group-col-name">' +
+                            '<div class="cl-group-avatar-stack">' + avatarStack + '</div>' +
+                            '<div class="cl-name-info" style="text-align:left;">' +
+                                '<div class="cl-name" style="display:flex;align-items:center;gap:4px;">' + client.name +
+                                    '<span class="cl-group-chevron"><i class="fas fa-chevron-down"></i></span>' +
+                                '</div>' +
+                                '<div class="cl-abn" style="color:#5a9e6a;font-weight:600;font-size:11px;">Group &bull; ' + client.members.length + ' entities</div>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="cl-group-header-col cl-group-col-entity">Group</div>' +
+                        '<div class="cl-group-header-col cl-group-col-risk"><span class="cl-risk-badge ' + riskClass + '">' + client.riskRating + ' <i class="fa-regular ' + riskIcon + '"></i></span></div>' +
+                        '<div class="cl-group-header-col cl-group-col-cdd"><span class="cl-cdd-badge">' + cddSVG + ' ' + client.cddStatus + '</span></div>' +
+                        '<div class="cl-group-header-col cl-group-col-date">' + client.lastCdd + '</div>' +
+                        '<div class="cl-group-header-col cl-group-col-review">' + client.nextReview + '</div>' +
+                        '<div class="cl-group-header-col cl-group-col-assign">' + client.assignedTo + '</div>' +
+                        '<div class="cl-group-header-col cl-group-col-actions"><div class="dropdown"><button class="btn btn-action dropdown-toggle">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Archive</a></div></div></div>' +
+                    '</div>' +
+                    '<div class="cl-group-body">' +
+                        '<div class="cl-group-subtable-header">' +
+                            '<div class="cl-gsth-col cl-gsth-name">Entities</div>' +
+                            '<div class="cl-gsth-col cl-gsth-bgl">BGL ID Check</div>' +
+                            '<div class="cl-gsth-col cl-gsth-risk">Risk Rating</div>' +
+                            '<div class="cl-gsth-col cl-gsth-check">Check Date</div>' +
+                            '<div class="cl-gsth-col cl-gsth-review">Next Review Date</div>' +
+                            '<div class="cl-gsth-col cl-gsth-act"></div>' +
+                        '</div>' +
+                        memberCards +
+                    '</div>' +
+                '</div>';
+
+            td.querySelector('.cl-group-header').addEventListener('click', function(e) {
+                if (e.target.closest('.dropdown')) return;
+                td.querySelector('.cl-group-card').classList.toggle('expanded');
+            });
+
+            row.appendChild(td);
+            return { headerRow: row, expandRow: null };
         }
 
         function createClientRow(client) {
@@ -4103,6 +4595,19 @@
                           client.riskRating === 'Medium' ? 'fa-face-meh' : 'fa-face-frown';
 
             // CDD badge
+            if(client.cddStatus === 'Draft'){
+                var cddBadge = '<span class="cl-cdd-badge" style="background:#f0f4f6;color:#7a8f98;border:1px solid #c7d4d9;"><i class="fas fa-clock" style="font-size:11px;margin-right:4px;"></i>Draft</span>';
+                row.style.opacity = '0.8';
+                row.innerHTML =
+                    '<td><div class="cl-name-cell"><img src="images/new_image.jpg" class="ukp-avatar-img" alt="" style="opacity:.5;"><div class="cl-name-info"><div class="cl-name">' + client.name + '</div><div class="cl-abn" style="color:#b0bec5;">Draft — not yet submitted</div></div></div></td>' +
+                    '<td>' + client.entityType + '</td>' +
+                    '<td><span class="cl-risk-badge" style="background:#f0f4f6;color:#7a8f98;border:1px solid #c7d4d9;">—</span></td>' +
+                    '<td>' + cddBadge + '</td>' +
+                    '<td>—</td><td>—</td>' +
+                    '<td>' + client.assignedTo + '</td>' +
+                    '<td><div class="dropdown"><button class="btn btn-action dropdown-toggle">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Resume</a><a class="dropdown-item text-danger" href="#">Discard Draft</a></div></div></td>';
+                return row;
+            }
             var cddIconColor = client.cddStatus === 'Current' ? '#00923b' :
                               client.cddStatus === 'Overdue' ? '#c0392b' : '#b85c00';
             var cddIcon = client.cddStatus === 'Current'
@@ -4122,14 +4627,53 @@
             return row;
         }
 
+        // Group member popover
+        (function() {
+            var pop = document.getElementById('clGroupPopover');
+            var hideTimer;
+
+            function showPopover(row) {
+                clearTimeout(hideTimer);
+                document.getElementById('cgpName').textContent        = row.dataset.name;
+                document.getElementById('cgpRole').textContent        = row.dataset.role;
+                document.getElementById('cgpCompanyName').textContent = row.dataset.name;
+                document.getElementById('cgpEntityType').textContent  = row.dataset.entityType || row.dataset.role;
+                document.getElementById('cgpLastReview').textContent  = row.dataset.lastReview || '—';
+                document.getElementById('cgpNextReview').textContent  = row.dataset.nextReview || '—';
+                document.getElementById('cgpNote').textContent        = row.dataset.note || '—';
+
+                var rect = row.getBoundingClientRect();
+                pop.style.top  = (rect.bottom + window.scrollY + 6) + 'px';
+                pop.style.left = (rect.left + window.scrollX + 40) + 'px';
+                pop.style.display = 'block';
+            }
+
+            function hidePopover() {
+                hideTimer = setTimeout(function() { pop.style.display = 'none'; }, 120);
+            }
+
+            document.getElementById('clientsTableBody').addEventListener('mouseover', function(e) {
+                var card = e.target.closest('.cl-group-member-card');
+                if (card) showPopover(card);
+            });
+
+            document.getElementById('clientsTableBody').addEventListener('mouseout', function(e) {
+                var card = e.target.closest('.cl-group-member-card');
+                if (card && !card.contains(e.relatedTarget)) hidePopover();
+            });
+
+            pop.addEventListener('mouseenter', function() { clearTimeout(hideTimer); });
+            pop.addEventListener('mouseleave', hidePopover);
+        })();
+
         // Add Group wizard — open on add-btn click
         document.querySelector('.cl-add-btn').addEventListener('click', function() {
             document.getElementById('ncgOverlay').classList.add('open');
         });
 
         // Advanced filter system
-        var activeFilters = {}; // { category: value }
-        var currentCategory = null;
+        // activeFilters: { category: [value, value, ...] }
+        var activeFilters = {};
 
         var filterDefinitions = {
             entityType: {
@@ -4161,91 +4705,99 @@
 
         var clAddFilterBtn = document.getElementById('clAddFilterBtn');
         var clFilterDropdown = document.getElementById('clFilterDropdown');
-        var clFilterValueDropdown = document.getElementById('clFilterValueDropdown');
         var clActiveFiltersContainer = document.getElementById('clActiveFilters');
 
-        // Show category dropdown
+        function getFilterCount(category, value) {
+            if (!clientsData || clientsData.length === 0) return 0;
+            return clientsData.filter(function(client) {
+                if (category === 'entityType') return client.entityType === value;
+                if (category === 'riskRating') return client.riskRating === value;
+                if (category === 'cddStatus') return client.cddStatus === value;
+                return false;
+            }).length;
+        }
+
+        function isChecked(category, value) {
+            return activeFilters[category] && activeFilters[category].indexOf(value) > -1;
+        }
+
+        function toggleFilter(category, value) {
+            if (!activeFilters[category]) activeFilters[category] = [];
+            var idx = activeFilters[category].indexOf(value);
+            if (idx > -1) {
+                activeFilters[category].splice(idx, 1);
+                if (activeFilters[category].length === 0) delete activeFilters[category];
+            } else {
+                activeFilters[category].push(value);
+            }
+            renderFilterPanel();
+            renderActiveFilters();
+            updateFilterCount();
+            applyFilters();
+        }
+
+        function renderFilterPanel() {
+            clFilterDropdown.innerHTML = '';
+            Object.keys(filterDefinitions).forEach(function(category) {
+                var def = filterDefinitions[category];
+                if (def.type === 'date') return; // skip date for checkbox panel
+
+                var section = document.createElement('div');
+                section.className = 'cl-filter-section' + (true ? ' open' : ''); // all open by default
+
+                var head = document.createElement('div');
+                head.className = 'cl-filter-section-head';
+                head.innerHTML = '<span class="cl-filter-section-title">' + def.label + '</span>' +
+                    '<i class="fas fa-chevron-down cl-filter-section-chevron"></i>';
+                head.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    section.classList.toggle('open');
+                });
+
+                var body = document.createElement('div');
+                body.className = 'cl-filter-section-body';
+
+                def.options.forEach(function(value) {
+                    var count = getFilterCount(category, value);
+                    var checked = isChecked(category, value);
+                    var row = document.createElement('div');
+                    row.className = 'cl-filter-cb-row';
+                    row.innerHTML =
+                        '<div class="cl-filter-cb-left">' +
+                            '<div class="cl-filter-cb' + (checked ? ' checked' : '') + '"></div>' +
+                            '<span class="cl-filter-cb-label">' + value + '</span>' +
+                        '</div>' +
+                        '<span class="cl-filter-cb-count">(' + count + ')</span>';
+                    row.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        toggleFilter(category, value);
+                    });
+                    body.appendChild(row);
+                });
+
+                section.appendChild(head);
+                section.appendChild(body);
+                clFilterDropdown.appendChild(section);
+            });
+        }
+
+        // Open/close panel
         clAddFilterBtn.addEventListener('click', function(e) {
             e.stopPropagation();
-            clFilterDropdown.classList.toggle('open');
-            clFilterValueDropdown.classList.remove('open');
+            var isOpen = clFilterDropdown.classList.toggle('open');
+            if (isOpen) renderFilterPanel();
         });
 
-        // Category hover - show values or date picker
-        document.querySelectorAll('#clFilterDropdown .cl-filter-option').forEach(function(opt) {
-            opt.addEventListener('mouseenter', function() {
-                // Highlight current category
-                document.querySelectorAll('#clFilterDropdown .cl-filter-option').forEach(function(o) {
-                    o.classList.remove('active');
-                });
-                this.classList.add('active');
-
-                currentCategory = this.dataset.category;
-                var def = filterDefinitions[currentCategory];
-
-                clFilterValueDropdown.innerHTML = '';
-
-                if (def.type === 'date') {
-                    // Show date picker
-                    renderDatePicker();
-                } else {
-                    // Build value dropdown with counts
-                    def.options.forEach(function(value) {
-                        var count = getFilterCount(currentCategory, value);
-
-                        var valueOpt = document.createElement('div');
-                        valueOpt.className = 'cl-filter-value-option';
-                        valueOpt.innerHTML = '<span class="cl-filter-value-label">' + value + '</span>' +
-                                            '<span class="cl-filter-value-count">(' + count + ')</span>';
-                        valueOpt.dataset.value = value;
-                        valueOpt.addEventListener('click', function() {
-                            addFilter(currentCategory, value);
-                            clFilterDropdown.classList.remove('open');
-                            clFilterValueDropdown.classList.remove('open');
-                        });
-                        clFilterValueDropdown.appendChild(valueOpt);
-                    });
-                }
-
-                // Position and show value dropdown
-                var rect = clFilterDropdown.getBoundingClientRect();
-                clFilterValueDropdown.style.left = (rect.width + 4) + 'px';
-                clFilterValueDropdown.style.top = '50px';
-                clFilterValueDropdown.classList.add('open');
-            });
-        });
-
-        // Close value dropdown when mouse leaves both dropdowns
-        var closeValueTimer;
-        clFilterDropdown.addEventListener('mouseleave', function() {
-            closeValueTimer = setTimeout(function() {
-                clFilterValueDropdown.classList.remove('open');
-                document.querySelectorAll('#clFilterDropdown .cl-filter-option').forEach(function(o) {
-                    o.classList.remove('active');
-                });
-            }, 100);
-        });
-        clFilterValueDropdown.addEventListener('mouseenter', function() {
-            clearTimeout(closeValueTimer);
-        });
-        clFilterValueDropdown.addEventListener('mouseleave', function() {
-            clFilterValueDropdown.classList.remove('open');
-            document.querySelectorAll('#clFilterDropdown .cl-filter-option').forEach(function(o) {
-                o.classList.remove('active');
-            });
-        });
-
-        // Close dropdowns on outside click
-        document.addEventListener('click', function() {
-            clFilterDropdown.classList.remove('open');
-            clFilterValueDropdown.classList.remove('open');
-            document.querySelectorAll('#clFilterDropdown .cl-filter-option').forEach(function(o) {
-                o.classList.remove('active');
-            });
+        document.addEventListener('click', function(e) {
+            if (!clFilterDropdown.contains(e.target) && e.target !== clAddFilterBtn) {
+                clFilterDropdown.classList.remove('open');
+            }
         });
 
         function addFilter(category, value) {
-            activeFilters[category] = value;
+            if (!activeFilters[category]) activeFilters[category] = [];
+            if (activeFilters[category].indexOf(value) === -1) activeFilters[category].push(value);
+            renderFilterPanel();
             renderActiveFilters();
             updateFilterCount();
             applyFilters();
@@ -4253,6 +4805,7 @@
 
         function removeFilter(category) {
             delete activeFilters[category];
+            renderFilterPanel();
             renderActiveFilters();
             updateFilterCount();
             applyFilters();
@@ -4267,21 +4820,6 @@
             } else {
                 countEl.style.display = 'none';
             }
-        }
-
-        function getFilterCount(category, value) {
-            if (!clientsData || clientsData.length === 0) return 0;
-
-            return clientsData.filter(function(client) {
-                if (category === 'entityType') {
-                    return client.entityType === value;
-                } else if (category === 'riskRating') {
-                    return client.riskRating === value;
-                } else if (category === 'cddStatus') {
-                    return client.cddStatus === value;
-                }
-                return false;
-            }).length;
         }
 
         var currentPickerDate = new Date();
@@ -4353,26 +4891,38 @@
             clActiveFiltersContainer.innerHTML = '';
 
             Object.keys(activeFilters).forEach(function(category) {
-                var value = activeFilters[category];
+                var values = activeFilters[category];
+                if (!values || values.length === 0) return;
                 var def = filterDefinitions[category];
-                var count = getFilterCount(category, value);
 
-                var pill = document.createElement('div');
-                pill.className = 'cl-filter-pill';
-                pill.innerHTML =
-                    '<span class="cl-filter-pill-count">(' + count + ')</span> ' +
-                    '<span class="cl-filter-pill-label">' + def.label + ':</span> ' +
-                    '<span class="cl-filter-pill-value">' + value + '</span>' +
-                    '<button class="cl-filter-pill-remove" data-category="' + category + '">&times;</button>';
+                values.forEach(function(value) {
+                    var count = getFilterCount(category, value);
+                    var pill = document.createElement('div');
+                    pill.className = 'cl-filter-pill';
+                    pill.innerHTML =
+                        '<span class="cl-filter-pill-count">(' + count + ')</span> ' +
+                        '<span class="cl-filter-pill-label">' + def.label + ':</span> ' +
+                        '<span class="cl-filter-pill-value">' + value + '</span>' +
+                        '<button class="cl-filter-pill-remove" data-category="' + category + '" data-value="' + value + '">&times;</button>';
 
-                pill.querySelector('.cl-filter-pill-remove').addEventListener('click', function() {
-                    removeFilter(this.dataset.category);
+                    pill.querySelector('.cl-filter-pill-remove').addEventListener('click', function() {
+                        var cat = this.dataset.category;
+                        var val = this.dataset.value;
+                        var idx = activeFilters[cat] ? activeFilters[cat].indexOf(val) : -1;
+                        if (idx > -1) {
+                            activeFilters[cat].splice(idx, 1);
+                            if (activeFilters[cat].length === 0) delete activeFilters[cat];
+                        }
+                        renderFilterPanel();
+                        renderActiveFilters();
+                        updateFilterCount();
+                        applyFilters();
+                    });
+
+                    clActiveFiltersContainer.appendChild(pill);
                 });
-
-                clActiveFiltersContainer.appendChild(pill);
             });
 
-            // Add "+" button to add more filters
             if (Object.keys(activeFilters).length > 0) {
                 var addBtn = document.createElement('button');
                 addBtn.className = 'cl-add-filter-pill';
@@ -4380,6 +4930,7 @@
                 addBtn.addEventListener('click', function(e) {
                     e.stopPropagation();
                     clFilterDropdown.classList.add('open');
+                    renderFilterPanel();
                 });
                 clActiveFiltersContainer.appendChild(addBtn);
             }
@@ -4484,26 +5035,27 @@
                     match = false;
                 }
 
-                // Apply active filters
+                // Apply active filters (multi-value OR within category, AND across categories)
                 Object.keys(activeFilters).forEach(function(category) {
-                    var filterValue = activeFilters[category];
+                    var values = activeFilters[category];
+                    if (!values || values.length === 0) return;
+                    var categoryMatch = false;
 
                     if (category === 'entityType') {
-                        var entityType = row.dataset.entityType;
-                        if (entityType !== filterValue) match = false;
+                        categoryMatch = values.indexOf(row.dataset.entityType) > -1;
                     } else if (category === 'riskRating') {
-                        var risk = row.dataset.risk;
-                        if (risk !== filterValue.toLowerCase()) match = false;
+                        categoryMatch = values.some(function(v) { return row.dataset.risk === v.toLowerCase(); });
                     } else if (category === 'cddStatus') {
-                        var cddStatus = row.dataset.cddStatus;
-                        if (cddStatus !== filterValue) match = false;
+                        categoryMatch = values.indexOf(row.dataset.cddStatus) > -1;
                     } else if (category === 'lastCddDate') {
-                        var lastCdd = row.children[4].textContent.trim();
-                        if (lastCdd !== filterValue) match = false;
+                        var lastCdd = row.children[4] ? row.children[4].textContent.trim() : '';
+                        categoryMatch = values.indexOf(lastCdd) > -1;
                     } else if (category === 'nextReviewDate') {
-                        var nextReview = row.children[5].textContent.trim();
-                        if (nextReview !== filterValue) match = false;
+                        var nextReview = row.children[5] ? row.children[5].textContent.trim() : '';
+                        categoryMatch = values.indexOf(nextReview) > -1;
                     }
+
+                    if (!categoryMatch) match = false;
                 });
 
                 row.style.display = match ? '' : 'none';
@@ -4532,6 +5084,14 @@
         }
 
         // Emoji animation on hover
+        // Feature notification close
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('featNotifClose').addEventListener('click', function() {
+                document.getElementById('featNotif').classList.remove('open');
+                sessionStorage.setItem('featNotifDismissed', '1');
+            });
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             const emojiButtons = document.querySelectorAll('.feedback-emoji-btn');
 

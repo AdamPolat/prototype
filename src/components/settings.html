@@ -474,13 +474,7 @@
                                 <span class="cl-filter-count" id="alFilterCount" style="display:none;">0</span>
                                 <i class="fas fa-sliders-h"></i>
                             </button>
-                            <div class="cl-filter-dropdown" id="alFilterDropdown">
-                                <div class="cl-filter-option" data-category="user">User</div>
-                                <div class="cl-filter-option" data-category="module">Module</div>
-                                <div class="cl-filter-option" data-category="action">Action</div>
-                                <div class="cl-filter-option" data-category="dateRange">Date Range</div>
-                            </div>
-                            <div class="cl-filter-value-dropdown" id="alFilterValueDropdown"></div>
+                            <div class="al-filter-panel" id="alFilterDropdown"></div>
                         </div>
 
                         <div class="al-cl-search">
@@ -539,13 +533,7 @@
                                 <span class="cl-filter-count" id="alFilterCount2" style="display:none;">0</span>
                                 <i class="fas fa-sliders-h"></i>
                             </button>
-                            <div class="cl-filter-dropdown" id="alFilterDropdown2">
-                                <div class="cl-filter-option" data-category="user">User</div>
-                                <div class="cl-filter-option" data-category="module">Module</div>
-                                <div class="cl-filter-option" data-category="action">Action</div>
-                                <div class="cl-filter-option" data-category="dateRange">Date Range</div>
-                            </div>
-                            <div class="cl-filter-value-dropdown" id="alFilterValueDropdown2"></div>
+                            <div class="al-filter-panel" id="alFilterDropdown2"></div>
                         </div>
 
                         <div class="al-cl-search">
@@ -580,13 +568,7 @@
                                 <span class="cl-filter-count" id="alFilterCount3" style="display:none;">0</span>
                                 <i class="fas fa-sliders-h"></i>
                             </button>
-                            <div class="cl-filter-dropdown" id="alFilterDropdown3">
-                                <div class="cl-filter-option" data-category="user">User</div>
-                                <div class="cl-filter-option" data-category="module">Module</div>
-                                <div class="cl-filter-option" data-category="action">Action</div>
-                                <div class="cl-filter-option" data-category="dateRange">Date Range</div>
-                            </div>
-                            <div class="cl-filter-value-dropdown" id="alFilterValueDropdown3"></div>
+                            <div class="al-filter-panel" id="alFilterDropdown3"></div>
                         </div>
                         <div class="al-cl-search">
                             <i class="fas fa-search al-cl-search-icon"></i>
@@ -620,6 +602,33 @@
                 <div id="al-detail-overlay" style="display:none; position:fixed; inset:0; z-index:1099; background:rgba(0,0,0,0.18);"></div>
 
                 <style>
+                    /* ── Audit log horizontal filter panel ── */
+                    .al-filter-panel {
+                        display: none; position: absolute; top: calc(100% + 6px);
+                        background: #fff; border: 1px solid #ccd5d9; border-radius: 14px;
+                        box-shadow: 0 8px 32px rgba(0,0,0,0.12); z-index: 500;
+                        padding: 25px 22px 31px; white-space: nowrap;
+                        box-sizing: border-box;
+                    }
+                    .al-filter-panel.open { display: block; }
+                    .al-filter-panel-inner { display: flex; align-items: flex-start; gap: 0; width: 100%; }
+                    .al-filter-col { flex: 1; display: flex; flex-direction: column; padding-right: 28px; margin-right: 28px; border-right: 1px solid #eef2f4; }
+                    .al-filter-col:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+                    .al-filter-col-title { font-size: 13px; font-weight: 700; color: #1a2b35; margin-bottom: 10px; }
+                    .al-filter-cb-row { display: flex; align-items: center; gap: 11px; padding: 7px 3px; cursor: pointer; white-space: nowrap; }
+                    .al-filter-cb-row:hover .al-filter-cb-label { color: #2d6a35; }
+                    .al-filter-cb { width: 18px; height: 18px; border: 1.5px solid #b0bec5; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: #f9f9f9; transition: background 0.12s, border-color 0.12s; }
+                    .al-filter-cb.checked { background: #2d6a35; border-color: #2d6a35; }
+                    .al-filter-cb.checked::after { content: ''; display: block; width: 10px; height: 6px; border-left: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(-45deg) translateY(-1px); }
+                    .al-filter-cb-label { font-size: 13px; color: #1a2b35; }
+                    /* Action 2-col grid */
+                    .al-filter-action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; }
+                    /* Date inputs */
+                    .al-filter-date-label { font-size: 12px; color: #6a7f89; margin-bottom: 4px; margin-top: 10px; }
+                    .al-filter-date-label:first-child { margin-top: 0; }
+                    .al-filter-date-input { padding: 7px 10px; border: 1px solid #c9d8de; border-radius: 8px; font-size: 13px; color: #1a2b35; outline: none; width: 160px; box-sizing: border-box; }
+                    .al-filter-date-input:focus { border-color: #2d6a35; }
+
                     /* Sticky filter bar inside audit log */
                     .al-sticky-bar {
                         position: sticky;
@@ -1004,6 +1013,132 @@
                 </style>
 
                 <script>
+                // ── Shared audit log filter panel builder ──────────────────
+                function buildAlPanel(ddId, filterDefs, activeFilters, toggleFn, onDateChange) {
+                    var dd = document.getElementById(ddId);
+                    if (!dd) return;
+                    // Stretch panel to fill the full tab pane width
+                    var suffix = ddId.replace('alFilterDropdown', '');
+                    var btn = document.getElementById('alAddFilterBtn' + suffix);
+                    if (btn) {
+                        var wrap = btn.closest('.cl-filter-wrap');
+                        var tab  = btn.closest('.settings-tab-pane');
+                        if (wrap && tab) {
+                            var wrapRect = wrap.getBoundingClientRect();
+                            var tabRect  = tab.getBoundingClientRect();
+                            dd.style.left  = (tabRect.left - wrapRect.left) + 'px';
+                            dd.style.width = tabRect.width + 'px';
+                        }
+                    }
+                    dd.innerHTML = '';
+                    var inner = document.createElement('div');
+                    inner.className = 'al-filter-panel-inner';
+
+                    Object.keys(filterDefs).forEach(function(cat) {
+                        var def = filterDefs[cat];
+                        var col = document.createElement('div');
+                        col.className = 'al-filter-col';
+                        var title = document.createElement('div');
+                        title.className = 'al-filter-col-title';
+                        title.textContent = def.label;
+                        col.appendChild(title);
+
+                        if (def.type === 'date') {
+                            var dr = activeFilters.dateRange || {};
+                            ['from','to'].forEach(function(key) {
+                                var lbl = document.createElement('div');
+                                lbl.className = 'al-filter-date-label';
+                                lbl.textContent = key === 'from' ? 'From' : 'To';
+                                var inp = document.createElement('input');
+                                inp.type = 'date'; inp.className = 'al-filter-date-input';
+                                inp.value = dr[key] || '';
+                                inp.addEventListener('change', function(e) {
+                                    e.stopPropagation();
+                                    if (!activeFilters.dateRange) activeFilters.dateRange = {};
+                                    activeFilters.dateRange[key] = this.value;
+                                    if (!activeFilters.dateRange.from && !activeFilters.dateRange.to) delete activeFilters.dateRange;
+                                    if (onDateChange) onDateChange();
+                                });
+                                col.appendChild(lbl);
+                                col.appendChild(inp);
+                            });
+                        } else if (cat === 'action') {
+                            // Two-column grid under one title
+                            var half = Math.ceil(def.options.length / 2);
+                            var grid = document.createElement('div');
+                            grid.className = 'al-filter-action-grid';
+                            // Left sub-col: first half; Right sub-col: second half
+                            var leftCol = document.createElement('div');
+                            var rightCol = document.createElement('div');
+                            def.options.slice(0, half).forEach(function(val) { leftCol.appendChild(makeCbRow(val, cat, activeFilters, toggleFn)); });
+                            def.options.slice(half).forEach(function(val) { rightCol.appendChild(makeCbRow(val, cat, activeFilters, toggleFn)); });
+                            grid.appendChild(leftCol);
+                            grid.appendChild(rightCol);
+                            col.appendChild(grid);
+                        } else {
+                            def.options.forEach(function(val) { col.appendChild(makeCbRow(val, cat, activeFilters, toggleFn)); });
+                        }
+                        inner.appendChild(col);
+                    });
+                    dd.appendChild(inner);
+
+                    // Footer buttons
+                    var footer = document.createElement('div');
+                    footer.style.cssText = 'display:flex; align-items:center; gap:10px; margin-top:18px; padding-top:16px; border-top:1px solid rgb(210 217 220);';
+
+                    var clearBtn = document.createElement('button');
+                    clearBtn.className = 'btn btn-upload';
+                    clearBtn.innerHTML = 'Clear selection <i class="fas fa-undo" style="font-size:11px;"></i>';
+                    clearBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        Object.keys(activeFilters).forEach(function(k) { delete activeFilters[k]; });
+                        buildAlPanel(ddId, filterDefs, activeFilters, toggleFn, onDateChange);
+                        // trigger pill/count refresh via onDateChange callback pattern
+                        if (onDateChange) onDateChange();
+                    });
+
+                    var searchBtn = document.createElement('button');
+                    searchBtn.className = 'btn btn-generate';
+                    searchBtn.innerHTML = 'Search &nbsp;<i class="fas fa-search" style="font-size:11px;"></i>';
+                    searchBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        dd.classList.remove('open');
+                    });
+
+                    footer.appendChild(clearBtn);
+                    footer.appendChild(searchBtn);
+                    dd.appendChild(footer);
+                }
+
+                function makeClearAllBtn(activeFilters, onClear) {
+                    var btn = document.createElement('button');
+                    btn.className = 'btn btn-upload';
+                    btn.style.cssText = 'height:42px; padding:0 14px; font-size:13px; gap:10px; white-space:nowrap;';
+                    btn.innerHTML = 'Clear All <i class="fas fa-undo" style="font-size:11px;"></i>';
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        Object.keys(activeFilters).forEach(function(k) { delete activeFilters[k]; });
+                        onClear();
+                    });
+                    return btn;
+                }
+
+                function makeCbRow(val, cat, activeFilters, toggleFn) {
+                    var checked = Array.isArray(activeFilters[cat]) && activeFilters[cat].indexOf(val) > -1;
+                    var row = document.createElement('div');
+                    row.className = 'al-filter-cb-row';
+                    var cb = document.createElement('div');
+                    cb.className = 'al-filter-cb' + (checked ? ' checked' : '');
+                    var lbl = document.createElement('span');
+                    lbl.className = 'al-filter-cb-label';
+                    lbl.textContent = val;
+                    row.appendChild(cb); row.appendChild(lbl);
+                    row.addEventListener('click', function(e) { e.stopPropagation(); toggleFn(cat, val); });
+                    return row;
+                }
+                </script>
+
+                <script>
                 (function() {
                     var ALL_ROWS = [
                         { ts:'26/05/2026 09:14:22', user:'Jeremy Hofsteede', action:'UPDATE', module:'FIRM_PROFILE',        moduleLabel:'Firm Profile',                    field:'Firm Details',     entity:'firm_001' },
@@ -1184,9 +1319,9 @@
                         var dateFrom = alActiveFilters.dateRange ? alActiveFilters.dateRange.from : null;
                         var dateTo   = alActiveFilters.dateRange ? alActiveFilters.dateRange.to   : null;
                         filteredRows = ALL_ROWS.filter(function(r) {
-                            if (alActiveFilters.user && r.user !== alActiveFilters.user) return false;
-                            if (alActiveFilters.module && r.module !== alModuleMap[alActiveFilters.module]) return false;
-                            if (alActiveFilters.action && r.action !== alActionMap[alActiveFilters.action]) return false;
+                            if (alActiveFilters.user   && alActiveFilters.user.length   && alActiveFilters.user.indexOf(r.user) === -1) return false;
+                            if (alActiveFilters.module && alActiveFilters.module.length && !alActiveFilters.module.some(function(m){ return r.module === alModuleMap[m]; })) return false;
+                            if (alActiveFilters.action && alActiveFilters.action.length && !alActiveFilters.action.some(function(a){ return r.action === alActionMap[a]; })) return false;
                             if (dateFrom || dateTo) {
                                 var d = parseRowDate(r.ts);
                                 if (dateFrom && d < new Date(dateFrom)) return false;
@@ -1199,291 +1334,74 @@
                         render();
                     }
 
-                    function addAlFilter(category, value) {
-                        alActiveFilters[category] = value;
-                        renderAlPills();
-                        updateAlCount();
-                        applyAlFilters();
+                    function toggleAlFilter1(cat, val) {
+                        if (!alActiveFilters[cat]) alActiveFilters[cat] = [];
+                        var idx = alActiveFilters[cat].indexOf(val);
+                        if (idx > -1) { alActiveFilters[cat].splice(idx,1); if(!alActiveFilters[cat].length) delete alActiveFilters[cat]; }
+                        else { alActiveFilters[cat].push(val); }
+                        buildAlPanel('alFilterDropdown', alFilterDefs, alActiveFilters, toggleAlFilter1, function(){ renderAlPills1(); updateAlCount1(); applyAlFilters(); });
+                        renderAlPills1(); updateAlCount1(); applyAlFilters();
                     }
-
+                    function addAlFilter(category, value) {
+                        if (!alActiveFilters[category]) alActiveFilters[category] = [];
+                        if (alActiveFilters[category].indexOf(value) === -1) alActiveFilters[category].push(value);
+                        buildAlPanel('alFilterDropdown', alFilterDefs, alActiveFilters, toggleAlFilter1, function(){ renderAlPills1(); updateAlCount1(); applyAlFilters(); });
+                        renderAlPills1(); updateAlCount1(); applyAlFilters();
+                    }
                     function removeAlFilter(category) {
                         delete alActiveFilters[category];
-                        renderAlPills();
-                        updateAlCount();
-                        applyAlFilters();
+                        buildAlPanel('alFilterDropdown', alFilterDefs, alActiveFilters, toggleAlFilter1, function(){ renderAlPills1(); updateAlCount1(); applyAlFilters(); });
+                        renderAlPills1(); updateAlCount1(); applyAlFilters();
                     }
-
-                    function updateAlCount() {
-                        var count = Object.keys(alActiveFilters).length;
+                    function updateAlCount1() {
+                        var count = Object.keys(alActiveFilters).reduce(function(sum, cat) {
+                            return sum + (Array.isArray(alActiveFilters[cat]) ? alActiveFilters[cat].length : 1);
+                        }, 0);
                         var el = document.getElementById('alFilterCount');
-                        if (count > 0) { el.textContent = count; el.style.display = 'inline-flex'; }
-                        else { el.style.display = 'none'; }
+                        if (count > 0) { el.textContent = count; el.style.display = 'inline-flex'; } else { el.style.display = 'none'; }
                     }
-
-                    function renderAlPills() {
+                    function renderAlPills1() {
                         var container = document.getElementById('alActiveFilters');
                         container.innerHTML = '';
                         Object.keys(alActiveFilters).forEach(function(cat) {
-                            var raw = alActiveFilters[cat];
-                            var def = alFilterDefs[cat];
-                            var displayValue = (cat === 'dateRange') ? raw.label : raw;
-                            var pill = document.createElement('div');
-                            pill.className = 'cl-filter-pill';
-                            pill.innerHTML =
-                                '<span class="cl-filter-pill-label">' + def.label + ':</span> ' +
-                                '<span class="cl-filter-pill-value">' + displayValue + '</span>' +
-                                '<button class="cl-filter-pill-remove" data-category="' + cat + '">&times;</button>';
-                            pill.querySelector('.cl-filter-pill-remove').addEventListener('click', function() {
-                                removeAlFilter(this.dataset.category);
-                            });
-                            container.appendChild(pill);
-                        });
-                        if (Object.keys(alActiveFilters).length > 0) {
-                            var addBtn = document.createElement('button');
-                            addBtn.className = 'cl-add-filter-pill';
-                            addBtn.textContent = '+';
-                            addBtn.addEventListener('click', function(e) {
-                                e.stopPropagation();
-                                document.getElementById('alFilterDropdown').classList.add('open');
-                            });
-                            container.appendChild(addBtn);
-                        }
-                    }
-
-                    // Filter dropdown wiring
-                    document.getElementById('alAddFilterBtn').addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        document.getElementById('alFilterDropdown').classList.toggle('open');
-                        document.getElementById('alFilterValueDropdown').classList.remove('open');
-                    });
-
-                    document.querySelectorAll('#alFilterDropdown .cl-filter-option').forEach(function(opt) {
-                        opt.addEventListener('mouseenter', function() {
-                            document.querySelectorAll('#alFilterDropdown .cl-filter-option').forEach(function(o) { o.classList.remove('active'); });
-                            this.classList.add('active');
-                            alCurrentCategory = this.dataset.category;
-                            var def = alFilterDefs[alCurrentCategory];
-                            var valDd = document.getElementById('alFilterValueDropdown');
-                            valDd.innerHTML = '';
-
-                            if (def.type === 'date') {
-                                var existing = alActiveFilters.dateRange || {};
-                                var drpState = {
-                                    year: new Date().getFullYear(),
-                                    month: new Date().getMonth(),
-                                    startDate: existing.from ? new Date(existing.from) : null,
-                                    endDate:   existing.to   ? new Date(existing.to)   : null,
-                                    selecting: existing.from ? null : 'start'
-                                };
-
-                                function fmtDate(d) {
-                                    if (!d) return '';
-                                    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
-                                }
-                                function fmtDisplay(d) {
-                                    if (!d) return '';
-                                    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-                                    return d.getDate() + ' ' + months[d.getMonth()] + ' ' + String(d.getFullYear()).slice(2);
-                                }
-
-                                function buildDrp() {
-                                    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-                                    var dows = ['Mo','Tu','We','Th','Fr','Sa','Su'];
-                                    var y = drpState.year, m = drpState.month;
-                                    var firstDay = new Date(y, m, 1).getDay(); // 0=Sun
-                                    firstDay = firstDay === 0 ? 6 : firstDay - 1; // Mon=0
-                                    var daysInMonth = new Date(y, m+1, 0).getDate();
-                                    var daysInPrev  = new Date(y, m, 0).getDate();
-
-                                    var displayStr = drpState.startDate && drpState.endDate
-                                        ? fmtDisplay(drpState.startDate) + ' – ' + fmtDisplay(drpState.endDate)
-                                        : drpState.startDate ? fmtDisplay(drpState.startDate) + ' – …' : 'Select range';
-
-                                    var html = '<div class="al-drp">';
-                                    html += '<div class="al-drp-header"><span class="al-drp-display"><i class="fas fa-calendar-alt" style="color:#6a7f89; font-size:12px;"></i>' + displayStr + ' <i class="fas fa-chevron-down" style="font-size:10px; color:#6a7f89;"></i></span></div>';
-                                    html += '<div class="al-drp-body">';
-
-                                    // Shortcuts
-                                    html += '<div class="al-drp-shortcuts">';
-                                    var shortcuts = [
-                                        { label: 'Today',        days: 0  },
-                                        { label: 'Yesterday',    days: -1 },
-                                        { label: 'Last week',    days: -7 },
-                                        { label: 'Last month',   days: -30 },
-                                        { label: 'Last quarter', days: -90 }
-                                    ];
-                                    shortcuts.forEach(function(s) {
-                                        html += '<div class="al-drp-shortcut" data-shortcut="' + s.days + '">' + s.label + '</div>';
-                                    });
-                                    html += '<div class="al-drp-shortcut al-drp-reset" data-shortcut="reset">Reset</div>';
-                                    html += '</div>';
-
-                                    // Calendar
-                                    html += '<div class="al-drp-cal">';
-                                    html += '<div class="al-drp-cal-header">';
-                                    html += '<button class="al-drp-nav" id="alDrpPrev">&#8249;</button>';
-                                    html += '<span class="al-drp-cal-title">' + months[m] + ' ' + y + '</span>';
-                                    html += '<button class="al-drp-nav" id="alDrpNext">&#8250;</button>';
-                                    html += '</div>';
-                                    html += '<div class="al-drp-grid">';
-                                    dows.forEach(function(d) { html += '<div class="al-drp-dow">' + d + '</div>'; });
-
-                                    // Prev month trailing days
-                                    for (var i = 0; i < firstDay; i++) {
-                                        var day = daysInPrev - firstDay + 1 + i;
-                                        html += '<div class="al-drp-day al-drp-empty">' + day + '</div>';
-                                    }
-                                    // Current month days
-                                    for (var d2 = 1; d2 <= daysInMonth; d2++) {
-                                        var thisDate = new Date(y, m, d2);
-                                        var cls = 'al-drp-day';
-                                        var isStart = drpState.startDate && thisDate.getTime() === drpState.startDate.getTime();
-                                        var isEnd   = drpState.endDate   && thisDate.getTime() === drpState.endDate.getTime();
-                                        var inRange = drpState.startDate && drpState.endDate && thisDate > drpState.startDate && thisDate < drpState.endDate;
-                                        if (isStart) cls += ' al-drp-start';
-                                        if (isEnd)   cls += ' al-drp-end';
-                                        if (inRange) cls += ' al-drp-in-range';
-                                        html += '<div class="' + cls + '" data-date="' + fmtDate(thisDate) + '">' + d2 + '</div>';
-                                    }
-                                    // Next month leading days
-                                    var totalCells = firstDay + daysInMonth;
-                                    var remaining = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
-                                    for (var n = 1; n <= remaining; n++) {
-                                        html += '<div class="al-drp-day al-drp-other">' + n + '</div>';
-                                    }
-                                    html += '</div></div>'; // grid + cal
-
-                                    html += '</div>'; // body
-                                    html += '<div class="al-drp-footer">';
-                                    html += '<button class="al-drp-cancel" id="alDrpCancel">Cancel</button>';
-                                    html += '<button class="al-drp-apply" id="alDrpApply">Apply</button>';
-                                    html += '</div></div>';
-
-                                    valDd.innerHTML = html;
-
-                                    // Nav
-                                    valDd.querySelector('#alDrpPrev').addEventListener('click', function(e) {
-                                        e.stopPropagation();
-                                        drpState.month--;
-                                        if (drpState.month < 0) { drpState.month = 11; drpState.year--; }
-                                        buildDrp();
-                                    });
-                                    valDd.querySelector('#alDrpNext').addEventListener('click', function(e) {
-                                        e.stopPropagation();
-                                        drpState.month++;
-                                        if (drpState.month > 11) { drpState.month = 0; drpState.year++; }
-                                        buildDrp();
-                                    });
-
-                                    // Day clicks
-                                    valDd.querySelectorAll('.al-drp-day[data-date]').forEach(function(el) {
-                                        el.addEventListener('click', function(e) {
-                                            e.stopPropagation();
-                                            var d = new Date(this.dataset.date);
-                                            if (!drpState.startDate || drpState.endDate || drpState.selecting === 'start') {
-                                                drpState.startDate = d;
-                                                drpState.endDate = null;
-                                                drpState.selecting = 'end';
-                                            } else {
-                                                if (d < drpState.startDate) {
-                                                    drpState.endDate = drpState.startDate;
-                                                    drpState.startDate = d;
-                                                } else {
-                                                    drpState.endDate = d;
-                                                }
-                                                drpState.selecting = 'start';
-                                            }
-                                            buildDrp();
-                                        });
-                                    });
-
-                                    // Shortcuts
-                                    valDd.querySelectorAll('.al-drp-shortcut[data-shortcut]').forEach(function(el) {
-                                        el.addEventListener('click', function(e) {
-                                            e.stopPropagation();
-                                            var v = this.dataset.shortcut;
-                                            if (v === 'reset') {
-                                                drpState.startDate = null;
-                                                drpState.endDate = null;
-                                                drpState.selecting = 'start';
-                                            } else {
-                                                var today = new Date(); today.setHours(0,0,0,0);
-                                                var offset = parseInt(v);
-                                                var from = new Date(today);
-                                                from.setDate(from.getDate() + offset);
-                                                drpState.startDate = offset === 0 ? today : from;
-                                                drpState.endDate   = offset === 0 ? today : today;
-                                                drpState.year  = drpState.startDate.getFullYear();
-                                                drpState.month = drpState.startDate.getMonth();
-                                            }
-                                            buildDrp();
-                                        });
-                                    });
-
-                                    // Apply
-                                    valDd.querySelector('#alDrpApply').addEventListener('click', function(e) {
-                                        e.stopPropagation();
-                                        if (drpState.startDate) {
-                                            alActiveFilters.dateRange = {
-                                                from: fmtDate(drpState.startDate),
-                                                to:   drpState.endDate ? fmtDate(drpState.endDate) : fmtDate(drpState.startDate),
-                                                label: fmtDisplay(drpState.startDate) + (drpState.endDate ? ' – ' + fmtDisplay(drpState.endDate) : '')
-                                            };
-                                            renderAlPills();
-                                            updateAlCount();
-                                            applyAlFilters();
-                                        }
-                                        document.getElementById('alFilterDropdown').classList.remove('open');
-                                        valDd.classList.remove('open');
-                                    });
-
-                                    // Cancel
-                                    valDd.querySelector('#alDrpCancel').addEventListener('click', function(e) {
-                                        e.stopPropagation();
-                                        document.getElementById('alFilterDropdown').classList.remove('open');
-                                        valDd.classList.remove('open');
-                                    });
-                                }
-
-                                buildDrp();
-                                valDd.addEventListener('click', function(e) { e.stopPropagation(); });
+                            var vals = alActiveFilters[cat]; var def = alFilterDefs[cat];
+                            if (cat === 'dateRange') {
+                                var parts = []; if (vals.from) parts.push('From ' + vals.from); if (vals.to) parts.push('To ' + vals.to);
+                                if (!parts.length) return;
+                                var pill = document.createElement('div'); pill.className = 'cl-filter-pill';
+                                pill.innerHTML = '<span class="cl-filter-pill-label">' + def.label + ':</span> <span class="cl-filter-pill-value">' + parts.join(' ') + '</span><button class="cl-filter-pill-remove" data-category="' + cat + '">&times;</button>';
+                                pill.querySelector('.cl-filter-pill-remove').addEventListener('click', function() { removeAlFilter(this.dataset.category); });
+                                container.appendChild(pill);
                             } else {
-                                def.options.forEach(function(val) {
-                                    var opt2 = document.createElement('div');
-                                    opt2.className = 'cl-filter-value-option';
-                                    opt2.innerHTML = '<span class="cl-filter-value-label">' + val + '</span>';
-                                    opt2.addEventListener('click', function() {
-                                        addAlFilter(alCurrentCategory, val);
-                                        document.getElementById('alFilterDropdown').classList.remove('open');
-                                        valDd.classList.remove('open');
+                                vals.forEach(function(val) {
+                                    var pill = document.createElement('div'); pill.className = 'cl-filter-pill';
+                                    pill.innerHTML = '<span class="cl-filter-pill-label">' + def.label + ':</span> <span class="cl-filter-pill-value">' + val + '</span><button class="cl-filter-pill-remove" data-category="' + cat + '" data-value="' + val + '">&times;</button>';
+                                    pill.querySelector('.cl-filter-pill-remove').addEventListener('click', function() {
+                                        var c = this.dataset.category, v = this.dataset.value, i = alActiveFilters[c]?alActiveFilters[c].indexOf(v):-1;
+                                        if (i > -1) { alActiveFilters[c].splice(i,1); if(!alActiveFilters[c].length) delete alActiveFilters[c]; }
+                                        buildAlPanel('alFilterDropdown', alFilterDefs, alActiveFilters, toggleAlFilter1, function(){ renderAlPills1(); updateAlCount1(); applyAlFilters(); });
+                                        renderAlPills1(); updateAlCount1(); applyAlFilters();
                                     });
-                                    valDd.appendChild(opt2);
+                                    container.appendChild(pill);
                                 });
                             }
-
-                            var rect = document.getElementById('alFilterDropdown').getBoundingClientRect();
-                            valDd.style.left = (rect.width + 4) + 'px';
-                            valDd.style.top = '0px';
-                            valDd.classList.add('open');
                         });
+                        if (Object.keys(alActiveFilters).length > 0) {
+                            var ab = document.createElement('button'); ab.className = 'cl-add-filter-pill'; ab.textContent = '+';
+                            ab.addEventListener('click', function(e) { e.stopPropagation(); var dd=document.getElementById('alFilterDropdown'); dd.classList.add('open'); buildAlPanel('alFilterDropdown', alFilterDefs, alActiveFilters, toggleAlFilter1, function(){ renderAlPills1(); updateAlCount1(); applyAlFilters(); }); });
+                            container.appendChild(ab);
+                            container.appendChild(makeClearAllBtn(alActiveFilters, function(){ buildAlPanel('alFilterDropdown', alFilterDefs, alActiveFilters, toggleAlFilter1, function(){ renderAlPills1(); updateAlCount1(); applyAlFilters(); }); renderAlPills1(); updateAlCount1(); applyAlFilters(); }));
+                        }
+                    }
+                    document.getElementById('alAddFilterBtn').addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        var dd = document.getElementById('alFilterDropdown');
+                        var open = dd.classList.toggle('open');
+                        if (open) buildAlPanel('alFilterDropdown', alFilterDefs, alActiveFilters, toggleAlFilter1, function(){ renderAlPills1(); updateAlCount1(); applyAlFilters(); });
                     });
-
-                    var alCloseValTimer;
-                    document.getElementById('alFilterDropdown').addEventListener('mouseleave', function() {
-                        alCloseValTimer = setTimeout(function() {
-                            document.getElementById('alFilterValueDropdown').classList.remove('open');
-                            document.querySelectorAll('#alFilterDropdown .cl-filter-option').forEach(function(o) { o.classList.remove('active'); });
-                        }, 100);
-                    });
-                    document.getElementById('alFilterValueDropdown').addEventListener('mouseenter', function() { clearTimeout(alCloseValTimer); });
-                    document.getElementById('alFilterValueDropdown').addEventListener('mouseleave', function() {
-                        document.getElementById('alFilterValueDropdown').classList.remove('open');
-                        document.querySelectorAll('#alFilterDropdown .cl-filter-option').forEach(function(o) { o.classList.remove('active'); });
-                    });
-
-                    document.addEventListener('click', function() {
-                        document.getElementById('alFilterDropdown').classList.remove('open');
-                        document.getElementById('alFilterValueDropdown').classList.remove('open');
+                    document.addEventListener('click', function(e) {
+                        var dd = document.getElementById('alFilterDropdown');
+                        if (dd && !dd.contains(e.target) && e.target !== document.getElementById('alAddFilterBtn')) dd.classList.remove('open');
                     });
 
                     document.getElementById('alSearchInput').addEventListener('input', applyAlFilters);
@@ -1688,111 +1606,84 @@
                         var dateFrom = alActiveFilters.dateRange ? alActiveFilters.dateRange.from : null;
                         var dateTo   = alActiveFilters.dateRange ? alActiveFilters.dateRange.to   : null;
                         filteredRows = ALL_ROWS.filter(function(r) {
-                            if (alActiveFilters.user   && r.user   !== alActiveFilters.user) return false;
-                            if (alActiveFilters.module && r.module !== alModuleMap[alActiveFilters.module]) return false;
-                            if (alActiveFilters.action && r.action !== alActionMap[alActiveFilters.action]) return false;
+                            if (alActiveFilters.user   && alActiveFilters.user.length   && alActiveFilters.user.indexOf(r.user) === -1) return false;
+                            if (alActiveFilters.module && alActiveFilters.module.length && !alActiveFilters.module.some(function(m){ return r.module === alModuleMap[m]; })) return false;
+                            if (alActiveFilters.action && alActiveFilters.action.length && !alActiveFilters.action.some(function(a){ return r.action === alActionMap[a]; })) return false;
                             if (dateFrom || dateTo) { var d = parseRowDate(r.ts); if (dateFrom && d < new Date(dateFrom)) return false; if (dateTo && d > new Date(dateTo)) return false; }
                             if (query && (r.user + r.moduleLabel + r.field + r.ts).toLowerCase().indexOf(query) === -1) return false;
                             return true;
                         });
                         render();
                     }
-
-                    function addAlFilter(cat, val) { alActiveFilters[cat] = val; renderAlPills(); updateAlCount(); applyAlFilters(); }
-                    function removeAlFilter(cat)   { delete alActiveFilters[cat]; renderAlPills(); updateAlCount(); applyAlFilters(); }
-
-                    function updateAlCount() {
-                        var count = Object.keys(alActiveFilters).length;
+                    function toggleAlFilter2(cat, val) {
+                        if (!alActiveFilters[cat]) alActiveFilters[cat] = [];
+                        var idx = alActiveFilters[cat].indexOf(val);
+                        if (idx > -1) { alActiveFilters[cat].splice(idx,1); if(!alActiveFilters[cat].length) delete alActiveFilters[cat]; }
+                        else { alActiveFilters[cat].push(val); }
+                        buildAlPanel('alFilterDropdown2', alFilterDefs, alActiveFilters, toggleAlFilter2, function(){ renderAlPills2(); updateAlCount2(); applyAlFilters(); });
+                        renderAlPills2(); updateAlCount2(); applyAlFilters();
+                    }
+                    function addAlFilter(cat, val) {
+                        if (!alActiveFilters[cat]) alActiveFilters[cat] = [];
+                        if (alActiveFilters[cat].indexOf(val) === -1) alActiveFilters[cat].push(val);
+                        buildAlPanel('alFilterDropdown2', alFilterDefs, alActiveFilters, toggleAlFilter2, function(){ renderAlPills2(); updateAlCount2(); applyAlFilters(); });
+                        renderAlPills2(); updateAlCount2(); applyAlFilters();
+                    }
+                    function removeAlFilter(cat) {
+                        delete alActiveFilters[cat];
+                        buildAlPanel('alFilterDropdown2', alFilterDefs, alActiveFilters, toggleAlFilter2, function(){ renderAlPills2(); updateAlCount2(); applyAlFilters(); });
+                        renderAlPills2(); updateAlCount2(); applyAlFilters();
+                    }
+                    function updateAlCount2() {
+                        var count = Object.keys(alActiveFilters).reduce(function(sum, cat) {
+                            return sum + (Array.isArray(alActiveFilters[cat]) ? alActiveFilters[cat].length : 1);
+                        }, 0);
                         var el = document.getElementById('alFilterCount2');
                         if (count > 0) { el.textContent = count; el.style.display = 'inline-flex'; } else { el.style.display = 'none'; }
                     }
-
-                    function renderAlPills() {
+                    function renderAlPills2() {
                         var container = document.getElementById('alActiveFilters2');
                         container.innerHTML = '';
                         Object.keys(alActiveFilters).forEach(function(cat) {
-                            var raw = alActiveFilters[cat];
-                            var def = alFilterDefs[cat];
-                            var displayValue = (cat === 'dateRange') ? raw.label : raw;
-                            var pill = document.createElement('div');
-                            pill.className = 'cl-filter-pill';
-                            pill.innerHTML = '<span class="cl-filter-pill-label">' + def.label + ':</span> <span class="cl-filter-pill-value">' + displayValue + '</span><button class="cl-filter-pill-remove" data-category="' + cat + '">&times;</button>';
-                            pill.querySelector('.cl-filter-pill-remove').addEventListener('click', function() { removeAlFilter(this.dataset.category); });
-                            container.appendChild(pill);
-                        });
-                        if (Object.keys(alActiveFilters).length > 0) {
-                            var addBtn = document.createElement('button');
-                            addBtn.className = 'cl-add-filter-pill'; addBtn.textContent = '+';
-                            addBtn.addEventListener('click', function(e) { e.stopPropagation(); document.getElementById('alFilterDropdown2').classList.add('open'); });
-                            container.appendChild(addBtn);
-                        }
-                    }
-
-                    document.getElementById('alAddFilterBtn2').addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        document.getElementById('alFilterDropdown2').classList.toggle('open');
-                        document.getElementById('alFilterValueDropdown2').classList.remove('open');
-                    });
-
-                    document.querySelectorAll('#alFilterDropdown2 .cl-filter-option').forEach(function(opt) {
-                        opt.addEventListener('mouseenter', function() {
-                            document.querySelectorAll('#alFilterDropdown2 .cl-filter-option').forEach(function(o) { o.classList.remove('active'); });
-                            this.classList.add('active');
-                            alCurrentCategory = this.dataset.category;
-                            var def = alFilterDefs[alCurrentCategory];
-                            var valDd = document.getElementById('alFilterValueDropdown2');
-                            valDd.innerHTML = '';
-
-                            if (def.type === 'date') {
-                                var existing = alActiveFilters.dateRange || {};
-                                var drpState = { year: new Date().getFullYear(), month: new Date().getMonth(), startDate: existing.from ? new Date(existing.from) : null, endDate: existing.to ? new Date(existing.to) : null, selecting: existing.from ? null : 'start' };
-                                function fmtDate(d) { if (!d) return ''; return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
-                                function fmtDisplay(d) { if (!d) return ''; var m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; return d.getDate() + ' ' + m[d.getMonth()] + ' ' + String(d.getFullYear()).slice(2); }
-                                function buildDrp() {
-                                    var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
-                                    var dows=['Mo','Tu','We','Th','Fr','Sa','Su'];
-                                    var y=drpState.year, m=drpState.month;
-                                    var firstDay=new Date(y,m,1).getDay(); firstDay=firstDay===0?6:firstDay-1;
-                                    var daysInMonth=new Date(y,m+1,0).getDate(), daysInPrev=new Date(y,m,0).getDate();
-                                    var displayStr=drpState.startDate&&drpState.endDate?fmtDisplay(drpState.startDate)+' – '+fmtDisplay(drpState.endDate):drpState.startDate?fmtDisplay(drpState.startDate)+' – …':'Select range';
-                                    var html='<div class="al-drp"><div class="al-drp-header"><span class="al-drp-display"><i class="fas fa-calendar-alt" style="color:#6a7f89;font-size:12px;"></i>'+displayStr+' <i class="fas fa-chevron-down" style="font-size:10px;color:#6a7f89;"></i></span></div><div class="al-drp-body"><div class="al-drp-shortcuts">';
-                                    [{ label:'Today',days:0},{ label:'Yesterday',days:-1},{ label:'Last week',days:-7},{ label:'Last month',days:-30},{ label:'Last quarter',days:-90}].forEach(function(s){ html+='<div class="al-drp-shortcut" data-shortcut="'+s.days+'">'+s.label+'</div>'; });
-                                    html+='<div class="al-drp-shortcut al-drp-reset" data-shortcut="reset">Reset</div></div><div class="al-drp-cal"><div class="al-drp-cal-header"><button class="al-drp-nav" id="alDrpPrev2">&#8249;</button><span class="al-drp-cal-title">'+months[m]+' '+y+'</span><button class="al-drp-nav" id="alDrpNext2">&#8250;</button></div><div class="al-drp-grid">';
-                                    dows.forEach(function(d){ html+='<div class="al-drp-dow">'+d+'</div>'; });
-                                    for(var i=0;i<firstDay;i++){ html+='<div class="al-drp-day al-drp-empty">'+(daysInPrev-firstDay+1+i)+'</div>'; }
-                                    for(var d2=1;d2<=daysInMonth;d2++){ var thisDate=new Date(y,m,d2); var cls='al-drp-day'; var isStart=drpState.startDate&&thisDate.getTime()===drpState.startDate.getTime(); var isEnd=drpState.endDate&&thisDate.getTime()===drpState.endDate.getTime(); var inRange=drpState.startDate&&drpState.endDate&&thisDate>drpState.startDate&&thisDate<drpState.endDate; if(isStart)cls+=' al-drp-start'; if(isEnd)cls+=' al-drp-end'; if(inRange)cls+=' al-drp-in-range'; html+='<div class="'+cls+'" data-date="'+fmtDate(thisDate)+'">'+d2+'</div>'; }
-                                    var totalCells=firstDay+daysInMonth; var remaining=totalCells%7===0?0:7-(totalCells%7); for(var n=1;n<=remaining;n++){ html+='<div class="al-drp-day al-drp-other">'+n+'</div>'; }
-                                    html+='</div></div></div><div class="al-drp-footer"><button class="al-drp-cancel" id="alDrpCancel2">Cancel</button><button class="al-drp-apply" id="alDrpApply2">Apply</button></div></div>';
-                                    valDd.innerHTML=html;
-                                    valDd.querySelector('#alDrpPrev2').addEventListener('click',function(e){e.stopPropagation();drpState.month--;if(drpState.month<0){drpState.month=11;drpState.year--;}buildDrp();});
-                                    valDd.querySelector('#alDrpNext2').addEventListener('click',function(e){e.stopPropagation();drpState.month++;if(drpState.month>11){drpState.month=0;drpState.year++;}buildDrp();});
-                                    valDd.querySelectorAll('.al-drp-day[data-date]').forEach(function(el){el.addEventListener('click',function(e){e.stopPropagation();var d=new Date(this.dataset.date);if(!drpState.startDate||drpState.endDate||drpState.selecting==='start'){drpState.startDate=d;drpState.endDate=null;drpState.selecting='end';}else{if(d<drpState.startDate){drpState.endDate=drpState.startDate;drpState.startDate=d;}else{drpState.endDate=d;}drpState.selecting='start';}buildDrp();});});
-                                    valDd.querySelectorAll('.al-drp-shortcut[data-shortcut]').forEach(function(el){el.addEventListener('click',function(e){e.stopPropagation();var v=this.dataset.shortcut;if(v==='reset'){drpState.startDate=null;drpState.endDate=null;drpState.selecting='start';}else{var today=new Date();today.setHours(0,0,0,0);var offset=parseInt(v);var from=new Date(today);from.setDate(from.getDate()+offset);drpState.startDate=offset===0?today:from;drpState.endDate=offset===0?today:today;drpState.year=drpState.startDate.getFullYear();drpState.month=drpState.startDate.getMonth();}buildDrp();});});
-                                    valDd.querySelector('#alDrpApply2').addEventListener('click',function(e){e.stopPropagation();if(drpState.startDate){alActiveFilters.dateRange={from:fmtDate(drpState.startDate),to:drpState.endDate?fmtDate(drpState.endDate):fmtDate(drpState.startDate),label:fmtDisplay(drpState.startDate)+(drpState.endDate?' – '+fmtDisplay(drpState.endDate):'')};renderAlPills();updateAlCount();applyAlFilters();}document.getElementById('alFilterDropdown2').classList.remove('open');valDd.classList.remove('open');});
-                                    valDd.querySelector('#alDrpCancel2').addEventListener('click',function(e){e.stopPropagation();document.getElementById('alFilterDropdown2').classList.remove('open');valDd.classList.remove('open');});
-                                }
-                                buildDrp();
-                                valDd.addEventListener('click', function(e) { e.stopPropagation(); });
+                            var vals = alActiveFilters[cat]; var def = alFilterDefs[cat];
+                            if (cat === 'dateRange') {
+                                var parts = []; if (vals.from) parts.push('From ' + vals.from); if (vals.to) parts.push('To ' + vals.to);
+                                if (!parts.length) return;
+                                var pill = document.createElement('div'); pill.className = 'cl-filter-pill';
+                                pill.innerHTML = '<span class="cl-filter-pill-label">' + def.label + ':</span> <span class="cl-filter-pill-value">' + parts.join(' ') + '</span><button class="cl-filter-pill-remove" data-category="' + cat + '">&times;</button>';
+                                pill.querySelector('.cl-filter-pill-remove').addEventListener('click', function() { removeAlFilter(this.dataset.category); });
+                                container.appendChild(pill);
                             } else {
-                                def.options.forEach(function(val) {
-                                    var opt2 = document.createElement('div');
-                                    opt2.className = 'cl-filter-value-option';
-                                    opt2.innerHTML = '<span class="cl-filter-value-label">' + val + '</span>';
-                                    opt2.addEventListener('click', function() { addAlFilter(alCurrentCategory, val); document.getElementById('alFilterDropdown2').classList.remove('open'); valDd.classList.remove('open'); });
-                                    valDd.appendChild(opt2);
+                                vals.forEach(function(val) {
+                                    var pill = document.createElement('div'); pill.className = 'cl-filter-pill';
+                                    pill.innerHTML = '<span class="cl-filter-pill-label">' + def.label + ':</span> <span class="cl-filter-pill-value">' + val + '</span><button class="cl-filter-pill-remove" data-category="' + cat + '" data-value="' + val + '">&times;</button>';
+                                    pill.querySelector('.cl-filter-pill-remove').addEventListener('click', function() {
+                                        var c = this.dataset.category, v = this.dataset.value, i = alActiveFilters[c]?alActiveFilters[c].indexOf(v):-1;
+                                        if (i > -1) { alActiveFilters[c].splice(i,1); if(!alActiveFilters[c].length) delete alActiveFilters[c]; }
+                                        buildAlPanel('alFilterDropdown2', alFilterDefs, alActiveFilters, toggleAlFilter2, function(){ renderAlPills2(); updateAlCount2(); applyAlFilters(); });
+                                        renderAlPills2(); updateAlCount2(); applyAlFilters();
+                                    });
+                                    container.appendChild(pill);
                                 });
                             }
-                            var rect = document.getElementById('alFilterDropdown2').getBoundingClientRect();
-                            valDd.style.left = (rect.width + 4) + 'px'; valDd.style.top = '0px';
-                            valDd.classList.add('open');
                         });
+                        if (Object.keys(alActiveFilters).length > 0) {
+                            var ab = document.createElement('button'); ab.className = 'cl-add-filter-pill'; ab.textContent = '+';
+                            ab.addEventListener('click', function(e) { e.stopPropagation(); var dd=document.getElementById('alFilterDropdown2'); dd.classList.add('open'); buildAlPanel('alFilterDropdown2', alFilterDefs, alActiveFilters, toggleAlFilter2, function(){ renderAlPills2(); updateAlCount2(); applyAlFilters(); }); });
+                            container.appendChild(ab);
+                            container.appendChild(makeClearAllBtn(alActiveFilters, function(){ buildAlPanel('alFilterDropdown2', alFilterDefs, alActiveFilters, toggleAlFilter2, function(){ renderAlPills2(); updateAlCount2(); applyAlFilters(); }); renderAlPills2(); updateAlCount2(); applyAlFilters(); }));
+                        }
+                    }
+                    document.getElementById('alAddFilterBtn2').addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        var dd = document.getElementById('alFilterDropdown2');
+                        var open = dd.classList.toggle('open');
+                        if (open) buildAlPanel('alFilterDropdown2', alFilterDefs, alActiveFilters, toggleAlFilter2, function(){ renderAlPills2(); updateAlCount2(); applyAlFilters(); });
                     });
-
-                    var alCloseValTimer;
-                    document.getElementById('alFilterDropdown2').addEventListener('mouseleave', function() { alCloseValTimer = setTimeout(function() { document.getElementById('alFilterValueDropdown2').classList.remove('open'); document.querySelectorAll('#alFilterDropdown2 .cl-filter-option').forEach(function(o){o.classList.remove('active');}); }, 100); });
-                    document.getElementById('alFilterValueDropdown2').addEventListener('mouseenter', function() { clearTimeout(alCloseValTimer); });
-                    document.getElementById('alFilterValueDropdown2').addEventListener('mouseleave', function() { document.getElementById('alFilterValueDropdown2').classList.remove('open'); document.querySelectorAll('#alFilterDropdown2 .cl-filter-option').forEach(function(o){o.classList.remove('active');}); });
-                    document.addEventListener('click', function() { document.getElementById('alFilterDropdown2').classList.remove('open'); document.getElementById('alFilterValueDropdown2').classList.remove('open'); });
+                    document.addEventListener('click', function(e) {
+                        var dd = document.getElementById('alFilterDropdown2');
+                        if (dd && !dd.contains(e.target) && e.target !== document.getElementById('alAddFilterBtn2')) dd.classList.remove('open');
+                    });
 
                     document.getElementById('alSearchInput2').addEventListener('input', applyAlFilters);
 
@@ -2001,106 +1892,84 @@
                         var dateFrom = alActiveFilters.dateRange ? alActiveFilters.dateRange.from : null;
                         var dateTo   = alActiveFilters.dateRange ? alActiveFilters.dateRange.to   : null;
                         filteredRows = ALL_ROWS.filter(function(r) {
-                            if (alActiveFilters.user   && r.user   !== alActiveFilters.user) return false;
-                            if (alActiveFilters.module && r.module !== alModuleMap[alActiveFilters.module]) return false;
-                            if (alActiveFilters.action && r.action !== alActionMap[alActiveFilters.action]) return false;
+                            if (alActiveFilters.user   && alActiveFilters.user.length   && alActiveFilters.user.indexOf(r.user) === -1) return false;
+                            if (alActiveFilters.module && alActiveFilters.module.length && !alActiveFilters.module.some(function(m){ return r.module === alModuleMap[m]; })) return false;
+                            if (alActiveFilters.action && alActiveFilters.action.length && !alActiveFilters.action.some(function(a){ return r.action === alActionMap[a]; })) return false;
                             if (dateFrom || dateTo) { var d=parseRowDate(r.ts); if(dateFrom && d<new Date(dateFrom))return false; if(dateTo && d>new Date(dateTo))return false; }
                             if (query && (r.user+r.moduleLabel+r.field+r.ts).toLowerCase().indexOf(query)===-1) return false;
                             return true;
                         });
                         render();
                     }
-
-                    function addAlFilter(cat, val) { alActiveFilters[cat]=val; renderAlPills(); updateAlCount(); applyAlFilters(); }
-                    function removeAlFilter(cat)   { delete alActiveFilters[cat]; renderAlPills(); updateAlCount(); applyAlFilters(); }
-
-                    function updateAlCount() {
-                        var count = Object.keys(alActiveFilters).length;
-                        var el = document.getElementById('alFilterCount3');
-                        if (count>0){el.textContent=count;el.style.display='inline-flex';}else{el.style.display='none';}
+                    function toggleAlFilter3(cat, val) {
+                        if (!alActiveFilters[cat]) alActiveFilters[cat] = [];
+                        var idx = alActiveFilters[cat].indexOf(val);
+                        if (idx > -1) { alActiveFilters[cat].splice(idx,1); if(!alActiveFilters[cat].length) delete alActiveFilters[cat]; }
+                        else { alActiveFilters[cat].push(val); }
+                        buildAlPanel('alFilterDropdown3', alFilterDefs, alActiveFilters, toggleAlFilter3, function(){ renderAlPills3(); updateAlCount3(); applyAlFilters(); });
+                        renderAlPills3(); updateAlCount3(); applyAlFilters();
                     }
-
-                    function renderAlPills() {
+                    function addAlFilter(cat, val) {
+                        if (!alActiveFilters[cat]) alActiveFilters[cat] = [];
+                        if (alActiveFilters[cat].indexOf(val) === -1) alActiveFilters[cat].push(val);
+                        buildAlPanel('alFilterDropdown3', alFilterDefs, alActiveFilters, toggleAlFilter3, function(){ renderAlPills3(); updateAlCount3(); applyAlFilters(); });
+                        renderAlPills3(); updateAlCount3(); applyAlFilters();
+                    }
+                    function removeAlFilter(cat) {
+                        delete alActiveFilters[cat];
+                        buildAlPanel('alFilterDropdown3', alFilterDefs, alActiveFilters, toggleAlFilter3, function(){ renderAlPills3(); updateAlCount3(); applyAlFilters(); });
+                        renderAlPills3(); updateAlCount3(); applyAlFilters();
+                    }
+                    function updateAlCount3() {
+                        var count = Object.keys(alActiveFilters).reduce(function(sum, cat) {
+                            return sum + (Array.isArray(alActiveFilters[cat]) ? alActiveFilters[cat].length : 1);
+                        }, 0);
+                        var el = document.getElementById('alFilterCount3');
+                        if (count > 0) { el.textContent = count; el.style.display = 'inline-flex'; } else { el.style.display = 'none'; }
+                    }
+                    function renderAlPills3() {
                         var container = document.getElementById('alActiveFilters3');
                         container.innerHTML = '';
                         Object.keys(alActiveFilters).forEach(function(cat) {
-                            var raw=alActiveFilters[cat]; var def=alFilterDefs[cat];
-                            var displayValue=(cat==='dateRange')?raw.label:raw;
-                            var pill=document.createElement('div'); pill.className='cl-filter-pill';
-                            pill.innerHTML='<span class="cl-filter-pill-label">'+def.label+':</span> <span class="cl-filter-pill-value">'+displayValue+'</span><button class="cl-filter-pill-remove" data-category="'+cat+'">&times;</button>';
-                            pill.querySelector('.cl-filter-pill-remove').addEventListener('click',function(){removeAlFilter(this.dataset.category);});
-                            container.appendChild(pill);
-                        });
-                        if (Object.keys(alActiveFilters).length>0) {
-                            var addBtn=document.createElement('button'); addBtn.className='cl-add-filter-pill'; addBtn.textContent='+';
-                            addBtn.addEventListener('click',function(e){e.stopPropagation();document.getElementById('alFilterDropdown3').classList.add('open');});
-                            container.appendChild(addBtn);
-                        }
-                    }
-
-                    document.getElementById('alAddFilterBtn3').addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        document.getElementById('alFilterDropdown3').classList.toggle('open');
-                        document.getElementById('alFilterValueDropdown3').classList.remove('open');
-                    });
-
-                    document.querySelectorAll('#alFilterDropdown3 .cl-filter-option').forEach(function(opt) {
-                        opt.addEventListener('mouseenter', function() {
-                            document.querySelectorAll('#alFilterDropdown3 .cl-filter-option').forEach(function(o){o.classList.remove('active');});
-                            this.classList.add('active');
-                            alCurrentCategory = this.dataset.category;
-                            var def = alFilterDefs[alCurrentCategory];
-                            var valDd = document.getElementById('alFilterValueDropdown3');
-                            valDd.innerHTML = '';
-                            if (def.type === 'date') {
-                                var existing = alActiveFilters.dateRange || {};
-                                var drpState = { year:new Date().getFullYear(), month:new Date().getMonth(), startDate:existing.from?new Date(existing.from):null, endDate:existing.to?new Date(existing.to):null, selecting:existing.from?null:'start' };
-                                function fmtDate(d){if(!d)return'';return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
-                                function fmtDisplay(d){if(!d)return'';var m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return d.getDate()+' '+m[d.getMonth()]+' '+String(d.getFullYear()).slice(2);}
-                                function buildDrp() {
-                                    var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
-                                    var dows=['Mo','Tu','We','Th','Fr','Sa','Su'];
-                                    var y=drpState.year,m=drpState.month;
-                                    var firstDay=new Date(y,m,1).getDay();firstDay=firstDay===0?6:firstDay-1;
-                                    var daysInMonth=new Date(y,m+1,0).getDate(),daysInPrev=new Date(y,m,0).getDate();
-                                    var displayStr=drpState.startDate&&drpState.endDate?fmtDisplay(drpState.startDate)+' – '+fmtDisplay(drpState.endDate):drpState.startDate?fmtDisplay(drpState.startDate)+' – …':'Select range';
-                                    var html='<div class="al-drp"><div class="al-drp-header"><span class="al-drp-display"><i class="fas fa-calendar-alt" style="color:#6a7f89;font-size:12px;"></i>'+displayStr+' <i class="fas fa-chevron-down" style="font-size:10px;color:#6a7f89;"></i></span></div><div class="al-drp-body"><div class="al-drp-shortcuts">';
-                                    [{label:'Today',days:0},{label:'Yesterday',days:-1},{label:'Last week',days:-7},{label:'Last month',days:-30},{label:'Last quarter',days:-90}].forEach(function(s){html+='<div class="al-drp-shortcut" data-shortcut="'+s.days+'">'+s.label+'</div>';});
-                                    html+='<div class="al-drp-shortcut al-drp-reset" data-shortcut="reset">Reset</div></div><div class="al-drp-cal"><div class="al-drp-cal-header"><button class="al-drp-nav" id="alDrpPrev3">&#8249;</button><span class="al-drp-cal-title">'+months[m]+' '+y+'</span><button class="al-drp-nav" id="alDrpNext3">&#8250;</button></div><div class="al-drp-grid">';
-                                    dows.forEach(function(d){html+='<div class="al-drp-dow">'+d+'</div>';});
-                                    for(var i=0;i<firstDay;i++){html+='<div class="al-drp-day al-drp-empty">'+(daysInPrev-firstDay+1+i)+'</div>';}
-                                    for(var d2=1;d2<=daysInMonth;d2++){var td=new Date(y,m,d2);var cls='al-drp-day';var iS=drpState.startDate&&td.getTime()===drpState.startDate.getTime();var iE=drpState.endDate&&td.getTime()===drpState.endDate.getTime();var iR=drpState.startDate&&drpState.endDate&&td>drpState.startDate&&td<drpState.endDate;if(iS)cls+=' al-drp-start';if(iE)cls+=' al-drp-end';if(iR)cls+=' al-drp-in-range';html+='<div class="'+cls+'" data-date="'+fmtDate(td)+'">'+d2+'</div>';}
-                                    var tc=firstDay+daysInMonth;var rem=tc%7===0?0:7-(tc%7);for(var n=1;n<=rem;n++){html+='<div class="al-drp-day al-drp-other">'+n+'</div>';}
-                                    html+='</div></div></div><div class="al-drp-footer"><button class="al-drp-cancel" id="alDrpCancel3">Cancel</button><button class="al-drp-apply" id="alDrpApply3">Apply</button></div></div>';
-                                    valDd.innerHTML=html;
-                                    valDd.querySelector('#alDrpPrev3').addEventListener('click',function(e){e.stopPropagation();drpState.month--;if(drpState.month<0){drpState.month=11;drpState.year--;}buildDrp();});
-                                    valDd.querySelector('#alDrpNext3').addEventListener('click',function(e){e.stopPropagation();drpState.month++;if(drpState.month>11){drpState.month=0;drpState.year++;}buildDrp();});
-                                    valDd.querySelectorAll('.al-drp-day[data-date]').forEach(function(el){el.addEventListener('click',function(e){e.stopPropagation();var d=new Date(this.dataset.date);if(!drpState.startDate||drpState.endDate||drpState.selecting==='start'){drpState.startDate=d;drpState.endDate=null;drpState.selecting='end';}else{if(d<drpState.startDate){drpState.endDate=drpState.startDate;drpState.startDate=d;}else{drpState.endDate=d;}drpState.selecting='start';}buildDrp();});});
-                                    valDd.querySelectorAll('.al-drp-shortcut[data-shortcut]').forEach(function(el){el.addEventListener('click',function(e){e.stopPropagation();var v=this.dataset.shortcut;if(v==='reset'){drpState.startDate=null;drpState.endDate=null;drpState.selecting='start';}else{var today=new Date();today.setHours(0,0,0,0);var offset=parseInt(v);var from=new Date(today);from.setDate(from.getDate()+offset);drpState.startDate=offset===0?today:from;drpState.endDate=offset===0?today:today;drpState.year=drpState.startDate.getFullYear();drpState.month=drpState.startDate.getMonth();}buildDrp();});});
-                                    valDd.querySelector('#alDrpApply3').addEventListener('click',function(e){e.stopPropagation();if(drpState.startDate){alActiveFilters.dateRange={from:fmtDate(drpState.startDate),to:drpState.endDate?fmtDate(drpState.endDate):fmtDate(drpState.startDate),label:fmtDisplay(drpState.startDate)+(drpState.endDate?' – '+fmtDisplay(drpState.endDate):'')};renderAlPills();updateAlCount();applyAlFilters();}document.getElementById('alFilterDropdown3').classList.remove('open');valDd.classList.remove('open');});
-                                    valDd.querySelector('#alDrpCancel3').addEventListener('click',function(e){e.stopPropagation();document.getElementById('alFilterDropdown3').classList.remove('open');valDd.classList.remove('open');});
-                                }
-                                buildDrp();
-                                valDd.addEventListener('click',function(e){e.stopPropagation();});
+                            var vals = alActiveFilters[cat]; var def = alFilterDefs[cat];
+                            if (cat === 'dateRange') {
+                                var parts = []; if (vals.from) parts.push('From ' + vals.from); if (vals.to) parts.push('To ' + vals.to);
+                                if (!parts.length) return;
+                                var pill = document.createElement('div'); pill.className = 'cl-filter-pill';
+                                pill.innerHTML = '<span class="cl-filter-pill-label">' + def.label + ':</span> <span class="cl-filter-pill-value">' + parts.join(' ') + '</span><button class="cl-filter-pill-remove" data-category="' + cat + '">&times;</button>';
+                                pill.querySelector('.cl-filter-pill-remove').addEventListener('click', function() { removeAlFilter(this.dataset.category); });
+                                container.appendChild(pill);
                             } else {
-                                def.options.forEach(function(val) {
-                                    var opt2=document.createElement('div'); opt2.className='cl-filter-value-option';
-                                    opt2.innerHTML='<span class="cl-filter-value-label">'+val+'</span>';
-                                    opt2.addEventListener('click',function(){addAlFilter(alCurrentCategory,val);document.getElementById('alFilterDropdown3').classList.remove('open');valDd.classList.remove('open');});
-                                    valDd.appendChild(opt2);
+                                vals.forEach(function(val) {
+                                    var pill = document.createElement('div'); pill.className = 'cl-filter-pill';
+                                    pill.innerHTML = '<span class="cl-filter-pill-label">' + def.label + ':</span> <span class="cl-filter-pill-value">' + val + '</span><button class="cl-filter-pill-remove" data-category="' + cat + '" data-value="' + val + '">&times;</button>';
+                                    pill.querySelector('.cl-filter-pill-remove').addEventListener('click', function() {
+                                        var c = this.dataset.category, v = this.dataset.value, i = alActiveFilters[c]?alActiveFilters[c].indexOf(v):-1;
+                                        if (i > -1) { alActiveFilters[c].splice(i,1); if(!alActiveFilters[c].length) delete alActiveFilters[c]; }
+                                        buildAlPanel('alFilterDropdown3', alFilterDefs, alActiveFilters, toggleAlFilter3, function(){ renderAlPills3(); updateAlCount3(); applyAlFilters(); });
+                                        renderAlPills3(); updateAlCount3(); applyAlFilters();
+                                    });
+                                    container.appendChild(pill);
                                 });
                             }
-                            var rect=document.getElementById('alFilterDropdown3').getBoundingClientRect();
-                            valDd.style.left=(rect.width+4)+'px';valDd.style.top='0px';
-                            valDd.classList.add('open');
                         });
+                        if (Object.keys(alActiveFilters).length > 0) {
+                            var ab = document.createElement('button'); ab.className = 'cl-add-filter-pill'; ab.textContent = '+';
+                            ab.addEventListener('click', function(e) { e.stopPropagation(); var dd=document.getElementById('alFilterDropdown3'); dd.classList.add('open'); buildAlPanel('alFilterDropdown3', alFilterDefs, alActiveFilters, toggleAlFilter3, function(){ renderAlPills3(); updateAlCount3(); applyAlFilters(); }); });
+                            container.appendChild(ab);
+                            container.appendChild(makeClearAllBtn(alActiveFilters, function(){ buildAlPanel('alFilterDropdown3', alFilterDefs, alActiveFilters, toggleAlFilter3, function(){ renderAlPills3(); updateAlCount3(); applyAlFilters(); }); renderAlPills3(); updateAlCount3(); applyAlFilters(); }));
+                        }
+                    }
+                    document.getElementById('alAddFilterBtn3').addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        var dd = document.getElementById('alFilterDropdown3');
+                        var open = dd.classList.toggle('open');
+                        if (open) buildAlPanel('alFilterDropdown3', alFilterDefs, alActiveFilters, toggleAlFilter3, function(){ renderAlPills3(); updateAlCount3(); applyAlFilters(); });
                     });
-
-                    var alCloseValTimer3;
-                    document.getElementById('alFilterDropdown3').addEventListener('mouseleave',function(){alCloseValTimer3=setTimeout(function(){document.getElementById('alFilterValueDropdown3').classList.remove('open');document.querySelectorAll('#alFilterDropdown3 .cl-filter-option').forEach(function(o){o.classList.remove('active');});},100);});
-                    document.getElementById('alFilterValueDropdown3').addEventListener('mouseenter',function(){clearTimeout(alCloseValTimer3);});
-                    document.getElementById('alFilterValueDropdown3').addEventListener('mouseleave',function(){document.getElementById('alFilterValueDropdown3').classList.remove('open');document.querySelectorAll('#alFilterDropdown3 .cl-filter-option').forEach(function(o){o.classList.remove('active');});});
-                    document.addEventListener('click',function(){document.getElementById('alFilterDropdown3').classList.remove('open');document.getElementById('alFilterValueDropdown3').classList.remove('open');});
+                    document.addEventListener('click', function(e) {
+                        var dd = document.getElementById('alFilterDropdown3');
+                        if (dd && !dd.contains(e.target) && e.target !== document.getElementById('alAddFilterBtn3')) dd.classList.remove('open');
+                    });
 
                     document.getElementById('alSearchInput3').addEventListener('input', applyAlFilters);
                     document.querySelector('[data-tab="audit-log-3"]').addEventListener('click', function() { setTimeout(render, 0); });
