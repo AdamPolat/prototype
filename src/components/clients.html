@@ -31,57 +31,43 @@
             font-size: 11px; font-weight: 700; margin-left: 4px;
         }
 
-        /* Filter panel — single checkbox panel */
+        /* Filter panel — horizontal layout */
         .cl-filter-dropdown {
-            display: none; position: absolute; top: calc(100% + 4px); left: 0;
-            background: #fff; border: 1px solid #c9d8de; border-radius: 12px;
-            box-shadow: 0 6px 24px rgba(0,0,0,0.13); z-index: 300;
-            width: 260px; max-height: 480px; overflow-y: auto;
+            display: none; position: absolute; top: calc(100% + 6px); left: 0;
+            background: #fff; border: 1px solid #ccd5d9; border-radius: 14px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12); z-index: 300;
+            padding: 25px 22px 31px; white-space: nowrap; box-sizing: border-box;
         }
         .cl-filter-dropdown.open { display: block; }
-        /* hide the old value dropdown — no longer used */
         .cl-filter-value-dropdown { display: none !important; }
-
-        .cl-filter-section { border-bottom: 1px solid #eef2f4; }
-        .cl-filter-section:last-child { border-bottom: none; }
-        .cl-filter-section-head {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 12px 16px; cursor: pointer; user-select: none;
-        }
-        .cl-filter-section-head:hover { background: #f8fafb; }
-        .cl-filter-section-title {
-            font-size: 13px; font-weight: 600; color: #1a2b35;
-        }
-        .cl-filter-section-chevron {
-            font-size: 11px; color: #6a7f89;
-            transition: transform 0.18s ease;
-        }
-        .cl-filter-section.open .cl-filter-section-chevron { transform: rotate(180deg); }
-        .cl-filter-section-body { display: none; padding: 4px 0 10px; }
-        .cl-filter-section.open .cl-filter-section-body { display: block; }
-
-        .cl-filter-cb-row {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 7px 16px; cursor: pointer;
-        }
-        .cl-filter-cb-row:hover { background: #f8fafb; }
-        .cl-filter-cb-left { display: flex; align-items: center; gap: 10px; }
+        .cl-filter-panel-inner { display: flex; align-items: flex-start; gap: 0; width: 100%; }
+        .cl-filter-col { flex: 1; display: flex; flex-direction: column; padding-right: 28px; margin-right: 28px; border-right: 1px solid #eef2f4; }
+        .cl-filter-col:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+        .cl-filter-col-title { font-size: 13px; font-weight: 700; color: #1a2b35; margin-bottom: 10px; }
+        .cl-filter-cb-row { display: flex; align-items: center; gap: 11px; padding: 7px 3px; cursor: pointer; white-space: nowrap; }
+        .cl-filter-cb-row:hover .cl-filter-cb-label { color: #2d6a35; }
+        .cl-filter-cb-left { display: flex; align-items: center; gap: 11px; }
         .cl-filter-cb {
-            width: 16px; height: 16px; border: 1.5px solid #b0bec5; border-radius: 4px;
+            width: 18px; height: 18px; border: 1.5px solid #b0bec5; border-radius: 4px;
             display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0; background: #fff; transition: background 0.12s, border-color 0.12s;
+            flex-shrink: 0; background: #f9f9f9; transition: background 0.12s, border-color 0.12s;
         }
-        .cl-filter-cb.checked {
-            background: #2d6a35; border-color: #2d6a35;
-        }
+        .cl-filter-cb.checked { background: #2d6a35; border-color: #2d6a35; }
         .cl-filter-cb.checked::after {
-            content: ''; display: block;
-            width: 9px; height: 5px;
+            content: ''; display: block; width: 10px; height: 6px;
             border-left: 2px solid #fff; border-bottom: 2px solid #fff;
             transform: rotate(-45deg) translateY(-1px);
         }
         .cl-filter-cb-label { font-size: 13px; color: #1a2b35; }
-        .cl-filter-cb-count { font-size: 12px; color: #8aa8b2; }
+        .cl-filter-cb-count { font-size: 12px; color: #8aa8b2; margin-left: auto; }
+        .cl-filter-date-label { font-size: 12px; color: #6a7f89; margin-bottom: 4px; margin-top: 10px; }
+        .cl-filter-date-label:first-child { margin-top: 0; }
+        .cl-filter-date-input { padding: 7px 10px; border: 1px solid #c9d8de; border-radius: 8px; font-size: 13px; color: #1a2b35; outline: none; width: 100%; box-sizing: border-box; }
+        .cl-filter-date-input:focus { border-color: #2d6a35; }
+        .cl-filter-search-wrap { position: relative; margin-bottom: 6px; }
+        .cl-filter-search-wrap .fa-search { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #8aa8b2; font-size: 12px; pointer-events: none; }
+        .cl-filter-search-inp { width: 100%; padding: 9px 10px 10px 30px; border: 1px solid #c9d8de; border-radius: 9px; font-size: 12px; outline: none; box-sizing: border-box; }
+        .cl-filter-search-inp:focus { border-color: #2d6a35; }
 
         /* Date picker */
         .cl-date-picker {
@@ -158,6 +144,22 @@
         .cl-search-input { border: none; outline: none; font-size: 13px; color: #1a2b35; background: transparent; width: 100%; }
         .cl-search-input::placeholder { color: #8aa8b2; }
         .cl-add-btn { height: 52px; padding: 0 20px; border-radius: 8px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+
+        /* Full-width table for clients page */
+        #clientsTableWrap { overflow-x: auto; }
+        #clientsTableWrap .ukp-table { min-width: 100%; table-layout: fixed; }
+        #clientsTableWrap .ukp-table thead th { padding: 6px 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        #clientsTableWrap .ukp-table tbody td { padding: 12px 10px; text-align: left; vertical-align: middle; }
+        #clientsTableWrap .ukp-table tbody td:last-child { text-align: right; }
+        #clientsTableWrap .ukp-table thead th:last-child { text-align: right; }
+        #clientsTableWrap .ukp-table thead th:first-child,
+        #clientsTableWrap .ukp-table tbody td:first-child { width: 20%; }
+        #clientsTableWrap .ukp-table thead th:nth-child(2),
+        #clientsTableWrap .ukp-table tbody td:nth-child(2) { width: 14%; }
+        #clientsTableWrap .ukp-table thead th:nth-child(7),
+        #clientsTableWrap .ukp-table tbody td:nth-child(7) { width: 16%; }
+
+        /* Client Status — uses label-tag from styles.css */
 
         /* Client name cell */
         .cl-name-cell { display: flex; align-items: center; gap: 10px; }
@@ -378,12 +380,14 @@
             text-align: left;
         }
         .cl-group-subtable-header .cl-gsth-col { flex-shrink: 0; }
-        .cl-gsth-name   { flex: 0 0 30%; }
-        .cl-gsth-bgl    { flex: 0 0 16%; }
-        .cl-gsth-risk   { flex: 0 0 14%; }
-        .cl-gsth-check  { flex: 0 0 18%; }
-        .cl-gsth-review { flex: 1; }
-        .cl-gsth-act    { flex: 0 0 30px; }
+        .cl-gsth-name       { flex: 0 0 20%; }
+        .cl-gsth-group      { flex: 0 0 10%; }
+        .cl-gsth-status     { flex: 0 0 14%; }
+        .cl-gsth-cdd        { flex: 0 0 12%; }
+        .cl-gsth-risk       { flex: 0 0 10%; }
+        .cl-gsth-assigned   { flex: 0 0 12%; }
+        .cl-gsth-renewal    { flex: 1; }
+        .cl-gsth-act        { flex: 0 0 30px; }
 
         /* Member mini-cards */
         .cl-group-member-card {
@@ -396,12 +400,14 @@
         .cl-group-member-card:last-child { margin-bottom: 0; }
         .cl-group-member-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
         .cl-gmc-col { flex-shrink: 0; font-size: 13px; color: #2a3840; }
-        .cl-gmc-name   { flex: 0 0 30%; display: flex; align-items: center; gap: 10px; justify-content: flex-start; }
-        .cl-gmc-bgl    { flex: 0 0 16%; }
-        .cl-gmc-risk   { flex: 0 0 14%; }
-        .cl-gmc-check  { flex: 0 0 18%; }
-        .cl-gmc-review { flex: 1; }
-        .cl-gmc-act    { flex: 0 0 30px; text-align: right; }
+        .cl-gmc-name     { flex: 0 0 20%; display: flex; align-items: center; gap: 10px; justify-content: flex-start; }
+        .cl-gmc-group    { flex: 0 0 10%; }
+        .cl-gmc-status   { flex: 0 0 14%; }
+        .cl-gmc-cdd      { flex: 0 0 12%; }
+        .cl-gmc-risk     { flex: 0 0 10%; }
+        .cl-gmc-assigned { flex: 0 0 12%; }
+        .cl-gmc-renewal  { flex: 1; }
+        .cl-gmc-act      { flex: 0 0 30px; text-align: right; }
 
         /* Empty state */
         .cl-empty { display:none; flex-direction:column; align-items:center; justify-content:center; padding:60px 20px; text-align:center; opacity:0; transition:opacity 300ms ease; }
@@ -728,11 +734,12 @@
                         <thead>
                             <tr>
                                 <th>Client Name <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" class="ml-1 sort-icon"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg></th>
+                                <th>Group Name</th>
                                 <th>Entity Type <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" class="ml-1 sort-icon"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg></th>
                                 <th>Risk Rating</th>
                                 <th>CDD Status <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" class="ml-1 sort-icon"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg></th>
-                                <th>Last CDD</th>
-                                <th>Next Reviews <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" class="ml-1 sort-icon"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg></th>
+                                <th>CDD Renewal Date <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" class="ml-1 sort-icon"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg></th>
+                                <th>Client Status</th>
                                 <th>Assigned to <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16" class="ml-1 sort-icon"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg></th>
                                 <th>Actions</th>
                             </tr>
@@ -4149,6 +4156,7 @@
                 "lastCdd": "10/03/26",
                 "nextReview": "10/03/27",
                 "assignedTo": "Kim Davidson",
+                "clientStatus": "In Process",
                 "isGroup": true,
                 "members": [
                     {
@@ -4233,6 +4241,7 @@
                 "lastCdd": "04/09/25",
                 "nextReview": "04/03/26",
                 "assignedTo": "Jason Lee",
+                "clientStatus": "Review Onboarding",
                 "isGroup": true,
                 "members": [
                     {
@@ -4286,9 +4295,9 @@
                 "entityType": "Trust",
                 "riskRating": "Low",
                 "cddStatus": "Current",
-                "lastCdd": "15/02/26",
                 "nextReview": "15/02/27",
-                "assignedTo": "Kim Davidson"
+                "assignedTo": "Kim Davidson",
+                "clientStatus": "Pre-commencement"
             },
             {
                 "id": "2",
@@ -4297,9 +4306,9 @@
                 "entityType": "Partnership",
                 "riskRating": "Medium",
                 "cddStatus": "Current",
-                "lastCdd": "03/11/25",
                 "nextReview": "03/11/26",
-                "assignedTo": "Jason Lee"
+                "assignedTo": "Jason Lee",
+                "clientStatus": "In Process"
             },
             {
                 "id": "3",
@@ -4308,9 +4317,9 @@
                 "entityType": "Family",
                 "riskRating": "Low",
                 "cddStatus": "Current",
-                "lastCdd": "22/01/26",
                 "nextReview": "22/01/27",
-                "assignedTo": "Sarah Mitchell"
+                "assignedTo": "Sarah Mitchell",
+                "clientStatus": "Awaiting Client Information"
             },
             {
                 "id": "4",
@@ -4319,9 +4328,9 @@
                 "entityType": "Individual /Sole Trader",
                 "riskRating": "Low",
                 "cddStatus": "Current",
-                "lastCdd": "18/12/25",
                 "nextReview": "18/12/26",
-                "assignedTo": "Kim Davidson"
+                "assignedTo": "Kim Davidson",
+                "clientStatus": "Review Onboarding"
             },
             {
                 "id": "5",
@@ -4330,9 +4339,9 @@
                 "entityType": "Partnership",
                 "riskRating": "High",
                 "cddStatus": "Due Soon",
-                "lastCdd": "05/01/25",
                 "nextReview": "05/04/26",
-                "assignedTo": "Jason Lee"
+                "assignedTo": "Jason Lee",
+                "clientStatus": "Prospect/Contact"
             },
             {
                 "id": "6",
@@ -4341,9 +4350,9 @@
                 "entityType": "Business Group",
                 "riskRating": "High",
                 "cddStatus": "Due Soon",
-                "lastCdd": "12/02/25",
                 "nextReview": "12/04/26",
-                "assignedTo": "Michael Chen"
+                "assignedTo": "Michael Chen",
+                "clientStatus": "In Process"
             },
             {
                 "id": "7",
@@ -4352,9 +4361,9 @@
                 "entityType": "Trust",
                 "riskRating": "Medium",
                 "cddStatus": "Current",
-                "lastCdd": "28/01/26",
                 "nextReview": "28/01/27",
-                "assignedTo": "Sarah Mitchell"
+                "assignedTo": "Sarah Mitchell",
+                "clientStatus": "Pre-commencement"
             },
             {
                 "id": "8",
@@ -4363,9 +4372,9 @@
                 "entityType": "Partnership",
                 "riskRating": "Low",
                 "cddStatus": "Current",
-                "lastCdd": "10/03/26",
                 "nextReview": "10/03/27",
-                "assignedTo": "Kim Davidson"
+                "assignedTo": "Kim Davidson",
+                "clientStatus": "Awaiting Client Information"
             },
             {
                 "id": "9",
@@ -4374,9 +4383,9 @@
                 "entityType": "Family",
                 "riskRating": "Low",
                 "cddStatus": "Current",
-                "lastCdd": "07/02/26",
                 "nextReview": "07/02/27",
-                "assignedTo": "Jason Lee"
+                "assignedTo": "Jason Lee",
+                "clientStatus": "Review Onboarding"
             },
             {
                 "id": "10",
@@ -4385,9 +4394,9 @@
                 "entityType": "Trust",
                 "riskRating": "Medium",
                 "cddStatus": "Current",
-                "lastCdd": "19/01/26",
                 "nextReview": "19/01/27",
-                "assignedTo": "Sarah Mitchell"
+                "assignedTo": "Sarah Mitchell",
+                "clientStatus": "Prospect/Contact"
             },
             {
                 "id": "11",
@@ -4396,9 +4405,9 @@
                 "entityType": "Business Group",
                 "riskRating": "High",
                 "cddStatus": "Overdue",
-                "lastCdd": "08/11/24",
                 "nextReview": "08/02/26",
-                "assignedTo": "Michael Chen"
+                "assignedTo": "Michael Chen",
+                "clientStatus": "In Process"
             },
             {
                 "id": "12",
@@ -4407,9 +4416,9 @@
                 "entityType": "Partnership",
                 "riskRating": "Medium",
                 "cddStatus": "Due Soon",
-                "lastCdd": "25/12/25",
                 "nextReview": "25/04/26",
-                "assignedTo": "Jason Lee"
+                "assignedTo": "Jason Lee",
+                "clientStatus": "Awaiting Client Information"
             },
             {
                 "id": "13",
@@ -4418,9 +4427,9 @@
                 "entityType": "Business Group",
                 "riskRating": "High",
                 "cddStatus": "Due Soon",
-                "lastCdd": "14/01/25",
                 "nextReview": "14/04/26",
-                "assignedTo": "Kim Davidson"
+                "assignedTo": "Kim Davidson",
+                "clientStatus": "Pre-commencement"
             },
             {
                 "id": "14",
@@ -4429,9 +4438,9 @@
                 "entityType": "Individual /Sole Trader",
                 "riskRating": "Low",
                 "cddStatus": "Current",
-                "lastCdd": "02/03/26",
                 "nextReview": "02/03/27",
-                "assignedTo": "Sarah Mitchell"
+                "assignedTo": "Sarah Mitchell",
+                "clientStatus": "Review Onboarding"
             },
             {
                 "id": "15",
@@ -4440,9 +4449,9 @@
                 "entityType": "Trust",
                 "riskRating": "Low",
                 "cddStatus": "Current",
-                "lastCdd": "16/02/26",
                 "nextReview": "16/02/27",
-                "assignedTo": "Michael Chen"
+                "assignedTo": "Michael Chen",
+                "clientStatus": "Prospect/Contact"
             }
         ];
 
@@ -4494,11 +4503,9 @@
         }
 
         function createGroupRow(client) {
-            var row = document.createElement('tr');
-            row.className = 'cl-group-row';
-
-            var td = document.createElement('td');
-            td.colSpan = 8;
+            var statusMap = { 'In Process':'label-tag-in-progress','Awaiting Client Information':'label-tag-under-review','Review Onboarding':'label-tag-purple','Pre-commencement':'label-tag-current','Prospect/Contact':'label-tag-gray' };
+            var clientStatus = client.clientStatus || 'Prospect/Contact';
+            var statusClass  = statusMap[clientStatus] || 'label-tag-gray';
 
             var riskClass = 'cl-risk-' + client.riskRating.toLowerCase();
             var riskIcon  = client.riskRating === 'Low' ? 'fa-face-smile' : client.riskRating === 'Medium' ? 'fa-face-meh' : 'fa-face-frown';
@@ -4509,74 +4516,39 @@
                 return '<img src="images/new_image.jpg" class="ukp-avatar-img" alt="" style="width:30px;height:30px;">';
             }).join('');
 
-            var memberCards = client.members.map(function(m) {
-                var bglBadge = m.bglCheck === 'Complete'
-                    ? '<span class="cl-cdd-badge" style="color:#00923b;border-color:#a8d8b4;"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#00923b" viewBox="0 0 16 16" style="margin-right:4px;flex-shrink:0;"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>Complete</span>'
-                    : '<span class="cl-cdd-badge" style="color:#c0392b;border-color:#f4b8b8;"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#c0392b" viewBox="0 0 16 16" style="margin-right:4px;flex-shrink:0;"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/></svg>Failed</span>';
-                var riskCell = m.riskRating
-                    ? '<span class="cl-risk-badge cl-risk-' + m.riskRating.toLowerCase() + '">' + m.riskRating + '</span>'
-                    : '<span style="color:#b0bec5;">—</span>';
-                return '<div class="cl-group-member-card"' +
-                    ' data-name="' + m.name + '"' +
-                    ' data-role="' + m.role + '"' +
-                    ' data-bgl="' + m.bglCheck + '"' +
-                    ' data-email="' + m.email + '"' +
-                    ' data-phone="' + m.phone + '"' +
-                    ' data-address="' + m.address + '"' +
-                    ' data-training="' + m.trainingStatus + '"' +
-                    ' data-position="' + m.position + '"' +
-                    ' data-entity-type="' + (m.entityType || m.role) + '"' +
-                    ' data-last-review="' + (m.checkDate || '—') + '"' +
-                    ' data-next-review="' + (m.nextReview || '—') + '"' +
-                    ' data-note="' + (m.note || '2 staff members have not completed initial AML/CTF training. Client-facing staff must complete training before conducting CDD with clients. Training must be refreshed annually, or when the program is materially updated.') + '">' +
-                    '<div class="cl-gmc-col cl-gmc-name"><img src="images/new_image.jpg" class="ukp-avatar-img" alt=""><div class="cl-name-info" style="text-align:left;"><div class="cl-name">' + m.name + '</div><div class="cl-abn">' + m.role + '</div></div></div>' +
-                    '<div class="cl-gmc-col cl-gmc-bgl">' + bglBadge + '</div>' +
-                    '<div class="cl-gmc-col cl-gmc-risk">' + riskCell + '</div>' +
-                    '<div class="cl-gmc-col cl-gmc-check">' + (m.checkDate || '<span style="color:#b0bec5;">—</span>') + '</div>' +
-                    '<div class="cl-gmc-col cl-gmc-review">' + (m.nextReview || '<span style="color:#b0bec5;">—</span>') + '</div>' +
-                    '<div class="cl-gmc-col cl-gmc-act"><div class="dropdown"><button class="btn btn-action dropdown-toggle">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a></div></div></div>' +
-                    '</div>';
-            }).join('');
+            var row = document.createElement('tr');
+            row.className = 'ukp-row';
+            row.style.cursor = 'pointer';
+            row.dataset.risk = client.riskRating.toLowerCase();
+            row.dataset.entityType = client.entityType;
+            row.dataset.cddStatus = client.cddStatus;
+            row.dataset.clientId = client.id;
+            row.dataset.assignedTo = client.assignedTo || '';
 
-            td.innerHTML =
-                '<div class="cl-group-card" id="cl-group-card-' + client.id + '">' +
-                    '<div class="cl-group-header">' +
-                        '<div class="cl-group-header-col cl-group-col-name">' +
-                            '<div class="cl-group-avatar-stack">' + avatarStack + '</div>' +
-                            '<div class="cl-name-info" style="text-align:left;">' +
-                                '<div class="cl-name" style="display:flex;align-items:center;gap:4px;">' + client.name +
-                                    '<span class="cl-group-chevron"><i class="fas fa-chevron-down"></i></span>' +
-                                '</div>' +
-                                '<div class="cl-abn" style="color:#5a9e6a;font-weight:600;font-size:11px;">Group &bull; ' + client.members.length + ' entities</div>' +
-                            '</div>' +
-                        '</div>' +
-                        '<div class="cl-group-header-col cl-group-col-entity">Group</div>' +
-                        '<div class="cl-group-header-col cl-group-col-risk"><span class="cl-risk-badge ' + riskClass + '">' + client.riskRating + ' <i class="fa-regular ' + riskIcon + '"></i></span></div>' +
-                        '<div class="cl-group-header-col cl-group-col-cdd"><span class="cl-cdd-badge">' + cddSVG + ' ' + client.cddStatus + '</span></div>' +
-                        '<div class="cl-group-header-col cl-group-col-date">' + client.lastCdd + '</div>' +
-                        '<div class="cl-group-header-col cl-group-col-review">' + client.nextReview + '</div>' +
-                        '<div class="cl-group-header-col cl-group-col-assign">' + client.assignedTo + '</div>' +
-                        '<div class="cl-group-header-col cl-group-col-actions"><div class="dropdown"><button class="btn btn-action dropdown-toggle">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Archive</a></div></div></div>' +
+            row.innerHTML =
+                '<td><div class="cl-name-cell">' +
+                    '<div class="cl-group-avatar-stack">' + avatarStack + '</div>' +
+                    '<div class="cl-name-info" style="margin-left:10px;text-align:left;">' +
+                        '<div class="cl-name">' + client.name + '</div>' +
+                        '<div class="cl-abn" style="color:#5a9e6a;font-weight:600;">Client Group &bull; ' + client.members.length + ' entities</div>' +
                     '</div>' +
-                    '<div class="cl-group-body">' +
-                        '<div class="cl-group-subtable-header">' +
-                            '<div class="cl-gsth-col cl-gsth-name">Entities</div>' +
-                            '<div class="cl-gsth-col cl-gsth-bgl">BGL ID Check</div>' +
-                            '<div class="cl-gsth-col cl-gsth-risk">Risk Rating</div>' +
-                            '<div class="cl-gsth-col cl-gsth-check">Check Date</div>' +
-                            '<div class="cl-gsth-col cl-gsth-review">Next Review Date</div>' +
-                            '<div class="cl-gsth-col cl-gsth-act"></div>' +
-                        '</div>' +
-                        memberCards +
-                    '</div>' +
-                '</div>';
+                '</div></td>' +
+                '<td><span style="color:#5a9e6a;font-weight:600;">' + client.name + '</span></td>' +
+                '<td>Group</td>' +
+                '<td><span class="cl-risk-badge ' + riskClass + '">' + client.riskRating + ' <i class="fa-regular ' + riskIcon + '"></i></span></td>' +
+                '<td><span class="cl-cdd-badge">' + cddSVG + ' ' + client.cddStatus + '</span></td>' +
+                '<td>' + client.nextReview + '</td>' +
+                '<td><span class="label-tag ' + statusClass + '">' + clientStatus + '</span></td>' +
+                '<td>' + (client.assignedTo || '—') + '</td>' +
+                '<td><div class="dropdown"><button class="btn btn-action dropdown-toggle">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Archive</a></div></div></td>';
 
-            td.querySelector('.cl-group-header').addEventListener('click', function(e) {
+            row.addEventListener('click', function(e) {
                 if (e.target.closest('.dropdown')) return;
-                td.querySelector('.cl-group-card').classList.toggle('expanded');
+                window.location.href = 'client-details.html?id=' + client.id;
             });
+            row.addEventListener('mouseenter', function() { if (!this.style.backgroundColor) this.style.backgroundColor = '#f8fafb'; });
+            row.addEventListener('mouseleave', function() { this.style.backgroundColor = ''; });
 
-            row.appendChild(td);
             return { headerRow: row, expandRow: null };
         }
 
@@ -4587,6 +4559,8 @@
             row.dataset.entityType = client.entityType;
             row.dataset.cddStatus = client.cddStatus;
             row.dataset.clientId = client.id;
+            row.dataset.assignedTo = client.assignedTo || '';
+            row.dataset.assignedTo = client.assignedTo || '';
             row.style.cursor = 'pointer';
 
             // Risk badge
@@ -4600,10 +4574,12 @@
                 row.style.opacity = '0.8';
                 row.innerHTML =
                     '<td><div class="cl-name-cell"><img src="images/new_image.jpg" class="ukp-avatar-img" alt="" style="opacity:.5;"><div class="cl-name-info"><div class="cl-name">' + client.name + '</div><div class="cl-abn" style="color:#b0bec5;">Draft — not yet submitted</div></div></div></td>' +
+                    '<td style="color:#b0bec5;">—</td>' +
                     '<td>' + client.entityType + '</td>' +
                     '<td><span class="cl-risk-badge" style="background:#f0f4f6;color:#7a8f98;border:1px solid #c7d4d9;">—</span></td>' +
                     '<td>' + cddBadge + '</td>' +
-                    '<td>—</td><td>—</td>' +
+                    '<td>—</td>' +
+                    '<td style="color:#b0bec5;">—</td>' +
                     '<td>' + client.assignedTo + '</td>' +
                     '<td><div class="dropdown"><button class="btn btn-action dropdown-toggle">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Resume</a><a class="dropdown-item text-danger" href="#">Discard Draft</a></div></div></td>';
                 return row;
@@ -4614,13 +4590,18 @@
                 ? '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="' + cddIconColor + '" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>'
                 : '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="' + cddIconColor + '" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/></svg>';
 
+            var statusMap = { 'In Process':'label-tag-in-progress','Awaiting Client Information':'label-tag-under-review','Review Onboarding':'label-tag-purple','Pre-commencement':'label-tag-current','Prospect/Contact':'label-tag-gray' };
+            var clientStatus = client.clientStatus || 'Prospect/Contact';
+            var statusClass  = statusMap[clientStatus] || 'label-tag-gray';
+
             row.innerHTML =
                 '<td><div class="cl-name-cell"><img src="images/new_image.jpg" class="ukp-avatar-img" alt=""><div class="cl-name-info"><div class="cl-name">' + client.name + '</div><div class="cl-abn">ABN ' + client.abn + '</div></div></div></td>' +
+                '<td style="color:#b0bec5;">—</td>' +
                 '<td>' + client.entityType + '</td>' +
                 '<td><span class="cl-risk-badge ' + riskClass + '">' + client.riskRating + ' <i class="fa-regular ' + riskIcon + '"></i></span></td>' +
                 '<td><span class="cl-cdd-badge">' + cddIcon + ' ' + client.cddStatus + '</span></td>' +
-                '<td>' + client.lastCdd + '</td>' +
                 '<td>' + client.nextReview + '</td>' +
+                '<td><span class="label-tag ' + statusClass + '">' + clientStatus + '</span></td>' +
                 '<td>' + client.assignedTo + '</td>' +
                 '<td><div class="dropdown"><button class="btn btn-action dropdown-toggle">&#8230;</button><div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">View</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Archive</a><a class="dropdown-item text-danger" href="#">Delete</a></div></div></td>';
 
@@ -4678,26 +4659,31 @@
         var filterDefinitions = {
             entityType: {
                 label: 'Entity Type',
-                options: ['Trust', 'Partnership', 'Family', 'Individual /Sole Trader', 'Business Group', 'Other'],
-                type: 'select'
-            },
-            riskRating: {
-                label: 'Risk Rating',
-                options: ['Low', 'Medium', 'High'],
+                options: ['Individual / Sole Trader', 'Company', 'Trust', 'SMSF', 'Partnership', 'Association', 'Government Body', 'Client Group'],
                 type: 'select'
             },
             cddStatus: {
                 label: 'CDD Status',
-                options: ['Current', 'Due Soon', 'Overdue'],
+                options: ['Prospect', 'CDD In Progress', 'Escalated', 'Active', 'Suspended', 'Closed'],
                 type: 'select'
             },
-            lastCddDate: {
-                label: 'Last CDD Date',
-                options: [],
-                type: 'date'
+            riskRating: {
+                label: 'Risk Rating',
+                options: ['High', 'Medium', 'Low', 'Not Assessed'],
+                type: 'select'
             },
-            nextReviewDate: {
-                label: 'Next Review Date',
+            clientGroup: {
+                label: 'Client Group',
+                options: ['Sunrise Group Holdings', 'Meridian Capital Group'],
+                type: 'searchable'
+            },
+            assignedTo: {
+                label: 'Assigned To',
+                options: ['Kim Davidson', 'Jason Lee', 'Sarah Mitchell', 'Michael Chen'],
+                type: 'searchable'
+            },
+            cddRenewalDate: {
+                label: 'CDD Renewal Date',
                 options: [],
                 type: 'date'
             }
@@ -4713,6 +4699,8 @@
                 if (category === 'entityType') return client.entityType === value;
                 if (category === 'riskRating') return client.riskRating === value;
                 if (category === 'cddStatus') return client.cddStatus === value;
+                if (category === 'assignedTo') return client.assignedTo === value;
+                if (category === 'clientGroup') return client.isGroup && client.name === value;
                 return false;
             }).length;
         }
@@ -4737,48 +4725,107 @@
         }
 
         function renderFilterPanel() {
+            // Set width to match action bar
+            var actionBar = clAddFilterBtn.closest('.cl-action-bar');
+            var wrap = clAddFilterBtn.closest('.cl-filter-wrap');
+            if (actionBar && wrap) {
+                var barRect = actionBar.getBoundingClientRect();
+                var wrapRect = wrap.getBoundingClientRect();
+                clFilterDropdown.style.left  = (barRect.left - wrapRect.left) + 'px';
+                clFilterDropdown.style.width = barRect.width + 'px';
+            }
+
             clFilterDropdown.innerHTML = '';
+            var inner = document.createElement('div');
+            inner.className = 'cl-filter-panel-inner';
+
             Object.keys(filterDefinitions).forEach(function(category) {
                 var def = filterDefinitions[category];
-                if (def.type === 'date') return; // skip date for checkbox panel
+                var col = document.createElement('div');
+                col.className = 'cl-filter-col';
 
-                var section = document.createElement('div');
-                section.className = 'cl-filter-section' + (true ? ' open' : ''); // all open by default
+                var title = document.createElement('div');
+                title.className = 'cl-filter-col-title';
+                title.textContent = def.label;
+                col.appendChild(title);
 
-                var head = document.createElement('div');
-                head.className = 'cl-filter-section-head';
-                head.innerHTML = '<span class="cl-filter-section-title">' + def.label + '</span>' +
-                    '<i class="fas fa-chevron-down cl-filter-section-chevron"></i>';
-                head.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    section.classList.toggle('open');
-                });
-
-                var body = document.createElement('div');
-                body.className = 'cl-filter-section-body';
-
-                def.options.forEach(function(value) {
-                    var count = getFilterCount(category, value);
-                    var checked = isChecked(category, value);
-                    var row = document.createElement('div');
-                    row.className = 'cl-filter-cb-row';
-                    row.innerHTML =
-                        '<div class="cl-filter-cb-left">' +
-                            '<div class="cl-filter-cb' + (checked ? ' checked' : '') + '"></div>' +
-                            '<span class="cl-filter-cb-label">' + value + '</span>' +
-                        '</div>' +
-                        '<span class="cl-filter-cb-count">(' + count + ')</span>';
-                    row.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        toggleFilter(category, value);
+                if (def.type === 'date') {
+                    ['from', 'to'].forEach(function(key) {
+                        var lbl = document.createElement('div');
+                        lbl.className = 'cl-filter-date-label';
+                        lbl.textContent = key === 'from' ? 'From' : 'To';
+                        var inp = document.createElement('input');
+                        inp.type = 'date'; inp.className = 'cl-filter-date-input';
+                        inp.value = (activeFilters[category] && activeFilters[category][key]) || '';
+                        inp.addEventListener('change', function(e) {
+                            e.stopPropagation();
+                            if (!activeFilters[category]) activeFilters[category] = {};
+                            activeFilters[category][key] = this.value;
+                            if (!activeFilters[category].from && !activeFilters[category].to) delete activeFilters[category];
+                            renderActiveFilters(); updateFilterCount(); applyFilters();
+                        });
+                        col.appendChild(lbl); col.appendChild(inp);
                     });
-                    body.appendChild(row);
-                });
+                } else if (def.type === 'searchable') {
+                    var searchWrap = document.createElement('div');
+                    searchWrap.className = 'cl-filter-search-wrap';
+                    var icon = document.createElement('i'); icon.className = 'fas fa-search';
+                    var searchInp = document.createElement('input');
+                    searchInp.type = 'text'; searchInp.placeholder = 'Search…';
+                    searchInp.className = 'cl-filter-search-inp';
+                    searchWrap.appendChild(icon); searchWrap.appendChild(searchInp);
+                    col.appendChild(searchWrap);
 
-                section.appendChild(head);
-                section.appendChild(body);
-                clFilterDropdown.appendChild(section);
+                    var optList = document.createElement('div');
+                    function buildOpts(cat, opts, q) {
+                        optList.innerHTML = '';
+                        (q ? opts.filter(function(v){ return v.toLowerCase().indexOf(q.toLowerCase()) > -1; }) : opts).forEach(function(value) {
+                            var checked = isChecked(cat, value);
+                            var row = document.createElement('div');
+                            row.className = 'cl-filter-cb-row';
+                            row.innerHTML = '<div class="cl-filter-cb' + (checked ? ' checked' : '') + '"></div><span class="cl-filter-cb-label">' + value + '</span>';
+                            row.addEventListener('click', function(e) { e.stopPropagation(); toggleFilter(cat, value); });
+                            optList.appendChild(row);
+                        });
+                    }
+                    buildOpts(category, def.options, '');
+                    searchInp.addEventListener('input', function(e) { e.stopPropagation(); buildOpts(category, def.options, this.value); });
+                    searchInp.addEventListener('click', function(e) { e.stopPropagation(); });
+                    col.appendChild(optList);
+                } else {
+                    def.options.forEach(function(value) {
+                        var count = getFilterCount(category, value);
+                        var checked = isChecked(category, value);
+                        var row = document.createElement('div');
+                        row.className = 'cl-filter-cb-row';
+                        row.innerHTML = '<div class="cl-filter-cb' + (checked ? ' checked' : '') + '"></div><span class="cl-filter-cb-label">' + value + '</span><span class="cl-filter-cb-count">(' + count + ')</span>';
+                        row.addEventListener('click', function(e) { e.stopPropagation(); toggleFilter(category, value); });
+                        col.appendChild(row);
+                    });
+                }
+                inner.appendChild(col);
             });
+            clFilterDropdown.appendChild(inner);
+
+            // Footer
+            var footer = document.createElement('div');
+            footer.style.cssText = 'display:flex;align-items:center;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid rgb(210 217 220);';
+            var clearBtn = document.createElement('button');
+            clearBtn.className = 'btn btn-upload';
+            clearBtn.style.cssText = 'height:43px;padding:0 14px;font-size:13px;gap:10px;white-space:nowrap;';
+            clearBtn.innerHTML = 'Clear selection <i class="fas fa-undo" style="font-size:11px;"></i>';
+            clearBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                Object.keys(activeFilters).forEach(function(k){ delete activeFilters[k]; });
+                renderFilterPanel(); renderActiveFilters(); updateFilterCount(); applyFilters();
+            });
+            var searchBtn = document.createElement('button');
+            searchBtn.className = 'btn btn-generate';
+            searchBtn.style.cssText = 'height:43px;padding:0 20px;font-size:13px;';
+            searchBtn.innerHTML = 'Search &nbsp;<i class="fas fa-search" style="font-size:11px;"></i>';
+            searchBtn.addEventListener('click', function(e) { e.stopPropagation(); clFilterDropdown.classList.remove('open'); });
+            footer.appendChild(clearBtn); footer.appendChild(searchBtn);
+            clFilterDropdown.appendChild(footer);
         }
 
         // Open/close panel
@@ -4812,14 +4859,16 @@
         }
 
         function updateFilterCount() {
-            var count = Object.keys(activeFilters).length;
+            var count = Object.keys(activeFilters).reduce(function(sum, cat) {
+                var v = activeFilters[cat];
+                if (!v) return sum;
+                if (Array.isArray(v)) return sum + v.length;
+                if (typeof v === 'object') return sum + ((v.from || v.to) ? 1 : 0);
+                return sum + 1;
+            }, 0);
             var countEl = document.getElementById('clFilterCount');
-            if (count > 0) {
-                countEl.textContent = count;
-                countEl.style.display = 'inline-flex';
-            } else {
-                countEl.style.display = 'none';
-            }
+            if (count > 0) { countEl.textContent = count; countEl.style.display = 'inline-flex'; }
+            else { countEl.style.display = 'none'; }
         }
 
         var currentPickerDate = new Date();
@@ -4892,47 +4941,43 @@
 
             Object.keys(activeFilters).forEach(function(category) {
                 var values = activeFilters[category];
-                if (!values || values.length === 0) return;
+                if (!values) return;
                 var def = filterDefinitions[category];
 
+                if (def.type === 'date') {
+                    if (!values.from && !values.to) return;
+                    var parts = []; if (values.from) parts.push('From ' + values.from); if (values.to) parts.push('To ' + values.to);
+                    var pill = document.createElement('div'); pill.className = 'cl-filter-pill';
+                    pill.innerHTML = '<span class="cl-filter-pill-label">' + def.label + ':</span> <span class="cl-filter-pill-value">' + parts.join(' ') + '</span><button class="cl-filter-pill-remove" data-category="' + category + '">&times;</button>';
+                    pill.querySelector('.cl-filter-pill-remove').addEventListener('click', function() { delete activeFilters[this.dataset.category]; renderFilterPanel(); renderActiveFilters(); updateFilterCount(); applyFilters(); });
+                    clActiveFiltersContainer.appendChild(pill);
+                    return;
+                }
+
+                if (!values.length) return;
                 values.forEach(function(value) {
                     var count = getFilterCount(category, value);
-                    var pill = document.createElement('div');
-                    pill.className = 'cl-filter-pill';
-                    pill.innerHTML =
-                        '<span class="cl-filter-pill-count">(' + count + ')</span> ' +
-                        '<span class="cl-filter-pill-label">' + def.label + ':</span> ' +
-                        '<span class="cl-filter-pill-value">' + value + '</span>' +
-                        '<button class="cl-filter-pill-remove" data-category="' + category + '" data-value="' + value + '">&times;</button>';
-
+                    var pill = document.createElement('div'); pill.className = 'cl-filter-pill';
+                    pill.innerHTML = '<span class="cl-filter-pill-count">(' + count + ')</span> <span class="cl-filter-pill-label">' + def.label + ':</span> <span class="cl-filter-pill-value">' + value + '</span><button class="cl-filter-pill-remove" data-category="' + category + '" data-value="' + value + '">&times;</button>';
                     pill.querySelector('.cl-filter-pill-remove').addEventListener('click', function() {
-                        var cat = this.dataset.category;
-                        var val = this.dataset.value;
+                        var cat = this.dataset.category, val = this.dataset.value;
                         var idx = activeFilters[cat] ? activeFilters[cat].indexOf(val) : -1;
-                        if (idx > -1) {
-                            activeFilters[cat].splice(idx, 1);
-                            if (activeFilters[cat].length === 0) delete activeFilters[cat];
-                        }
-                        renderFilterPanel();
-                        renderActiveFilters();
-                        updateFilterCount();
-                        applyFilters();
+                        if (idx > -1) { activeFilters[cat].splice(idx, 1); if (!activeFilters[cat].length) delete activeFilters[cat]; }
+                        renderFilterPanel(); renderActiveFilters(); updateFilterCount(); applyFilters();
                     });
-
                     clActiveFiltersContainer.appendChild(pill);
                 });
             });
 
             if (Object.keys(activeFilters).length > 0) {
-                var addBtn = document.createElement('button');
-                addBtn.className = 'cl-add-filter-pill';
-                addBtn.textContent = '+';
-                addBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    clFilterDropdown.classList.add('open');
-                    renderFilterPanel();
-                });
+                var addBtn = document.createElement('button'); addBtn.className = 'cl-add-filter-pill'; addBtn.textContent = '+';
+                addBtn.addEventListener('click', function(e) { e.stopPropagation(); clFilterDropdown.classList.add('open'); renderFilterPanel(); });
                 clActiveFiltersContainer.appendChild(addBtn);
+                var clearAll = document.createElement('button'); clearAll.className = 'btn btn-upload';
+                clearAll.style.cssText = 'height:43px;padding:0 14px;font-size:13px;gap:10px;white-space:nowrap;';
+                clearAll.innerHTML = 'Clear All <i class="fas fa-undo" style="font-size:11px;"></i>';
+                clearAll.addEventListener('click', function(e) { e.stopPropagation(); Object.keys(activeFilters).forEach(function(k){ delete activeFilters[k]; }); renderFilterPanel(); renderActiveFilters(); updateFilterCount(); applyFilters(); });
+                clActiveFiltersContainer.appendChild(clearAll);
             }
         }
 
@@ -5047,12 +5092,15 @@
                         categoryMatch = values.some(function(v) { return row.dataset.risk === v.toLowerCase(); });
                     } else if (category === 'cddStatus') {
                         categoryMatch = values.indexOf(row.dataset.cddStatus) > -1;
-                    } else if (category === 'lastCddDate') {
-                        var lastCdd = row.children[4] ? row.children[4].textContent.trim() : '';
-                        categoryMatch = values.indexOf(lastCdd) > -1;
-                    } else if (category === 'nextReviewDate') {
-                        var nextReview = row.children[5] ? row.children[5].textContent.trim() : '';
-                        categoryMatch = values.indexOf(nextReview) > -1;
+                    } else if (category === 'assignedTo') {
+                        categoryMatch = values.indexOf(row.dataset.assignedTo) > -1;
+                    } else if (category === 'clientGroup') {
+                        categoryMatch = values.some(function(v) { return row.textContent.indexOf(v) > -1; });
+                    } else if (category === 'cddRenewalDate') {
+                        if (typeof values === 'object' && !Array.isArray(values)) {
+                            var renewal = row.children[4] ? row.children[4].textContent.trim() : '';
+                            categoryMatch = (!values.from || renewal >= values.from) && (!values.to || renewal <= values.to);
+                        }
                     }
 
                     if (!categoryMatch) match = false;
