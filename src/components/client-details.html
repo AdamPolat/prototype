@@ -2064,7 +2064,11 @@
         }
 
         function prefillDiagram() {
-            clearDiagram();
+            diagNodes = []; diagEdges = []; nodeIdSeq = 1;
+            const nodesEl = document.getElementById('diagram-nodes');
+            const edgesEl = document.getElementById('edges-layer');
+            if (nodesEl) nodesEl.innerHTML = '';
+            if (edgesEl) edgesEl.innerHTML = '';
             const john  = addNode('individual','John Smith',  'Director · Appointor · Member',   ['Controller', 'UBO'], 80, 50);
             const mary  = addNode('individual','Mary Smith',   'Director · Member · Beneficiary', ['Controller', 'UBO'], 340, 50);
             const tcol  = addNode('company', 'Trustee Co Pty Ltd',       'Dirs: John & Mary · Trustee only', ['Company'], 80, 230);
