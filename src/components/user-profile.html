@@ -12,6 +12,46 @@
     <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 
 <style>
+    /* PDD record card */
+    .pdd-record-card {
+        display: flex; align-items: center; gap: 16px;
+        background: #fff; border: 1px solid #e0e8eb; border-radius: 10px;
+        padding: 14px 18px; font-size: 13px; color: #2a3840;
+    }
+    .pdd-record-icon { width: 36px; height: 36px; border-radius: 8px; background: #f0f4f6; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #5a7280; }
+    .pdd-record-purpose { font-weight: 600; color: #1a2b35; }
+    .pdd-record-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 600; }
+    .pdd-record-badge-completed { background: #e6f4ec; color: #2d6a35; }
+    .pdd-record-badge-uploaded  { background: #e3f2fd; color: #1976d2; }
+    .pdd-record-meta { display: flex; flex-direction: column; gap: 2px; }
+    .pdd-record-meta-label { font-size: 11px; color: #8aa8b2; }
+    .pdd-record-meta-value { font-size: 13px; color: #1a2b35; font-weight: 500; }
+    .pdd-record-outcome-suitable     { background: #e6f4ec; color: #2d6a35; border: 1px solid #a8d8b4; }
+    .pdd-record-outcome-not-suitable  { background: #ffebee; color: #c0392b; border: 1px solid #f4b8b8; }
+
+    .agw-group-radio-card {
+        display: flex; align-items: flex-start; gap: 10px;
+        font-size: 13px; cursor: pointer;
+        padding: 10px 14px; border: 1.5px solid #e0e8eb;
+        border-radius: 8px; background: #fff;
+        transition: border-color 0.15s, background 0.15s;
+    }
+    .agw-group-radio-card:has(input:checked) {
+        border-color: #036b1f;
+        background: #f0fff4;
+    }
+
+    @keyframes pddShake {
+        0%,100% { transform: translateX(0); }
+        15%      { transform: translateX(-8px); }
+        30%      { transform: translateX(8px); }
+        45%      { transform: translateX(-6px); }
+        60%      { transform: translateX(6px); }
+        75%      { transform: translateX(-3px); }
+        90%      { transform: translateX(3px); }
+    }
+    .pdd-shake { animation: pddShake 0.45s ease; }
+
     .up-container {
         margin: 0 auto;
         padding: 4px 31px;
@@ -848,6 +888,79 @@
                 box-shadow: inset 0px 0px 0px 30px #7ac142;
             }
         }
+
+        /* ---- PDD Wizard: ncg-overlay ---- */
+        .ncg-overlay {
+            position: fixed; inset: 0; z-index: 2000;
+            background: rgba(0,0,0,0.55);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+        .ncg-overlay.open { opacity: 1; pointer-events: all; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+        .ncg-modal {
+            background: #fff; box-shadow: 0 24px 80px rgba(0,0,0,0.28);
+            transform: translateY(24px); transition: transform 0.3s ease;
+        }
+        .ncg-overlay.open .ncg-modal { transform: translateY(0); }
+
+        /* ---- Vertical sidebar stepper ---- */
+        .agw-stepper-step { display:flex;align-items:center;gap:0;padding:0 24px;cursor:default;border-radius:8px;transition:background .15s; }
+        .agw-step-circle {
+            width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+            font-size:11px;font-weight:700;border:2px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.45);
+            background:transparent;flex-shrink:0;transition:all .2s;
+        }
+        .agw-step-circle.done { background:#00923b;border-color:#00923b;color:#fff; }
+        .agw-step-circle.active { background:#fff;border-color:#fff;color:#1a3a40; }
+        .agw-step-label { font-size:12px;color:rgba(255,255,255,0.45);margin-left:10px;text-transform:capitalize;letter-spacing:.01em; }
+        .agw-step-label.active { color:#fff;font-weight:600; }
+        .agw-step-label.done { color:rgba(255,255,255,0.7); }
+        .agw-step-connector { width:2px;height:28px;background:rgba(255,255,255,0.15);margin:4px 0 4px 37px;flex-shrink:0; }
+        .agw-step-connector.done { background:#5a9e6a; }
+
+        /* ---- Panel fade ---- */
+        .agw-panel { opacity:0;transition:opacity 500ms ease-in-out; }
+        .agw-panel.agw-panel-visible { opacity:1; }
+
+        /* ---- Step loader ---- */
+        .agw-step-loader {
+            position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+            z-index:10;opacity:0;visibility:hidden;transition:opacity 0.4s ease,visibility 0.4s ease;
+        }
+        .agw-step-loader.active { opacity:1;visibility:visible; }
+        .agw-step-loader-spinner {
+            width:44px;height:44px;border:3.5px solid rgba(3,107,31,0.18);
+            border-top-color:#036b1f;border-radius:50%;animation:pddSpin 0.8s linear infinite;
+        }
+        @keyframes pddSpin { to { transform:rotate(360deg); } }
+
+        /* ---- Section card & title ---- */
+        .agw-section-card {
+            background:#fafbfc;border:1px solid #b7ced6;border-radius:10px;
+            padding:26px 28px;margin-bottom:14px;
+        }
+        .agw-section-title {
+            font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+            color:#1a3a40;padding-bottom:10px;margin-bottom:14px;
+            border-bottom:1px solid #e0e8eb;
+        }
+
+        /* ---- Add button ---- */
+        .agw-add-btn {
+            display:inline-flex;align-items:center;padding:11px 17px;border:1px solid #c9d8de;border-radius:8px;
+            background:#fff;box-shadow:rgba(0,0,0,0.13) 0px .9px 0px;color:#1a2b35;font-size:12px;font-weight:600;
+            cursor:pointer;transition:border-color .15s,background .15s;
+        }
+        .agw-add-btn:hover { border-color:#5a9e6a;background:#f0f9f2; }
+
+        /* ---- Success button ---- */
+        .agw-success-btn {
+            display:flex;align-items:center;justify-content:center;width:100%;padding:11px 16px;
+            border:1px solid #c9d8de;border-radius:8px;background:#fff;color:#1a2b35;font-size:13px;
+            font-weight:600;cursor:pointer;transition:border-color .15s,background .15s;
+        }
+        .agw-success-btn:hover { border-color:#4a7c3f;background:#f0f9f2; }
 </style>
 </head>
 <body>
@@ -1087,18 +1200,16 @@
                             </div>
 
                             <div class="up-sidebar-section">
-                                <div class="up-sidebar-item" style="cursor: default; opacity: 0.6;">
+                                <div class="up-sidebar-item" data-section="personnel-due-diligence">
                                     <div class="up-sidebar-icon">
                                         <i class="fas fa-user-check"></i>
                                     </div>
                                     <div class="up-sidebar-title">
-                                        KYE (soon)
+                                        Personnel Due Diligence
                                         <span class="up-sidebar-badge">3</span>
                                     </div>
                                 </div>
-                                <div class="up-sidebar-sub" style="cursor: default; opacity: 0.6;">Basic Info</div>
-                                <div class="up-sidebar-sub" style="cursor: default; opacity: 0.6;">SSO Information (Read-Only)</div>
-                                <div class="up-sidebar-sub" style="cursor: default; opacity: 0.6;">Role & Contact Information</div>
+                                <div class="up-sidebar-sub" data-section="personnel-due-diligence">Incomplete CDD</div>
                             </div>
                         </div>
 
@@ -1265,7 +1376,7 @@
 
                                 <!-- Empty State -->
                                 <div id="trainingEmptyState" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 20px; text-align: center;">
-                                    <img src="images/default_state.svg" alt="No training added yet" style="width: 229px;height: auto;margin-bottom: 32px;">
+                                    <img src="images/Roni-Add.png" alt="No training added yet" style="width: 229px;height: auto;margin-bottom: 32px;">
                                     <h5 style="font-size: 18px; font-weight: 600; color: #1f2937; margin-bottom: 12px;">You haven't added anything yet</h5>
                                     <p style="font-size: 14px; color: #6b7280; margin-bottom: 32px; max-width: 420px;">Click the button below to add some completed certificates, create new assignments, etc.</p>
                                     <button class="up-add-detail-btn" id="addTrainingBtnEmpty" style="background: #1a6b40; color: #fff; border: none; padding: 14px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; cursor: pointer;">
@@ -1281,12 +1392,588 @@
                                     <div style="display: flex; flex-direction: column; gap: 0;" id="trainingCardsList"></div>
                                 </div>
                             </div>
+
+                            <!-- Personnel Due Diligence Section -->
+                            <div class="up-content-section" id="personnel-due-diligence-section" style="display:none;">
+
+                                <!-- Profile header -->
+                                <div class="up-header-row">
+                                    <div class="up-header-left">
+                                        <img src="images/new_image.jpg" alt="Jeevan Tokhi" class="up-avatar" id="pddUserAvatar">
+                                        <div class="up-header-info">
+                                            <h4 class="up-name" id="pddUserName">Jeevan Tokhi</h4>
+                                            <div class="up-badges">
+                                                <div class="up-badge-item">
+                                                    <div class="up-badge-label">Training status</div>
+                                                    <span class="ukp-training-badge"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#00923b" viewBox="0 0 16 16" class="mr-1"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"></path></svg> Complete</span>
+                                                </div>
+                                                <div class="up-badge-item">
+                                                    <div class="up-badge-label">Status</div>
+                                                    <span class="up-badge active" id="pddUserStatus">Active</span>
+                                                </div>
+                                                <div class="up-badge-item">
+                                                    <div class="up-badge-label">Position</div>
+                                                    <span class="up-badge position" id="pddUserPosition">User</span>
+                                                </div>
+                                                <div class="up-badge-item">
+                                                    <div class="up-badge-label">PDD status</div>
+                                                    <span class="up-badge" style="background:#f0f4f6; color:#6a7f89; border:1px solid #c9d8de; display:inline-flex; align-items:center; gap:6px;">
+                                                        <span style="width:8px; height:8px; border-radius:50%; background:#8aa8b2; flex-shrink:0;"></span>
+                                                        Not started
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Action buttons — hidden until first record added -->
+                                    <div id="pddHeaderButtons" style="display:none; align-items:center; gap:10px;">
+                                        <button onclick="document.getElementById('pddWizardOverlay').classList.add('open')" class="up-add-detail-btn" style="background:#1a6b40; color:#fff; border:none; padding:12px 18px; border-radius:8px; font-size:13px; font-weight:600; display:flex; align-items:center; gap:8px; cursor:pointer; white-space:nowrap;">
+                                            Start PDD
+                                            <svg style="width:15px;height:15px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                                        </button>
+                                        <button onclick="document.getElementById('pddUploadOverlay').classList.add('open')" style="background:#fff; color:#1a2b35; border:1px solid #c9d8de; padding:12px 18px; border-radius:8px; font-size:13px; font-weight:500; cursor:pointer; display:flex; align-items:center; gap:8px; white-space:nowrap;">
+                                            <i class="fas fa-upload" style="font-size:12px;"></i> Upload PDD
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="pddEmptyState" style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding:80px 20px; text-align:center;">
+                                    <img src="images/Roni-Add.png" alt="No records yet" style="width:229px; height:auto; margin-bottom:32px;">
+                                    <h5 style="font-size:18px; font-weight:600; color:#1f2937; margin-bottom:12px;">No due diligence records yet</h5>
+                                    <p style="font-size:14px; color:#6b7280; margin-bottom:32px; max-width:420px;">Click the button below to add personnel due diligence records for this user.</p>
+                                    <div style="display:flex; align-items:center; gap:12px;">
+                                        <button onclick="document.getElementById('pddWizardOverlay').classList.add('open')" style="background:#2d6a35; color:#fff; border:none; padding:12px 22px; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer;">
+                                            Start PDD
+                                        </button>
+                                        <button onclick="document.getElementById('pddUploadOverlay').classList.add('open')" style="background:#fff; color:#1a2b35; border:1px solid #c9d8de; padding:12px 22px; border-radius:8px; font-size:14px; font-weight:500; cursor:pointer; display:flex; align-items:center; gap:8px;">
+                                            <i class="fas fa-upload" style="font-size:13px;"></i> Upload PDD
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- PDD Records list -->
+                                <div id="pddRecordsContainer" style="display:none; margin-top:12px;">
+                                    <div style="display:flex; flex-direction:column; gap:8px;" id="pddRecordsList"></div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
+
+    <!-- PDD Wizard Modal -->
+    <div class="ncg-overlay" id="pddWizardOverlay">
+        <div class="ncg-modal" style="width:80vw;max-width:80vw;height:80vh;max-height:80vh;border-radius:14px;display:flex;flex-direction:column;overflow:hidden;">
+            <div style="display:flex;flex:1;overflow:hidden;border-radius:14px;">
+
+                <!-- LEFT SIDEBAR -->
+                <div style="width:300px;flex-shrink:0;background:#153541;border-radius:14px 0 0 14px;display:flex;flex-direction:column;padding:28px 0 24px 0;">
+                    <div style="padding:0 24px 28px 24px;border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <div style="display:flex;align-items:center;gap:14px;">
+                            <div style="width:52px;height:52px;border-radius:14px;background:#1e4a5a;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7ecbaa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><polyline points="16 11 18 13 22 9" stroke="#7ecbaa" stroke-width="2"/></svg>
+                            </div>
+                            <div>
+                                <div style="font-size:16px;font-weight:700;color:#fff;line-height:1.2;">Personnel Due Diligence</div>
+                                <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:3px;">FirmVerify</div>
+                            </div>
+                        </div>
+                    </div>
+                    <nav id="pddStepper" style="flex:1;padding:20px 0;overflow:hidden;">
+                        <!-- rendered by JS -->
+                    </nav>
+                </div>
+
+                <!-- RIGHT CONTENT -->
+                <div style="flex:1;display:flex;flex-direction:column;min-width:300px;overflow:hidden;background:#f6f7f8;border-radius:0 14px 14px 0;">
+                    <div style="padding:28px 32px 0 32px;">
+                        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;">
+                            <h2 id="pddPanelTitle" style="font-size:18px;font-weight:700;color:#1a2b35;margin:0;">Personnel Information</h2>
+                            <button class="header-live-chat-btn" onclick="fvLiveChatOpen()" title="Live Chat" style="margin-right:0;flex-shrink:0;">Live chat <span class="live-chat-icon"><i class="fas fa-comments" style="font-size:14px;"></i><span class="live-chat-dot"></span></span></button>
+                        </div>
+                        <p id="pddPanelSubtitle" style="font-size:13px;color:#7a8f98;margin:0 0 24px 0;">Confirm personnel details and select the purpose of this PDD.</p>
+                        <hr style="border:none;border-top:1px solid #e8edf0;margin:0 0 24px 0;">
+                    </div>
+
+                    <div style="flex:1;overflow-y:auto;padding:0 32px 12px 32px;position:relative;">
+                        <div class="agw-step-loader" id="pddStepLoader">
+                            <div class="agw-step-loader-spinner"></div>
+                        </div>
+
+                        <!-- Wizard error banner -->
+                        <div id="pddWizardErrorBanner" class="gen-info-box" style="display:none; margin-bottom:20px;">
+                            <div class="gen-info-title">⚠ Please fix the following</div>
+                            <p id="pddWizardErrorText">Please fill in all required fields before continuing.</p>
+                        </div>
+
+                        <!-- STEP 1 — Personnel Information -->
+                        <div class="agw-panel" id="pddPanel1">
+                            <div class="agw-section-card">
+                                <div class="agw-section-title">A. Pre-filled Personnel Details</div>
+                                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+                                    <div class="ukp-modal-form-group">
+                                        <label class="ukp-modal-form-label">Legal Name</label>
+                                        <input type="text" class="ukp-modal-form-input" id="pddLegalName" readonly style="background:#f0f4f5;color:#4a5568;">
+                                    </div>
+                                    <div class="ukp-modal-form-group">
+                                        <label class="ukp-modal-form-label">Date of Birth</label>
+                                        <input type="text" class="ukp-modal-form-input" id="pddDOB" readonly style="background:#f0f4f5;color:#4a5568;" placeholder="—">
+                                    </div>
+                                </div>
+                                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                                    <div class="ukp-modal-form-group">
+                                        <label class="ukp-modal-form-label">Residential Address</label>
+                                        <input type="text" class="ukp-modal-form-input" id="pddAddress" readonly style="background:#f0f4f5;color:#4a5568;">
+                                    </div>
+                                    <div class="ukp-modal-form-group">
+                                        <label class="ukp-modal-form-label">Role</label>
+                                        <input type="text" class="ukp-modal-form-input" id="pddRoleField" readonly style="background:#f0f4f5;color:#4a5568;">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="agw-section-card">
+                                <div class="agw-section-title">B. Purpose of PDD <span style="color:#c0392b;">*</span></div>
+                                <div style="display:flex;flex-direction:column;gap:10px;">
+                                    <label class="agw-group-radio-card">
+                                        <input type="radio" name="pddPurpose" value="new_personnel" style="margin-top:2px;accent-color:#1a6b40;"> <span>New personnel in an AML/CTF-related role</span>
+                                    </label>
+                                    <label class="agw-group-radio-card">
+                                        <input type="radio" name="pddPurpose" value="promotion" style="margin-top:2px;accent-color:#1a6b40;"> <span>Internal promotion or transfer to an AML/CTF-related role</span>
+                                    </label>
+                                    <label class="agw-group-radio-card">
+                                        <input type="radio" name="pddPurpose" value="circumstances" style="margin-top:2px;accent-color:#1a6b40;"> <span>Change in circumstances affecting suitability</span>
+                                    </label>
+                                    <label class="agw-group-radio-card">
+                                        <input type="radio" name="pddPurpose" value="conduct" style="margin-top:2px;accent-color:#1a6b40;"> <span>Concern about a person's conduct, suitability or competence in the role</span>
+                                    </label>
+                                    <label class="agw-group-radio-card">
+                                        <input type="radio" name="pddPurpose" value="triggered" style="margin-top:2px;accent-color:#1a6b40;"> <span>Triggered review</span>
+                                    </label>
+                                </div>
+                                <div id="pddPurposeError" style="display:none;color:#c0392b;font-size:12px;margin-top:8px;">Please select the purpose of this PDD.</div>
+                            </div>
+
+                            <div class="agw-section-card">
+                                <div class="agw-section-title">C. Notes <span style="font-weight:400;color:#7a8f98;">(optional)</span></div>
+                                <textarea class="ukp-modal-form-input" id="pddStep1Notes" rows="3" placeholder="Any additional context or notes…" style="resize:vertical;min-height:72px;"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- STEP 2 — Membership -->
+                        <div class="agw-panel" id="pddPanel2" style="display:none;">
+                            <div class="agw-section-card">
+                                <div class="agw-section-title">A. Professional Membership</div>
+                                <p style="font-size:13px;color:#7a8f98;margin-bottom:16px;">Is the person a member of a professional association?</p>
+                                <div style="display:flex;gap:16px;margin-bottom:16px;">
+                                    <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="radio" name="pddMember" value="yes" onchange="pddToggleMembership()" style="accent-color:#1a6b40;"> Yes</label>
+                                    <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="radio" name="pddMember" value="no" onchange="pddToggleMembership()" style="accent-color:#1a6b40;"> No</label>
+                                    <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="radio" name="pddMember" value="unsure" onchange="pddToggleMembership()" style="accent-color:#1a6b40;"> Unsure</label>
+                                </div>
+                                <div id="pddMembershipFields" style="display:none;">
+                                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Association</label>
+                                            <select class="ukp-modal-form-select" id="pddAssociation">
+                                                <option value="cpa">CPA Australia</option>
+                                                <option value="caanz">Chartered Accountants Australia &amp; New Zealand</option>
+                                                <option value="ipa">Institute of Public Accountants</option>
+                                            </select>
+                                        </div>
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Membership Number</label>
+                                            <input type="text" class="ukp-modal-form-input" id="pddMemberNumber" placeholder="e.g. CPA-123456">
+                                        </div>
+                                    </div>
+                                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Verified By</label>
+                                            <input type="text" class="ukp-modal-form-input" id="pddMemberVerifiedBy" value="Jeevan Tokhi">
+                                        </div>
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Date Verified</label>
+                                            <input type="date" class="ukp-modal-form-input" id="pddMemberDateVerified">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- STEP 3 — Verify -->
+                        <div class="agw-panel" id="pddPanel3" style="display:none;">
+                            <div class="agw-section-card">
+                                <div class="agw-section-title">A. Background Checks</div>
+                                <p style="font-size:13px;color:#7a8f98;margin-bottom:14px;">Add one or more background checks conducted for this person.</p>
+                                <div id="pddChecksList" style="margin-bottom:14px;"></div>
+                                <button type="button" class="agw-add-btn" id="pddAddCheckBtn" onclick="pddToggleCheckForm()">+ Add Check</button>
+                            </div>
+
+                            <div class="agw-section-card" id="pddCheckFormCard" style="display:none;">
+                                <div class="agw-section-title">New Check</div>
+                                <div class="ukp-modal-form-group" style="margin-bottom:12px;">
+                                    <label class="ukp-modal-form-label">Check Type <span style="color:#c0392b;">*</span></label>
+                                    <select class="ukp-modal-form-select" id="pddCheckType">
+                                        <option value="">— Select —</option>
+                                        <option value="adverse_media">Adverse media search</option>
+                                        <option value="bankruptcy">Bankruptcy register search</option>
+                                        <option value="employment_ref">Employment reference check</option>
+                                        <option value="identification">Identification</option>
+                                        <option value="criminal_history">National criminal history check</option>
+                                        <option value="referee_statement">Referee statement</option>
+                                        <option value="statutory_declaration">Statutory declaration</option>
+                                        <option value="written_commitment">Written commitment letter</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="ukp-modal-form-group" style="margin-bottom:12px;">
+                                    <label class="ukp-modal-form-label">Notes</label>
+                                    <textarea class="ukp-modal-form-input" id="pddCheckNotes" rows="2" placeholder="Observations or outcome…" style="resize:vertical;"></textarea>
+                                </div>
+                                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+                                    <div class="ukp-modal-form-group">
+                                        <label class="ukp-modal-form-label">Verified By</label>
+                                        <input type="text" class="ukp-modal-form-input" id="pddCheckVerifiedBy" value="Jeevan Tokhi">
+                                    </div>
+                                    <div class="ukp-modal-form-group">
+                                        <label class="ukp-modal-form-label">Date Verified</label>
+                                        <input type="date" class="ukp-modal-form-input" id="pddCheckDateVerified">
+                                    </div>
+                                </div>
+                                <div style="display:flex;gap:8px;">
+                                    <button type="button" class="ukp-modal-save-btn" style="font-size:12px;padding:7px 16px;" onclick="pddSaveCheck()">Save Check</button>
+                                    <button type="button" class="ukp-modal-cancel-btn" style="font-size:12px;padding:7px 16px;" onclick="pddToggleCheckForm()">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- STEP 4 — Eligibility -->
+                        <div class="agw-panel" id="pddPanel4" style="display:none;">
+                            <div class="agw-section-card">
+                                <div class="agw-section-title">A. Role Eligibility</div>
+                                <p style="font-size:13px;color:#7a8f98;margin-bottom:14px;">Select all roles that apply to this person. Relevant questions will appear below.</p>
+                                <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;">
+                                    <label style="display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer;"><input type="checkbox" name="pddEligRole" value="governing_body" onchange="pddUpdateEligibilityQuestions()" style="width:16px;height:16px;accent-color:#1a6b40;"> Governing Body</label>
+                                    <label style="display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer;"><input type="checkbox" name="pddEligRole" value="senior_manager" onchange="pddUpdateEligibilityQuestions()" style="width:16px;height:16px;accent-color:#1a6b40;"> Senior Manager</label>
+                                    <label style="display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer;"><input type="checkbox" name="pddEligRole" value="compliance_officer" onchange="pddUpdateEligibilityQuestions()" style="width:16px;height:16px;accent-color:#1a6b40;"> Compliance Officer</label>
+                                    <label style="display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer;"><input type="checkbox" name="pddEligRole" value="other_personnel" onchange="pddUpdateEligibilityQuestions()" style="width:16px;height:16px;accent-color:#1a6b40;"> Other Personnel</label>
+                                </div>
+                                <div id="pddEligibilityQuestions" style="display:none;">
+                                    <div style="border-top:1px solid #e0e8eb;padding-top:16px;">
+                                        <div id="pddGoverningBodyQs" style="display:none;margin-bottom:14px;">
+                                            <div style="font-size:12px;font-weight:700;color:#1a3a40;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">Governing Body</div>
+                                            <div style="display:flex;flex-direction:column;gap:10px;">
+                                                <div>
+                                                    <div style="font-size:13px;color:#1a2b35;margin-bottom:6px;">Has the person been convicted of a serious offence?</div>
+                                                    <div style="display:flex;gap:16px;"><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddGBQ1" value="yes" style="accent-color:#1a6b40;"> Yes</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddGBQ1" value="no" style="accent-color:#1a6b40;"> No</label></div>
+                                                </div>
+                                                <div>
+                                                    <div style="font-size:13px;color:#1a2b35;margin-bottom:6px;">Has the person been bankrupt or insolvent in the last 10 years?</div>
+                                                    <div style="display:flex;gap:16px;"><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddGBQ2" value="yes" style="accent-color:#1a6b40;"> Yes</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddGBQ2" value="no" style="accent-color:#1a6b40;"> No</label></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="pddSeniorManagerQs" style="display:none;margin-bottom:14px;">
+                                            <div style="font-size:12px;font-weight:700;color:#1a3a40;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">Senior Manager</div>
+                                            <div style="display:flex;flex-direction:column;gap:10px;">
+                                                <div>
+                                                    <div style="font-size:13px;color:#1a2b35;margin-bottom:6px;">Does the person have relevant AML/CTF knowledge and experience?</div>
+                                                    <div style="display:flex;gap:16px;"><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddSMQ1" value="yes" style="accent-color:#1a6b40;"> Yes</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddSMQ1" value="no" style="accent-color:#1a6b40;"> No</label></div>
+                                                </div>
+                                                <div>
+                                                    <div style="font-size:13px;color:#1a2b35;margin-bottom:6px;">Is the person subject to any disciplinary action or adverse findings?</div>
+                                                    <div style="display:flex;gap:16px;"><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddSMQ2" value="yes" style="accent-color:#1a6b40;"> Yes</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddSMQ2" value="no" style="accent-color:#1a6b40;"> No</label></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="pddComplianceOfficerQs" style="display:none;margin-bottom:14px;">
+                                            <div style="font-size:12px;font-weight:700;color:#1a3a40;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">Compliance Officer</div>
+                                            <div style="display:flex;flex-direction:column;gap:10px;">
+                                                <div>
+                                                    <div style="font-size:13px;color:#1a2b35;margin-bottom:6px;">Does the person hold relevant qualifications or certifications?</div>
+                                                    <div style="display:flex;gap:16px;"><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddCOQ1" value="yes" style="accent-color:#1a6b40;"> Yes</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddCOQ1" value="no" style="accent-color:#1a6b40;"> No</label></div>
+                                                </div>
+                                                <div>
+                                                    <div style="font-size:13px;color:#1a2b35;margin-bottom:6px;">Is the person aware of their obligations under the AML/CTF Act?</div>
+                                                    <div style="display:flex;gap:16px;"><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddCOQ2" value="yes" style="accent-color:#1a6b40;"> Yes</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddCOQ2" value="no" style="accent-color:#1a6b40;"> No</label></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="pddOtherPersonnelQs" style="display:none;margin-bottom:14px;">
+                                            <div style="font-size:12px;font-weight:700;color:#1a3a40;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">Other Personnel</div>
+                                            <div>
+                                                <div style="font-size:13px;color:#1a2b35;margin-bottom:6px;">Has the person completed required AML/CTF training?</div>
+                                                <div style="display:flex;gap:16px;"><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddOPQ1" value="yes" style="accent-color:#1a6b40;"> Yes</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddOPQ1" value="no" style="accent-color:#1a6b40;"> No</label></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="agw-section-card">
+                                <div class="agw-section-title">B. Notes <span style="font-weight:400;color:#7a8f98;">(optional)</span></div>
+                                <textarea class="ukp-modal-form-input" id="pddEligibilityNotes" rows="3" placeholder="Notes on eligibility assessment…" style="resize:vertical;min-height:72px;"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- STEP 5 — Suitability -->
+                        <div class="agw-panel" id="pddPanel5" style="display:none;">
+                            <div class="agw-section-card">
+                                <div class="agw-section-title">A. Suitability Assessment</div>
+                                <p style="font-size:13px;color:#7a8f98;margin-bottom:16px;">Assess each area for this person's suitability in the role.</p>
+                                <div style="display:flex;flex-direction:column;gap:2px;">
+                                    <div style="background:#fff;border:1px solid #e0e8eb;border-radius:10px;padding:16px 20px;margin-bottom:10px;">
+                                        <div style="font-size:13.5px;font-weight:600;color:#1a2b35;margin-bottom:8px;">Integrity</div>
+                                        <div style="font-size:12.5px;color:#7a8f98;margin-bottom:10px;">Assessment of honesty, ethical conduct, and absence of criminal history relevant to the role.</div>
+                                        <div style="display:flex;gap:20px;"><label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="radio" name="pddIntegrity" value="suitable" style="accent-color:#1a6b40;"> Suitable</label><label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="radio" name="pddIntegrity" value="not_suitable" style="accent-color:#c0392b;"> Not Suitable</label></div>
+                                    </div>
+                                    <div style="background:#fff;border:1px solid #e0e8eb;border-radius:10px;padding:16px 20px;margin-bottom:10px;">
+                                        <div style="font-size:13.5px;font-weight:600;color:#1a2b35;margin-bottom:8px;">Conflicts of Interest</div>
+                                        <div style="font-size:12.5px;color:#7a8f98;margin-bottom:10px;">Identification and management of actual or potential conflicts of interest.</div>
+                                        <div style="display:flex;gap:20px;"><label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="radio" name="pddConflicts" value="suitable" style="accent-color:#1a6b40;"> Suitable</label><label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="radio" name="pddConflicts" value="not_suitable" style="accent-color:#c0392b;"> Not Suitable</label></div>
+                                    </div>
+                                    <div style="background:#fff;border:1px solid #e0e8eb;border-radius:10px;padding:16px 20px;margin-bottom:10px;">
+                                        <div style="font-size:13.5px;font-weight:600;color:#1a2b35;margin-bottom:8px;">Competence</div>
+                                        <div style="font-size:12.5px;color:#7a8f98;margin-bottom:10px;">Skills, experience, and qualifications relevant to AML/CTF responsibilities.</div>
+                                        <div style="display:flex;gap:20px;"><label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="radio" name="pddCompetence" value="suitable" style="accent-color:#1a6b40;"> Suitable</label><label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="radio" name="pddCompetence" value="not_suitable" style="accent-color:#c0392b;"> Not Suitable</label></div>
+                                    </div>
+                                    <div style="background:#fff;border:1px solid #e0e8eb;border-radius:10px;padding:16px 20px;margin-bottom:10px;">
+                                        <div style="font-size:13.5px;font-weight:600;color:#1a2b35;margin-bottom:8px;">Adverse Findings</div>
+                                        <div style="font-size:12.5px;color:#7a8f98;margin-bottom:10px;">Presence or absence of adverse findings from background checks and references.</div>
+                                        <div style="display:flex;gap:20px;"><label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="radio" name="pddAdverse" value="suitable" style="accent-color:#1a6b40;"> Suitable</label><label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="radio" name="pddAdverse" value="not_suitable" style="accent-color:#c0392b;"> Not Suitable</label></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="agw-section-card">
+                                <div class="agw-section-title">B. Notes <span style="font-weight:400;color:#7a8f98;">(optional)</span></div>
+                                <textarea class="ukp-modal-form-input" id="pddSuitabilityNotes" rows="3" placeholder="Notes on suitability assessment…" style="resize:vertical;min-height:72px;"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- STEP 6 — Decision -->
+                        <div class="agw-panel" id="pddPanel6" style="display:none;">
+                            <div class="agw-section-card">
+                                <div class="agw-section-title">A. Assessment Details</div>
+                                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+                                    <div class="ukp-modal-form-group">
+                                        <label class="ukp-modal-form-label">Assessed By</label>
+                                        <input type="text" class="ukp-modal-form-input" id="pddAssessedBy" value="Jeevan Tokhi">
+                                    </div>
+                                    <div class="ukp-modal-form-group">
+                                        <label class="ukp-modal-form-label">Date of Assessment</label>
+                                        <input type="date" class="ukp-modal-form-input" id="pddAssessmentDate">
+                                    </div>
+                                    <div class="ukp-modal-form-group">
+                                        <label class="ukp-modal-form-label">Next Review Date</label>
+                                        <input type="date" class="ukp-modal-form-input" id="pddNextReviewDate">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="agw-section-card">
+                                <div class="agw-section-title">B. Decision <span style="color:#c0392b;">*</span></div>
+                                <div style="display:flex;gap:16px;margin-bottom:4px;">
+                                    <label class="agw-group-radio-card" style="flex:1;">
+                                        <input type="radio" name="pddDecision" value="suitable" style="accent-color:#1a6b40;">
+                                        <span><span style="display:block;font-weight:600;color:#1a6b40;">Suitable</span><span style="display:block;font-size:11.5px;color:#7a8f98;">Person is assessed as suitable for the role</span></span>
+                                    </label>
+                                    <label class="agw-group-radio-card" style="flex:1;">
+                                        <input type="radio" name="pddDecision" value="not_suitable" style="accent-color:#c0392b;">
+                                        <span><span style="display:block;font-weight:600;color:#c0392b;">Not Suitable</span><span style="display:block;font-size:11.5px;color:#7a8f98;">Person is assessed as not suitable for the role</span></span>
+                                    </label>
+                                </div>
+                                <div id="pddDecisionError" style="display:none;color:#c0392b;font-size:12px;margin-top:8px;">Please select a decision.</div>
+                            </div>
+                            <div class="agw-section-card">
+                                <div class="agw-section-title">C. Rationale</div>
+                                <textarea class="ukp-modal-form-input" id="pddRationale" rows="4" placeholder="Provide a rationale for the decision…" style="resize:vertical;min-height:96px;"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- SUCCESS screen -->
+                        <div class="agw-panel" id="pddPanelSuccess" style="display:none;">
+                            <div style="text-align:center;padding:40px 32px 32px 32px;max-width:720px;margin:0 auto;">
+                                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                                </svg>
+                                <h3 style="font-size:20px;font-weight:700;color:#1a2b35;margin:0 0 8px 0;">PDD Record Saved</h3>
+                                <p style="font-size:13.5px;color:#7a8f98;margin:0 0 28px 0;">The personnel due diligence record has been saved successfully.</p>
+                                <div style="display:flex;flex-direction:column;gap:10px;max-width:260px;margin:0 auto;">
+                                    <button class="agw-success-btn" onclick="pddAddRecord(); document.getElementById('pddWizardOverlay').classList.remove('open'); setTimeout(pddReset,300);">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px;"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                                        Return to Profile
+                                    </button>
+                                    <button class="agw-success-btn" onclick="pddReset()">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                        Start New PDD Record
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Footer nav -->
+                    <div id="pddFooter" style="display:flex;align-items:center;padding:16px 32px;border-top:1px solid #c3c9cd;flex-shrink:0;gap:12px;">
+                        <button id="pddDiscardBtn" onclick="document.getElementById('pddWizardOverlay').classList.remove('open');setTimeout(pddReset,300);" style="padding:9px 18px;background:transparent;border:1px solid #c9d8de;border-radius:8px;color:#7a8f98;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;">Discard</button>
+                        <button id="pddSaveForLaterBtn" onclick="pddSaveForLater()" style="padding:10px 24px;background:#4a7c3f;border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;">Save for Later</button>
+                        <div style="display:flex;gap:10px;flex-shrink:0;white-space:nowrap;margin-left:auto;">
+                            <button id="pddBackBtn" class="ukp-modal-cancel-btn" style="display:none;white-space:nowrap;" onclick="pddBack()">&#8592; Back</button>
+                            <button id="pddNextBtn" class="ukp-modal-save-btn" style="white-space:nowrap;" onclick="pddNext()">Continue &#8594;</button>
+                            <button id="pddCompleteBtn" class="ukp-modal-save-btn" style="display:none;white-space:nowrap;background:#036b1f;" onclick="pddComplete()">Complete PDD</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload PDD Modal -->
+    <div class="ukp-modal-overlay" id="pddUploadOverlay">
+        <div class="ukp-modal" style="width:560px; max-width:95vw;">
+            <div class="ukp-modal-header">
+                <span>Upload Personnel Due Diligence</span>
+                <button onclick="document.getElementById('pddUploadOverlay').classList.remove('open'); pddUploadReset();" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer; line-height:1; padding:0;">&times;</button>
+            </div>
+            <div class="ukp-modal-body">
+
+                <!-- Validation error banner -->
+                <div id="pddUploadErrorBanner" class="gen-info-box" style="display:none; margin-bottom:20px;">
+                    <div class="gen-info-title">⚠ Please fix the following</div>
+                    <p id="pddUploadErrorText">Please fill in all required fields before saving.</p>
+                </div>
+
+                <!-- Assessment Provider -->
+                <div class="ukp-modal-form-group full" style="margin-bottom:20px;">
+                    <label class="ukp-modal-form-label">Assessment Provider <span style="color:#c0392b;">*</span></label>
+                    <input type="text" class="ukp-modal-form-input" id="pddUploadProvider" placeholder="e.g. External Compliance Services Pty Ltd">
+                    <div class="ukp-modal-form-error" id="pddUploadProviderErr" style="display:none; color:#c0392b; font-size:12px; margin-top:4px;">Enter an assessment provider.</div>
+                </div>
+
+                <!-- Purpose of PDD -->
+                <div style="margin-bottom:20px;">
+                    <label class="ukp-modal-form-label">Purpose of PDD <span style="color:#c0392b;">*</span></label>
+                    <div style="display:flex; flex-direction:column; gap:8px; margin-top:8px;" id="pddUploadPurposeGroup">
+                        <label style="display:flex; align-items:center; gap:12px; padding:12px 14px; border:1px solid #c9d8de; border-radius:9px; cursor:pointer; font-size:13px; color:#1a2b35;">
+                            <input type="radio" name="pddUploadPurpose" value="new-personnel" style="accent-color:#2d6a35; width:16px; height:16px; margin:0; flex-shrink:0;">
+                            New personnel in an AML/CTF-related role
+                        </label>
+                        <label style="display:flex; align-items:center; gap:12px; padding:12px 14px; border:1px solid #c9d8de; border-radius:9px; cursor:pointer; font-size:13px; color:#1a2b35;">
+                            <input type="radio" name="pddUploadPurpose" value="internal-promotion" style="accent-color:#2d6a35; width:16px; height:16px; margin:0; flex-shrink:0;">
+                            Internal promotion or transfer to an AML/CTF-related role
+                        </label>
+                        <label style="display:flex; align-items:center; gap:12px; padding:12px 14px; border:1px solid #c9d8de; border-radius:9px; cursor:pointer; font-size:13px; color:#1a2b35;">
+                            <input type="radio" name="pddUploadPurpose" value="change-circumstances" style="accent-color:#2d6a35; width:16px; height:16px; margin:0; flex-shrink:0;">
+                            Change in circumstances affecting suitability
+                        </label>
+                        <label style="display:flex; align-items:center; gap:12px; padding:12px 14px; border:1px solid #c9d8de; border-radius:9px; cursor:pointer; font-size:13px; color:#1a2b35;">
+                            <input type="radio" name="pddUploadPurpose" value="concern-conduct" style="accent-color:#2d6a35; width:16px; height:16px; margin:0; flex-shrink:0;">
+                            Concern about a person's conduct, suitability or competence in the role
+                        </label>
+                        <label style="display:flex; align-items:center; gap:12px; padding:12px 14px; border:1px solid #c9d8de; border-radius:9px; cursor:pointer; font-size:13px; color:#1a2b35;">
+                            <input type="radio" name="pddUploadPurpose" value="triggered-review" style="accent-color:#2d6a35; width:16px; height:16px; margin:0; flex-shrink:0;">
+                            Triggered review
+                        </label>
+                    </div>
+                    <div class="ukp-modal-form-error" id="pddUploadPurposeErr" style="display:none; color:#c0392b; font-size:12px; margin-top:4px;">Select a purpose.</div>
+                </div>
+
+                <!-- Date of Assessment + Outcome -->
+                <div class="ukp-modal-form-row" style="margin-bottom:20px;">
+                    <div class="ukp-modal-form-group" style="flex:1;">
+                        <label class="ukp-modal-form-label">Date of Assessment <span style="color:#c0392b;">*</span></label>
+                        <input type="date" class="ukp-modal-form-input" id="pddUploadDate" value="2026-06-22">
+                        <div class="ukp-modal-form-error" id="pddUploadDateErr" style="display:none; color:#c0392b; font-size:12px; margin-top:4px;">Select the date of assessment.</div>
+                    </div>
+                    <div class="ukp-modal-form-group" style="flex:1;">
+                        <label class="ukp-modal-form-label">Outcome <span style="color:#c0392b;">*</span></label>
+                        <select class="ukp-modal-form-select" id="pddUploadOutcome">
+                            <option value="">Select an outcome</option>
+                            <option value="suitable">Suitable</option>
+                            <option value="not-suitable">Not suitable</option>
+                        </select>
+                        <div class="ukp-modal-form-error" id="pddUploadOutcomeErr" style="display:none; color:#c0392b; font-size:12px; margin-top:4px;">Select an outcome.</div>
+                    </div>
+                </div>
+
+                <!-- PDF Evidence -->
+                <div style="margin-bottom:20px;">
+                    <label class="ukp-modal-form-label">PDF Evidence <span style="color:#c0392b;">*</span></label>
+                    <div class="upload-dropzone mb-3" id="pddUploadDropzone" style="cursor:pointer;"
+                        onclick="document.getElementById('pddUploadFileInput').click()"
+                        ondragover="event.preventDefault();"
+                        ondrop="event.preventDefault(); pddHandleDrop(event.dataTransfer.files);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#a0b4bc" viewBox="0 0 16 16" class="mb-2">
+                            <path d="M6.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path>
+                            <path d="M14 14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zM4 1a1 1 0 0 0-1 1v10l2.224-2.224a.5.5 0 0 1 .61-.075L8 11l2.157-3.02a.5.5 0 0 1 .76-.063L13 10V4.5h-2A1.5 1.5 0 0 1 9.5 3V1z"></path>
+                        </svg>
+                        <p class="upload-drop-text">Drag and drop file here or <a href="#" class="upload-select-link" onclick="event.stopPropagation(); document.getElementById('pddUploadFileInput').click(); return false;">select files to upload</a></p>
+                        <p class="upload-drop-sub">.pdf only · subject to system file size limits</p>
+                        <input type="file" id="pddUploadFileInput" accept=".pdf" style="display:none;" onchange="pddHandleDrop(this.files)">
+                    </div>
+                    <div class="ukp-modal-form-error" id="pddUploadFileErr" style="display:none; color:#c0392b; font-size:12px; margin-top:4px;">Attach a PDF file.</div>
+                </div>
+
+                <!-- Next Review Date -->
+                <div class="ukp-modal-form-group" style="max-width:220px;">
+                    <label class="ukp-modal-form-label">Next Review Date</label>
+                    <input type="date" class="ukp-modal-form-input" id="pddUploadNextReview">
+                </div>
+
+            </div>
+            <div class="ukp-modal-footer">
+                <button class="ukp-modal-cancel-btn" onclick="document.getElementById('pddUploadOverlay').classList.remove('open'); pddUploadReset();">Cancel</button>
+                <button class="ukp-modal-save-btn" onclick="pddUploadSave()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function pddHandleDrop(files) {
+        if (!files || !files.length) return;
+        var file = files[0];
+        document.getElementById('pddUploadFileName').style.display = 'flex';
+        document.getElementById('pddUploadFileNameText').textContent = file.name;
+        document.getElementById('pddUploadFileErr').style.display = 'none';
+    }
+    function pddUploadReset() {
+        document.getElementById('pddUploadProvider').value = '';
+        document.querySelectorAll('input[name="pddUploadPurpose"]').forEach(function(r){ r.checked = false; });
+        document.getElementById('pddUploadDate').value = '2026-06-22';
+        document.getElementById('pddUploadOutcome').value = '';
+        document.getElementById('pddUploadFileInput').value = '';
+        document.getElementById('pddUploadFileName').style.display = 'none';
+        document.getElementById('pddUploadNextReview').value = '';
+        ['pddUploadProviderErr','pddUploadPurposeErr','pddUploadDateErr','pddUploadOutcomeErr','pddUploadFileErr'].forEach(function(id){ document.getElementById(id).style.display = 'none'; });
+    }
+    function pddUploadSave() {
+        var valid = true;
+        var errors = [];
+        if (!document.getElementById('pddUploadProvider').value.trim()) { document.getElementById('pddUploadProviderErr').style.display = 'block'; valid = false; errors.push('Assessment Provider'); } else { document.getElementById('pddUploadProviderErr').style.display = 'none'; }
+        if (!document.querySelector('input[name="pddUploadPurpose"]:checked')) { document.getElementById('pddUploadPurposeErr').style.display = 'block'; valid = false; errors.push('Purpose of PDD'); } else { document.getElementById('pddUploadPurposeErr').style.display = 'none'; }
+        if (!document.getElementById('pddUploadDate').value) { document.getElementById('pddUploadDateErr').style.display = 'block'; valid = false; errors.push('Date of Assessment'); } else { document.getElementById('pddUploadDateErr').style.display = 'none'; }
+        if (!document.getElementById('pddUploadOutcome').value) { document.getElementById('pddUploadOutcomeErr').style.display = 'block'; valid = false; errors.push('Outcome'); } else { document.getElementById('pddUploadOutcomeErr').style.display = 'none'; }
+        if (!document.getElementById('pddUploadFileInput').files.length) { document.getElementById('pddUploadFileErr').style.display = 'block'; valid = false; errors.push('PDF Evidence'); } else { document.getElementById('pddUploadFileErr').style.display = 'none'; }
+
+        if (!valid) {
+            var banner = document.getElementById('pddUploadErrorBanner');
+            document.getElementById('pddUploadErrorText').textContent = 'Please complete the following required fields: ' + errors.join(', ') + '.';
+            banner.style.display = 'block';
+            // Scroll banner into view
+            banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            // Shake the modal
+            var modal = document.querySelector('#pddUploadOverlay .ukp-modal');
+            modal.classList.remove('pdd-shake');
+            void modal.offsetWidth; // reflow
+            modal.classList.add('pdd-shake');
+            return;
+        }
+        document.getElementById('pddUploadErrorBanner').style.display = 'none';
+        document.getElementById('pddUploadOverlay').classList.remove('open');
+        pddUploadReset();
+    }
+    </script>
 
     <!-- Add Training Modal -->
     <div class="ukp-modal-overlay" id="addTrainingModalOverlay">
@@ -1415,6 +2102,7 @@
 
             if (name) {
                 document.getElementById('userName').textContent = name;
+                document.getElementById('pddUserName').textContent = name;
                 document.getElementById('pageTitle').textContent = name;
                 document.getElementById('breadcrumbName').textContent = name;
                 document.getElementById('inputName').value = name;
@@ -1431,19 +2119,15 @@
             }
             if (position) {
                 document.getElementById('inputPosition').value = position;
-                // Update position badge
-                var positionBadge = document.querySelector('.up-badge.position');
-                if (positionBadge) {
-                    positionBadge.textContent = position;
-                }
+                document.querySelectorAll('.up-badge.position').forEach(function(el) { el.textContent = position; });
+                var pddPos = document.getElementById('pddUserPosition');
+                if (pddPos) pddPos.textContent = position;
             }
             if (status) {
                 document.getElementById('inputStatus').value = status;
-                // Update status badge
-                var statusBadge = document.querySelector('.up-badge.active');
-                if (statusBadge) {
-                    statusBadge.textContent = status;
-                }
+                document.querySelectorAll('.up-badge.active').forEach(function(el) { el.textContent = status; });
+                var pddStat = document.getElementById('pddUserStatus');
+                if (pddStat) pddStat.textContent = status;
             }
         }
 
@@ -1493,6 +2177,15 @@
                         setTimeout(function() {
                             trainingSection.classList.add('active');
                             // Hide loader after content starts fading in
+                            setTimeout(function() {
+                                stepLoader.classList.remove('active');
+                            }, 500);
+                        }, 10);
+                    } else if (section === 'personnel-due-diligence') {
+                        var pddSection = document.getElementById('personnel-due-diligence-section');
+                        pddSection.style.display = 'block';
+                        setTimeout(function() {
+                            pddSection.classList.add('active');
                             setTimeout(function() {
                                 stepLoader.classList.remove('active');
                             }, 500);
@@ -2078,6 +2771,369 @@
     window.fvLiveChatKey = function(e){
         if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();fvLiveChatSend();}
     };
+    })();
+
+    // ---- PDD Wizard ----
+    (function(){
+        var pddStep = 1;
+        var pddChecks = [];
+        var PDD_TOTAL_STEPS = 6;
+
+        var pddStepLabels = [
+            'Personnel Information',
+            'Membership',
+            'Verify',
+            'Eligibility',
+            'Suitability',
+            'Decision'
+        ];
+        var pddPanelTitles = pddStepLabels;
+        var pddPanelSubtitles = [
+            'Confirm personnel details and select the purpose of this PDD.',
+            'Verify professional membership of the person.',
+            'Add background checks and verification records.',
+            'Assess eligibility for the relevant roles.',
+            'Assess suitability across the four key areas.',
+            'Record the final assessment decision.'
+        ];
+
+        // ---- pre-fill from URL params ----
+        function pddPrefill(){
+            var params = new URLSearchParams(window.location.search);
+            var nameEl = document.getElementById('pddLegalName');
+            var addrEl = document.getElementById('pddAddress');
+            var roleEl = document.getElementById('pddRoleField');
+            if(nameEl) nameEl.value = params.get('name') || '';
+            if(addrEl) addrEl.value = params.get('address') || '';
+            if(roleEl) roleEl.value = params.get('position') || '';
+            // pre-fill today's date fields
+            var today = new Date().toISOString().split('T')[0];
+            var memberDate = document.getElementById('pddMemberDateVerified');
+            var checkDate  = document.getElementById('pddCheckDateVerified');
+            var assessDate = document.getElementById('pddAssessmentDate');
+            if(memberDate) memberDate.value = today;
+            if(checkDate)  checkDate.value  = today;
+            if(assessDate) assessDate.value = today;
+        }
+
+        // ---- stepper ----
+        function pddRenderStepper(){
+            var el = document.getElementById('pddStepper');
+            if(!el) return;
+            el.innerHTML = '';
+            pddStepLabels.forEach(function(label, i){
+                var s = i + 1;
+                var circleClass = s < pddStep ? 'done' : (s === pddStep ? 'active' : '');
+                var labelClass  = s < pddStep ? 'done'  : (s === pddStep ? 'active' : '');
+                var inner = s < pddStep
+                    ? '<i class="fa-solid fa-check" style="font-size:11px;"></i>'
+                    : s;
+                el.innerHTML += '<div class="agw-stepper-step">'
+                    + '<div class="agw-step-circle ' + circleClass + '">' + inner + '</div>'
+                    + '<span class="agw-step-label ' + labelClass + '">' + label + '</span>'
+                    + '</div>';
+                if(s < PDD_TOTAL_STEPS){
+                    el.innerHTML += '<div class="agw-step-connector ' + (s < pddStep ? 'done' : '') + '"></div>';
+                }
+            });
+        }
+
+        // ---- panel navigation ----
+        function pddShowPanel(n){
+            var loader  = document.getElementById('pddStepLoader');
+            var footer  = document.getElementById('pddFooter');
+            var backBtn = document.getElementById('pddBackBtn');
+            var nextBtn = document.getElementById('pddNextBtn');
+            var doneBtn = document.getElementById('pddCompleteBtn');
+
+            var current = document.querySelector('#pddWizardOverlay .agw-panel.agw-panel-visible');
+            if(current) current.classList.remove('agw-panel-visible');
+
+            setTimeout(function(){ loader.classList.add('active'); }, 150);
+
+            setTimeout(function(){
+                document.querySelectorAll('#pddWizardOverlay .agw-panel').forEach(function(p){
+                    p.style.display = 'none';
+                    p.classList.remove('agw-panel-visible');
+                });
+
+                var panelId = n === 'success' ? 'pddPanelSuccess' : 'pddPanel' + n;
+                var target = document.getElementById(panelId);
+                if(!target) return;
+                target.style.display = '';
+
+                if(n === 'success'){
+                    footer.style.display = 'none';
+                    document.getElementById('pddPanelTitle').textContent = 'PDD Completed';
+                    document.getElementById('pddPanelSubtitle').textContent = '';
+                } else {
+                    footer.style.display = 'flex';
+                    backBtn.style.display = (n > 1) ? '' : 'none';
+                    var isLast = (n === PDD_TOTAL_STEPS);
+                    nextBtn.style.display = isLast ? 'none' : '';
+                    doneBtn.style.display = isLast ? '' : 'none';
+                    document.getElementById('pddPanelTitle').textContent = pddPanelTitles[n - 1] || '';
+                    document.getElementById('pddPanelSubtitle').textContent = pddPanelSubtitles[n - 1] || '';
+                }
+
+                setTimeout(function(){
+                    target.classList.add('agw-panel-visible');
+                    setTimeout(function(){ loader.classList.remove('active'); }, 300);
+                }, 10);
+            }, 350);
+        }
+
+        // ---- navigation ----
+        function pddShowError(msg) {
+            var banner = document.getElementById('pddWizardErrorBanner');
+            document.getElementById('pddWizardErrorText').textContent = msg;
+            banner.style.display = 'block';
+            banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            var modal = document.querySelector('#pddWizardOverlay .ncg-modal');
+            if (modal) {
+                modal.classList.remove('pdd-shake');
+                void modal.offsetWidth;
+                modal.classList.add('pdd-shake');
+            }
+        }
+
+        function pddHideError() {
+            document.getElementById('pddWizardErrorBanner').style.display = 'none';
+        }
+
+        window.pddNext = function(){
+            if(pddStep === 1){
+                var selected = document.querySelector('input[name="pddPurpose"]:checked');
+                if(!selected){
+                    document.getElementById('pddPurposeError').style.display = '';
+                    pddShowError('Please select a Purpose of PDD before continuing.');
+                    return;
+                }
+                document.getElementById('pddPurposeError').style.display = 'none';
+                pddHideError();
+            }
+            if(pddStep < PDD_TOTAL_STEPS){
+                pddStep++;
+                pddRenderStepper();
+                pddShowPanel(pddStep);
+            }
+        };
+
+        window.pddBack = function(){
+            if(pddStep > 1){
+                pddHideError();
+                pddStep--;
+                pddRenderStepper();
+                pddShowPanel(pddStep);
+            }
+        };
+
+        window.pddComplete = function(){
+            var decision = document.querySelector('input[name="pddDecision"]:checked');
+            if(!decision){
+                document.getElementById('pddDecisionError').style.display = '';
+                pddShowError('Please select a Decision before completing the PDD.');
+                return;
+            }
+            document.getElementById('pddDecisionError').style.display = 'none';
+            pddHideError();
+            pddStep = PDD_TOTAL_STEPS + 1;
+            pddRenderStepper();
+            pddShowPanel('success');
+        };
+
+        window.pddAddRecord = function() {
+            var purpose   = (document.querySelector('input[name="pddPurpose"]:checked') || {}).value || 'PDD Record';
+            var purposeLabels = {
+                'new-personnel':    'New personnel in an AML/CTF-related role',
+                'internal-promotion': 'Internal promotion or transfer to an AML/CTF-related role',
+                'change-circumstances': 'Change in circumstances affecting suitability',
+                'concern-conduct':  "Concern about a person's conduct, suitability or competence",
+                'triggered-review': 'Triggered review'
+            };
+            var purposeLabel = purposeLabels[purpose] || purpose;
+            var decision   = (document.querySelector('input[name="pddDecision"]:checked') || {}).value || '';
+            var assessedBy = document.getElementById('pddAssessedBy').value || '—';
+            var dateRaw    = document.getElementById('pddAssessmentDate').value;
+            var dateDisp   = dateRaw ? dateRaw.split('-').reverse().join('/') : '—';
+            var isSuitable = decision === 'suitable';
+            var outcomeLabel = decision === 'suitable' ? 'Suitable' : decision === 'not_suitable' ? 'Not Suitable' : '—';
+            var outcomeClass = isSuitable ? 'pdd-record-outcome-suitable' : 'pdd-record-outcome-not-suitable';
+            var dot = isSuitable ? '#2d6a35' : '#c0392b';
+
+            var card = document.createElement('div');
+            card.className = 'pdd-record-card';
+            card.innerHTML =
+                '<div class="pdd-record-icon" style="background:' + (isSuitable ? '#e6f4ec' : '#ffebee') + '; color:' + (isSuitable ? '#2d6a35' : '#c0392b') + ';"><i class="' + (isSuitable ? 'fas fa-check' : 'fas fa-times') + '"></i></div>' +
+                '<div style="flex:1; min-width:0;">' +
+                    '<div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">' +
+                        '<span class="pdd-record-purpose">' + purposeLabel + '</span>' +
+                        '<span class="pdd-record-badge pdd-record-badge-completed"><span style="width:7px;height:7px;border-radius:50%;background:#2d6a35;display:inline-block;"></span> Completed</span>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="pdd-record-meta">' +
+                    '<div class="pdd-record-meta-label">Date of assessment</div>' +
+                    '<div class="pdd-record-meta-value">' + dateDisp + '</div>' +
+                '</div>' +
+                '<div class="pdd-record-meta">' +
+                    '<div class="pdd-record-meta-label">Assessed by</div>' +
+                    '<div class="pdd-record-meta-value">' + assessedBy + '</div>' +
+                '</div>' +
+                '<div class="pdd-record-meta">' +
+                    '<div class="pdd-record-meta-label">PDD Status</div>' +
+                    '<span class="pdd-record-badge ' + outcomeClass + '" style="white-space:nowrap;">' +
+                        '<span style="width:7px;height:7px;border-radius:50%;background:' + dot + ';display:inline-block;"></span> ' + outcomeLabel +
+                    '</span>' +
+                '</div>' +
+                '<button style="background:none;border:none;cursor:pointer;color:#8aa8b2;padding:4px;" title="View"><i class="fas fa-eye"></i></button>';
+
+            var list = document.getElementById('pddRecordsList');
+            list.appendChild(card);
+            document.getElementById('pddEmptyState').style.display = 'none';
+            document.getElementById('pddRecordsContainer').style.display = 'block';
+            document.getElementById('pddHeaderButtons').style.display = 'flex';
+
+            // Update sidebar sub-label to Complete CDD
+            var pddSub = document.querySelector('.up-sidebar-sub[data-section="personnel-due-diligence"]');
+            if (pddSub) {
+                pddSub.innerHTML = '<i class="fas fa-check" style="color:#2d6a35; margin-right:6px; font-size:11px;"></i>Complete CDD';
+            }
+
+            // Update PDD status badge in header
+            var statusBadge = document.querySelector('#personnel-due-diligence-section .up-badge-item:last-child .up-badge');
+            if (statusBadge) {
+                statusBadge.innerHTML = '<span style="width:8px;height:8px;border-radius:50%;background:' + dot + ';flex-shrink:0;display:inline-block;"></span> ' + outcomeLabel;
+                statusBadge.style.background = isSuitable ? '#e6f4ec' : '#ffebee';
+                statusBadge.style.color = isSuitable ? '#2d6a35' : '#c0392b';
+                statusBadge.style.borderColor = isSuitable ? '#a8d8b4' : '#f4b8b8';
+            }
+        };
+
+        window.pddSaveForLater = function(){
+            document.getElementById('pddWizardOverlay').classList.remove('open');
+        };
+
+        window.pddReset = function(){
+            pddStep = 1;
+            pddChecks = [];
+            document.getElementById('pddChecksList').innerHTML = '';
+            document.getElementById('pddCheckFormCard').style.display = 'none';
+            document.getElementById('pddMembershipFields').style.display = 'none';
+            document.getElementById('pddEligibilityQuestions').style.display = 'none';
+            document.querySelectorAll('input[name="pddPurpose"]').forEach(function(r){ r.checked = false; });
+            document.querySelectorAll('input[name="pddMember"]').forEach(function(r){ r.checked = false; });
+            document.querySelectorAll('input[name="pddDecision"]').forEach(function(r){ r.checked = false; });
+            document.getElementById('pddPurposeError').style.display = 'none';
+            document.getElementById('pddDecisionError').style.display = 'none';
+            pddHideError();
+            var footer = document.getElementById('pddFooter');
+            if(footer) footer.style.display = 'flex';
+            pddRenderStepper();
+            pddShowPanel(1);
+        };
+
+        // ---- membership toggle ----
+        window.pddToggleMembership = function(){
+            var val = document.querySelector('input[name="pddMember"]:checked');
+            var fields = document.getElementById('pddMembershipFields');
+            if(fields) fields.style.display = (val && val.value === 'yes') ? '' : 'none';
+        };
+
+        // ---- verify checks ----
+        window.pddToggleCheckForm = function(){
+            var card = document.getElementById('pddCheckFormCard');
+            card.style.display = card.style.display === 'none' ? '' : 'none';
+        };
+
+        window.pddSaveCheck = function(){
+            var typeEl = document.getElementById('pddCheckType');
+            if(!typeEl.value){
+                typeEl.style.borderColor = '#c0392b';
+                typeEl.focus();
+                return;
+            }
+            typeEl.style.borderColor = '';
+            var checkTypeLabels = {
+                adverse_media: 'Adverse media search',
+                bankruptcy: 'Bankruptcy register search',
+                employment_ref: 'Employment reference check',
+                identification: 'Identification',
+                criminal_history: 'National criminal history check',
+                referee_statement: 'Referee statement',
+                statutory_declaration: 'Statutory declaration',
+                written_commitment: 'Written commitment letter',
+                other: 'Other'
+            };
+            var check = {
+                type: typeEl.value,
+                label: checkTypeLabels[typeEl.value] || typeEl.value,
+                notes: document.getElementById('pddCheckNotes').value,
+                verifiedBy: document.getElementById('pddCheckVerifiedBy').value,
+                dateVerified: document.getElementById('pddCheckDateVerified').value
+            };
+            pddChecks.push(check);
+            pddRenderChecks();
+            // reset form
+            typeEl.value = '';
+            document.getElementById('pddCheckNotes').value = '';
+            document.getElementById('pddCheckVerifiedBy').value = 'Jeevan Tokhi';
+            var today = new Date().toISOString().split('T')[0];
+            document.getElementById('pddCheckDateVerified').value = today;
+            document.getElementById('pddCheckFormCard').style.display = 'none';
+        };
+
+        function pddRenderChecks(){
+            var list = document.getElementById('pddChecksList');
+            if(!list) return;
+            list.innerHTML = '';
+            pddChecks.forEach(function(c, idx){
+                var row = document.createElement('div');
+                row.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border:1px solid #e0e8eb;border-radius:8px;background:#fff;margin-bottom:8px;';
+                row.innerHTML = '<div>'
+                    + '<div style="font-size:13px;font-weight:600;color:#1a2b35;">' + c.label + '</div>'
+                    + '<div style="font-size:12px;color:#7a8f98;margin-top:2px;">Verified by ' + (c.verifiedBy || '—') + (c.dateVerified ? ' · ' + c.dateVerified : '') + '</div>'
+                    + (c.notes ? '<div style="font-size:12px;color:#4a5568;margin-top:3px;">' + c.notes + '</div>' : '')
+                    + '</div>'
+                    + '<button type="button" onclick="pddRemoveCheck(' + idx + ')" style="background:none;border:1px solid #e0e8eb;border-radius:6px;padding:3px 10px;font-size:11px;color:#7a8f98;cursor:pointer;">Remove</button>';
+                list.appendChild(row);
+            });
+        }
+
+        window.pddRemoveCheck = function(idx){
+            pddChecks.splice(idx, 1);
+            pddRenderChecks();
+        };
+
+        // ---- eligibility questions ----
+        window.pddUpdateEligibilityQuestions = function(){
+            var checked = document.querySelectorAll('input[name="pddEligRole"]:checked');
+            var qContainer = document.getElementById('pddEligibilityQuestions');
+            qContainer.style.display = checked.length > 0 ? '' : 'none';
+            var vals = Array.from(checked).map(function(c){ return c.value; });
+            document.getElementById('pddGoverningBodyQs').style.display   = vals.indexOf('governing_body') > -1   ? '' : 'none';
+            document.getElementById('pddSeniorManagerQs').style.display   = vals.indexOf('senior_manager') > -1   ? '' : 'none';
+            document.getElementById('pddComplianceOfficerQs').style.display = vals.indexOf('compliance_officer') > -1 ? '' : 'none';
+            document.getElementById('pddOtherPersonnelQs').style.display  = vals.indexOf('other_personnel') > -1  ? '' : 'none';
+        };
+
+        // ---- open overlay: pre-fill + init ----
+        var pddOverlay = document.getElementById('pddWizardOverlay');
+        if(pddOverlay){
+            // Watch for overlay being opened via classList.add('open')
+            var pddObserver = new MutationObserver(function(mutations){
+                mutations.forEach(function(m){
+                    if(m.type === 'attributes' && m.attributeName === 'class'){
+                        if(pddOverlay.classList.contains('open')){
+                            pddPrefill();
+                            pddRenderStepper();
+                            pddShowPanel(1);
+                        }
+                    }
+                });
+            });
+            pddObserver.observe(pddOverlay, { attributes: true });
+        }
+
     })();
     </script>
 
