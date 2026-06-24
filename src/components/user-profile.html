@@ -1612,9 +1612,11 @@
 
                             <div class="agw-section-card" id="pddCheckFormCard" style="display:none;">
                                 <div class="agw-section-title">New Check</div>
+
+                                <!-- Check Type -->
                                 <div class="ukp-modal-form-group" style="margin-bottom:12px;">
                                     <label class="ukp-modal-form-label">Check Type <span style="color:#c0392b;">*</span></label>
-                                    <select class="ukp-modal-form-select" id="pddCheckType">
+                                    <select class="ukp-modal-form-select" id="pddCheckType" onchange="pddUpdateCheckFields()">
                                         <option value="">— Select —</option>
                                         <option value="adverse_media">Adverse media search</option>
                                         <option value="bankruptcy">Bankruptcy register search</option>
@@ -1626,21 +1628,213 @@
                                         <option value="written_commitment">Written commitment letter</option>
                                         <option value="other">Other</option>
                                     </select>
+                                    <div id="pddCheckTypeErr" style="display:none;color:#c0392b;font-size:12px;margin-top:4px;">Select a check type.</div>
                                 </div>
+
+                                <!-- Guidance banner (shown for certain types) -->
+                                <div id="pddCheckGuidance" style="display:none; background:#fdf8ec; border:1px solid #e8d89a; border-radius:8px; padding:10px 14px; font-size:13px; color:#9a6200; margin-bottom:12px;"></div>
+
+                                <!-- Identification sub-type -->
+                                <div id="pddCheckIdSubType" style="display:none; margin-bottom:12px;">
+                                    <label class="ukp-modal-form-label">Identification Type <span style="color:#c0392b;">*</span></label>
+                                    <select class="ukp-modal-form-select" id="pddCheckIdType" onchange="pddUpdateIdFields()">
+                                        <option value="">— Select —</option>
+                                        <option value="drivers_licence">Driver's Licence</option>
+                                        <option value="passport">Passport</option>
+                                        <option value="medicare">Australian Medicare</option>
+                                    </select>
+                                </div>
+
+                                <!-- Driver's Licence fields -->
+                                <div id="pddCheckDriversFields" style="display:none;">
+                                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Issue Country <span style="color:#c0392b;">*</span></label>
+                                            <select class="ukp-modal-form-select" id="pddDLCountry" onchange="pddUpdateLicenceLocation()">
+                                                <option value="">— Select —</option>
+                                                <option value="AU">Australia</option>
+                                                <option value="NZ">New Zealand</option>
+                                                <option value="GB">United Kingdom</option>
+                                                <option value="US">United States</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                        <div class="ukp-modal-form-group" id="pddDLLocationWrap">
+                                            <label class="ukp-modal-form-label">Licence Issue Location <span style="color:#c0392b;">*</span></label>
+                                            <select class="ukp-modal-form-select" id="pddDLStateAU" style="display:none;">
+                                                <option value="">— Select state —</option>
+                                                <option value="ACT">Australian Capital Territory</option>
+                                                <option value="NSW">New South Wales</option>
+                                                <option value="VIC">Victoria</option>
+                                                <option value="QLD">Queensland</option>
+                                                <option value="SA">South Australia</option>
+                                                <option value="WA">Western Australia</option>
+                                                <option value="TAS">Tasmania</option>
+                                                <option value="NT">Northern Territory</option>
+                                            </select>
+                                            <input type="text" class="ukp-modal-form-input" id="pddDLLocationOther" placeholder="Enter location" style="display:none;">
+                                        </div>
+                                    </div>
+                                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px;">
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Name</label>
+                                            <input type="text" class="ukp-modal-form-input" id="pddDLName" placeholder="Name as per licence">
+                                        </div>
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Licence Number <span style="color:#c0392b;">*</span></label>
+                                            <input type="text" class="ukp-modal-form-input" id="pddDLNumber" placeholder="Licence number">
+                                        </div>
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Card Number</label>
+                                            <input type="text" class="ukp-modal-form-input" id="pddDLCardNumber" placeholder="Card number">
+                                        </div>
+                                    </div>
+                                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Date of Birth</label>
+                                            <input type="date" class="ukp-modal-form-input" id="pddDLDOB">
+                                        </div>
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Expiry Date <span style="color:#c0392b;">*</span></label>
+                                            <input type="date" class="ukp-modal-form-input" id="pddDLExpiry">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Passport fields -->
+                                <div id="pddCheckPassportFields" style="display:none;">
+                                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Issue Country <span style="color:#c0392b;">*</span></label>
+                                            <select class="ukp-modal-form-select" id="pddPassportCountry">
+                                                <option value="">— Select —</option>
+                                                <option value="AU">Australia</option>
+                                                <option value="NZ">New Zealand</option>
+                                                <option value="GB">United Kingdom</option>
+                                                <option value="US">United States</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Passport Number <span style="color:#c0392b;">*</span></label>
+                                            <input type="text" class="ukp-modal-form-input" id="pddPassportNumber" placeholder="Passport number">
+                                        </div>
+                                    </div>
+                                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px;">
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Name</label>
+                                            <input type="text" class="ukp-modal-form-input" id="pddPassportName" placeholder="Name as per passport">
+                                        </div>
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Date of Birth</label>
+                                            <input type="date" class="ukp-modal-form-input" id="pddPassportDOB">
+                                        </div>
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Gender</label>
+                                            <select class="ukp-modal-form-select" id="pddPassportGender">
+                                                <option value="">— Optional —</option>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Issue Date</label>
+                                            <input type="date" class="ukp-modal-form-input" id="pddPassportIssueDate">
+                                        </div>
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Expiry Date <span style="color:#c0392b;">*</span></label>
+                                            <input type="date" class="ukp-modal-form-input" id="pddPassportExpiry">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Medicare fields -->
+                                <div id="pddCheckMedicareFields" style="display:none;">
+                                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px;">
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Name</label>
+                                            <input type="text" class="ukp-modal-form-input" id="pddMedicareName" placeholder="Name as per card">
+                                        </div>
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Medicare Number <span style="color:#c0392b;">*</span></label>
+                                            <input type="text" class="ukp-modal-form-input" id="pddMedicareNumber" placeholder="Medicare number">
+                                        </div>
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Individual Reference Number <span style="color:#c0392b;">*</span></label>
+                                            <select class="ukp-modal-form-select" id="pddMedicareIRN">
+                                                <option value="">— Select —</option>
+                                                <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+                                                <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Card Colour <span style="color:#c0392b;">*</span></label>
+                                            <select class="ukp-modal-form-select" id="pddMedicareColour">
+                                                <option value="">— Select —</option>
+                                                <option value="green">Green</option>
+                                                <option value="blue">Blue</option>
+                                                <option value="yellow">Yellow</option>
+                                            </select>
+                                        </div>
+                                        <div class="ukp-modal-form-group">
+                                            <label class="ukp-modal-form-label">Expiry Date <span style="color:#c0392b;">*</span></label>
+                                            <input type="date" class="ukp-modal-form-input" id="pddMedicareExpiry">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Other check: Description + Unique Identifier -->
+                                <div id="pddCheckOtherFields" style="display:none;">
+                                    <div class="ukp-modal-form-group" style="margin-bottom:12px;">
+                                        <label class="ukp-modal-form-label">Description <span style="color:#c0392b;">*</span></label>
+                                        <input type="text" class="ukp-modal-form-input" id="pddCheckOtherDesc" placeholder="Describe the check">
+                                        <div id="pddCheckOtherDescErr" style="display:none;color:#c0392b;font-size:12px;margin-top:4px;">Enter a description.</div>
+                                    </div>
+                                    <div class="ukp-modal-form-group" style="margin-bottom:12px;">
+                                        <label class="ukp-modal-form-label">Unique Identifier</label>
+                                        <input type="text" class="ukp-modal-form-input" id="pddCheckOtherUID" placeholder="Document number or unique identifier (optional)">
+                                    </div>
+                                </div>
+
+                                <!-- File upload (shown for all types) -->
+                                <div class="ukp-modal-form-group" style="margin-bottom:12px;" id="pddCheckFileWrap">
+                                    <label class="ukp-modal-form-label" id="pddCheckFileLabel">Attach Files</label>
+                                    <div class="upload-dropzone" id="pddCheckDropzone" style="cursor:pointer;" onclick="document.getElementById('pddCheckFileInput').click()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#a0b4bc" viewBox="0 0 16 16" class="mb-2">
+                                            <path d="M6.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path>
+                                            <path d="M14 14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zM4 1a1 1 0 0 0-1 1v10l2.224-2.224a.5.5 0 0 1 .61-.075L8 11l2.157-3.02a.5.5 0 0 1 .76-.063L13 10V4.5h-2A1.5 1.5 0 0 1 9.5 3V1z"></path>
+                                        </svg>
+                                        <p class="upload-drop-text">Drag and drop here or <a href="#" class="upload-select-link" onclick="event.stopPropagation();document.getElementById('pddCheckFileInput').click();return false;">select files to upload</a></p>
+                                        <p class="upload-drop-sub">PDF, DOC, DOCX, JPEG, PNG · up to 20MB</p>
+                                        <input type="file" id="pddCheckFileInput" style="display:none;" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                                    </div>
+                                    <div id="pddCheckFileErr" style="display:none;color:#c0392b;font-size:12px;margin-top:4px;">Attach files or enter notes.</div>
+                                </div>
+
+                                <!-- Notes -->
                                 <div class="ukp-modal-form-group" style="margin-bottom:12px;">
                                     <label class="ukp-modal-form-label">Notes</label>
                                     <textarea class="ukp-modal-form-input" id="pddCheckNotes" rows="2" placeholder="Observations or outcome…" style="resize:vertical;"></textarea>
                                 </div>
+
+                                <!-- Verified By + Date -->
                                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
                                     <div class="ukp-modal-form-group">
-                                        <label class="ukp-modal-form-label">Verified By</label>
+                                        <label class="ukp-modal-form-label">Verified By <span style="color:#c0392b;">*</span></label>
                                         <input type="text" class="ukp-modal-form-input" id="pddCheckVerifiedBy" value="Jeevan Tokhi">
+                                        <div id="pddCheckVerifiedByErr" style="display:none;color:#c0392b;font-size:12px;margin-top:4px;">Enter the verifier's name.</div>
                                     </div>
                                     <div class="ukp-modal-form-group">
-                                        <label class="ukp-modal-form-label">Date Verified</label>
+                                        <label class="ukp-modal-form-label">Date Verified <span style="color:#c0392b;">*</span></label>
                                         <input type="date" class="ukp-modal-form-input" id="pddCheckDateVerified">
+                                        <div id="pddCheckDateErr" style="display:none;color:#c0392b;font-size:12px;margin-top:4px;">Select the date verified.</div>
                                     </div>
                                 </div>
+
                                 <div style="display:flex;gap:8px;">
                                     <button type="button" class="ukp-modal-save-btn" style="font-size:12px;padding:7px 16px;" onclick="pddSaveCheck()">Save Check</button>
                                     <button type="button" class="ukp-modal-cancel-btn" style="font-size:12px;padding:7px 16px;" onclick="pddToggleCheckForm()">Cancel</button>
@@ -3043,42 +3237,154 @@
         window.pddToggleCheckForm = function(){
             var card = document.getElementById('pddCheckFormCard');
             card.style.display = card.style.display === 'none' ? '' : 'none';
+            if (card.style.display !== 'none') {
+                var today = new Date().toISOString().split('T')[0];
+                document.getElementById('pddCheckDateVerified').value = today;
+            }
+        };
+
+        var CHECK_TYPE_LABELS = {
+            adverse_media: 'Adverse media search',
+            bankruptcy: 'Bankruptcy register search',
+            employment_ref: 'Employment reference check',
+            identification: 'Identification',
+            criminal_history: 'National criminal history check',
+            referee_statement: 'Referee statement',
+            statutory_declaration: 'Statutory declaration',
+            written_commitment: 'Written commitment letter',
+            other: 'Other'
+        };
+
+        // Types that require at least one of files/notes
+        var REQUIRES_FILE_OR_NOTES = ['adverse_media','bankruptcy','employment_ref','referee_statement','criminal_history','other'];
+        // Types that require files (not notes)
+        var REQUIRES_FILE = ['statutory_declaration','written_commitment'];
+        // Types with guidance messages
+        var CHECK_GUIDANCE = {
+            criminal_history: '⚠ Results must be within the last 6 months.',
+            statutory_declaration: '⚠ A signed statutory declaration is required.',
+            written_commitment: '⚠ A signed statement is required.'
+        };
+
+        window.pddUpdateCheckFields = function() {
+            var type = document.getElementById('pddCheckType').value;
+            // Hide all type-specific sections
+            ['pddCheckIdSubType','pddCheckDriversFields','pddCheckPassportFields','pddCheckMedicareFields','pddCheckOtherFields'].forEach(function(id){
+                document.getElementById(id).style.display = 'none';
+            });
+            // Guidance
+            var guidance = document.getElementById('pddCheckGuidance');
+            if (CHECK_GUIDANCE[type]) {
+                guidance.textContent = CHECK_GUIDANCE[type];
+                guidance.style.display = '';
+            } else {
+                guidance.style.display = 'none';
+            }
+            // File label
+            var fileLabel = document.getElementById('pddCheckFileLabel');
+            if (REQUIRES_FILE.indexOf(type) > -1) {
+                fileLabel.innerHTML = 'Attach Files <span style="color:#c0392b;">*</span>';
+            } else if (REQUIRES_FILE_OR_NOTES.indexOf(type) > -1) {
+                fileLabel.innerHTML = 'Attach Files <span style="color:#6a7f89;font-weight:400;">(at least files or notes required)</span>';
+            } else {
+                fileLabel.innerHTML = 'Attach Files';
+            }
+            // Show type-specific
+            if (type === 'identification') {
+                document.getElementById('pddCheckIdSubType').style.display = '';
+            } else if (type === 'other') {
+                document.getElementById('pddCheckOtherFields').style.display = '';
+            }
+        };
+
+        window.pddUpdateIdFields = function() {
+            var idType = document.getElementById('pddCheckIdType').value;
+            document.getElementById('pddCheckDriversFields').style.display  = idType === 'drivers_licence' ? '' : 'none';
+            document.getElementById('pddCheckPassportFields').style.display = idType === 'passport'        ? '' : 'none';
+            document.getElementById('pddCheckMedicareFields').style.display = idType === 'medicare'        ? '' : 'none';
+        };
+
+        window.pddUpdateLicenceLocation = function() {
+            var country = document.getElementById('pddDLCountry').value;
+            var stateEl = document.getElementById('pddDLStateAU');
+            var otherEl = document.getElementById('pddDLLocationOther');
+            if (country === 'AU') { stateEl.style.display = ''; otherEl.style.display = 'none'; }
+            else if (country) { stateEl.style.display = 'none'; otherEl.style.display = ''; }
+            else { stateEl.style.display = 'none'; otherEl.style.display = 'none'; }
         };
 
         window.pddSaveCheck = function(){
             var typeEl = document.getElementById('pddCheckType');
-            if(!typeEl.value){
-                typeEl.style.borderColor = '#c0392b';
-                typeEl.focus();
-                return;
+            var valid = true;
+            if (!typeEl.value) {
+                document.getElementById('pddCheckTypeErr').style.display = '';
+                valid = false;
+            } else {
+                document.getElementById('pddCheckTypeErr').style.display = 'none';
             }
-            typeEl.style.borderColor = '';
-            var checkTypeLabels = {
-                adverse_media: 'Adverse media search',
-                bankruptcy: 'Bankruptcy register search',
-                employment_ref: 'Employment reference check',
-                identification: 'Identification',
-                criminal_history: 'National criminal history check',
-                referee_statement: 'Referee statement',
-                statutory_declaration: 'Statutory declaration',
-                written_commitment: 'Written commitment letter',
-                other: 'Other'
-            };
+            // Verifier
+            if (!document.getElementById('pddCheckVerifiedBy').value.trim()) {
+                document.getElementById('pddCheckVerifiedByErr').style.display = '';
+                valid = false;
+            } else {
+                document.getElementById('pddCheckVerifiedByErr').style.display = 'none';
+            }
+            // Date
+            if (!document.getElementById('pddCheckDateVerified').value) {
+                document.getElementById('pddCheckDateErr').style.display = '';
+                valid = false;
+            } else {
+                document.getElementById('pddCheckDateErr').style.display = 'none';
+            }
+            // File / notes requirement
+            var type = typeEl.value;
+            var hasFile  = document.getElementById('pddCheckFileInput').files.length > 0;
+            var hasNotes = document.getElementById('pddCheckNotes').value.trim().length > 0;
+            if (REQUIRES_FILE.indexOf(type) > -1 && !hasFile) {
+                document.getElementById('pddCheckFileErr').textContent = 'Attach files.';
+                document.getElementById('pddCheckFileErr').style.display = '';
+                valid = false;
+            } else if (REQUIRES_FILE_OR_NOTES.indexOf(type) > -1 && !hasFile && !hasNotes) {
+                document.getElementById('pddCheckFileErr').textContent = 'Attach files or enter notes.';
+                document.getElementById('pddCheckFileErr').style.display = '';
+                valid = false;
+            } else {
+                document.getElementById('pddCheckFileErr').style.display = 'none';
+            }
+            // Other: description
+            if (type === 'other' && !document.getElementById('pddCheckOtherDesc').value.trim()) {
+                document.getElementById('pddCheckOtherDescErr').style.display = '';
+                valid = false;
+            } else {
+                var descErr = document.getElementById('pddCheckOtherDescErr');
+                if (descErr) descErr.style.display = 'none';
+            }
+            if (!valid) return;
+
+            var subLabel = '';
+            if (type === 'identification') {
+                var idTypeEl = document.getElementById('pddCheckIdType');
+                var idMap = { drivers_licence: "Driver's Licence", passport: 'Passport', medicare: 'Australian Medicare' };
+                subLabel = idMap[idTypeEl.value] ? ' — ' + idMap[idTypeEl.value] : '';
+            }
             var check = {
-                type: typeEl.value,
-                label: checkTypeLabels[typeEl.value] || typeEl.value,
+                type: type,
+                label: (CHECK_TYPE_LABELS[type] || type) + subLabel,
                 notes: document.getElementById('pddCheckNotes').value,
                 verifiedBy: document.getElementById('pddCheckVerifiedBy').value,
                 dateVerified: document.getElementById('pddCheckDateVerified').value
             };
             pddChecks.push(check);
             pddRenderChecks();
-            // reset form
+
+            // Reset form
             typeEl.value = '';
+            pddUpdateCheckFields();
+            document.getElementById('pddCheckIdType').value = '';
             document.getElementById('pddCheckNotes').value = '';
             document.getElementById('pddCheckVerifiedBy').value = 'Jeevan Tokhi';
-            var today = new Date().toISOString().split('T')[0];
-            document.getElementById('pddCheckDateVerified').value = today;
+            document.getElementById('pddCheckDateVerified').value = new Date().toISOString().split('T')[0];
+            document.getElementById('pddCheckFileInput').value = '';
             document.getElementById('pddCheckFormCard').style.display = 'none';
         };
 
