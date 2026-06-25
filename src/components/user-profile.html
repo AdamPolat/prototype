@@ -1855,51 +1855,71 @@
                                 </div>
                                 <div id="pddEligibilityQuestions" style="display:none;">
                                     <div style="border-top:1px solid #e0e8eb;padding-top:16px;">
+                                        <!-- Governing Body questions -->
                                         <div id="pddGoverningBodyQs" style="display:none;margin-bottom:14px;">
                                             <div style="font-size:12px;font-weight:700;color:#1a3a40;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">Governing Body</div>
-                                            <div style="display:flex;flex-direction:column;gap:10px;">
-                                                <div>
-                                                    <div style="font-size:13px;color:#1a2b35;margin-bottom:6px;">Has the person been convicted of a serious offence?</div>
-                                                    <div style="display:flex;gap:16px;"><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddGBQ1" value="yes" style="accent-color:#1a6b40;"> Yes</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddGBQ1" value="no" style="accent-color:#1a6b40;"> No</label></div>
-                                                </div>
-                                                <div>
-                                                    <div style="font-size:13px;color:#1a2b35;margin-bottom:6px;">Has the person been bankrupt or insolvent in the last 10 years?</div>
-                                                    <div style="display:flex;gap:16px;"><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddGBQ2" value="yes" style="accent-color:#1a6b40;"> Yes</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddGBQ2" value="no" style="accent-color:#1a6b40;"> No</label></div>
+                                            <div style="display:flex;flex-direction:column;gap:12px;">
+                                                <div style="background:#f8fafb;border:1px solid #e0e8eb;border-radius:8px;padding:14px 16px;">
+                                                    <div style="font-size:13px;color:#1a2b35;margin-bottom:8px;font-weight:500;">Does this person have primary responsibility for governance and executive-level decisions? <span style="color:#c0392b;">*</span></div>
+                                                    <div style="display:flex;gap:16px;">
+                                                        <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddGBQ1" value="yes" style="accent-color:#1a6b40;"> Yes</label>
+                                                        <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddGBQ1" value="no" style="accent-color:#1a6b40;"> No</label>
+                                                    </div>
+                                                    <div id="pddGBQ1Err" style="display:none;color:#c0392b;font-size:12px;margin-top:4px;">Answer this question.</div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <!-- Senior Manager questions -->
                                         <div id="pddSeniorManagerQs" style="display:none;margin-bottom:14px;">
                                             <div style="font-size:12px;font-weight:700;color:#1a3a40;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">Senior Manager</div>
-                                            <div style="display:flex;flex-direction:column;gap:10px;">
-                                                <div>
-                                                    <div style="font-size:13px;color:#1a2b35;margin-bottom:6px;">Does the person have relevant AML/CTF knowledge and experience?</div>
-                                                    <div style="display:flex;gap:16px;"><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddSMQ1" value="yes" style="accent-color:#1a6b40;"> Yes</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddSMQ1" value="no" style="accent-color:#1a6b40;"> No</label></div>
-                                                </div>
-                                                <div>
-                                                    <div style="font-size:13px;color:#1a2b35;margin-bottom:6px;">Is the person subject to any disciplinary action or adverse findings?</div>
-                                                    <div style="display:flex;gap:16px;"><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddSMQ2" value="yes" style="accent-color:#1a6b40;"> Yes</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddSMQ2" value="no" style="accent-color:#1a6b40;"> No</label></div>
+                                            <div style="display:flex;flex-direction:column;gap:12px;">
+                                                <div style="background:#f8fafb;border:1px solid #e0e8eb;border-radius:8px;padding:14px 16px;">
+                                                    <div style="font-size:13px;color:#1a2b35;margin-bottom:8px;font-weight:500;">Can this person make or influence decisions affecting the whole or a substantial part of the practice? <span style="color:#c0392b;">*</span></div>
+                                                    <div style="display:flex;gap:16px;">
+                                                        <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddSMQ1" value="yes" style="accent-color:#1a6b40;"> Yes</label>
+                                                        <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddSMQ1" value="no" style="accent-color:#1a6b40;"> No</label>
+                                                    </div>
+                                                    <div id="pddSMQ1Err" style="display:none;color:#c0392b;font-size:12px;margin-top:4px;">Answer this question.</div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <!-- Compliance Officer questions -->
                                         <div id="pddComplianceOfficerQs" style="display:none;margin-bottom:14px;">
                                             <div style="font-size:12px;font-weight:700;color:#1a3a40;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">Compliance Officer</div>
-                                            <div style="display:flex;flex-direction:column;gap:10px;">
-                                                <div>
-                                                    <div style="font-size:13px;color:#1a2b35;margin-bottom:6px;">Does the person hold relevant qualifications or certifications?</div>
-                                                    <div style="display:flex;gap:16px;"><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddCOQ1" value="yes" style="accent-color:#1a6b40;"> Yes</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddCOQ1" value="no" style="accent-color:#1a6b40;"> No</label></div>
+                                            <div style="display:flex;flex-direction:column;gap:12px;">
+                                                <div style="background:#f8fafb;border:1px solid #e0e8eb;border-radius:8px;padding:14px 16px;">
+                                                    <div style="font-size:13px;color:#1a2b35;margin-bottom:8px;font-weight:500;">Is this person an Australian resident with a degree of permanence? <span style="color:#c0392b;">*</span></div>
+                                                    <div style="display:flex;gap:16px;">
+                                                        <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddCOQ1" value="yes" style="accent-color:#1a6b40;"> Yes</label>
+                                                        <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddCOQ1" value="no" style="accent-color:#1a6b40;"> No</label>
+                                                    </div>
+                                                    <div id="pddCOQ1Err" style="display:none;color:#c0392b;font-size:12px;margin-top:4px;">Answer this question.</div>
                                                 </div>
-                                                <div>
-                                                    <div style="font-size:13px;color:#1a2b35;margin-bottom:6px;">Is the person aware of their obligations under the AML/CTF Act?</div>
-                                                    <div style="display:flex;gap:16px;"><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddCOQ2" value="yes" style="accent-color:#1a6b40;"> Yes</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddCOQ2" value="no" style="accent-color:#1a6b40;"> No</label></div>
+                                                <div style="background:#f8fafb;border:1px solid #e0e8eb;border-radius:8px;padding:14px 16px;">
+                                                    <div style="font-size:13px;color:#1a2b35;margin-bottom:8px;font-weight:500;">Does this person hold a management-level position? <span style="color:#c0392b;">*</span></div>
+                                                    <div style="display:flex;gap:16px;">
+                                                        <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddCOQ2" value="yes" style="accent-color:#1a6b40;"> Yes</label>
+                                                        <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddCOQ2" value="no" style="accent-color:#1a6b40;"> No</label>
+                                                    </div>
+                                                    <div id="pddCOQ2Err" style="display:none;color:#c0392b;font-size:12px;margin-top:4px;">Answer this question.</div>
+                                                </div>
+                                                <div style="background:#f8fafb;border:1px solid #e0e8eb;border-radius:8px;padding:14px 16px;">
+                                                    <div style="font-size:13px;color:#1a2b35;margin-bottom:8px;font-weight:500;">Does this person have sufficient authority, independence and access to the resources and information needed? <span style="color:#c0392b;">*</span></div>
+                                                    <div style="display:flex;gap:16px;">
+                                                        <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddCOQ3" value="yes" style="accent-color:#1a6b40;"> Yes</label>
+                                                        <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddCOQ3" value="no" style="accent-color:#1a6b40;"> No</label>
+                                                    </div>
+                                                    <div id="pddCOQ3Err" style="display:none;color:#c0392b;font-size:12px;margin-top:4px;">Answer this question.</div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <!-- Other Personnel — no spec questions required -->
                                         <div id="pddOtherPersonnelQs" style="display:none;margin-bottom:14px;">
                                             <div style="font-size:12px;font-weight:700;color:#1a3a40;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">Other Personnel</div>
-                                            <div>
-                                                <div style="font-size:13px;color:#1a2b35;margin-bottom:6px;">Has the person completed required AML/CTF training?</div>
-                                                <div style="display:flex;gap:16px;"><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddOPQ1" value="yes" style="accent-color:#1a6b40;"> Yes</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pddOPQ1" value="no" style="accent-color:#1a6b40;"> No</label></div>
-                                            </div>
+                                            <div style="font-size:13px;color:#7a8f98;font-style:italic;">No additional questions required for Other Personnel.</div>
                                         </div>
                                     </div>
                                 </div>
