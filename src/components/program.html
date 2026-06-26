@@ -569,6 +569,17 @@
             background: #155530;
         }
 
+        /* AGW Stepper (matches clients.html) */
+        .agw-stepper-step { display:flex;align-items:center;gap:0;padding:0 24px;cursor:default;border-radius:8px;transition:background .15s; }
+        .agw-step-circle { width:28px;height:28px;border-radius:50%;border:2px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:rgba(255,255,255,0.4);flex-shrink:0;transition:all .2s; }
+        .agw-step-circle.done { background:#00923b;border-color:#00923b;color:#fff; }
+        .agw-step-circle.active { background:#fff;border-color:#fff;color:#1a3a40; }
+        .agw-step-label { font-size:12px;color:rgba(255,255,255,0.45);margin-left:10px;text-transform:capitalize;letter-spacing:.01em; }
+        .agw-step-label.active { color:#fff;font-weight:600; }
+        .agw-step-label.done { color:rgba(255,255,255,0.7); }
+        .agw-step-connector { width:2px;height:28px;background:rgba(255,255,255,0.15);margin:4px 0 4px 37px;flex-shrink:0; }
+        .agw-step-connector.done { background:#5a9e6a; }
+
         /* Generate Risk Program Modal */
         .ncg-overlay {
             position: fixed;
@@ -921,6 +932,52 @@
                 box-shadow: inset 0px 0px 0px 30px #7ac142;
             }
         }
+
+        /* BGL Support Access tooltip */
+        .bgl-access-wrap { position: relative; }
+        .bgl-access-tooltip {
+            display: none; position: absolute; bottom: calc(100% + 10px); left: 50%;
+            transform: translateX(-50%); width: 500px;
+            background: #1a2b35; color: #fff; font-size: 12.5px; line-height: 1.6;
+            padding: 12px 14px; border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.22); z-index: 100;
+            pointer-events: none; text-align: left;
+        }
+        .bgl-access-tooltip::after {
+            content: ''; position: absolute; top: 100%; left: 50%;
+            transform: translateX(-50%);
+            border: 7px solid transparent; border-top-color: #1a2b35;
+        }
+        .bgl-access-wrap:hover .bgl-access-tooltip { display: block; }
+    
+        /* BGL Access granted notification */
+        .bgl-access-notif {
+            position: fixed; top: 78px; right: 20px; z-index: 1200;
+            width: 380px; background: #fff; border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.16);
+            display: flex; align-items: center; gap: 14px;
+            padding: 16px 20px; overflow: visible;
+            opacity: 0; pointer-events: none;
+            transform-origin: top center;
+        }
+        .bgl-access-notif.open {
+            opacity: 1; pointer-events: all;
+            animation: featFlipIn 0.45s cubic-bezier(0.34, 1.3, 0.64, 1) forwards;
+        }
+        .bgl-access-notif-icon {
+            width: 44px; height: 44px; border-radius: 50%; background: #e6f4ec;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .bgl-access-notif-body { flex: 1; min-width: 0; }
+        .bgl-access-notif-title { font-size: 13px; font-weight: 700; color: #1a2b35; margin-bottom: 2px; }
+        .bgl-access-notif-sub { font-size: 12px; color: #5a7280; line-height: 1.5; }
+        .bgl-access-notif-close {
+            position: absolute; top: -11px; right: -11px;
+            width: 28px; height: 28px; border-radius: 50%;
+            background: #1a2b35; border: none; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+        }
     </style>
 </head>
 <body>
@@ -1035,6 +1092,7 @@
                     <a href="#" class="help-menu-item">FirmVerify Help Centre</a>
                     <a href="#" class="help-menu-item">New Features Notes</a>
                     <a href="#" class="help-menu-item">Server Status</a>
+                    <a href="#" class="help-menu-item" onclick="event.preventDefault(); document.getElementById('bglSupportModal').classList.add('open')">BGL Support Access</a>
                 </div>
             </div>
             <button class="header-icon-btn" title="Logout" id="logoutBtn">
@@ -1555,132 +1613,68 @@
 
     <!-- Generate Risk Program Modal -->
     <div class="ncg-overlay" id="generateProgramModal">
-        <div class="ncg-modal" style="width: 1200px; max-width: 95vw; display: flex; flex-direction: column; height: 85vh;">
-            <!-- Modal Header -->
-            <div class="ncg-modal-header"><span>Generate Risk Program</span><button class="header-live-chat-btn" onclick="fvLiveChatOpen()" title="Live Chat">Live chat <span class="live-chat-icon"><i class="fas fa-comments" style="font-size:14px;"></i><span class="live-chat-dot"></span></span></button></div>
+        <div class="ncg-modal" style="width:80vw;max-width:80vw;height:80vh;max-height:80vh;border-radius:14px;display:flex;flex-direction:column;overflow:hidden;">
+            <div style="display:flex;flex:1;overflow:hidden;border-radius:14px;">
 
-            <!-- Modal Body with Stepper Layout -->
-            <div style="display: flex; flex: 1; overflow: hidden;">
-                <!-- Left Stepper Sidebar -->
-                <aside class="era-stepper">
-                    <!-- Section: Risk Assessment -->
-                    <div class="era-section active-section">
-                        <div class="era-section-header">
-                            <i class="fas fa-dot-circle era-step-done-fa"></i>
-                            <span class="era-section-label active-label">Risk Assessment</span>
+                <!-- LEFT SIDEBAR -->
+                <div style="width:280px;flex-shrink:0;background:#153541;border-radius:14px 0 0 14px;display:flex;flex-direction:column;padding:28px 0 24px 0;">
+                    <div style="padding:0 24px 28px 24px;border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <div style="display:flex;align-items:center;gap:14px;">
+                            <img src="images/logo.svg" alt="FirmVerify" style="width:52px;height:52px;border-radius:14px;flex-shrink:0;">
+                            <div>
+                                <div style="font-size:16px;font-weight:700;color:#fff;line-height:1.2;">Risk Program</div>
+                                <div style="font-size:12px;color:rgba(255,255,255,0.55);margin-top:2px;">FirmVerify</div>
+                            </div>
                         </div>
                     </div>
+                    <nav id="grpStepper" style="flex:1;padding:20px 0;overflow:hidden;"><!-- rendered by JS --></nav>
+                </div>
 
-                    <!-- Section: Policy -->
-                    <div class="era-section">
-                        <div class="era-section-header">
-                            <i class="fas fa-question-circle era-step-pending-fa"></i>
-                            <span class="era-section-label">Policy</span>
+                <!-- RIGHT CONTENT -->
+                <div style="flex:1;display:flex;flex-direction:column;min-width:300px;overflow:hidden;background:#f6f7f8;border-radius:0 14px 14px 0;">
+
+                    <!-- Step heading -->
+                    <div style="padding:28px 32px 0 32px;">
+                        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;">
+                            <h2 id="grpPanelTitle" style="font-size:18px;font-weight:700;color:#1a2b35;margin:0;">Risk Assessment</h2>
+                            <button class="header-live-chat-btn" onclick="fvLiveChatOpen()" title="Live Chat" style="margin-right:0;flex-shrink:0;">Live chat <span class="live-chat-icon"><i class="fas fa-comments" style="font-size:14px;"></i><span class="live-chat-dot"></span></span></button>
                         </div>
+                        <p id="grpPanelSubtitle" style="font-size:13px;color:#7a8f98;margin:0 0 24px 0;">Select the current risk assessment documents to include in your program.</p>
+                        <hr style="border:none;border-top:1px solid #e8edf0;margin:0 0 24px 0;">
                     </div>
 
-                    <!-- Section: Process -->
-                    <div class="era-section">
-                        <div class="era-section-header">
-                            <i class="fas fa-question-circle era-step-pending-fa"></i>
-                            <span class="era-section-label">Process</span>
+                    <!-- Scrollable panel -->
+                    <div id="grpContentArea" class="program-modal-content-area" style="flex:1;overflow-y:auto;padding:0 32px 12px 32px;position:relative;">
+                        <!-- Loader -->
+                        <div class="step-loader" id="stepLoader">
+                            <div class="step-loader-spinner"></div>
                         </div>
-                    </div>
 
-                    <!-- Section: Program -->
-                    <div class="era-section">
-                        <div class="era-section-header">
-                            <i class="fas fa-question-circle era-step-pending-fa"></i>
-                            <span class="era-section-label">Program</span>
-                        </div>
-                    </div>
-
-                    <!-- Section: Finish -->
-                    <div class="era-section">
-                        <div class="era-section-header">
-                            <i class="fas fa-award" id="finishIcon" style="position: absolute; left: 0; top: 4px; font-size: 24px; color: #b8b8b8; z-index: 1;"></i>
-                            <span class="era-section-label">Finish</span>
-                        </div>
-                    </div>
-                </aside>
-
-                <!-- Right Content Area -->
-                <div class="era-content" style="flex: 1; display: flex; flex-direction: column; background: #fff; position: relative;">
-                    <!-- Loader -->
-                    <div class="step-loader" id="stepLoader">
-                        <div class="step-loader-spinner"></div>
-                    </div>
-
-                    <div class="program-modal-content-area" style="flex: 1; padding: 32px 40px; overflow-y: auto; background: #f0f5f7;">
                         <!-- Validation Info Box -->
-                        <div class="ukp-modal-info-box" id="programValidationBox" style="display: none; margin-bottom: 24px;">
+                        <div class="ukp-modal-info-box" id="programValidationBox" style="display:none;margin-bottom:24px;">
                             <div class="ukp-modal-info-title">Selection Required</div>
                             <p>Please select at least one document to continue.</p>
                         </div>
-
-                        <h3 style="font-size: 20px; font-weight: 700; color: #1a2b35; margin: 0 0 8px 0;">Risk Assessment</h3>
-                        <p style="font-size: 14px; color: #5a6c7a; margin: 0 0 32px 0;">Select the current risk assessment documents to include in your program.</p>
-
-                        <!-- Document Selection List -->
-                        <div style="display: flex; flex-direction: column; gap: 16px;">
-                            <!-- Document 1 - Selected -->
-                            <div class="program-doc-item selected" style="display: flex;align-items: center;gap: 10px;padding: 14px 25px;border: 2px solid rgb(21, 194, 103);border-radius: 10px;background: rgb(255, 255, 255);cursor: pointer;transition: all 0.2s;">
-                                <div style="font-size: 15px; font-weight: 300; color: #1a2b35;">Risk Assessment  V 2.0</div>
-                                <span style="padding: 2px 12px; border-radius: 6px; font-size: 11px; font-weight: 200; background: #e8f5e9; color: #388e3c; border: 1px solid #81c784;">Approved</span>
-                                <span style="padding: 2px 12px; border-radius: 6px; font-size: 11px; font-weight: 200; background: #e0f2f1; color: #00897b; border: 1px solid #4db6ac;">Current</span>
-                                <span style="padding: 3px 10px; border-radius: 20px; font-size: 11px; color: #2a3840; background: #fff; border: 1px solid #c9d8de; display: inline-flex; align-items: center; gap: 5px;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="#df05e5" viewBox="0 0 16 16">
-                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path>
-                                    </svg>
-                                    FirmVerify Generated
-                                </span>
-                                <button class="program-select-btn selected" style="margin-left: auto; display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; font-size: 14px; font-weight: 500; background: rgb(255, 255, 255); border: 1px solid rgb(23, 140, 78); color: rgb(26, 43, 53); cursor: pointer; transition: all 0.2s; box-shadow: rgba(50, 50, 93, 0.25) 0px 1px 3px -1px, rgba(0, 0, 0, 0.3) 0px 0px 0.3px -1px;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10" fill="#1a6b40" stroke="#1a6b40"/>
-                                        <path d="M9 12l2 2 4-4" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    Select
-                                </button>
-                            </div>
-
-                            <!-- Document 2 - Unselected -->
-                            <div class="program-doc-item" style="display: flex; align-items: center; gap: 10px; padding: 14px 25px; border: 1px solid #d0d7de; border-radius: 10px; background: #fff; cursor: pointer; transition: all 0.2s;">
-                                <div style="font-size: 15px; font-weight: 300; color: #1a2b35;">Risk Assessment  V 1.0</div>
-                                <span style="padding: 2px 12px; border-radius: 6px; font-size: 11px; font-weight: 200; background: #e8f5e9; color: #388e3c; border: 1px solid #81c784;">Approved</span>
-                                <span style="padding: 3px 10px; border-radius: 20px; font-size: 11px; color: #2a3840; background: #fff; border: 1px solid #c9d8de; display: inline-flex; align-items: center; gap: 5px;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="#df05e5" viewBox="0 0 16 16">
-                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
-                                    </svg>
-                                    FirmVerify Generated
-                                </span>
-                                <button class="program-select-btn" style="margin-left: auto; display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; font-size: 14px; font-weight: 500; background: #fff; border: 1px solid #d0d7de; color: #1a2b35; cursor: pointer; transition: all 0.2s; box-shadow: rgba(50, 50, 93, 0.25) 0px 1px 3px -1px, rgba(0, 0, 0, 0.3) 0px 0px 0.3px -1px;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10" stroke="#d0d7de" fill="none"/>
-                                    </svg>
-                                    Select
-                                </button>
-                            </div>
-                        </div>
+                        <!-- Document items rendered dynamically by renderContent() -->
                     </div>
 
                     <!-- Footer -->
-                    <div class="program-modal-footer" style="display: flex; align-items: center; justify-content: space-between; padding: 20px 32px; border-top: 1px solid #e0e0e0; background: #fafafa;">
-                        <div style="display: flex; gap: 12px;">
-                            <button class="program-modal-btn cancel" id="programModalCancel" style="padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; background: #fff; border: 1px solid #c9d8de; color: #1a2b35;">Cancel</button>
-                            <button class="program-modal-btn back" id="programModalBack" style="padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; background: #fff; border: 1px solid #c9d8de; color: #1a2b35; display: inline-flex; align-items: center; gap: 8px;">
-                                <i class="fas fa-arrow-left"></i>
-                                Back
+                    <div id="grpModalFooter" class="program-modal-footer" style="display:flex;align-items:center;justify-content:space-between;padding:20px 32px;border-top:1px solid #e8edf0;background:#fff;">
+                        <div style="display:flex;gap:10px;">
+                            <button class="program-modal-btn cancel" id="programModalCancel" style="padding:9px 22px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;background:#fff;border:1px solid #c9d8de;color:#1a2b35;">Cancel</button>
+                            <button class="program-modal-btn back" id="programModalBack" style="padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;background:#fff;border:1px solid #c9d8de;color:#1a2b35;display:inline-flex;align-items:center;gap:8px;">
+                                <i class="fas fa-arrow-left"></i> Back
                             </button>
                         </div>
-                        <button class="program-modal-btn next" id="programModalNext" style="padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; background: #1a6b40; border: none; color: #fff; display: inline-flex; align-items: center; gap: 8px;">
-                            Next
-                            <i class="fas fa-arrow-right"></i>
+                        <button class="program-modal-btn next" id="programModalNext" style="padding:9px 22px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;background:#1a6b40;border:none;color:#fff;display:inline-flex;align-items:center;gap:8px;">
+                            Next <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Spinner Overlay -->
     <div id="spinnerOverlay" style="position:fixed; inset:0; background:rgba(0,54,66,0.75); z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column; opacity:0; transition: opacity 0.4s ease;">
@@ -2274,6 +2268,7 @@
                         // Fade in Generate Program Modal
                         if (generateProgramModal) {
                             generateProgramModal.classList.add('open');
+                            updateStepIcons();
                             generateProgramModal.style.opacity = '0';
                             generateProgramModal.style.transition = 'opacity 0.4s ease';
 
@@ -2330,6 +2325,7 @@
                     var generateProgramModal = document.getElementById('generateProgramModal');
                     if (generateProgramModal) {
                         generateProgramModal.classList.add('open');
+                        updateStepIcons();
                     }
                 }
             });
@@ -2369,68 +2365,53 @@
                 { id: 'proc1', name: 'CDD Process V 2.0', current: true, approved: true, generated: true }
             ];
 
+            var grpStepOrder = ['ra', 'pol', 'proc', 'prog', 'finish'];
+            var grpStepLabels = {
+                'ra': 'Risk Assessment',
+                'pol': 'Policy',
+                'proc': 'Process',
+                'prog': 'Program',
+                'finish': 'Finish'
+            };
+            var grpStepTitles = {
+                'ra':     ['Risk Assessment',  'Select the current risk assessment documents to include in your program.'],
+                'pol':    ['Policy',            'Select the policy documents to include in your program.'],
+                'proc':   ['Process',           'Select the process documents to include in your program.'],
+                'prog':   ['Program',           'Review and confirm the documents for your program.'],
+                'finish': ['Finish',            'Your program is ready to generate.']
+            };
+
             function updateStepIcons() {
-                var stepSections = {
-                    'ra': document.querySelector('.era-section:nth-child(1)'),
-                    'pol': document.querySelector('.era-section:nth-child(2)'),
-                    'proc': document.querySelector('.era-section:nth-child(3)'),
-                    'prog': document.querySelector('.era-section:nth-child(4)')
-                };
-                var stepIcons = {
-                    'ra': document.querySelector('.era-section:nth-child(1) i'),
-                    'pol': document.querySelector('.era-section:nth-child(2) i'),
-                    'proc': document.querySelector('.era-section:nth-child(3) i'),
-                    'prog': document.querySelector('.era-section:nth-child(4) i')
-                };
-                var stepLabels = {
-                    'ra': document.querySelector('.era-section:nth-child(1) .era-section-label'),
-                    'pol': document.querySelector('.era-section:nth-child(2) .era-section-label'),
-                    'proc': document.querySelector('.era-section:nth-child(3) .era-section-label'),
-                    'prog': document.querySelector('.era-section:nth-child(4) .era-section-label')
-                };
-
-                steps.forEach(function(step) {
-                    var isActive = modalState.currentStep === step.id;
-                    var isComplete = false;
-
-                    if (step.id === 'ra') isComplete = modalState.selectedRA.length > 0;
-                    if (step.id === 'pol') isComplete = modalState.selectedPol.length > 0;
-                    if (step.id === 'proc') isComplete = modalState.selectedProc.length > 0;
-
-                    var section = stepSections[step.id];
-                    var icon = stepIcons[step.id];
-                    var label = stepLabels[step.id];
-
-                    // Update active section class
-                    if (isActive) {
-                        section.classList.add('active-section');
-                    } else {
-                        section.classList.remove('active-section');
-                    }
-
-                    if (isActive && !isComplete) {
-                        icon.className = 'fas fa-dot-circle era-step-done-fa';
-                        label.className = 'era-section-label active-label';
-                    } else if (isComplete && !isActive) {
-                        icon.className = 'fas fa-check-circle era-step-done-fa';
-                        label.className = 'era-section-label done-label';
-                    } else if (isActive && isComplete) {
-                        icon.className = 'fas fa-dot-circle era-step-done-fa';
-                        label.className = 'era-section-label active-label';
-                    } else {
-                        icon.className = 'fas fa-question-circle era-step-pending-fa';
-                        label.className = 'era-section-label';
+                var el = document.getElementById('grpStepper');
+                if (!el) return;
+                var currentIdx = grpStepOrder.indexOf(modalState.currentStep);
+                var html = '';
+                grpStepOrder.forEach(function(id, i) {
+                    var isActive  = id === modalState.currentStep;
+                    var isDone    = i < currentIdx;
+                    var isComplete = (id === 'ra' && modalState.selectedRA && modalState.selectedRA.length > 0)
+                                  || (id === 'pol' && modalState.selectedPol && modalState.selectedPol.length > 0)
+                                  || (id === 'proc' && modalState.selectedProc && modalState.selectedProc.length > 0);
+                    var circleClass = isActive ? 'active' : (isDone || isComplete) ? 'done' : '';
+                    var labelClass  = isActive ? 'active' : (isDone || isComplete) ? 'done' : '';
+                    var inner = (isDone || (isComplete && !isActive)) ? '&#10003;' : (i + 1);
+                    html += '<div class="agw-stepper-step">'
+                        + '<div class="agw-step-circle ' + circleClass + '">' + inner + '</div>'
+                        + '<span class="agw-step-label ' + labelClass + '">' + grpStepLabels[id] + '</span>'
+                        + '</div>';
+                    if (i < grpStepOrder.length - 1) {
+                        html += '<div class="agw-step-connector' + ((isDone || isComplete) ? ' done' : '') + '"></div>';
                     }
                 });
+                el.innerHTML = html;
 
-                // Update finish icon color
-                var finishIcon = document.getElementById('finishIcon');
-                if (finishIcon) {
-                    if (modalState.currentStep === 'prog') {
-                        finishIcon.style.color = 'rgb(0, 146, 59)';
-                    } else {
-                        finishIcon.style.color = '#b8b8b8';
-                    }
+                // Update panel title/subtitle
+                var info = grpStepTitles[modalState.currentStep];
+                if (info) {
+                    var t = document.getElementById('grpPanelTitle');
+                    var s = document.getElementById('grpPanelSubtitle');
+                    if (t) t.textContent = info[0];
+                    if (s) s.textContent = info[1];
                 }
             }
 
@@ -3101,5 +3082,43 @@
     })();
     </script>
 
+    <!-- BGL Support Access Modal -->
+    <div class="ukp-modal-overlay" id="bglSupportModal">
+        <div class="ukp-modal" style="width:600px; max-width:95vw; overflow:hidden; padding:0;">
+            <div style="background:#153541; padding:20px 24px; border-radius:14px 14px 0 0;">
+                <div style="font-size:16px; font-weight:700; color:#fff;">What would you like help with?</div>
+            </div>
+            <div style="padding:32px 24px 24px; text-align:center; background:#fff;">
+                <img src="images/Roni-Search.png" alt="Support" style="width:160px; height:auto; margin-bottom:20px;">
+                <div style="font-size:18px; font-weight:700; color:#1a2b35; margin-bottom:8px;">What would you like help with?</div>
+                <div style="font-size:13px; color:#5a7280; margin-bottom:24px; line-height:1.6;">Before we log the support call, let's search for a<br>solution to your question</div>
+                <div style="position:relative; margin-bottom:12px;">
+                    <i class="fas fa-search" style="position:absolute; left:14px; top:50%; transform:translateY(-50%); color:#8aa8b2; font-size:14px;"></i>
+                    <input type="text" placeholder="Search" style="width:100%; box-sizing:border-box; padding:13px 14px 13px 40px; border:1px solid #e0e8eb; border-radius:10px; font-size:14px; color:#1a2b35; background:#f6f8fa; outline:none;">
+                </div>
+                <div style="position:relative; margin-bottom:10px;" class="bgl-access-wrap">
+                    <button style="width:100%; padding:14px; background:#1a6b40; color:#fff; border:none; border-radius:10px; font-size:14px; font-weight:600; cursor:pointer;" onclick="document.getElementById('bglSupportModal').classList.remove('open'); setTimeout(function(){ document.getElementById('bglAccessNotif').classList.add('open'); setTimeout(function(){ document.getElementById('bglAccessNotif').classList.remove('open'); }, 5000); }, 200);">Already in contact with BGL Support? Grant Account Access here</button>
+                    <div class="bgl-access-tooltip">Use this if you’re already working with BGL Support and they’ve asked for access to your account.<br><br>Clicking grants access for 14 days; remove it sooner from the User List screen.</div>
+                </div>
+                <button onclick="document.getElementById('bglSupportModal').classList.remove('open')" style="width:100%; padding:13px; background:#fff; color:#1a2b35; border:1px solid #c9d8de; border-radius:10px; font-size:14px; font-weight:500; cursor:pointer;">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BGL Access Granted Notification -->
+    <div class="bgl-access-notif" id="bglAccessNotif">
+        <div class="bgl-access-notif-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#2d6a35" viewBox="0 0 16 16">
+                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+            </svg>
+        </div>
+        <div class="bgl-access-notif-body">
+            <div class="bgl-access-notif-title">BGL Support access granted</div>
+            <div class="bgl-access-notif-sub">BGL Support has been invited to access your account for 14 days.</div>
+        </div>
+        <button class="bgl-access-notif-close" onclick="document.getElementById('bglAccessNotif').classList.remove('open')">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
 </body>
 </html>
