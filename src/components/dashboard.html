@@ -200,6 +200,16 @@
         }
     </script>
 
+    <!-- New Features Modal -->
+    <div class="ukp-modal-overlay" id="adModalOverlay">
+        <div class="ukp-modal" style="width:auto; max-width:54vw; padding:0; overflow:visible; background:transparent; box-shadow:none; position:relative;">
+            <button onclick="document.getElementById('adModalOverlay').classList.remove('open');document.querySelector('.header-new-features-btn').classList.add('nf-seen');" style="position:absolute; top:-14px; right:-14px; width:34px; height:34px; border-radius:50%; background:#1a2b35; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#fff; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,0.25); z-index:10;">
+                <i class="fas fa-times"></i>
+            </button>
+            <img src="images/image-20260619-004530.png" alt="New features" style="display:block; max-width:100%; max-height:50vh; border-radius:14px;">
+        </div>
+    </div>
+
     <!-- Spinner Overlay -->
     <div id="spinnerOverlay" style="position:fixed; inset:0; background:rgba(0,54,66,0.75); z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column; opacity:0; transition: opacity 0.4s ease;">
         <div class="loader"></div>
@@ -224,6 +234,10 @@
                         <button class="header-live-chat-btn" onclick="fvLiveChatOpen()" title="Live Chat">
                 Live chat
                 <span class="live-chat-icon"><i class="fas fa-comments" style="font-size:17px;"></i><span class="live-chat-dot"></span></span>
+            </button>
+            <button class="header-new-features-btn" title="New Features" onclick="document.getElementById('adModalOverlay').classList.add('open')">
+                <i class="fas fa-medal" style="font-size:16px;margin-right:6px;color:#fbbf24;"></i>
+                New Features
             </button>
             <button class="header-feedback-btn" title="Feedback">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 6px;">
