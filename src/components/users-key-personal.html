@@ -82,25 +82,32 @@
             cursor:pointer;transition:border-color .15s,background .15s;
         }
         .agw-add-btn:hover { border-color:#5a9e6a; background:#f0f9f2; }
-        .ukp-role-card { border:1px solid #c7d4d9; border-radius:12px; margin-bottom:12px; background:#fff; overflow:hidden; }
-        .ukp-role-card.ceased { border-color:#f5c6cb; }
-        .ukp-role-card-head { display:flex; align-items:center; justify-content:space-between; padding:14px 18px; gap:12px; cursor:pointer; transition:background .15s; }
-        .ukp-role-card-head:hover { background:#f5f7f8; }
-        .ukp-role-card.ceased .ukp-role-card-head { background:#fff0f0; }
-        .ukp-role-card.ceased .ukp-role-card-head:hover { background:#ffe4e4; }
-        .ukp-role-card-body { padding:17px 26px 20px; background:#fafbfc; border-top:1px solid #e8edf0; }
-        .ukp-role-card.ceased .ukp-role-card-body { background:#fff8f8; border-top-color:#f5c6cb; }
-        .ukp-role-status-badge { display:inline-block; padding:2px 10px; border-radius:20px; font-size:11px; font-weight:700; }
-        .ukp-role-status-badge.active { background:#d1fae5; color:#065f46; }
-        .ukp-role-status-badge.ceased { background:#fee2e2; color:#b91c1c; }
-        .ukp-role-acc-btn { background:none; border:none; cursor:pointer; padding:4px 10px; line-height:1; }
-        .ukp-role-acc-btn i { transition:transform .2s; }
-        .ukp-role-field { display:flex; flex-direction:column; gap:4px; flex:1; min-width:120px; }
+        .ukp-role-row { display:grid; grid-template-columns:1fr 1fr 1fr auto; align-items:end; gap:12px; padding:12px 0; border-bottom:1px solid #e8edf0; }
+        .ukp-role-row:first-child { border-top:1px solid #e8edf0; }
+        .ukp-role-row.ceased { background:#fff8f8; border-radius:6px; padding-left:8px; padding-right:8px; }
+        .ukp-role-field { display:flex; flex-direction:column; gap:4px; }
         .ukp-role-field label { font-size:11.5px; color:#7a8f98; font-weight:500; }
-        .ukp-role-field input[type="date"] {
-            border:1px solid #c9d8de; border-radius:6px; padding:8px 10px; font-size:12.5px; color:#1a2b35; background:#fff; cursor:pointer; height:38px; box-sizing:border-box;
+        .ukp-role-field input[type="date"],
+        .ukp-role-field .ukp-modal-form-select {
+            height:42px; box-sizing:border-box; width:100%;
         }
-        .ukp-role-ceased-warn { font-size:11.5px; color:#b91c1c; margin-top:10px; padding:6px 10px; background:#fff0f0; border-radius:6px; border:1px solid #f5c6cb; }
+        .ukp-role-field input[type="date"] {
+            border:1px solid #c9d8de; border-radius:8px; padding:8px 10px; font-size:12.5px; color:#1a2b35; background:#fff; cursor:pointer;
+        }
+        .ukp-role-ceased-warn { font-size:11.5px; color:#b91c1c; margin-top:6px; padding:6px 10px; background:#fff0f0; border-radius:6px; border:1px solid #f5c6cb; grid-column:1/-1; }
+        .ukp-role-delete-btn { background:#fff; border:1px solid #c9d8de; cursor:pointer; padding:0 10px; height:42px; color:#4a6472; display:flex; align-items:center; justify-content:center; border-radius:8px; box-shadow:rgba(0,0,0,0.08) 0px 1px 0px; transition:color .15s, border-color .15s; align-self:end; margin-bottom:0; }
+        .ukp-role-delete-btn:hover { color:#e53935; border-color:#e53935; }
+        .ukp-role-combo { position:relative; }
+        .ukp-role-combo-input { border:1px solid #c9d8de; border-radius:8px; padding:0 32px 0 12px; height:42px; font-size:13px; color:#1a2b35; background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23666'/%3E%3C/svg%3E") no-repeat right 12px center; box-shadow:rgba(0,0,0,0.13) 0px .9px 0px; box-sizing:border-box; width:100%; outline:none; cursor:pointer; transition:border-color .15s; }
+        .ukp-role-combo-input:focus { border-color:#5a9e6a; cursor:text; }
+        .ukp-role-combo-list { position:absolute; top:calc(100% + 4px); left:0; width:120%; background:#fff; border:1px solid #c9d8de; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.12); z-index:200; max-height:200px; overflow-y:auto; display:none; }
+        .ukp-role-combo-list.open { display:block; }
+        .ukp-role-combo-option { padding:9px 13px; font-size:13px; color:#1a2b35; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:8px; }
+        .ukp-role-combo-option:hover, .ukp-role-combo-option.focused { background:#f0f9f2; }
+        .ukp-role-combo-option.add-new { color:#2d6a35; font-weight:600; border-top:1px solid #e8edf0; }
+        .ukp-role-combo-opt-delete { background:none; border:none; cursor:pointer; padding:2px 4px; color:#9ab0b8; line-height:1; border-radius:4px; flex-shrink:0; }
+        .ukp-role-combo-opt-delete:hover { color:#e53935; }
+        .ukp-role-combo-empty { padding:9px 13px; font-size:12.5px; color:#9ab0b8; }
     </style>
 </head>
 <body>
@@ -552,6 +559,12 @@
                                 Show ceased roles
                             </label>
                         </div>
+                        <div id="ukpRoleHeaderRow" style="display:none;grid-template-columns:1fr 1fr 1fr auto;gap:12px;padding:0 0 6px 0;">
+                            <span style="font-size:11.5px;color:#7a8f98;font-weight:500;">Role</span>
+                            <span style="font-size:11.5px;color:#7a8f98;font-weight:500;">Appointed</span>
+                            <span style="font-size:11.5px;color:#7a8f98;font-weight:500;">Status</span>
+                            <span></span>
+                        </div>
                         <div id="ukpRoleCardsContainer"></div>
                         <button type="button" onclick="ukpAddRole()" style="width:100%;padding:12px 16px;background:#ebf0f2;border:1px dashed #666e71;border-radius:8px;color:#525b5f;font-size:13px;font-family:inherit;cursor:pointer;text-align:center;transition:background 0.15s;margin-bottom:20px;">+ Add role</button>
                     </div>
@@ -926,79 +939,161 @@ document.getElementById('popEmail').textContent = row.dataset.email;
         // --- Roles component ---
         var ukpRoleCount = 0;
         var ROLE_OPTIONS = ['Compliance Officer', 'Director', 'Shareholder', 'Secretary', 'Beneficial Owner', 'Other'];
-        var ROLE_COLOURS = {
-            'Compliance Officer': {bg:'#dbeafe',color:'#1d4ed8'},
-            'Director':           {bg:'#ede9fe',color:'#6d28d9'},
-            'Shareholder':        {bg:'#d1fae5',color:'#065f46'},
-            'Secretary':          {bg:'#fef3c7',color:'#92400e'},
-            'Beneficial Owner':   {bg:'#fee2e2',color:'#b91c1c'},
-            'Other':              {bg:'#f1f5f9',color:'#475569'}
-        };
-
-        function ukpRoleAvatarStyle(role) {
-            var c = ROLE_COLOURS[role] || {bg:'#f1f5f9',color:'#475569'};
-            return 'background:' + c.bg + ';color:' + c.color + ';width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;';
-        }
 
         window.ukpAddRole = function() {
             var c = document.getElementById('ukpRoleCardsContainer');
             ukpRoleCount++;
             var id = 'ukpRole' + ukpRoleCount;
-            var bodyId = id + '-body';
-            var defaultRole = ROLE_OPTIONS[0];
-            var card = document.createElement('div');
-            card.className = 'ukp-role-card';
-            card.id = id;
-            card.innerHTML =
-                '<div class="ukp-role-card-head" onclick="ukpToggleRoleCard(\'' + bodyId + '\',this)">' +
-                    '<div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0;">' +
-                        '<div class="ukp-role-avatar" style="' + ukpRoleAvatarStyle(defaultRole) + '">' + defaultRole[0] + '</div>' +
-                        '<div style="min-width:0;">' +
-                            '<div class="ukp-role-head-title" style="font-size:13px;font-weight:600;color:#1a2b35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + defaultRole + '</div>' +
-                            '<div class="ukp-role-head-sub" style="font-size:12px;color:#7a8f98;">Active</div>' +
-                        '</div>' +
-                    '</div>' +
-                    '<div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">' +
-                        '<button type="button" class="ukp-role-acc-btn" onclick="event.stopPropagation()" title="Expand/Collapse"><i class="fa-solid fa-chevron-down" style="font-size:12px;color:#7a8f98;"></i></button>' +
-                        '<button type="button" onclick="event.stopPropagation();ukpRemoveRole(\'' + id + '\')" title="Remove" style="background:none;border:none;cursor:pointer;padding:4px;">' +
-                            '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg>' +
-                        '</button>' +
+            var comboId = id + '-combo';
+            var listId = id + '-list';
+            var row = document.createElement('div');
+            row.className = 'ukp-role-row';
+            row.id = id;
+            row.innerHTML =
+                '<div class="ukp-role-field ukp-role-combo" id="' + comboId + '">' +
+                    '<input type="text" class="ukp-role-combo-input" placeholder="' + ROLE_OPTIONS[0] + '" autocomplete="off" value="' + ROLE_OPTIONS[0] + '">' +
+                    '<div class="ukp-role-combo-list" id="' + listId + '">' +
+                        ROLE_OPTIONS.map(function(r){ return '<div class="ukp-role-combo-option">' + r + '</div>'; }).join('') +
                     '</div>' +
                 '</div>' +
-                '<div id="' + bodyId + '" class="ukp-role-card-body" style="display:none;">' +
-                    '<div style="display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;">' +
-                        '<div class="ukp-role-field">' +
-                            '<label style="font-size:11.5px;color:#7a8f98;font-weight:500;">Role</label>' +
-                            '<select class="ukp-modal-form-select" onclick="event.stopPropagation()" onchange="ukpRoleTypeChange(this)">' +
-                                ROLE_OPTIONS.map(function(r){ return '<option>' + r + '</option>'; }).join('') +
-                            '</select>' +
-                        '</div>' +
-                        '<div class="ukp-role-field">' +
-                            '<label style="font-size:11.5px;color:#7a8f98;font-weight:500;">Appointed</label>' +
-                            '<input type="date">' +
-                        '</div>' +
-                        '<div class="ukp-role-field">' +
-                            '<label style="font-size:11.5px;color:#7a8f98;font-weight:500;">Status</label>' +
-                            '<select class="ukp-modal-form-select" onclick="event.stopPropagation()" onchange="ukpRoleStatusChange(this)">' +
-                                '<option value="Active">Active</option>' +
-                                '<option value="Ceased">Ceased</option>' +
-                            '</select>' +
-                        '</div>' +
-                    '</div>' +
-                '</div>';
-            c.appendChild(card);
-            ukpToggleRoleCard(bodyId, card.querySelector('.ukp-role-card-head'));
+                '<div class="ukp-role-field">' +
+                    '<input type="date">' +
+                '</div>' +
+                '<div class="ukp-role-field">' +
+                    '<select class="ukp-modal-form-select" onchange="ukpRoleStatusChange(this)">' +
+                        '<option value="Active">Active</option>' +
+                        '<option value="Ceased">Ceased</option>' +
+                    '</select>' +
+                '</div>' +
+                '<button type="button" class="ukp-role-delete-btn" onclick="ukpRemoveRole(\'' + id + '\')" title="Remove">' +
+                    '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg>' +
+                '</button>';
+            c.appendChild(row);
+            ukpInitCombo(comboId, listId);
             ukpMarkRolesUpdated();
         };
 
-        window.ukpToggleRoleCard = function(bodyId, head) {
-            var body = document.getElementById(bodyId);
-            if (!body) return;
-            var isOpen = body.style.display !== 'none';
-            body.style.display = isOpen ? 'none' : '';
-            var icon = head.querySelector('i');
-            if (icon) icon.style.transform = isOpen ? '' : 'rotate(180deg)';
-        };
+        function ukpInitCombo(comboId, listId) {
+            var combo = document.getElementById(comboId);
+            var input = combo.querySelector('.ukp-role-combo-input');
+            var list = document.getElementById(listId);
+
+            function getOptions() { return list.querySelectorAll('.ukp-role-combo-option:not(.add-new)'); }
+
+            function filterList(query) {
+                var q = query.trim().toLowerCase();
+                var hasMatch = false;
+                getOptions().forEach(function(opt) {
+                    var match = !q || opt.textContent.toLowerCase().includes(q);
+                    opt.style.display = match ? '' : 'none';
+                    if (match) hasMatch = true;
+                });
+                var existing = list.querySelector('.ukp-role-combo-option.add-new');
+                var emptyEl = list.querySelector('.ukp-role-combo-empty');
+                if (q && !hasMatch) {
+                    if (existing) existing.remove();
+                    if (!emptyEl) {
+                        var em = document.createElement('div');
+                        em.className = 'ukp-role-combo-empty';
+                        em.textContent = 'No matches';
+                        list.appendChild(em);
+                    }
+                } else {
+                    if (emptyEl) emptyEl.remove();
+                }
+                if (q) {
+                    var exactMatch = Array.from(getOptions()).some(function(o){ return o.textContent.toLowerCase() === q; });
+                    if (!exactMatch) {
+                        if (!existing) {
+                            existing = document.createElement('div');
+                            existing.className = 'ukp-role-combo-option add-new';
+                            list.appendChild(existing);
+                        }
+                        existing.textContent = '+ Add "' + query.trim() + '"';
+                        existing.dataset.value = query.trim();
+                        existing.style.display = '';
+                    } else {
+                        if (existing) existing.remove();
+                    }
+                } else {
+                    if (existing) existing.remove();
+                }
+            }
+
+            function openList() { list.classList.add('open'); filterList(input.value); }
+            function closeList() { list.classList.remove('open'); }
+
+            function makeCustomOption(value) {
+                var opt = document.createElement('div');
+                opt.className = 'ukp-role-combo-option';
+                opt.dataset.value = value;
+                var label = document.createElement('span');
+                label.textContent = value;
+                var del = document.createElement('button');
+                del.type = 'button';
+                del.className = 'ukp-role-combo-opt-delete';
+                del.title = 'Remove';
+                del.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg>';
+                del.addEventListener('mousedown', function(e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    var idx = ROLE_OPTIONS.indexOf(value);
+                    if (idx !== -1) ROLE_OPTIONS.splice(idx, 1);
+                    document.querySelectorAll('.ukp-role-combo-list').forEach(function(l) {
+                        l.querySelectorAll('.ukp-role-combo-option').forEach(function(o) {
+                            if ((o.dataset.value || o.querySelector('span') && o.querySelector('span').textContent) === value) o.remove();
+                        });
+                    });
+                    document.querySelectorAll('.ukp-role-combo-input').forEach(function(inp) {
+                        if (inp.value === value) inp.value = ROLE_OPTIONS[0] || '';
+                    });
+                });
+                opt.appendChild(label);
+                opt.appendChild(del);
+                return opt;
+            }
+
+            function selectOption(value) {
+                input.value = value;
+                if (!ROLE_OPTIONS.includes(value)) {
+                    ROLE_OPTIONS.push(value);
+                    var newOpt = makeCustomOption(value);
+                    document.querySelectorAll('.ukp-role-combo-list').forEach(function(l) {
+                        var exists = Array.from(l.querySelectorAll('.ukp-role-combo-option:not(.add-new)')).some(function(o){ return (o.dataset.value || (o.querySelector('span') && o.querySelector('span').textContent)) === value; });
+                        if (!exists) {
+                            var clone = makeCustomOption(value);
+                            var addNew = l.querySelector('.ukp-role-combo-option.add-new');
+                            addNew ? l.insertBefore(clone, addNew) : l.appendChild(clone);
+                        }
+                    });
+                }
+                closeList();
+                ukpMarkRolesUpdated();
+            }
+
+            input.addEventListener('focus', function() { input.select(); openList(); });
+            input.addEventListener('input', function() { openList(); filterList(input.value); });
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') { closeList(); input.blur(); }
+                if (e.key === 'Enter') {
+                    var focused = list.querySelector('.ukp-role-combo-option.focused');
+                    if (focused) { selectOption(focused.dataset.value || focused.textContent); }
+                    else if (input.value.trim()) { selectOption(input.value.trim()); }
+                    e.preventDefault();
+                }
+            });
+
+            list.addEventListener('mousedown', function(e) {
+                var opt = e.target.closest('.ukp-role-combo-option');
+                if (!opt) return;
+                e.preventDefault();
+                selectOption(opt.dataset.value || opt.textContent);
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!combo.contains(e.target)) closeList();
+            }, true);
+        }
 
         window.ukpRemoveRole = function(id) {
             var el = document.getElementById(id);
@@ -1007,51 +1102,22 @@ document.getElementById('popEmail').textContent = row.dataset.email;
         };
 
         window.ukpRoleStatusChange = function(sel) {
-            var card = sel.closest('.ukp-role-card');
-            var fieldsRow = sel.closest('div[style*="display:flex"]');
-            var body = card.querySelector('.ukp-role-card-body');
-            var isCeased = sel.value === 'Ceased';
+            var row = sel.closest('.ukp-role-row');
+            var statusSel = row.querySelectorAll('select')[1];
+            var isCeased = statusSel && statusSel.value === 'Ceased';
+            row.classList.toggle('ceased', isCeased);
 
-            card.classList.toggle('ceased', isCeased);
-
-            // Update subtitle in head
-            var sub = card.querySelector('.ukp-role-head-sub');
-            if (sub) sub.textContent = sel.value;
-
-            var existingField = fieldsRow.querySelector('.ukp-role-ceased-field');
-            var existingWarn = body.querySelector('.ukp-role-ceased-warn');
-
+            var existingWarn = row.querySelector('.ukp-role-ceased-warn');
             if (isCeased) {
-                if (!existingField) {
-                    var ceasedField = document.createElement('div');
-                    ceasedField.className = 'ukp-role-field ukp-role-ceased-field';
-                    ceasedField.innerHTML = '<label style="font-size:11.5px;color:#7a8f98;font-weight:500;">Ceased date <span style="color:#b91c1c;">*</span></label><input type="date" style="border-color:#f5c6cb;">';
-                    fieldsRow.appendChild(ceasedField);
-                }
                 if (!existingWarn) {
                     var warn = document.createElement('div');
                     warn.className = 'ukp-role-ceased-warn';
                     warn.innerHTML = '<i class="fas fa-exclamation-circle" style="margin-right:6px;"></i>Status changed — ceased date required before save';
-                    body.appendChild(warn);
+                    row.appendChild(warn);
                 }
             } else {
-                if (existingField) existingField.remove();
                 if (existingWarn) existingWarn.remove();
             }
-            ukpMarkRolesUpdated();
-        };
-
-        window.ukpRoleTypeChange = function(sel) {
-            var card = sel.closest('.ukp-role-card');
-            var role = sel.value;
-            // Update avatar colour, letter, and title in head
-            var avatar = card.querySelector('.ukp-role-avatar');
-            if (avatar) {
-                avatar.style.cssText = ukpRoleAvatarStyle(role);
-                avatar.textContent = role[0];
-            }
-            var title = card.querySelector('.ukp-role-head-title');
-            if (title) title.textContent = role;
             ukpMarkRolesUpdated();
         };
 
@@ -1059,18 +1125,19 @@ document.getElementById('popEmail').textContent = row.dataset.email;
             var badge = document.getElementById('ukpRolesUpdatedBadge');
             var hasRoles = document.getElementById('ukpRoleCardsContainer').children.length > 0;
             badge.style.display = hasRoles ? 'inline-block' : 'none';
+            var header = document.getElementById('ukpRoleHeaderRow');
+            if (header) header.style.display = hasRoles ? 'grid' : 'none';
         }
 
         // Ceased roles toggle
         window.ukpToggleCeased = function() {
             var cb = document.getElementById('ukpCeasedCb');
             var isChecked = cb.classList.toggle('checked');
-            document.querySelectorAll('#ukpRoleCardsContainer .ukp-role-card.ceased').forEach(function(c){
-                c.style.display = isChecked ? '' : 'none';
+            document.querySelectorAll('#ukpRoleCardsContainer .ukp-role-row.ceased').forEach(function(r){
+                r.style.display = isChecked ? '' : 'none';
             });
         };
 
-        // Reset roles on modal cancel/close
         function ukpResetRoles() {
             document.getElementById('ukpRoleCardsContainer').innerHTML = '';
             document.getElementById('ukpRolesUpdatedBadge').style.display = 'none';
