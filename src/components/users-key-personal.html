@@ -83,8 +83,8 @@
         }
         .agw-add-btn:hover { border-color:#5a9e6a; background:#f0f9f2; }
         .ukp-role-row { display:grid; grid-template-columns:1fr 1fr 1fr auto; align-items:end; gap:12px; padding:12px 0; border-bottom:1px solid #e8edf0; }
+        .ukp-role-row.has-ceased { grid-template-columns:1fr 1fr 1fr 1fr auto; }
         .ukp-role-row:first-child { border-top:1px solid #e8edf0; }
-        .ukp-role-row.ceased { background:#fff8f8; border-radius:6px; padding-left:8px; padding-right:8px; }
         .ukp-role-field { display:flex; flex-direction:column; gap:4px; }
         .ukp-role-field label { font-size:11.5px; color:#7a8f98; font-weight:500; }
         .ukp-role-field input[type="date"],
@@ -511,41 +511,10 @@
         <div class="ukp-modal">
             <div class="ukp-modal-header"><span>Add Key Personal</span><button class="header-live-chat-btn" onclick="fvLiveChatOpen()" title="Live Chat">Live chat <span class="live-chat-icon"><i class="fas fa-comments" style="font-size:14px;"></i><span class="live-chat-dot"></span></span></button></div>
             <div class="ukp-modal-body">
-                <div class="ukp-modal-info-box">
-                    <div class="ukp-modal-info-title">Let's get started...</div>
-                    <p>Choose the sector that best describes your firm's designated services. This determines the right risk assessment template for your practice.</p>
-                </div>
-
                 <div class="ukp-modal-form">
                     <div class="ukp-modal-form-group full">
                         <label class="ukp-modal-form-label">Name</label>
                         <input type="text" class="ukp-modal-form-input" id="ukpModalName" placeholder="">
-                    </div>
-                    <div class="ukp-modal-form-row">
-                        <div class="ukp-modal-form-group">
-                            <label class="ukp-modal-form-label">Status</label>
-                            <select class="ukp-modal-form-select" id="ukpModalStatus">
-                                <option>Complete</option>
-                                <option>Incomplete</option>
-                            </select>
-                        </div>
-                        <div class="ukp-modal-form-group">
-                            <label class="ukp-modal-form-label">Phone Number</label>
-                            <input type="tel" class="ukp-modal-form-input" id="ukpModalPhone" placeholder="" pattern="[0-9]*" inputmode="numeric">
-                        </div>
-                    </div>
-                    <div class="ukp-modal-form-row">
-                        <div class="ukp-modal-form-group">
-                            <label class="ukp-modal-form-label">Email</label>
-                            <input type="text" class="ukp-modal-form-input" id="ukpModalEmail" placeholder="">
-                        </div>
-                        <div class="ukp-modal-form-group">
-                            <label class="ukp-modal-form-label">Training Completed</label>
-                            <select class="ukp-modal-form-select" id="ukpModalTraining">
-                                <option>Complete</option>
-                                <option>Incomplete</option>
-                            </select>
-                        </div>
                     </div>
                     <!-- Roles Section -->
                     <div class="ukp-modal-form-group full" style="margin-bottom:16px;">
@@ -554,15 +523,12 @@
                                 <label class="ukp-modal-form-label" style="margin-bottom:0;">Roles</label>
                                 <span id="ukpRolesUpdatedBadge" style="display:none;background:#dbeafe;color:#1d4ed8;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:.03em;">UPDATED</span>
                             </div>
-                            <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:#1a2b35;cursor:pointer;user-select:none;" onclick="ukpToggleCeased()">
-                                <div class="cl-filter-cb" id="ukpCeasedCb"></div>
-                                Show ceased roles
-                            </label>
                         </div>
                         <div id="ukpRoleHeaderRow" style="display:none;grid-template-columns:1fr 1fr 1fr auto;gap:12px;padding:0 0 6px 0;">
                             <span style="font-size:11.5px;color:#7a8f98;font-weight:500;">Role</span>
                             <span style="font-size:11.5px;color:#7a8f98;font-weight:500;">Appointed</span>
                             <span style="font-size:11.5px;color:#7a8f98;font-weight:500;">Status</span>
+                            <span id="ukpCeasedDateHeader" style="font-size:11.5px;color:#b91c1c;font-weight:500;display:none;">Ceased Date *</span>
                             <span></span>
                         </div>
                         <div id="ukpRoleCardsContainer"></div>
@@ -570,15 +536,20 @@
                     </div>
 
                     <div class="ukp-modal-form-group full">
-                        <label class="ukp-modal-form-label">Address</label>
-                        <input type="text" class="ukp-modal-form-input" id="ukpModalAddress" placeholder="">
+                        <label class="ukp-modal-form-label">Date of Birth</label>
+                        <input type="date" class="ukp-modal-form-input" id="ukpModalDob">
                     </div>
                     <div class="ukp-modal-form-group full">
-                        <label class="ukp-modal-form-label">Position</label>
-                        <select class="ukp-modal-form-select" id="ukpModalPosition">
-                            <option>Key Personal</option>
-                            <option>User</option>
-                        </select>
+                        <label class="ukp-modal-form-label">Email</label>
+                        <input type="text" class="ukp-modal-form-input" id="ukpModalEmail" placeholder="">
+                    </div>
+                    <div class="ukp-modal-form-group full">
+                        <label class="ukp-modal-form-label">Phone Number</label>
+                        <input type="tel" class="ukp-modal-form-input" id="ukpModalPhone" placeholder="" pattern="[0-9]*" inputmode="numeric">
+                    </div>
+                    <div class="ukp-modal-form-group full">
+                        <label class="ukp-modal-form-label">Address</label>
+                        <input type="text" class="ukp-modal-form-input" id="ukpModalAddress" placeholder="">
                     </div>
                 </div>
             </div>
@@ -1103,20 +1074,31 @@ document.getElementById('popEmail').textContent = row.dataset.email;
 
         window.ukpRoleStatusChange = function(sel) {
             var row = sel.closest('.ukp-role-row');
-            var statusSel = row.querySelectorAll('select')[1];
-            var isCeased = statusSel && statusSel.value === 'Ceased';
+            var isCeased = sel.value === 'Ceased';
             row.classList.toggle('ceased', isCeased);
-
-            var existingWarn = row.querySelector('.ukp-role-ceased-warn');
+            row.classList.toggle('has-ceased', isCeased);
+            var existingCeased = row.querySelector('.ukp-role-ceased-field');
+            var headerRow = document.getElementById('ukpRoleHeaderRow');
             if (isCeased) {
-                if (!existingWarn) {
-                    var warn = document.createElement('div');
-                    warn.className = 'ukp-role-ceased-warn';
-                    warn.innerHTML = '<i class="fas fa-exclamation-circle" style="margin-right:6px;"></i>Status changed — ceased date required before save';
-                    row.appendChild(warn);
+                if (!existingCeased) {
+                    var cf = document.createElement('div');
+                    cf.className = 'ukp-role-field ukp-role-ceased-field';
+                    cf.innerHTML = '<input type="date" style="border:1px solid #f5c6cb;border-radius:8px;padding:8px 10px;height:42px;box-sizing:border-box;width:100%;font-size:12.5px;color:#1a2b35;background:#fff;">';
+                    var deleteBtn = row.querySelector('.ukp-role-delete-btn');
+                    row.insertBefore(cf, deleteBtn);
+                }
+                if (headerRow) {
+                    headerRow.style.gridTemplateColumns = '1fr 1fr 1fr 1fr auto';
+                    document.getElementById('ukpCeasedDateHeader').style.display = '';
                 }
             } else {
-                if (existingWarn) existingWarn.remove();
+                if (existingCeased) existingCeased.remove();
+                var container = row.closest('#ukpRoleCardsContainer');
+                var anyOtherCeased = container && container.querySelector('.ukp-role-row.has-ceased');
+                if (headerRow && !anyOtherCeased) {
+                    headerRow.style.gridTemplateColumns = '1fr 1fr 1fr auto';
+                    document.getElementById('ukpCeasedDateHeader').style.display = 'none';
+                }
             }
             ukpMarkRolesUpdated();
         };

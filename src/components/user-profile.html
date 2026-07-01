@@ -976,8 +976,8 @@
     }
     /* Role rows */
     .ukp-role-row { display:grid; grid-template-columns:1fr 1fr 1fr auto; align-items:end; gap:12px; padding:12px 0; border-bottom:1px solid #e8edf0; }
+    .ukp-role-row.has-ceased { grid-template-columns:1fr 1fr 1fr 1fr auto; }
     .ukp-role-row:first-child { border-top:1px solid #e8edf0; }
-    .ukp-role-row.ceased { background:#fff8f8; border-radius:6px; padding-left:8px; padding-right:8px; }
     .ukp-role-field { display:flex; flex-direction:column; gap:4px; }
     .ukp-role-field label { font-size:11.5px; color:#7a8f98; font-weight:500; }
     .ukp-role-field input[type="date"],
@@ -1300,34 +1300,6 @@
                                 </div>
                             </div>
 
-                            <div class="up-form-row">
-                                <div class="up-form-group">
-                                    <label class="up-label">Date Appointed</label>
-                                    <input type="text" class="up-input" id="inputDateAppointed" value="12/12/1967" disabled>
-                                </div>
-                                <div class="up-form-group">
-                                    <label class="up-label">Date Ceased</label>
-                                    <input type="text" class="up-input" id="inputDateCeased" value="12/12/1967" disabled>
-                                </div>
-                                <div class="up-form-group">
-                                    <label class="up-label">Status</label>
-                                    <select class="up-select" id="inputStatus" disabled>
-                                        <option>Active</option>
-                                        <option>Inactive</option>
-                                    </select>
-                                </div>
-                                <div class="up-form-group">
-                                    <label class="up-label">Date of Birth</label>
-                                    <input type="text" class="up-input" id="inputDOB" value="12/12/1967" disabled>
-                                </div>
-                            </div>
-
-                            <div class="up-form-group full" style="margin-bottom: 20px;">
-                                <label class="up-label">Position</label>
-                                <input type="text" class="up-input" id="inputPosition" value="Key Personnel" disabled>
-                            </div>
-
-
                             <!-- Roles Section -->
                             <div style="margin-top:32px;margin-bottom:20px;">
                                 <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:8px;margin-bottom:17px;border-bottom:1px solid #c9cfd2;">
@@ -1344,16 +1316,17 @@
                                     <span style="font-size:11.5px;color:#7a8f98;font-weight:500;">Role</span>
                                     <span style="font-size:11.5px;color:#7a8f98;font-weight:500;">Appointed</span>
                                     <span style="font-size:11.5px;color:#7a8f98;font-weight:500;">Status</span>
+                                    <span id="upCeasedDateHeader" style="font-size:11.5px;color:#b91c1c;font-weight:500;display:none;">Ceased Date *</span>
                                     <span></span>
                                 </div>
                                 <div id="upRoleCardsContainer"></div>
                                 <button type="button" onclick="upAddRole()" style="width:100%;padding:12px 16px;background:#ebf0f2;border:1px dashed #666e71;border-radius:8px;color:#525b5f;font-size:13px;font-family:inherit;cursor:pointer;text-align:center;transition:background 0.15s;margin-bottom:20px;">+ Add role</button>
                             </div>
 
-                            <div class="up-form-row-2" style="margin-top: 32px;">
+                            <div class="up-form-row-2" style="margin-top:24px;">
                                 <div class="up-form-group">
-                                    <label class="up-label">Fax No</label>
-                                    <input type="text" class="up-input" id="inputFax" value="9883 4567" disabled>
+                                    <label class="up-label">Date of Birth</label>
+                                    <input type="text" class="up-input" id="inputDOB" value="12/12/1967" disabled>
                                 </div>
                                 <div class="up-form-group">
                                     <label class="up-label">Mobile</label>
@@ -2374,13 +2347,15 @@
                 document.getElementById('inputAddress').value = address;
             }
             if (position) {
-                document.getElementById('inputPosition').value = position;
+                var inputPos = document.getElementById('inputPosition');
+                if (inputPos) inputPos.value = position;
                 document.querySelectorAll('.up-badge.position').forEach(function(el) { el.textContent = position; });
                 var pddPos = document.getElementById('pddUserPosition');
                 if (pddPos) pddPos.textContent = position;
             }
             if (status) {
-                document.getElementById('inputStatus').value = status;
+                var inputStat = document.getElementById('inputStatus');
+                if (inputStat) inputStat.value = status;
                 document.querySelectorAll('.up-badge.active').forEach(function(el) { el.textContent = status; });
                 var pddStat = document.getElementById('pddUserStatus');
                 if (pddStat) pddStat.textContent = status;
@@ -2391,11 +2366,11 @@
 
         // Sidebar navigation
         document.querySelectorAll('.up-sidebar-sub, .up-sidebar-item').forEach(function(item) {
-            item.addEventListener('click', function() {
-                // Skip if no data-section (disabled items)
-                if (!this.dataset.section) {
-                    return;
-                }
+            item.addEventListener('click', function(e) {
+                // Resolve the actual nav item (handles clicks on child elements)
+                var navItem = e.target.closest('[data-section]');
+                if (!navItem) return;
+
                 // Remove active class from all sub items and parent items
                 document.querySelectorAll('.up-sidebar-sub').forEach(function(el) {
                     el.classList.remove('active');
@@ -2404,10 +2379,10 @@
                     el.classList.remove('active');
                 });
 
-                // Add active to clicked item
-                this.classList.add('active');
+                // Add active to the resolved nav item
+                navItem.classList.add('active');
 
-                var section = this.dataset.section;
+                var section = navItem.dataset.section;
                 var stepLoader = document.getElementById('stepLoader');
 
                 // Fade out all content sections
@@ -2427,43 +2402,29 @@
                     });
 
                     // Show and fade in relevant section
+                    var targetId, scrollTarget;
                     if (section === 'uploaded-certificates' || section === 'training-completed' || section === 'incomplete-training') {
-                        var trainingSection = document.getElementById('training-section');
-                        trainingSection.style.display = 'block';
-                        setTimeout(function() {
-                            trainingSection.classList.add('active');
-                            // Hide loader after content starts fading in
-                            setTimeout(function() {
-                                stepLoader.classList.remove('active');
-                            }, 500);
-                        }, 10);
+                        targetId = 'training-section';
                     } else if (section === 'personnel-due-diligence') {
-                        var pddSection = document.getElementById('personnel-due-diligence-section');
-                        pddSection.style.display = 'block';
-                        setTimeout(function() {
-                            pddSection.classList.add('active');
-                            setTimeout(function() {
-                                stepLoader.classList.remove('active');
-                            }, 500);
-                        }, 10);
+                        targetId = 'personnel-due-diligence-section';
                     } else {
-                        var ssoSection = document.getElementById('sso-info');
-                        ssoSection.style.display = 'block';
-                        setTimeout(function() {
-                            ssoSection.classList.add('active');
-                            // Hide loader after content starts fading in
-                            setTimeout(function() {
-                                stepLoader.classList.remove('active');
-                            }, 500);
-                        }, 10);
+                        targetId = 'sso-info';
                     }
+
+                    var targetSection = document.getElementById(targetId);
+                    targetSection.style.display = 'block';
+                    setTimeout(function() {
+                        targetSection.classList.add('active');
+                        stepLoader.classList.remove('active');
+                        if (targetId === 'sso-info' && section === 'role-contact') {
+                            var rolesEl = document.getElementById('upRoleCardsContainer');
+                            if (rolesEl) rolesEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }, 10);
                 }, 400);
 
-                // Only mark parent items as active if a parent item was clicked, NOT sub-items
-                var clickedItem = item;
-                if (clickedItem.classList.contains('up-sidebar-item')) {
-                    // Parent item was clicked, keep it active
-                    clickedItem.classList.add('active');
+                if (navItem.classList.contains('up-sidebar-item')) {
+                    navItem.classList.add('active');
                 }
             });
         });
@@ -3022,16 +2983,29 @@
             var row = sel.closest('.ukp-role-row');
             var isCeased = sel.value === 'Ceased';
             row.classList.toggle('ceased', isCeased);
-            var existingWarn = row.querySelector('.ukp-role-ceased-warn');
+            row.classList.toggle('has-ceased', isCeased);
+            var existingCeased = row.querySelector('.ukp-role-ceased-field');
+            var headerRow = document.getElementById('upRoleHeaderRow');
             if (isCeased) {
-                if (!existingWarn) {
-                    var w = document.createElement('div');
-                    w.className = 'ukp-role-ceased-warn';
-                    w.innerHTML = '<i class="fas fa-exclamation-circle" style="margin-right:6px;"></i>Status changed — ceased date required before save';
-                    row.appendChild(w);
+                if (!existingCeased) {
+                    var cf = document.createElement('div');
+                    cf.className = 'ukp-role-field ukp-role-ceased-field';
+                    cf.innerHTML = '<input type="date" style="border:1px solid #f5c6cb;border-radius:8px;padding:8px 10px;height:42px;box-sizing:border-box;width:100%;font-size:12.5px;color:#1a2b35;background:#fff;">';
+                    var deleteBtn = row.querySelector('.ukp-role-delete-btn');
+                    row.insertBefore(cf, deleteBtn);
+                }
+                if (headerRow) {
+                    headerRow.style.gridTemplateColumns = '1fr 1fr 1fr 1fr auto';
+                    document.getElementById('upCeasedDateHeader').style.display = '';
                 }
             } else {
-                if (existingWarn) existingWarn.remove();
+                if (existingCeased) existingCeased.remove();
+                var container = row.closest('#upRoleCardsContainer');
+                var anyOtherCeased = container && container.querySelector('.ukp-role-row.has-ceased');
+                if (headerRow && !anyOtherCeased) {
+                    headerRow.style.gridTemplateColumns = '1fr 1fr 1fr auto';
+                    document.getElementById('upCeasedDateHeader').style.display = 'none';
+                }
             }
             upMarkRolesUpdated();
         };
