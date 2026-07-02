@@ -1417,11 +1417,11 @@
 
                                 <!-- Profile header -->
                                 <div class="up-header-row">
-                                    <div class="up-header-left">
+                                    <div class="up-header-left" style="flex:1;">
                                         <img src="images/new_image.jpg" alt="Jeevan Tokhi" class="up-avatar" id="pddUserAvatar">
-                                        <div class="up-header-info">
+                                        <div class="up-header-info" style="flex:1;">
                                             <h4 class="up-name" id="pddUserName">Jeevan Tokhi</h4>
-                                            <div class="up-badges">
+                                            <div class="up-badges" style="width:100%;">
                                                 <div class="up-badge-item">
                                                     <div class="up-badge-label">Training status</div>
                                                     <span class="ukp-training-badge"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#00923b" viewBox="0 0 16 16" class="mr-1"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"></path></svg> Complete</span>
@@ -1441,10 +1441,26 @@
                                                         Not started
                                                     </span>
                                                 </div>
+                                                <div class="up-badge-item" style="position:relative; margin-left:auto;">
+                                                    <div class="up-badge-label">PDD Review Date</div>
+                                                    <button id="pddNextReviewBtn" onclick="pddToggleReviewPopover(event)" style="background:#ffffff; color:#6a7f89; border:1px solid #73b7d3; display:inline-flex; align-items:center; gap:6px; padding:4px 12px; border-radius:14px; font-size:11px; font-weight:600; cursor:pointer; white-space:nowrap; font-family:inherit;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/></svg>
+                                                        <span id="pddNextReviewLabel">Set date</span>
+                                                    </button>
+                                                    <!-- Date popover -->
+                                                    <div id="pddReviewPopover" style="display:none; position:absolute; top:calc(100% + 8px); right:0; background:#fff; border:1px solid #d1d5db; border-radius:10px; box-shadow:0 4px 16px rgba(0,0,0,0.13); padding:14px 16px; z-index:500; min-width:220px;">
+                                                        <div style="font-size:11px; font-weight:700; color:#374151; text-transform:uppercase; letter-spacing:.04em; margin-bottom:10px;">PDD Review Date</div>
+                                                        <input type="date" id="pddNextReviewInput" style="width:100%; padding:8px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; font-family:inherit; color:#1a2b35; outline:none; box-sizing:border-box;">
+                                                        <div style="display:flex; gap:8px; margin-top:10px;">
+                                                            <button onclick="pddClearReviewDate()" style="flex:1; padding:7px 0; background:#fff; border:1px solid #d1d5db; border-radius:6px; font-size:12px; font-weight:600; color:#6b7280; cursor:pointer; font-family:inherit;">Clear</button>
+                                                            <button onclick="pddSaveReviewDate()" style="flex:1; padding:7px 0; background:#1a6b40; border:none; border-radius:6px; font-size:12px; font-weight:600; color:#fff; cursor:pointer; font-family:inherit;">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Action buttons — hidden until first record added -->
+                                    <!-- Action buttons -->
                                     <div id="pddHeaderButtons" style="display:none; align-items:center; gap:10px;">
                                         <button onclick="document.getElementById('pddWizardOverlay').classList.add('open')" class="up-add-detail-btn" style="background:#1a6b40; color:#fff; border:none; padding:12px 18px; border-radius:8px; font-size:13px; font-weight:600; display:flex; align-items:center; gap:8px; cursor:pointer; white-space:nowrap;">
                                             Start PDD
@@ -3016,6 +3032,55 @@
             document.querySelectorAll('#upRoleCardsContainer .ukp-role-row.ceased').forEach(function(r){
                 r.style.display = isChecked ? '' : 'none';
             });
+        };
+
+        // --- Next Review Date popover ---
+        window.pddToggleReviewPopover = function(e) {
+            e.stopPropagation();
+            var pop = document.getElementById('pddReviewPopover');
+            var isOpen = pop.style.display !== 'none';
+            pop.style.display = isOpen ? 'none' : 'block';
+            if (!isOpen) {
+                setTimeout(function() {
+                    document.addEventListener('click', pddCloseReviewPopover, { once: true });
+                }, 0);
+            }
+        };
+
+        function pddCloseReviewPopover(e) {
+            var pop = document.getElementById('pddReviewPopover');
+            if (pop && !pop.contains(e.target)) {
+                pop.style.display = 'none';
+            } else if (pop && pop.contains(e.target)) {
+                document.addEventListener('click', pddCloseReviewPopover, { once: true });
+            }
+        }
+
+        window.pddSaveReviewDate = function() {
+            var input = document.getElementById('pddNextReviewInput');
+            var label = document.getElementById('pddNextReviewLabel');
+            var btn = document.getElementById('pddNextReviewBtn');
+            var val = input.value;
+            if (val) {
+                var parts = val.split('-');
+                var formatted = parts[2] + '/' + parts[1] + '/' + parts[0];
+                label.textContent = formatted;
+                btn.style.background = '#e8f5e9';
+                btn.style.color = '#2e7d32';
+                btn.style.borderColor = '#a8d8b4';
+            }
+            document.getElementById('pddReviewPopover').style.display = 'none';
+        };
+
+        window.pddClearReviewDate = function() {
+            document.getElementById('pddNextReviewInput').value = '';
+            var label = document.getElementById('pddNextReviewLabel');
+            var btn = document.getElementById('pddNextReviewBtn');
+            label.textContent = 'Set date';
+            btn.style.background = '#ffffff';
+            btn.style.color = '#6a7f89';
+            btn.style.borderColor = '#73b7d3';
+            document.getElementById('pddReviewPopover').style.display = 'none';
         };
 
         function upMarkRolesUpdated() {
